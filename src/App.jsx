@@ -1,10 +1,11 @@
-import CategoriesProduct from "./layouts/Categories-product";
+import HomePageLayOut from "./layouts/Homepage-layout";
+
 
 
 export default function App() {
   return (
     <>
-<CategoriesProduct />
+<HomePageLayOut />
     </>
   );
 }

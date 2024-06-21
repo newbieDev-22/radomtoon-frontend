@@ -1,7 +1,7 @@
 const widthMap = {
   small: 'w-72',
-  medium: 'w-72',
-  large: 'w-96',
+  medium: 'w-80',
+  large: 'w-[450px]',
 };
 
 const imageMap ={
@@ -12,7 +12,7 @@ const imageMap ={
 
 const heightMap = {
   small: 'h-48',
-  medium: 'h-64',
+  medium: 'h-72',
   large: 'h-80',
 };
 
@@ -30,7 +30,7 @@ const progressBar = {
 
 const textMap = {
   small: 'text-xs',
-  medium: 'text-xs',
+  medium: 'text-sm',
   large: 'text-lg'
 }
 
@@ -67,7 +67,7 @@ export default function ImgCard({
               alt="Avatar"
             />
           </div>
-          <div className="flex flex-col ml-2">
+          <div className="flex flex-col ml-2 ">
             <div className={` ${textMap[size]} font-bold`}>
               Product Name:
               {productName}
@@ -96,7 +96,7 @@ export default function ImgCard({
         
 
         <div>
-          <button className={`mt-5 ml-20 ${colorMap[buttonColor]}`}>
+          <button className={`mt-5 ml-36 ${colorMap[buttonColor]}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
