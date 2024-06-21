@@ -19,6 +19,10 @@ export default function TierContainer() {
                 <TierCard />
                 <TierCard />
                 <TierCard />
+
+
+
+
             </div>
         </>
     )
