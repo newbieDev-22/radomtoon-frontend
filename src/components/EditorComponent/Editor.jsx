@@ -2,8 +2,9 @@ import { useRef, useState, useCallback } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import ResizeModule from "@botom/quill-resize-module";
 import { formats, toolbarOptions } from "./config";
-import "./editor-snow.css";
-import "./editor-bubble.css";
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
+import "./editor.css";
 import mockData from "./mock-data";
 import uploadToCloudinary from "./upload-cloudinary";
 
