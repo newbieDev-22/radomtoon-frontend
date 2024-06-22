@@ -1,4 +1,5 @@
-import CategoriesProduct from "./layouts/Categories-layout";
+
+import HomePageLayOut from "./layouts/Homepage-layout";
 
 
 
@@ -6,7 +7,7 @@ import CategoriesProduct from "./layouts/Categories-layout";
 export default function App() {
   return (
     <>
-<CategoriesProduct />
+<HomePageLayOut />
     </>
   );
 }
