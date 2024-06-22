@@ -1,11 +1,11 @@
 const widthMap = {
-  small: "w-[300px]",
+  small: "w-60",
   medium: "w-80",
   large: "w-96",
 };
 
 const imageMap = {
-  small: "h-32",
+  small: "h-42",
   medium: "h-48",
   large: "h-60",
 };
