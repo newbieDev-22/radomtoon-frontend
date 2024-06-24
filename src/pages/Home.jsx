@@ -4,7 +4,7 @@ const mockImage =
   "https://static.thairath.co.th/media/B6FtNKtgSqRqbnNsbKEfQbPGELW2YjCcDQUpDilBzR4jVwhRbzfUfbngdYegm1bTfTXjc.webp";
 const mockAvatar = "https://mdbcdn.b-cdn.net/img/new/avatars/1.webp";
 const mockProjectName =
-  "ascsacascasssssssssssssssssssssssssssssssssssssssssssssssssssssssc";
+  "ascsacascasssssssssssssss ssssssssssssssssssssssssssssssssssssssssc";
 const mockCreatorName = "safassafsafsfa";
 const daysLeft = 23;
 
