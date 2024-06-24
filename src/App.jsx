@@ -1,14 +1,10 @@
-
-import CategoriesProduct from "./layouts/Categories-layout";
-import HomePageLayOut from "./layouts/Homepage-layout";
-
-
-
+import Router from "./routes";
+import { Suspense } from "react";
 
 export default function App() {
   return (
-    <>
-<CategoriesProduct />
-    </>
+    <Suspense fallback={"Loading..."}>
+      <Router />
+    </Suspense>
   );
 }
