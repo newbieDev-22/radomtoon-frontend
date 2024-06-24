@@ -43,9 +43,9 @@ export default function ImgCard({
   buttonColor = "",
 }) {
   return (
-    <div className="flex items-center gap-5">
+    <div className="relative items-center gap-5 ">
       <div
-        className={`group bg-beige-400 ${widthMap[size]} ${heightMap[size]} hover:h-auto shadow-md rounded-md overflow-hidden`}
+        className={`group bg-beige-400 ${widthMap[size]} ${heightMap[size]} hover:h-auto hover:scale-[102%] transition-all shadow-md rounded-md hover:absolute hover:bg-white z-20 overflow-hidden`}
       >
         <div className="h-40 relative overflow-hidden">
           <img
@@ -72,7 +72,7 @@ export default function ImgCard({
             <span className="mr-2 text-xs text-gray-500 font-medium">
               {daysLeft} days left
             </span>
-            <div className="mt-2 opacity-0 group-hover:opacity-100 duration-[1s] -translate-y-6 group-hover:translate-y-0">
+            <div className="mt-2 opacity-0 pb-4 pr-4 group-hover:opacity-100 duration-[1s] -translate-y-6 group-hover:translate-y-0">
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
