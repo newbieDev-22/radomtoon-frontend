@@ -79,7 +79,7 @@ const widthMap = {
                 </p>
               </div>
               <div>
-                <button className='border-solid border-2 border-yellow-600 w-1/4 rounded-xl mt-4 hover:border-orange-200'>categories</button>
+                <button className=' mt-4 underline hover:text-blue-600'>categories</button>
               </div>
             </div>
           </div>
