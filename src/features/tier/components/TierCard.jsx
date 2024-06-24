@@ -1,30 +1,39 @@
-export default function TierCard({ tierNumber = "1", productName = "", detail = "", dateEstimated = "Dec 2024", amountSupporters = "456" }) {
-    return (
-        <div className="shadow-lg  p-8 mb-10 ">
-            <div className="flex justify-between ">
-                <div className="flex flex-col gap-5 max-w-3xl">
-                    <h2 className="font-bold text-3xl">{`Tier ${tierNumber}`}</h2>
-                    <h3 className="text-2xl font-semibold  overflow-hidden">{`Product name: ${productName}`}</h3>
-                    <p className="font-semibold">{`Detail: ${detail}`}</p>
-                    <div className="max-w-3xl">
-                        <p className="font-semibold">ESTIMATED DELIVERY</p>
-                        <h3 className="text-xl font-semibold">{dateEstimated}</h3>
-                    </div>
+import Button from "../../../components/Button";
 
-                    <div className="bg-gray-300 rounded-lg p-1 text-center font-semibold max-w-44">{`${amountSupporters} Supporters`}</div>
-                    <button className="btn btn-primary max-w-44">Pledge 20B</button>
+export default function TierCard({
+  tierNumber,
+  productName,
+  detail,
+  dateEstimated,
+  amountSupporters,
+  productImage,
+}) {
+  return (
+    <div className="shadow-lg border-gray-300 border py-8 px-12 hover:border-gray-500 transition-all hover:scale-[101%] active:scale-100">
+      <div className="grid grid-cols-7">
+        <div className="flex flex-col gap-5 max-w-3xl col-span-5">
+          <h2 className="font-bold text-3xl">{`Tier ${tierNumber}`}</h2>
+          <h3 className="text-2xl font-semibold  overflow-hidden">{productName}</h3>
+          <div className="flex flex-col gap-2">
+            <h3 className="text-2xl font-semibold">Detail</h3>
+            <p className="">{detail}`</p>
+          </div>
+          <div className="max-w-3xl">
+            <p className="font-semibold text-xl">ESTIMATED DELIVERY</p>
+            <h3 className="text-lg font-semibold">{dateEstimated}</h3>
+          </div>
 
-                </div>
-                <div className="flex items-center justify-center">
-                    <img
-
-                        src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
-                        alt="product's picture"
-
-                    />
-                </div>
-            </div>
+          <div className="bg-gray-300 w-40 rounded py-2 text-center font-semibold">{`${amountSupporters} Supporters`}</div>
+          <Button>Pledge 20 &#x0E3F;</Button>
         </div>
-    )
+        <div className="flex items-center justify-center col-span-2 p-4">
+          <img
+            src={productImage}
+            alt="product's picture"
+            className="aspect-[3/4] w-full"
+          />
+        </div>
+      </div>
+    </div>
+  );
 }
-
