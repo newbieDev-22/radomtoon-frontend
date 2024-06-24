@@ -2,11 +2,11 @@ export default function TierCard({ tierNumber = "1", productName = "", detail = 
     return (
         <div className="shadow-lg  p-8 mb-10 ">
             <div className="flex justify-between ">
-                <div className="flex flex-col gap-5 max-w-[50rem]">
+                <div className="flex flex-col gap-5 max-w-3xl">
                     <h2 className="font-bold text-3xl">{`Tier ${tierNumber}`}</h2>
-                    <h3 className="text-2xl font-semibold max-w-[40vw] overflow-hidden">{`Product name: ${productName}`}</h3>
+                    <h3 className="text-2xl font-semibold  overflow-hidden">{`Product name: ${productName}`}</h3>
                     <p className="font-semibold">{`Detail: ${detail}`}</p>
-                    <div className="max-w-[50rem]">
+                    <div className="max-w-3xl">
                         <p className="font-semibold">ESTIMATED DELIVERY</p>
                         <h3 className="text-xl font-semibold">{dateEstimated}</h3>
                     </div>
@@ -27,3 +27,4 @@ export default function TierCard({ tierNumber = "1", productName = "", detail = 
         </div>
     )
 }
+
