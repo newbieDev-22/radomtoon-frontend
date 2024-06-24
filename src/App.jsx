@@ -5,7 +5,7 @@ export default function App() {
     <>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
       <button className="btn btn-neutral">Button</button>
-      <div className="px-4">
+      <div className="px-20 py-20">
         <Editor />
       </div>
     </>

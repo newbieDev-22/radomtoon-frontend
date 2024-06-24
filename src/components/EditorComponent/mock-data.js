@@ -1,18 +1,11 @@
 const mockData = {
   ops: [
-    {
-      attributes: { height: "310", width: "230" },
-      insert: {
-        image:
-          "https://res.cloudinary.com/dpl1p3prr/image/upload/v1719062296/infinitywar_efm5z8.jpg",
-      },
-    },
     { insert: "\n" },
     { attributes: { size: "huge", font: "monospace" }, insert: "HEADER!!" },
     { attributes: { align: "center", header: 1 }, insert: "\n" },
     { insert: "\n" },
     {
-      attributes: { height: "301", width: "739", align: "center" },
+      attributes: { height: "416", width: "789", align: "center" },
       insert: { video: "https://www.youtube.com/embed/0v7ke3Gd1c8?showinfo=0" },
     },
     { attributes: { align: "center" }, insert: "\n" },
@@ -27,7 +20,7 @@ const mockData = {
     { attributes: { align: "justify" }, insert: "\n" },
     { attributes: { align: "center" }, insert: "\n\n" },
     {
-      attributes: { height: "345", width: "282" },
+      attributes: { height: "186", width: "418" },
       insert: {
         image:
           "https://res.cloudinary.com/dpl1p3prr/image/upload/v1719056061/movielogo_dyqffa.png",
@@ -45,7 +38,7 @@ const mockData = {
     { attributes: { align: "justify" }, insert: "\n" },
     { attributes: { align: "center" }, insert: "\n" },
     {
-      attributes: { height: "230", width: "136" },
+      attributes: { height: "67", width: "658" },
       insert: {
         image:
           "https://res.cloudinary.com/dpl1p3prr/image/upload/v1719062638/test_upload_tdtgur.jpg",
@@ -56,4 +49,5 @@ const mockData = {
     { attributes: { align: "center" }, insert: "\n\n" },
   ],
 };
+
 export default mockData;
