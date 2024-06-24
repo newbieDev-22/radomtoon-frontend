@@ -1,4 +1,8 @@
-import ProductCommentCard from "./ProductCommentCard";
+
+import { lazy } from "react";
+
+const ProductCommentCard = lazy(() => import("./ProductCommentCard"))
+
 
 export default function ProductCommentContainer() {
     return (
