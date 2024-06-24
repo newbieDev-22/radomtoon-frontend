@@ -1,11 +1,10 @@
-import HomePageLayOut from "./layouts/Homepage-layout";
-
-
+import Router from './routes'
+import { Suspense } from 'react';
 
 export default function App() {
   return (
-    <>
-<HomePageLayOut />
-    </>
+    <Suspense fallback={"Loading..."}>
+      <Router />
+    </Suspense>
   );
 }
