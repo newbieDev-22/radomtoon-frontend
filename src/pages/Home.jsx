@@ -1,4 +1,7 @@
 import ImgCard from "../components/ImageCard";
+import ProductCommentCard from "../features/product-comment/components/ProductCommentCard";
+import ProductCommentContainer from "../features/product-comment/components/ProductCommentContainer";
+import TierContainer from "../features/tier/components/TierContainer";
 
 const mockImage =
   "https://static.thairath.co.th/media/B6FtNKtgSqRqbnNsbKEfQbPGELW2YjCcDQUpDilBzR4jVwhRbzfUfbngdYegm1bTfTXjc.webp";
@@ -11,7 +14,7 @@ const daysLeft = 23;
 export default function Home() {
   return (
     <div>
-      <div className="flex justify-center mt-20">
+      {/* <div className="flex justify-center mt-20">
         <div>
           <ImgCard
             widthSize="large"
@@ -60,7 +63,8 @@ export default function Home() {
             avatarImage={mockAvatar}
           />
         </div>
-      </div>
+      </div> */}
+      <TierContainer />
     </div>
   );
 }

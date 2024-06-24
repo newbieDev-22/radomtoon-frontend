@@ -33,3 +33,54 @@ export const textMap = {
   medium: "text-sm",
   large: "text-lg",
 };
+
+export const bgBtnMap = {
+  "radomtoon-dark": "bg-radomtoon-dark ",
+  "radomtoon-bright": "bg-radomtoon-bright",
+  "creator-normal": "bg-creator-normal",
+  "creator-saturate": "bg-creator-saturate",
+  "supporter-normal": "bg-supporter-normal",
+  "supporter-saturate": "bg-supporter-saturate",
+  white: "bg-white ",
+  black: "bg-black ",
+  red: "bg-red-300 hover:bg-red-500",
+  green: "bg-green-300 hover:bg-green-500",
+  none: "bg-none ",
+};
+
+export const borderBtnMap = {
+  "radomtoon-dark": "border-radomtoon-dark ",
+  "radomtoon-bright": "border-radomtoon-bright",
+  "creator-normal": "border-creator-normal",
+  "creator-saturate": "border-creator-saturate",
+  "supporter-normal": "border-supporter-normal",
+  "supporter-saturate": "border-supporter-saturate",
+  white: "border-white ",
+  black: "border-black ",
+  red: "border-red-300 hover:border-red-500",
+  green: "border-green-300 hover:border-green-500",
+  none: "border-none ",
+};
+
+export const colorBtnMap = {
+  "creator-normal": "bg-creator-normal",
+  "creator-saturate": "bg-creator-saturate",
+  "supporter-normal": "bg-supporter-normal",
+  "supporter-saturate": "bg-supporter-saturate",
+  white: "text-white hover:text-supporter-saturate",
+  black: "text-black ",
+};
+
+export const widthBtnMap = {
+  full: "w-full",
+  40: "w-40",
+  20: "w-20",
+};
+
+export const heightBtnMap = {
+  none: "",
+  full: "h-full",
+  11: "h-11",
+  14: "h-14",
+  20: "h-20",
+};
