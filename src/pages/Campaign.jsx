@@ -1,4 +1,5 @@
 import CampaignSection from '../layouts/CampaignSection'
+import Editor from '../components/EditorComponent/Editor'
 
 const project = {
   id:1,
@@ -17,13 +18,13 @@ export default function Campaign() {
           <div className='w-[564px] h-[452px] overflow-hidden  rounded-xl'>
             <img src={project.img} className='w-full h-full object-cover' alt="" />
           </div>
-          <div className='flex flex-col'>
+          <div className='flex flex-col ml-16'>
             <div className=''>line</div>
-            <div>
+            <div className='mb-6'>
               <div className='text-4xl font-bold text-supporter-saturate'>THB {50000}</div>
               <div className='text-gray-500 font-semibold'>supported of THB {"10,000"} goal</div>
             </div>
-            <div>
+            <div className='mb-6'>
               <div className='text-3xl font-extrabold'>{5000}</div>
               <div className='text-gray-500 font-semibold'>supporters</div>
             </div>
@@ -35,6 +36,14 @@ export default function Campaign() {
         </div>
       </content>
       <CampaignSection />
+      <div className='flex justify-center'>
+        <div className='w-3/4'>
+          <Editor />
+        </div>
+      </div>
+      
+      
+
     </div>
   )
 }
