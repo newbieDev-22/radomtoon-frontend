@@ -75,6 +75,7 @@ const widthMap = {
               <div className="mt-2">
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and typesetting
+                  industryLorem Ipsum is simply dummy text of the printing and typesetting
                   industry. 
                 </p>
               </div>
