@@ -1,7 +1,9 @@
-import React from 'react'
+import Editor from "../components/EditorComponent/Editor";
 
 export default function Home() {
   return (
-    <div>Home</div>
-  )
+    <div>
+      <Editor />
+    </div>
+  );
 }

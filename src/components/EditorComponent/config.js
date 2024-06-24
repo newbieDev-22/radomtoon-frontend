@@ -1,5 +1,5 @@
 export const toolbarOptions = [
-  [{ header: [1, 2, 3, 4, 5, 6] }, { font: [] }],
+  [{ header: [1, 2, 3, 4, 5, 6] }],
   [{ size: [] }],
   ["bold", "italic", "underline", "strike", "blockquote"],
   [{ align: [] }],
@@ -12,7 +12,6 @@ export const toolbarOptions = [
 export const formats = [
   "header",
   "font",
-  "size",
   "bold",
   "italic",
   "underline",
@@ -29,7 +28,4 @@ export const formats = [
   "height",
   "width",
   "float",
-  "style",
-  "display",
-  "margin",
 ];
