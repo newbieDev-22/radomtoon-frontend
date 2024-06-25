@@ -1,12 +1,14 @@
 import React from "react";
-import CreatorApprovalManagement from "./CreatorApprovalManagementTable";
+import CreatorApprovalManagementTable from "./CreatorApprovalManagementTable";
 import MockupData from "./GridTable";
+import ProjectApprovalManagementTable from "./ProjectApprovalManagementTable";
 
 export default function Table() {
   return (
     <>
       {/* <CreatorApprovalManagement /> */}
-      <CreatorApprovalManagement />
+      <CreatorApprovalManagementTable />
+      <ProjectApprovalManagementTable />
       {/* <MockupData /> */}
     </>
   );
