@@ -19,17 +19,17 @@ export default function ImgCard({
         className={`group ${widthMap[widthSize]} ${
           heightMap[heightSize]
         }  hover:scale-[102%] transition-all shadow-lg rounded-md ${
-          mainCard ? "h-[542px] " : "hover:h-auto hover:absolute z-20 overflow-hidden hover:bg-white"
+          mainCard ? "h-auto " : "hover:h-auto hover:absolute z-20 overflow-hidden hover:bg-white"
         }  `}
       >
-        <div className="h-40 relative overflow-hidden">
+        <div className={`${mainCard? 'h-64 rounded-t-md':'h-40'} relative overflow-hidden`}>
           <img
             src={imageSrc}
-            className={`absolute rounded-md top-0 left-0 ${imageMap[imageSize]} object-cover transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:duration-[1s]`}
+            className={`absolute object-cover h-full w-full top-0 left-0 ${imageMap[imageSize]} object-cover transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:duration-[1s]`}
           />
         </div>
         <div className="h-2 bg-neutral-300">
-          <div className={`h-2 ${progressBar[progressSize]} bg-yellow-500`}></div>
+          <div className={`h-2 ${progressBar[progressSize]} bg-supporter-saturate`}></div>
         </div>
         <div className="flex ml-4 gap-4 py-2 px-2">
           <div className="py-1">

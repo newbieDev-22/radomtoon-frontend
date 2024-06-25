@@ -13,8 +13,8 @@ const loopCard = 6;
 export default function Home() {
   return (
     <div>
-        <h1 className="flex justify-center text-5xl text-semibold mt-20">Title</h1>
-      <div className="flex justify-center gap-10 mt-20 mb-20">
+        <h1 className="flex justify-center text-5xl text-semibold mt-10">Title</h1>
+      <div className="flex justify-center gap-10 mt-10 mb-20">
         <div>
           <ImgCard
             widthSize="large"
