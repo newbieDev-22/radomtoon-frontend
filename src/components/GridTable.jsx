@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 
 const ColumnsGridColsMapping = {
   3: "grid-cols-3",
@@ -26,6 +27,25 @@ export default function GridTable({ columns, data, title }) {
         return "";
     }
   };
+
+  const deliveryStatusClass = (status) => {
+    switch (status) {
+      case "deliver":
+        return "text-yellow-600 bg-yellow-100 text-center";
+      case "delivered":
+        return "text-green-600 bg-green-100 text-center";
+      default:
+        return "";
+    }
+  };
+
+  const handleDeliveryClick = (event) => {
+    const button = event.target;
+    button.classList.remove("text-yellow-600", "bg-yellow-100");
+    button.classList.add("text-green-600", "bg-green-100");
+    button.textContent = "delivered";
+  };
+
   return (
     <div className="p-4 flex justify-center items-center">
       <div className="flex flex-col">
@@ -63,6 +83,26 @@ export default function GridTable({ columns, data, title }) {
                     <a href="#" className="text-[#7D8398] hover:underline">
                       {value}
                     </a>
+                  ) : key === "tier" ? (
+                    <div>LV. {value}</div>
+                  ) : key === "spendingMoney" ? (
+                    <div>
+                      THB{" "}
+                      {value.toLocaleString("en-US", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </div>
+                  ) : key === "delivery" ? (
+                    <button
+                      key={subIndex}
+                      className={`w-[120px] rounded-lg shadow-md ${deliveryStatusClass(
+                        value
+                      )}`}
+                      onClick={handleDeliveryClick}
+                    >
+                      {value}
+                    </button>
                   ) : (
                     value
                   )}
