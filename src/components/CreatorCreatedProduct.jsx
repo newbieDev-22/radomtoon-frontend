@@ -16,7 +16,7 @@ export default function CreatorCreatedProduct() {
     <div>
       <div className="flex justify-center gap-10 mt-20 mb-20">
         <div className="grid grid-cols-3 gap-10 mb-20 ">
-          <div className="border-dashed border-4 border-gray-500 rounded-lg grid-cols-1">
+          <div className="border-dashed border-4 border-gray-500 rounded-lg bg-red-300">
             <Button width="full" height="full" bg="creator-normal">
               <span className="text-5xl text-white ">+</span>
             </Button>

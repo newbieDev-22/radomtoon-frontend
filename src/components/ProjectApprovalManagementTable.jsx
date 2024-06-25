@@ -1,4 +1,3 @@
-import React from "react";
 import GridTable from "./GridTable";
 
 export default function ProjectApprovalManagementTable() {
@@ -20,11 +19,5 @@ export default function ProjectApprovalManagementTable() {
       status: "failed",
     },
   ];
-  return (
-    <GridTable
-      columns={columns}
-      data={data}
-      title="Project Approval Management"
-    />
-  );
+  return <GridTable columns={columns} data={data} title="Project Approval Management" />;
 }

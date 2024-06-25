@@ -4,7 +4,7 @@ const mockImage =
   "https://static.thairath.co.th/media/B6FtNKtgSqRqbnNsbKEfQbPGELW2YjCcDQUpDilBzR4jVwhRbzfUfbngdYegm1bTfTXjc.webp";
 const mockAvatar = "https://mdbcdn.b-cdn.net/img/new/avatars/1.webp";
 const mockProjectName =
-  "ascsacascasssssssssssssss ssssssssssssssssssssssssssssssssssssssssc";
+  "ascsacascass sssssssssssss ssssssssssssssssssss ssssssssssssssssssssc";
 const mockCreatorName = "safassafsafsfa";
 const daysLeft = 23;
 
@@ -13,7 +13,7 @@ const loopCard = 6;
 export default function Home() {
   return (
     <div>
-        <h1 className="flex justify-center text-5xl text-semibold mt-10">Title</h1>
+      <h1 className="flex justify-center text-5xl text-semibold mt-10">Home</h1>
       <div className="flex justify-center gap-10 mt-10 mb-20">
         <div>
           <ImgCard
@@ -43,6 +43,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-      </div>
+    </div>
   );
 }
