@@ -17,11 +17,11 @@ const DataGridColsMapping = {
 export default function GridTable({ columns, data, title }) {
   const getStatusClass = (status) => {
     switch (status) {
-      case "success":
+      case "Success":
         return "text-green-600 bg-green-100 text-center";
-      case "pending":
+      case "Pending":
         return "text-yellow-600 bg-yellow-100 text-center";
-      case "failed":
+      case "Failed":
         return "text-red-600 bg-red-100 text-center";
       default:
         return "";
@@ -30,9 +30,19 @@ export default function GridTable({ columns, data, title }) {
 
   const deliveryStatusClass = (status) => {
     switch (status) {
-      case "deliver":
+      case "Deliver":
         return "text-yellow-600 bg-yellow-100 text-center";
-      case "delivered":
+      case "Delivered":
+        return "text-green-600 bg-green-100 text-center";
+      default:
+        return "";
+    }
+  };
+  const evidenceStatusClass = (status) => {
+    switch (status) {
+      case "Send Evidence":
+        return "text-yellow-600 bg-yellow-100 text-center";
+      case "Evidence Sent":
         return "text-green-600 bg-green-100 text-center";
       default:
         return "";
@@ -44,6 +54,12 @@ export default function GridTable({ columns, data, title }) {
     button.classList.remove("text-yellow-600", "bg-yellow-100");
     button.classList.add("text-green-600", "bg-green-100");
     button.textContent = "delivered";
+  };
+  const handleEvidenceClick = (event) => {
+    const button = event.target;
+    button.classList.remove("text-yellow-600", "bg-yellow-100");
+    button.classList.add("text-green-600", "bg-green-100");
+    button.textContent = "Evidence Sent";
   };
 
   return (
@@ -100,6 +116,16 @@ export default function GridTable({ columns, data, title }) {
                         value
                       )}`}
                       onClick={handleDeliveryClick}
+                    >
+                      {value}
+                    </button>
+                  ) : key === "evidence" ? (
+                    <button
+                      key={subIndex}
+                      className={`w-[120px] rounded-lg shadow-md ${evidenceStatusClass(
+                        value
+                      )}`}
+                      onClick={handleEvidenceClick}
                     >
                       {value}
                     </button>
