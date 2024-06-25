@@ -4,7 +4,7 @@ import GridTable from "./GridTable";
 export default function MilestoneApprovalManagementTable() {
   const columns = [
     "Creator name",
-    "Register form",
+    "Project name",
     "Milestone Evidence",
     "Status",
   ];
