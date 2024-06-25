@@ -1,8 +1,13 @@
 import React from 'react'
-import CreateEditProfile from '../components/CreatorEditProfile'
+import CreatorEditProfile from '../layouts/CreatorEditProfile'
+import CreatorCreatedProduct from '../components/CreatorCreatedProduct'
+
 
 export default function CreatorPanel() {
   return (
-    <CreateEditProfile />
+    <>
+    <CreatorEditProfile/>
+    <CreatorCreatedProduct />
+    </>
   )
 }
