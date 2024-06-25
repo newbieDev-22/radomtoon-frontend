@@ -1,13 +1,7 @@
-import { Link } from "react-router-dom"
-
-export default function CampaignSectionItem({ tab }) {
+export default function CampaignSectionItem({ tab, onClick }) {
   return (
-    <span 
-      className="font-medium hover:text-supporter-saturate cursor-pointer"
-    >
-    {tab}
+    <span onClick={onClick} className="font-medium hover:text-supporter-saturate cursor-pointer">
+      {tab}
     </span>
-  )
+  );
 }
-
-

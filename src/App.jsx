@@ -1,5 +1,5 @@
-import Router from './routes'
-import { Suspense } from 'react';
+import Router from "./routes";
+import { Suspense } from "react";
 
 export default function App() {
   return (
