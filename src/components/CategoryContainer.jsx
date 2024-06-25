@@ -6,7 +6,7 @@ const mockProjectName = "ascsacascasssssssssssssss sssssssssssssssssssssssssssss
 const mockCreatorName = "safassafsafsfa";
 const daysLeft = 23;
 
-const loopCard = 16;
+const loopCard = 12;
 
 export default function CategoryContainer(){
     return(
