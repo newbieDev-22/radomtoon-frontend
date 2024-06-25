@@ -1,13 +1,7 @@
-import React from "react";
 import GridTable from "./GridTable";
 
 export default function MilestoneApprovalManagementTable() {
-  const columns = [
-    "Creator name",
-    "Project name",
-    "Milestone Evidence",
-    "Status",
-  ];
+  const columns = ["Creator name", "Project name", "Milestone Evidence", "Status"];
   const data = [
     {
       name: "John Doe",
@@ -29,10 +23,6 @@ export default function MilestoneApprovalManagementTable() {
     },
   ];
   return (
-    <GridTable
-      columns={columns}
-      data={data}
-      title="Milestone Approval Management"
-    />
+    <GridTable columns={columns} data={data} title="Milestone Approval Management" />
   );
 }

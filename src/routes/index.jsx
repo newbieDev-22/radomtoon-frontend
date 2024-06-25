@@ -15,33 +15,36 @@ const SupporterPanel = lazy(() => import('../pages/SupporterPanel'))
 const CreatorPanel = lazy(() => import('../pages/CreatorPanel'))
 const AdminPanel = lazy(() => import('../pages/AdminPanel'))
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <>
+        <Header />
+        <div className="min-h-[80vh]">
+          <Outlet />
+        </div>
+        <Footer />
+      </>
+    ),
+    children: [
+      { path: "/landing", element: <Landing /> },
+      { path: "/", element: <Home /> },
+      { path: "/login", element: <LogIn /> },
+      { path: "/register", element: <CreatorRegister /> },
 
-const router = createBrowserRouter([{
-  path: '/',
-  element:
-    <>
-      <Header />
-      <div className="min-h-[80vh]"><Outlet /></div>
-      <Footer />
-    </>,
-  children: [
-    { path: '/landing', element: <Landing /> },
-    { path: '/', element: <Home /> },
-    { path: '/login', element: <LogIn /> },
-    { path: '/register', element: <CreatorRegister /> },
+      { path: "/campaign/:productId", element: <Campaign /> },
+      { path: "/campaign/:productId/tier/:tierId/payment", element: <Payment /> },
+      { path: "/campaign/:productId/tiers", element: <Tier /> },
 
-    { path: '/campaign/:productId', element: <Campaign /> },
-    { path: '/campaign/:productId/payment', element: <Payment /> },
-    { path: '/campaign/:productId/tiers', element: <Tier /> },
-
-    { path: '/supporter/:supporterId', element: <SupporterPanel /> },
-    { path: '/creator/:creatorId', element: <CreatorPanel /> },
-    { path: '/admin-panel', element: <AdminPanel /> },
-    { path: '/homedummy', element: <HomeDummy /> },
-
-  ]
-}])
+      { path: "/supporter/:supporterId", element: <SupporterPanel /> },
+      { path: "/creator/:creatorId", element: <CreatorPanel /> },
+      { path: "/admin-panel", element: <AdminPanel /> },
+      { path: "/homedummy", element: <HomeDummy /> },
+    ],
+  },
+]);
 
 export default function Router() {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }

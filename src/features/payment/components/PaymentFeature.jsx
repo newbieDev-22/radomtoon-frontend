@@ -3,28 +3,26 @@ import { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
-
-
+import { useParams } from "react-router-dom";
 
 function PaymentFeature() {
+  const { tierId } = useParams();
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-
-    fetch("http://localhost:8888/config").then(async (r) => {
+    fetch(`${import.meta.env.VITE_API_URL}/stripe/config`).then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
     });
   }, []);
 
-
   useEffect(() => {
-    fetch("http://localhost:8888/create-payment-intent", {
+    fetch(`${import.meta.env.VITE_API_URL}/stripe/create-payment-intent/tier/${tierId}`, {
       method: "POST",
       body: JSON.stringify({}),
     }).then(async (result) => {
-      var { clientSecret } = await result.json();
+      const { clientSecret } = await result.json();
       setClientSecret(clientSecret);
     });
   }, []);
