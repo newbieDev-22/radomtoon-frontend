@@ -83,4 +83,5 @@ export const heightBtnMap = {
   11: "h-11",
   14: "h-14",
   20: "h-20",
+  60: "h-60",
 };
