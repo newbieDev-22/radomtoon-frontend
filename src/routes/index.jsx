@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import HomeDummy from "../pages/HomeDummy";
 
 const Header = lazy(() => import('../layouts/Header'))
 const Footer = lazy(() => import('../layouts/Footer'))
@@ -25,6 +26,7 @@ const router = createBrowserRouter([ {
   children: [
     { path: '/landing', element: <Landing />},
     { path: '/', element: <Home />},
+    { path: '/homedummy', element: <HomeDummy /> },
     { path: '/login', element: <LogIn />},
     { path: '/register', element: <CreatorRegister />},
 
