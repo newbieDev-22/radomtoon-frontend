@@ -1,4 +1,3 @@
-import React from "react";
 import GridTable from "./GridTable";
 
 export default function CreatorApprovalManagementTable() {
@@ -21,11 +20,5 @@ export default function CreatorApprovalManagementTable() {
     },
   ];
 
-  return (
-    <GridTable
-      columns={columns}
-      data={data}
-      title="Creator approval management"
-    />
-  );
+  return <GridTable columns={columns} data={data} title="Creator approval management" />;
 }
