@@ -18,7 +18,7 @@ export default function ProductCommentCard({
 
         {isUserComment && (
           <div className="flex gap-2 justify-end  w-[5rem]  ">
-            <Button>Edit</Button>
+            <Button bg="yellow">Edit</Button>
             <Button bg="red">Delete</Button>
           </div>
         )}

@@ -45,6 +45,7 @@ export const bgBtnMap = {
   black: "bg-black ",
   red: "bg-red-300 hover:bg-red-500",
   green: "bg-green-300 hover:bg-green-500",
+  yellow: "bg-yellow-300 hover:bg-yellow-500",
   none: "bg-none ",
 };
 

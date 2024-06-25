@@ -20,10 +20,10 @@ export default function LoginPage() {
   return (
     <div className="min-w-screen min-h-screen">
       <div className="grid grid-cols-2 shadow-lg rounded-lg">
-        <div className="h-full w-full">
+        <div className="h-screen w-full">
           <LoginImage />
         </div>
-        <div className="px-48 rounded-lg bg-green-300 flex w-full h-full flex-col justify-center g">
+        <div className="px-48 rounded-lg bg-creator-normal flex w-full h-full flex-col justify-center g">
           <h1 className="text-3xl font-bold text-center">SIGN IN</h1>
 
           <form onSubmit={handleSubmitForm} action="">
