@@ -12,7 +12,7 @@ const mockImageProduct =
 export default function TierContainer() {
   return (
     <>
-      <div className=" w-7/12 m-auto mt-10 p-6 ">
+      <div className=" w-7/12 m-auto p-6">
         <h2 id="header" className=" font-bold text-3xl">
           Select your reward
         </h2>

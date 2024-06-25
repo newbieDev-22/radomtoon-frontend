@@ -1,4 +1,5 @@
-import ImgCard from "../components/ImageCard";
+import ProductImageCard from "./ProductImageCard";
+import Button from "./Button";
 
 const mockImage =
   "https://static.thairath.co.th/media/B6FtNKtgSqRqbnNsbKEfQbPGELW2YjCcDQUpDilBzR4jVwhRbzfUfbngdYegm1bTfTXjc.webp";
@@ -10,28 +11,18 @@ const daysLeft = 23;
 
 const loopCard = 6;
 
-export default function Home() {
+export default function CreatorCreatedProduct() {
   return (
     <div>
-        <h1 className="flex justify-center text-5xl text-semibold mt-10">Title</h1>
-      <div className="flex justify-center gap-10 mt-10 mb-20">
-        <div>
-          <ImgCard
-            widthSize="large"
-            heightSize="large"
-            progressSize="large"
-            imageSize="large"
-            imageSrc={mockImage}
-            productName={mockProjectName}
-            creatorName={mockCreatorName}
-            daysLeft={daysLeft}
-            avatarImage={mockAvatar}
-            mainCard={true}
-          />
-        </div>
-        <div className="grid grid-cols-2 gap-10 mb-20 ">
+      <div className="flex justify-center gap-10 mt-20 mb-20">
+        <div className="grid grid-cols-3 gap-10 mb-20 ">
+          <div className="border-dashed border-4 border-gray-500 rounded-lg grid-cols-1">
+            <Button width="full" height="full" bg="creator-normal">
+              <span className="text-5xl text-white ">+</span>
+            </Button>
+          </div>
           {Array.from({ length: loopCard }).map((_, index) => (
-            <ImgCard
+            <ProductImageCard
               key={index}
               size="medium"
               imageSrc={mockImage}
@@ -43,6 +34,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-      </div>
+    </div>
   );
 }

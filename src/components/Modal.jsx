@@ -1,6 +1,6 @@
 export default function Modal({ title = "MODAL", children }) {
   return (
-    <div className="w-[600px] shadow-lg p-8 flex flex-col items-center rounded-lg">
+    <div className="w-auto shadow-lg p-8 flex flex-col items-center rounded-lg">
       <div className="w-full flex justify-between">
         <div className="invisible">&#10005;</div>
         <div>&#10005;</div>
