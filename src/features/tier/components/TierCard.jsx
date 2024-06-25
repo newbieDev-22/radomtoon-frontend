@@ -9,7 +9,11 @@ export default function TierCard({
   productImage,
 }) {
   return (
-    <div className="shadow-lg border-gray-300 border py-8 px-12 hover:border-gray-500 transition-all hover:scale-[101%] active:scale-100">
+    <div
+      role="button"
+      className="shadow-lg border-gray-300 border py-8 px-12 hover:border-gray-500 
+    transition-all hover:scale-[101%] active:scale-100 rounded-xl"
+    >
       <div className="grid grid-cols-7">
         <div className="flex flex-col gap-5 max-w-3xl col-span-5">
           <h2 className="font-bold text-3xl">{`Tier ${tierNumber}`}</h2>
@@ -30,7 +34,7 @@ export default function TierCard({
           <img
             src={productImage}
             alt="product's picture"
-            className="aspect-[3/4] w-full"
+            className="aspect-[3/4] w-full rounded-lg"
           />
         </div>
       </div>

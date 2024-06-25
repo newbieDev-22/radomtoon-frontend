@@ -1,8 +1,7 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-// import Payment from "../pages/Payment";
-// import Completion from "../features/payment/components/Completion";
 
+import HomeDummy from "../pages/HomeDummy";
 const Header = lazy(() => import('../layouts/Header'))
 const Footer = lazy(() => import('../layouts/Footer'))
 const Landing = lazy(() => import('../pages/Landing'))
@@ -33,12 +32,12 @@ const router = createBrowserRouter([{
 
     { path: '/campaign/:productId', element: <Campaign /> },
     { path: '/campaign/:productId/payment', element: <Payment /> },
-    { path: '/campaign/:productId/payment/completion', element: <Completion /> },
     { path: '/campaign/:productId/tiers', element: <Tier /> },
 
     { path: '/supporter/:supporterId', element: <SupporterPanel /> },
     { path: '/creator/:creatorId', element: <CreatorPanel /> },
     { path: '/admin-panel', element: <AdminPanel /> },
+    { path: '/homedummy', element: <HomeDummy /> },
 
   ]
 }])
