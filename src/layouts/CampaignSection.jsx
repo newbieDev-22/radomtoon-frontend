@@ -8,7 +8,7 @@ const sections = [
 
 export default function CampaignSection() {
   return (
-    <section className="h-[10vh] my-[10vh] flex items-center gap-20 text-white pl-[10vw] bg-radomtoon-dark">
+    <section className="h-[10vh] mt-[10vh] flex items-center gap-20 text-white pl-[10vw] bg-radomtoon-dark">
       {sections.map((sec) => (
         <CampaignSectionItem onClick={''} key={sec.id} name={sec.name} tab={sec.tab} />
       ))}

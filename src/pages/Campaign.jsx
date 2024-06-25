@@ -1,5 +1,6 @@
-import CampaignContent from '../components/CampaignContent'
+import ProductCommentContainer from '../features/product-comment/components/ProductCommentContainer'
 import CampaignSection from '../layouts/CampaignSection'
+import CampaignContent from '../components/CampaignContent'
 
 const mockContent = {
   id:1,
@@ -23,6 +24,7 @@ export default function Campaign() {
         remainingDay={mockContent.remainingDay}
       />
       <CampaignSection />
+      <ProductCommentContainer />
     </div>
   )
 }
