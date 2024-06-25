@@ -14,7 +14,7 @@ const Payment = lazy(() => import('../pages/Payment'))
 const SupporterPanel = lazy(() => import('../pages/SupporterPanel'))
 const CreatorPanel = lazy(() => import('../pages/CreatorPanel'))
 const AdminPanel = lazy(() => import('../pages/AdminPanel'))
-const Completion = lazy(() => import("../features/payment/components/Completion"))
+
 
 const router = createBrowserRouter([{
   path: '/',

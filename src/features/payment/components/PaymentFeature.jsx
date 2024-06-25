@@ -14,7 +14,6 @@ function PaymentFeature() {
 
     fetch("http://localhost:8888/config").then(async (r) => {
       const { publishableKey } = await r.json();
-      // console.log("publishableKey", publishableKey)
       setStripePromise(loadStripe(publishableKey));
     });
   }, []);
@@ -31,14 +30,14 @@ function PaymentFeature() {
   }, []);
 
   return (
-    <>
-      {/* <h1>React Stripe and the Payment Element</h1> */}
+    <div className="w-full">
+      <h1 className="text-2xl font-bold pb-5">Payment Methods</h1>
       {clientSecret && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <CheckoutForm />
         </Elements>
       )}
-    </>
+    </div>
   );
 }
 
