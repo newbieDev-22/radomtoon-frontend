@@ -1,7 +1,7 @@
 import React from "react";
 import GridTable from "./GridTable";
 
-export default function CreatorApprovalManagement() {
+export default function CreatorApprovalManagementTable() {
   const columns = ["Creator name", "Register form", "Status"];
   const data = [
     {
