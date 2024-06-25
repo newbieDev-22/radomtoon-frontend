@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import HomeDummy from "../pages/HomeDummy";
 
+import HomeDummy from "../pages/HomeDummy";
 const Header = lazy(() => import('../layouts/Header'))
 const Footer = lazy(() => import('../layouts/Footer'))
 const Landing = lazy(() => import('../pages/Landing'))
@@ -14,32 +14,33 @@ const Payment = lazy(() => import('../pages/Payment'))
 const SupporterPanel = lazy(() => import('../pages/SupporterPanel'))
 const CreatorPanel = lazy(() => import('../pages/CreatorPanel'))
 const AdminPanel = lazy(() => import('../pages/AdminPanel'))
+const Completion = lazy(() => import("../features/payment/components/Completion"))
 
-const router = createBrowserRouter([ {
+const router = createBrowserRouter([{
   path: '/',
   element:
-  <>
-    <Header />
-    <div className="min-h-[80vh]"><Outlet /></div>
-    <Footer />
-  </>,
+    <>
+      <Header />
+      <div className="min-h-[80vh]"><Outlet /></div>
+      <Footer />
+    </>,
   children: [
-    { path: '/landing', element: <Landing />},
-    { path: '/', element: <Home />},
-    { path: '/homedummy', element: <HomeDummy /> },
-    { path: '/login', element: <LogIn />},
-    { path: '/register', element: <CreatorRegister />},
+    { path: '/landing', element: <Landing /> },
+    { path: '/', element: <Home /> },
+    { path: '/login', element: <LogIn /> },
+    { path: '/register', element: <CreatorRegister /> },
 
-    { path: '/campaign/:productId', element: <Campaign />},
-    { path: '/campaign/:productId/payment', element: <Payment />},
-    { path: '/campaign/:productId/tiers', element: <Tier />},
-    
-    { path: '/supporter/:supporterId', element: <SupporterPanel />},
-    { path: '/creator/:creatorId', element: <CreatorPanel />},
-    { path: '/admin-panel', element: <AdminPanel />},
-    
+    { path: '/campaign/:productId', element: <Campaign /> },
+    { path: '/campaign/:productId/payment', element: <Payment /> },
+    { path: '/campaign/:productId/tiers', element: <Tier /> },
+
+    { path: '/supporter/:supporterId', element: <SupporterPanel /> },
+    { path: '/creator/:creatorId', element: <CreatorPanel /> },
+    { path: '/admin-panel', element: <AdminPanel /> },
+    { path: '/homedummy', element: <HomeDummy /> },
+
   ]
-} ])
+}])
 
 export default function Router() {
   return <RouterProvider router={router} />
