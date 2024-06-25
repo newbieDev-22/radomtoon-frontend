@@ -8,10 +8,11 @@ const mockProjectName =
 const mockCreatorName = "safassafsafsfa";
 const daysLeft = 23;
 
+const loopCard = 6;
+
 export default function Home() {
   return (
-    <div>
-      <div className="flex justify-center mt-20">
+      <div className="flex justify-center gap-10 mt-20 mb-20">
         <div>
           <ImgCard
             widthSize="large"
@@ -26,41 +27,19 @@ export default function Home() {
             mainCard={true}
           />
         </div>
-        <div className="grid grid-cols-2 gap-4 ml-4">
-          <ImgCard
-            size="medium"
-            imageSrc={mockImage}
-            productName={mockProjectName}
-            creatorName={mockCreatorName}
-            daysLeft={daysLeft}
-            avatarImage={mockAvatar}
-          />
-          <ImgCard
-            size="medium"
-            imageSrc={mockImage}
-            productName={mockProjectName}
-            creatorName={mockCreatorName}
-            daysLeft={daysLeft}
-            avatarImage={mockAvatar}
-          />
-          <ImgCard
-            size="medium"
-            imageSrc={mockImage}
-            productName={mockProjectName}
-            creatorName={mockCreatorName}
-            daysLeft={daysLeft}
-            avatarImage={mockAvatar}
-          />
-          <ImgCard
-            size="medium"
-            imageSrc={mockImage}
-            productName={mockProjectName}
-            creatorName={mockCreatorName}
-            daysLeft={daysLeft}
-            avatarImage={mockAvatar}
-          />
+        <div className="grid grid-cols-2 gap-10 ">
+          {Array.from({ length: loopCard }).map((_, index) => (
+            <ImgCard
+              key={index}
+              size="medium"
+              imageSrc={mockImage}
+              productName={mockProjectName}
+              creatorName={mockCreatorName}
+              daysLeft={daysLeft}
+              avatarImage={mockAvatar}
+            />
+          ))}
         </div>
       </div>
-    </div>
   );
 }

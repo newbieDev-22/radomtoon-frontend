@@ -18,14 +18,14 @@ export default function ImgCard({
       <div
         className={`group ${widthMap[widthSize]} ${
           heightMap[heightSize]
-        } hover:h-auto hover:scale-[102%] transition-all shadow-md rounded-md ${
-          !mainCard ? "hover:absolute" : ""
-        } hover:bg-white z-20 overflow-hidden`}
+        }  hover:scale-[102%] transition-all shadow-lg rounded-md ${
+          mainCard ? "h-[542px] " : "hover:h-auto hover:absolute z-20 overflow-hidden hover:bg-white"
+        }  `}
       >
         <div className="h-40 relative overflow-hidden">
           <img
             src={imageSrc}
-            className={`absolute top-0 left-0 ${imageMap[imageSize]} object-cover transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:duration-[1s]`}
+            className={`absolute rounded-md top-0 left-0 ${imageMap[imageSize]} object-cover transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:duration-[1s]`}
           />
         </div>
         <div className="h-2 bg-neutral-300">
@@ -50,7 +50,10 @@ export default function ImgCard({
                 {daysLeft} days left
               </div>
             </span>
-            <div className="opacity-0 pb-4 pr-4 group-hover:opacity-100 duration-[1s] -translate-y-6 group-hover:translate-y-0">
+            <div className={`pb-4 pr-4  ${
+              mainCard ? "opacity-100 translate-y-0" 
+              : "opacity-0 group-hover:opacity-100 duration-[1s] -translate-y-6 group-hover:translate-y-0"
+            }`}>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 Lorem Ipsum has been the industry standard dummy text ever since the
