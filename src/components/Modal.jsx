@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Modal({ title = "MODAL", children }) {
   return (
     <div className="w-[600px] shadow-lg p-8 flex flex-col items-center rounded-lg">
