@@ -2,12 +2,14 @@ import { PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 import Button from "../../../components/Button";
-// import "../css/App.css";
-// import "../css/index.css"
+import { useNavigate } from "react-router-dom";
+
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
+
+  const navigate = useNavigate()
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -46,10 +48,11 @@ export default function CheckoutForm() {
     <form
       id="payment-form"
       onSubmit={handleSubmit}
-      className=" w-5/12  min-h-[20rem]  p-5 rounded-lg shadow-2xl flex flex-col gap-2"
+      className=" w-5/12  min-h-[20rem] min-w-[30rem]  p-5 rounded-lg shadow-2xl flex flex-col gap-2"
     >
       <PaymentElement />
-      <div className=" flex justify-center h-16 mt-2 items-center">
+      <div className=" flex justify-between h-16 mt-2 items-center">
+        <Button onClick={() => navigate("/campaign/:productId/tiers")}  >Back</Button>
         <Button disabled={isProcessing || !stripe || !elements} id="submit" >
           <span id="button-text">
             {isProcessing ? "Processing ... " : "Pay now"}
