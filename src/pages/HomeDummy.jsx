@@ -11,8 +11,9 @@ const loopCard = 16;
 export default function HomeDummy() {
   return (
     <div>
-      <div className="flex justify-center mt-20">
-        <div className="grid grid-cols-4 gap-4 ml-4">
+      <h1 className="flex justify-center text-5xl text-semibold mt-20">Title</h1>
+      <div className="flex justify-center mt-20 mb-40">
+        <div className="grid grid-cols-4 gap-4 ml-4 ">
           {Array.from({ length: loopCard }).map((_, index) => (
             <ImgCard
               key={index}
