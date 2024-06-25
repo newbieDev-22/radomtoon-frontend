@@ -10,7 +10,7 @@ export default function CampaignSection() {
   return (
     <section className="h-[10vh] mt-[10vh] flex items-center gap-20 text-white pl-[10vw] bg-radomtoon-dark">
       {sections.map((sec) => (
-        <CampaignSectionItem key={sec.id} name={sec.name} tab={sec.tab} />
+        <CampaignSectionItem onClick={''} key={sec.id} name={sec.name} tab={sec.tab} />
       ))}
     </section>
   );

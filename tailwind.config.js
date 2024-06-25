@@ -14,7 +14,7 @@ export default {
         'creator-normal' : '#A1E3D9',
         'creator-saturate' : '#01C7D0',
         'radomtoon-dark' : '#05262D',
-        'raomtoon-bright' : '#0B5868',
+        'radomtoon-bright' : '#0B5868',
       },
   },
   plugins: [daisyui],
