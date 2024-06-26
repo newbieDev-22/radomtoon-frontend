@@ -1,52 +1,44 @@
 import { lazy } from "react";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
-import HomeDummy from "../pages/HomeDummy";
+const LandingPage = lazy(() => import("../pages/LandingPage"));
+const LoginPage = lazy(() => import("../pages/LoginPage"));
+const CreatorRegister = lazy(() => import("../pages/CreatorRegister"));
+const HomePage = lazy(() => import("../pages/HomePage"));
+const CampaignPage = lazy(() => import("../pages/CampaignPage"));
+const SelectTierPage = lazy(() => import("../pages/SelectTierPage"));
+const PaymentPage = lazy(() => import("../pages/PaymentPage"));
+const SupporterHistoryPage = lazy(() => import("../pages/SupporterHistoryPage"));
+const CreatorPanel = lazy(() => import("../pages/CreatorPanel"));
+const AdminPanel = lazy(() => import("../pages/AdminPanel"));
 
-const Header = lazy(() => import('../layouts/Header'))
-const Footer = lazy(() => import('../layouts/Footer'))
-const Landing = lazy(() => import('../pages/Landing'))
-const LogIn = lazy(() => import('../pages/LogIn'))
-const CreatorRegister = lazy(() => import('../pages/CreatorRegister'))
-const Home = lazy(() => import('../pages/Home'))
-const Campaign = lazy(() => import('../pages/Campaign'))
-const Tier = lazy(() => import('../pages/SelectTier'))
-const Payment = lazy(() => import('../pages/Payment'))
-const SupporterPanel = lazy(() => import('../pages/SupporterPanel'))
-const CreatorPanel = lazy(() => import('../pages/CreatorPanel'))
-const AdminPanel = lazy(() => import('../pages/AdminPanel'))
-const ProductRewardContainer = lazy(() => import('../features/product-reward/components/ProductRewardContainer'))
+const HomeDummy = lazy(() => import("../pages/HomeDummy"));
+
+const MainContainer = lazy(() => import("../layouts/MainContainer"));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <Header />
-        <div className="min-h-[80vh]">
-          <Outlet />
-        </div>
-        <Footer />
-      </>
-    ),
+    element: <MainContainer />,
     children: [
-      { path: "/landing", element: <Landing /> },
-      { path: "/", element: <Home /> },
-      { path: "/login", element: <LogIn /> },
-      { path: "/register", element: <CreatorRegister /> },
+      { path: "/landing", element: <LandingPage /> },
+      { path: "/", element: <HomePage /> },
 
-      { path: "/campaign/:productId", element: <Campaign /> },
-      { path: "/campaign/:productId/tier/:tierId/payment", element: <Payment /> },
-      { path: "/campaign/:productId/tiers", element: <Tier /> },
+      { path: "/campaign/:productId", element: <CampaignPage /> },
+      { path: "/campaign/:productId/tier", element: <SelectTierPage /> },
+      { path: "/campaign/:productId/tier/:tierId/payment", element: <PaymentPage /> },
 
-      { path: "/product-reward/:productId/", element: <ProductRewardContainer /> },
-
-      { path: "/supporter/:supporterId", element: <SupporterPanel /> },
-      { path: "/creator/:creatorId", element: <CreatorPanel /> },
+      { path: "/supporter-histories", element: <SupporterHistoryPage /> },
+      { path: "/creator-panel", element: <CreatorPanel /> },
       { path: "/admin-panel", element: <AdminPanel /> },
-      { path: "/homedummy", element: <HomeDummy /> },
+
+      { path: "/home-dummy", element: <HomeDummy /> },
     ],
   },
+  { path: "*", element: <Navigate to="/" /> },
+  { path: "/login", element: <LoginPage /> },
+  { path: "/creator-register", element: <CreatorRegister /> },
+  { path: "/supporter-register", element: <CreatorRegister /> },
 ]);
 
 export default function Router() {

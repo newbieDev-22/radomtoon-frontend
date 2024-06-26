@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Input from "./Input";
-import Modal from "./Modal";
+import Input from "../components/Input";
+import Modal from "../components/Modal";
 import validateRegister from "../validators/validate-register";
-import Button from "./Button";
+import Button from "../components/Button";
 
 const CreatorRegisterData = {
   firstName: "",
@@ -25,9 +25,7 @@ const ErrorCreatorRegisterData = {
 export default function CreatorRegisterForm() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [creatorData, setCreatorData] = useState(CreatorRegisterData);
-  const [errorCreatorData, setErrorCreatorData] = useState(
-    ErrorCreatorRegisterData
-  );
+  const [errorCreatorData, setErrorCreatorData] = useState(ErrorCreatorRegisterData);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -132,10 +130,7 @@ export default function CreatorRegisterForm() {
                 Picture upload successful
               </h1>
             ) : (
-              <label
-                htmlFor="file-upload"
-                className="cursor-pointer text-center"
-              >
+              <label htmlFor="file-upload" className="cursor-pointer text-center">
                 <span
                   className={`block border-[1.5px] border-gray rounded-lg p-8 ${
                     errorCreatorData?.password ? "mt-11" : null

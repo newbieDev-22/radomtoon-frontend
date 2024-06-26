@@ -7,10 +7,12 @@ export default function TierCard({
   dateEstimated,
   amountSupporters,
   productImage,
+  onClick,
 }) {
   return (
     <div
       role="button"
+      onClick={onClick}
       className="shadow-lg border-gray-300 border py-8 px-12 hover:border-gray-500 
     transition-all hover:scale-[101%] active:scale-100 rounded-xl"
     >

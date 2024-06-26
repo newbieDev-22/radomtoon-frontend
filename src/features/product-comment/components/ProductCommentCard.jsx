@@ -10,9 +10,7 @@ export default function ProductCommentCard({
     <div className="bg-white p-5 rounded-xl mb-5">
       <div className="flex gap-2 items-center justify-between">
         <div className="flex gap-2 items-center">
-          <div className="avatar">
-            <img src={avatarImage} className="w-12 rounded-full" />
-          </div>
+          <img src={avatarImage} className="w-12 h-12 rounded-full" alt="avatar" />
           <h3 className="font-semibold text-xl">{userName}</h3>
         </div>
 

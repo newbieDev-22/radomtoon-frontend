@@ -9,7 +9,7 @@ export default function Input({
   return (
     <div className={`relative w-full mb-4`}>
       <input
-        className={`w-full p-2 border-[1.5px] outline-none rounded-lg ${
+        className={`w-full indent-2 p-2 border-[1.5px] outline-none rounded-lg ${
           error ? "border-red-500" : "border-gray"
         }`}
         type={type}

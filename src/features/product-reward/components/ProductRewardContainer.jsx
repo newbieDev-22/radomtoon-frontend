@@ -1,6 +1,5 @@
 import TierCard from "../../tier/components/TierCard";
 
-
 const mockTierNumber = "1";
 const mockProductName = "test name name name";
 const mockDetail =

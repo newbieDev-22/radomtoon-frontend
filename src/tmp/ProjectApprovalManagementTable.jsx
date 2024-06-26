@@ -1,4 +1,4 @@
-import GridTable from "./GridTable";
+import GridTable from "../components/GridTable";
 
 export default function ProjectApprovalManagementTable() {
   const columns = ["Creator name", "Project name", "Status"];

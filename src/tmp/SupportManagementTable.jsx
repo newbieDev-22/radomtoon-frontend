@@ -1,4 +1,4 @@
-import GridTable from "./GridTable";
+import GridTable from "../components/GridTable";
 
 export default function SupportManagementTable() {
   const columns = ["Name", "Tier", "Spending Money", "Delivery"];
