@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 import HomeDummy from "../pages/HomeDummy";
+
 const Header = lazy(() => import('../layouts/Header'))
 const Footer = lazy(() => import('../layouts/Footer'))
 const Landing = lazy(() => import('../pages/Landing'))
@@ -14,6 +15,7 @@ const Payment = lazy(() => import('../pages/Payment'))
 const SupporterPanel = lazy(() => import('../pages/SupporterPanel'))
 const CreatorPanel = lazy(() => import('../pages/CreatorPanel'))
 const AdminPanel = lazy(() => import('../pages/AdminPanel'))
+const ProductRewardContainer = lazy(() => import('../features/product-reward/components/ProductRewardContainer'))
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
       { path: "/campaign/:productId", element: <Campaign /> },
       { path: "/campaign/:productId/tier/:tierId/payment", element: <Payment /> },
       { path: "/campaign/:productId/tiers", element: <Tier /> },
+
+      { path: "/product-reward/:productId/", element: <ProductRewardContainer /> },
 
       { path: "/supporter/:supporterId", element: <SupporterPanel /> },
       { path: "/creator/:creatorId", element: <CreatorPanel /> },
