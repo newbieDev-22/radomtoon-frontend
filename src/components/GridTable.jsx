@@ -17,11 +17,11 @@ export default function GridTable({ columns, data, title }) {
   const getStatusClass = (status) => {
     switch (status) {
       case "Success":
-        return "text-green-600 bg-green-100 text-center";
+        return "text-green-600 bg-green-100 text-center rounded-lg";
       case "Pending":
-        return "text-yellow-600 bg-yellow-100 text-center";
+        return "text-yellow-600 bg-yellow-100 text-center rounded-lg";
       case "Failed":
-        return "text-red-600 bg-red-100 text-center";
+        return "text-red-600 bg-red-100 text-center rounded-lg";
       default:
         return "";
     }
@@ -64,7 +64,7 @@ export default function GridTable({ columns, data, title }) {
   return (
     <div className="p-4 flex justify-center items-center">
       <div className="flex flex-col">
-        <h1 className="text-lg font-semibold mb-3">{title}</h1>
+        <h1 className="text-2xl font-semibold mb-3">{title}</h1>
         <div className="overflow-x-auto border-2 border-gray-300 rounded-lg">
           <div
             className={`grid ${
@@ -74,7 +74,7 @@ export default function GridTable({ columns, data, title }) {
             {columns.map((column, index) => (
               <div
                 key={index}
-                className=" py-3  w-[180px] text-center text-xs text-black font-semibold uppercase"
+                className=" py-3  w-[180px] text-center text-lg text-black font-semibold uppercase"
               >
                 {column}
               </div>
@@ -83,7 +83,9 @@ export default function GridTable({ columns, data, title }) {
           {data.map((item, index) => (
             <div
               key={index}
-              className={`grid ${DataGridColsMapping[columns.length]} gap-4 ${
+              className={`grid text- ${
+                DataGridColsMapping[columns.length]
+              } gap-4 ${
                 index % 2 === 0 ? "bg-white" : "bg-gray-50"
               } border-b border-gray-300 text-center`}
             >
