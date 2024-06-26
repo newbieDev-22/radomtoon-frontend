@@ -10,7 +10,7 @@ export default function Header() {
 
   const inLanding = location.pathname == '/landing'
   const hideHeader = ['/login'].includes(location.pathname);
-  const hideNav = ['/landing', '/login',`/campaign/${params.productId}/payment`].includes(location.pathname)
+  const hideNav = ['/landing', '/login','/admin-panel',`/campaign/${params.productId}/payment`].includes(location.pathname)
 
   return (
     <>
