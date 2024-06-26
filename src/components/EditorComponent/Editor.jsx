@@ -12,7 +12,7 @@ Quill.register("modules/resize", ResizeModule);
 
 export default function Editor() {
   const quillRef = useRef(null);
-  const [disable, setDisable] = useState(false);
+  const [disable, setDisable] = useState(true);
   const [content, setContent] = useState(mockData);
 
   // Handle form submission
@@ -78,9 +78,11 @@ export default function Editor() {
 
   return (
     <div className="editor">
-      <button type="button" onClick={handleSubmit}>
+      {disable || (
+        <button type="button" onClick={handleSubmit} >
         Submit
       </button>
+      )}
       <ReactQuill
         ref={quillRef}
         theme={disable ? "bubble" : "snow"}

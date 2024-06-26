@@ -6,6 +6,7 @@ const project = {
   id: 1,
   title: "EASYPLAY1s - Portable Music Keyboard with MIDI",
   img: "https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_1.0,f_auto,h_460/k6og9yhnskzqbc5o3ldg",
+
 };
 
 export default function Campaign() {

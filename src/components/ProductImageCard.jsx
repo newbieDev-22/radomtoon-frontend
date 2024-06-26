@@ -1,7 +1,7 @@
 import { heightMap, imageMap, progressBar, widthMap } from "../constants";
 import { TimeIcon } from "../icons";
 
-export default function ImgCard({
+export default function ProductImageCard({
   imageSrc,
   productName,
   creatorName,
@@ -18,25 +18,25 @@ export default function ImgCard({
       <div
         className={`group ${widthMap[widthSize]} ${
           heightMap[heightSize]
-        }  hover:scale-[102%] transition-all shadow-lg rounded-md ${
-          mainCard ? "h-auto " : "hover:h-auto hover:absolute z-20 overflow-hidden hover:bg-white"
-        }  `}
+        } shadow-lg rounded-md ${
+          mainCard ? "h-[542px]" : "z-20 overflow-hidden bg-white"
+        }`}
       >
-        <div className={`${mainCard? 'h-64 rounded-t-md':'h-40'} relative overflow-hidden`}>
+        <div className="h-40 relative overflow-hidden">
           <img
             src={imageSrc}
-            className={`absolute object-cover h-full w-full top-0 left-0 ${imageMap[imageSize]} object-cover transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:duration-[1s]`}
+            className={`absolute rounded-md top-0 left-0 ${imageMap[imageSize]} object-cover transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:duration-[1s]`}
           />
         </div>
         <div className="h-2 bg-neutral-300">
-          <div className={`h-2 ${progressBar[progressSize]} bg-supporter-saturate`}></div>
+          <div className={`h-2 ${progressBar[progressSize]} bg-yellow-500`}></div>
         </div>
         <div className="flex ml-4 gap-4 py-2 px-2">
           <div className="py-1">
             <div name="avatar">
               <img
                 src={avatarImage}
-                className="w-72 rounded-full shadow-lg"
+                className="w-24 rounded-full shadow-lg"
                 alt="Avatar"
               />
             </div>
@@ -50,18 +50,12 @@ export default function ImgCard({
                 {daysLeft} days left
               </div>
             </span>
-            <div className={`pb-4 pr-4  ${
-              mainCard ? "opacity-100 translate-y-0" 
-              : "opacity-0 group-hover:opacity-100 duration-[1s] -translate-y-6 group-hover:translate-y-0"
-            }`}>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry standard dummy text ever since the
-                1500s, when an unknown printer took a galley of type and scrambled it to
-                make a type specimen book.
-              </p>
-            </div>
           </div>
+        </div>
+        <div className="absolute bottom-2 right-2">
+          <a href="#">
+            <p className="hover:text-gray-700 ">...</p>
+          </a>
         </div>
       </div>
     </div>

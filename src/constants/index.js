@@ -1,3 +1,11 @@
+export const STATUS_PRODUCT = {
+    PENDING: "Waiting for admin approval",
+    IN_PROGRESS: "Project in progress",
+    REJECT: "Reject",
+    FAILED: "Failed",
+    SUCCESS: "Success",
+    DELETE: "Delete"
+}
 export const widthMap = {
   small: "w-[300px]",
   medium: "w-80",
@@ -45,6 +53,7 @@ export const bgBtnMap = {
   black: "bg-black ",
   red: "bg-red-300 hover:bg-red-500",
   green: "bg-green-300 hover:bg-green-500",
+  yellow: "bg-yellow-300 hover:bg-yellow-500",
   none: "bg-none ",
 };
 
@@ -83,4 +92,5 @@ export const heightBtnMap = {
   11: "h-11",
   14: "h-14",
   20: "h-20",
+  60: "h-60",
 };
