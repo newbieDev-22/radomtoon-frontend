@@ -1,11 +1,11 @@
 export const STATUS_PRODUCT = {
-    PENDING: "Waiting for admin approval",
-    IN_PROGRESS: "Project in progress",
-    REJECT: "Reject",
-    FAILED: "Failed",
-    SUCCESS: "Success",
-    DELETE: "Delete"
-}
+  PENDING: "Waiting for admin approval",
+  IN_PROGRESS: "Project in progress",
+  REJECT: "Reject",
+  FAILED: "Failed",
+  SUCCESS: "Success",
+  DELETE: "Delete",
+};
 export const widthMap = {
   small: "w-[300px]",
   medium: "w-80",
@@ -69,6 +69,11 @@ export const borderBtnMap = {
   red: "border-red-300 hover:border-red-500",
   green: "border-green-300 hover:border-green-500",
   none: "border-none ",
+};
+
+export const DELIVERY_STATUS = {
+  PENDING: "PENDING",
+  DELIVERED: "DELIVERED",
 };
 
 export const colorBtnMap = {
