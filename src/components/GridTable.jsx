@@ -1,5 +1,3 @@
-import React from "react";
-
 const ColumnsGridColsMapping = {
   3: "grid-cols-3",
   4: "grid-cols-4",
@@ -13,41 +11,41 @@ const DataGridColsMapping = {
   6: "grid-cols-6",
 };
 
+const getStatusClass = (status) => {
+  switch (status) {
+    case "Success":
+      return "text-green-600 bg-green-100 text-center rounded-lg";
+    case "Pending":
+      return "text-yellow-600 bg-yellow-100 text-center rounded-lg";
+    case "Failed":
+      return "text-red-600 bg-red-100 text-center rounded-lg";
+    default:
+      return "";
+  }
+};
+
+const deliveryStatusClass = (status) => {
+  switch (status) {
+    case "Deliver":
+      return "text-yellow-600 bg-yellow-100 text-center";
+    case "Delivered":
+      return "text-green-600 bg-green-100 text-center";
+    default:
+      return "";
+  }
+};
+const evidenceStatusClass = (status) => {
+  switch (status) {
+    case "Send Evidence":
+      return "text-yellow-600 bg-yellow-100 text-center";
+    case "Evidence Sent":
+      return "text-green-600 bg-green-100 text-center";
+    default:
+      return "";
+  }
+};
+
 export default function GridTable({ columns, data, title }) {
-  const getStatusClass = (status) => {
-    switch (status) {
-      case "Success":
-        return "text-green-600 bg-green-100 text-center rounded-lg";
-      case "Pending":
-        return "text-yellow-600 bg-yellow-100 text-center rounded-lg";
-      case "Failed":
-        return "text-red-600 bg-red-100 text-center rounded-lg";
-      default:
-        return "";
-    }
-  };
-
-  const deliveryStatusClass = (status) => {
-    switch (status) {
-      case "Deliver":
-        return "text-yellow-600 bg-yellow-100 text-center";
-      case "Delivered":
-        return "text-green-600 bg-green-100 text-center";
-      default:
-        return "";
-    }
-  };
-  const evidenceStatusClass = (status) => {
-    switch (status) {
-      case "Send Evidence":
-        return "text-yellow-600 bg-yellow-100 text-center";
-      case "Evidence Sent":
-        return "text-green-600 bg-green-100 text-center";
-      default:
-        return "";
-    }
-  };
-
   const handleDeliveryClick = (event) => {
     const button = event.target;
     button.classList.remove("text-yellow-600", "bg-yellow-100");
@@ -83,9 +81,7 @@ export default function GridTable({ columns, data, title }) {
           {data.map((item, index) => (
             <div
               key={index}
-              className={`grid text- ${
-                DataGridColsMapping[columns.length]
-              } gap-4 ${
+              className={`grid text- ${DataGridColsMapping[columns.length]} gap-4 ${
                 index % 2 === 0 ? "bg-white" : "bg-gray-50"
               } border-b border-gray-300 text-center`}
             >

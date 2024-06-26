@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import TierCard from "./TierCard";
 
 const mockTierNumber = "1";
@@ -9,46 +10,50 @@ const mockAmountSupporters = "456";
 const mockImageProduct =
   "https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg";
 
+const mockPaymentPath = "/campaign/1/tier/24/payment";
+
 export default function TierContainer() {
+  const navigate = useNavigate();
   return (
-    <>
-      <div className=" w-7/12 m-auto p-6">
-        <h2 id="header" className=" font-bold text-3xl">
-          Select your reward
-        </h2>
-        <h3 id="subHeader" className=" text-xl mb-5">
-          Select an option below
-        </h3>
-        <div
-          className="flex flex-col gap-4
+    <div className=" w-7/12 m-auto p-6">
+      <h2 id="header" className=" font-bold text-3xl">
+        Select your reward
+      </h2>
+      <h3 id="subHeader" className=" text-xl mb-5">
+        Select an option below
+      </h3>
+      <div
+        className="flex flex-col gap-4
         "
-        >
-          <TierCard
-            tierNumber={mockTierNumber}
-            productName={mockProductName}
-            detail={mockDetail}
-            dateEstimated={mockDateEstimated}
-            amountSupporters={mockAmountSupporters}
-            productImage={mockImageProduct}
-          />
-          <TierCard
-            tierNumber={mockTierNumber}
-            productName={mockProductName}
-            detail={mockDetail}
-            dateEstimated={mockDateEstimated}
-            amountSupporters={mockAmountSupporters}
-            productImage={mockImageProduct}
-          />{" "}
-          <TierCard
-            tierNumber={mockTierNumber}
-            productName={mockProductName}
-            detail={mockDetail}
-            dateEstimated={mockDateEstimated}
-            amountSupporters={mockAmountSupporters}
-            productImage={mockImageProduct}
-          />
-        </div>
+      >
+        <TierCard
+          tierNumber={mockTierNumber}
+          productName={mockProductName}
+          detail={mockDetail}
+          dateEstimated={mockDateEstimated}
+          amountSupporters={mockAmountSupporters}
+          productImage={mockImageProduct}
+          onClick={() => navigate(mockPaymentPath)}
+        />
+        <TierCard
+          tierNumber={mockTierNumber}
+          productName={mockProductName}
+          detail={mockDetail}
+          dateEstimated={mockDateEstimated}
+          amountSupporters={mockAmountSupporters}
+          productImage={mockImageProduct}
+          onClick={() => navigate(mockPaymentPath)}
+        />
+        <TierCard
+          tierNumber={mockTierNumber}
+          productName={mockProductName}
+          detail={mockDetail}
+          dateEstimated={mockDateEstimated}
+          amountSupporters={mockAmountSupporters}
+          productImage={mockImageProduct}
+          onClick={() => navigate(mockPaymentPath)}
+        />
       </div>
-    </>
+    </div>
   );
 }

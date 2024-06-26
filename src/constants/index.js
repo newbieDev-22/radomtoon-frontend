@@ -99,3 +99,29 @@ export const heightBtnMap = {
   20: "h-20",
   60: "h-60",
 };
+
+export const USER_ROLE = {
+  GUEST: "GUEST",
+  SUPPORTER: "SUPPORTER",
+  CREATOR: "CREATOR",
+  ADMIN: "ADMIN",
+};
+
+export const subPageMap = {
+  STORY: "STORY",
+  MILESTONE: "MILESTONE",
+  REWARD: "REWARD",
+  FORUM: "FORUM",
+};
+
+export const mockImage =
+  "https://static.thairath.co.th/media/B6FtNKtgSqRqbnNsbKEfQbPGELW2YjCcDQUpDilBzR4jVwhRbzfUfbngdYegm1bTfTXjc.webp";
+export const mockAvatar = "https://mdbcdn.b-cdn.net/img/new/avatars/1.webp";
+export const mockProjectName = "Test name";
+export const mockCreatorName = "creator name";
+export const daysLeft = 23;
+export const loopCard = 6;
+export const mockContent = `  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry standard dummy text ever since the
+                1500s, when an unknown printer took a galley of type and scrambled it to
+                make a type specimen book.`;

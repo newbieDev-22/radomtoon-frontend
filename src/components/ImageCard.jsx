@@ -7,25 +7,34 @@ export default function ImgCard({
   creatorName,
   daysLeft,
   avatarImage,
+  content,
   widthSize = "medium",
   heightSize = "large",
   progressSize = "medium",
   imageSize = "medium",
   mainCard = false,
+  onClick,
 }) {
   return (
-    <div className="relative items-center gap-4">
+    <div role="button" className="relative items-center gap-4" onClick={onClick}>
       <div
         className={`group ${widthMap[widthSize]} ${
           heightMap[heightSize]
-        }  hover:scale-[102%] transition-all shadow-lg rounded-md ${
-          mainCard ? "h-auto " : "hover:h-auto hover:absolute z-20 overflow-hidden hover:bg-white"
+        }  hover:scale-[102%] active:scale-100 transition-all shadow-lg rounded-md ${
+          mainCard
+            ? "h-auto "
+            : "hover:h-auto hover:absolute z-20 overflow-hidden hover:bg-white"
         }  `}
       >
-        <div className={`${mainCard? 'h-64 rounded-t-md':'h-40'} relative overflow-hidden`}>
+        <div
+          className={`${
+            mainCard ? "h-64 rounded-t-md" : "h-40"
+          } relative overflow-hidden`}
+        >
           <img
             src={imageSrc}
-            className={`absolute object-cover h-full w-full top-0 left-0 ${imageMap[imageSize]} object-cover transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:duration-[1s]`}
+            className={`absolute object-cover h-full w-full top-0 left-0 ${imageMap[imageSize]} object-cover`}
+            alt="product-card"
           />
         </div>
         <div className="h-2 bg-neutral-300">
@@ -50,16 +59,14 @@ export default function ImgCard({
                 {daysLeft} days left
               </div>
             </span>
-            <div className={`pb-4 pr-4  ${
-              mainCard ? "opacity-100 translate-y-0" 
-              : "opacity-0 group-hover:opacity-100 duration-[1s] -translate-y-6 group-hover:translate-y-0"
-            }`}>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry standard dummy text ever since the
-                1500s, when an unknown printer took a galley of type and scrambled it to
-                make a type specimen book.
-              </p>
+            <div
+              className={`pb-4 pr-4  ${
+                mainCard
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 group-hover:opacity-100 duration-[1s] -translate-y-6 group-hover:translate-y-0"
+              }`}
+            >
+              <p>{content}</p>
             </div>
           </div>
         </div>

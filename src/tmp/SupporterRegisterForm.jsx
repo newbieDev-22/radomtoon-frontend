@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Input from "./Input";
-import Modal from "./Modal";
-import Button from "./Button";
+import Input from "../components/Input";
+import Modal from "../components/Modal";
+import Button from "../components/Button";
 import validateRegister from "../validators/validate-rigister";
 
 const SupporterRegisterData = {
@@ -115,10 +115,7 @@ export default function SupporterRegisterForm() {
                 error={errorSupporterData.confirmPassword}
               />
             </div>
-            <Button
-              moveDown={errorSupporterData?.password && "mt-6"}
-              color="orange"
-            >
+            <Button moveDown={errorSupporterData?.password && "mt-6"} color="orange">
               Register
             </Button>
           </div>

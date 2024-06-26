@@ -1,4 +1,4 @@
-import GridTable from "./GridTable";
+import GridTable from "../components/GridTable";
 
 export default function CreatorApprovalManagementTable() {
   const columns = ["Creator name", "Register form", "Status"];

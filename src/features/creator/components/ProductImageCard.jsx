@@ -1,5 +1,6 @@
-import { heightMap, imageMap, progressBar, widthMap } from "../constants";
-import { TimeIcon } from "../icons";
+import { heightMap, imageMap, progressBar, widthMap } from "../../../constants";
+import { DotMenu, TimeIcon } from "../../../icons";
+// import { DotMenu, TimeIcon } from "../icons";
 
 export default function ProductImageCard({
   imageSrc,
@@ -25,7 +26,8 @@ export default function ProductImageCard({
         <div className="h-40 relative overflow-hidden">
           <img
             src={imageSrc}
-            className={`absolute rounded-md top-0 left-0 ${imageMap[imageSize]} object-cover transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:duration-[1s]`}
+            className={`absolute rounded-md top-0 left-0 ${imageMap[imageSize]} object-cover`}
+            alt="src"
           />
         </div>
         <div className="h-2 bg-neutral-300">
@@ -52,10 +54,8 @@ export default function ProductImageCard({
             </span>
           </div>
         </div>
-        <div className="absolute bottom-2 right-2">
-          <a href="#">
-            <p className="hover:text-gray-700 ">...</p>
-          </a>
+        <div className="absolute bottom-2 right-2 hover:scale-125 active:scale-100 transition-all">
+          <DotMenu />
         </div>
       </div>
     </div>

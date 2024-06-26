@@ -1,13 +1,13 @@
 import PaymentFeature from "../features/payment/components/PaymentFeature";
 import TierSummaryCard from "../features/payment/components/TierSummaryCard";
 
-export default function Payment() {
+export default function PaymentPage() {
   return (
-    <div className="flex justify-between p-20 px-[15rem] items-center">
-      <div className="">
+    <div className="grid grid-cols-2 p-10">
+      <div className="flex items-center px-24">
         <PaymentFeature />
       </div>
-      <div className="border ">
+      <div className="flex items-center px-24">
         <TierSummaryCard />
       </div>
     </div>

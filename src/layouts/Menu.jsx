@@ -1,32 +1,20 @@
-import { Link, useLocation } from "react-router-dom"
-import Button from "../components/Button"
-
-const user = false
-// const user = {}
-// user.creator = 1
+import { useLocation } from "react-router-dom";
+import GuestNavMenu from "./GuestNavMenu";
+import UserNavMenu from "./UserNavMenu";
+import { USER_ROLE } from "../constants";
 
 export default function Menu() {
+  const currentUser = USER_ROLE.CREATOR;
   const location = useLocation();
-  const inLanding = location.pathname == '/landing'
+  const inLanding = location.pathname == "/landing";
 
   return (
-    <>
-      {!user ? (
-        <>
-          <Button onClick={() => "Creator Register Modal"} bg="creator-normal" width="40" height="14">Start a Project</Button>
-          <Link to="/login" className={`hover:text-creator-saturate transition duration-300 ${inLanding ? 'text-white' : 'text-black'}`}>Log In</Link>
-        </>
-      )
-      : (
-        <>
-          {user.supporter && <Button to="/support-history" bg="creator-normal" width="40" height="14">History</Button>}
-          {user.creator && <Button to="/creator-profile" bg="creator-normal" width="40" height="14">Profile</Button>}
-          {user.admin && <Button to="/admin-panel" bg="creator-normal" width="40" height="14">Admin Panel</Button>}
-          <Link onClick={"handleLogout"} className={`${inLanding ? 'text-white' : 'text-black'}`}>Log Out</Link>
-        </>
-      )
-
-      }
-    </>
-  )
+    <div>
+      {currentUser === USER_ROLE.GUEST ? (
+        <GuestNavMenu inLanding={inLanding} />
+      ) : (
+        <UserNavMenu inLanding={inLanding} currentUser={currentUser} />
+      )}
+    </div>
+  );
 }

@@ -1,5 +1,4 @@
-import React from "react";
-import GridTable from "./GridTable";
+import GridTable from "../components/GridTable";
 
 export default function MilestoneStatusTable() {
   const columns = ["Milstone name", "Milestone status", "Evidence"];

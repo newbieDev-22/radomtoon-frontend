@@ -1,5 +1,3 @@
-import MilestoneStatusTable from "./components/MilestoneStatusTable";
-import SupportManagementTable from "./components/SupportManagementTable";
 import Router from "./routes";
 import { Suspense } from "react";
 export default function App() {
@@ -7,9 +5,5 @@ export default function App() {
     <Suspense fallback={"Loading..."}>
       <Router />
     </Suspense>
-    // <>
-    // <SupportManagementTable />
-    // <MilestoneStatusTable />
-    // </>
   );
 }

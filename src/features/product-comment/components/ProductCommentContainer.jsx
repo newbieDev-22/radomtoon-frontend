@@ -12,7 +12,7 @@ export default function ProductCommentContainer() {
   const [comment, setComment] = useState("");
 
   return (
-    <div className="w-3/4 bg-slate-200 m-auto p-10">
+    <div className="w-4/5 bg-slate-200 m-auto p-10">
       <div className="flex gap-5 justify-between mb-10 items-center">
         <textarea
           className="w-full px-8 py-4 min-h-16 max-h-32 outline-none rounded-xl text-lg"

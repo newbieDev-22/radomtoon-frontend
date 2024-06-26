@@ -23,12 +23,12 @@ export default function LoginPage() {
         <div className="h-screen w-full">
           <LoginImage />
         </div>
-        <div className="px-48 rounded-lg bg-creator-normal flex w-full h-full flex-col justify-center g">
+        <div className="px-20 bg-creator-normal flex w-full h-full flex-col justify-center">
           <h1 className="text-3xl font-bold text-center">SIGN IN</h1>
 
-          <form onSubmit={handleSubmitForm} action="">
-            <div className="">
-              <div className="flex flex-col justify-center mt-8">
+          <form onSubmit={handleSubmitForm}>
+            <div className="flex flex-col ">
+              <div className="flex flex-col justify-center pt-8">
                 <Input
                   name="emailOrPhone"
                   placeholder="Email or phone number"
@@ -44,14 +44,15 @@ export default function LoginPage() {
                 />
                 <Button width={"full"}>LOGIN</Button>
               </div>
-              <hr className="mt-10 border-black border-1" />
-              <div className="flex justify-center mt-8 gap-6">
-                <h6 role="button" className="text-[12px] font-semibold">
+
+              <div className="flex justify-center">
+                <div className="rounded-box grid place-items-center font-bold">
                   Create Creator Account
-                </h6>
-                <h6 role="button" className="text-[12px] font-semibold">
+                </div>
+                <div className="divider lg:divider-horizontal">OR</div>
+                <div className="rounded-box grid place-items-center font-bold">
                   Create Supporter Account
-                </h6>
+                </div>
               </div>
             </div>
           </form>
