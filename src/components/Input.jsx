@@ -9,8 +9,8 @@ export default function Input({
   return (
     <div className={`relative w-full mb-4`}>
       <input
-        className={`w-full indent-2 p-2 border-[1.5px] outline-none rounded-lg ${
-          error ? "border-red-500" : "border-gray"
+        className={`w-full indent-2 p-2 border-[1.5px] outline-none rounded-lg bg-gray-200 focus:border-radomtoon-dark transition duration-300 placeholder-gray-500 ${
+          error ? "border-red-500 mt-2" : "border-gray"
         }`}
         type={type}
         placeholder={placeholder}
@@ -19,7 +19,7 @@ export default function Input({
         onChange={onChange}
       />
       {error && (
-        <small className="text-red-500 mt-1 block absolute top-full left-0">
+        <small className="text-red-500 block absolute top-full left-0">
           {error}
         </small>
       )}
