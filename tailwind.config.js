@@ -17,6 +17,6 @@ export default {
         'radomtoon-bright' : '#0B5868',
       },
   },
+},
   plugins: [daisyui],
-}
 };
