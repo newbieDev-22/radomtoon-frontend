@@ -1,18 +1,27 @@
 import { useState } from "react";
 import Button from "../../../components/Button";
 import ProductCommentCard from "./ProductCommentCard";
-const mockUserName = "Brian Clark";
-const mockComment =
-  "“Lorem ipsum dolor sit amet consectetur eget maecenas sapLorem ipsum dolor sit amet consectetur eget maecenas sapien fusce egestas risus purus suspendisse turpis volutpat onareLorem ipsum dolor sit amet consectetur eget maecenas sapien fusce egestas risus purus suspendisse turpis volutpat onareLorem ipsum dolor sit amet consectetur eget maecenas sapien fusce egestas risus purus suspendisse turpis volutpat onareien fusce egestas risus purus suspendisse turpis volutpat onare”";
+const mockUserName = "Grant Mielke";
+const mockComment = `Hey there everyone! Thank you so much for checking out Bria's Mythical Menagerie! Few things!
+
+-We'd love to invite you to join our Discord! https://discord.gg/MythCraft
+
+we have a wonderful Discord community, and a dedicated Bria's channel where you can chat, ask questions, hang out, and even earn XP for helping us spread the word, which unlocks a Sparkly Astral Kitty pin included in your pledge!
+
+-Please check out the FAQs! I will do my best to keep those updated. If you feel something is missing don't hesitate to ask here!
+
+-Help us spread the word and hit those stretch goals! Share, Comment, tell your friends... you know the drill!
+
+Happy creature collecting!`;
 
 const mockAvatarImage =
-  "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
+  "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D";
 
 export default function ProductCommentContainer() {
   const [comment, setComment] = useState("");
 
   return (
-    <div className="w-4/5 bg-slate-200 m-auto p-10">
+    <div className=" bg-slate-200 m-auto px-20 py-10">
       <div className="flex gap-5 justify-between mb-10 items-center">
         <textarea
           className="w-full px-8 py-4 min-h-16 max-h-32 outline-none rounded-xl text-lg"
@@ -28,11 +37,12 @@ export default function ProductCommentContainer() {
         userName={mockUserName}
         content={mockComment}
         avatarImage={mockAvatarImage}
-        isUserComment={true}
+        isCreator={true}
       />
       <ProductCommentCard
         userName={mockUserName}
         content={mockComment}
+        isUserComment={true}
         avatarImage={mockAvatarImage}
       />
       <ProductCommentCard

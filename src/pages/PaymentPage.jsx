@@ -3,11 +3,11 @@ import TierSummaryCard from "../features/payment/components/TierSummaryCard";
 
 export default function PaymentPage() {
   return (
-    <div className="grid grid-cols-2 p-10">
-      <div className="flex items-center px-24">
+    <div className="flex py-10 px-20 justify-center gap-20">
+      <div className="flex items-center px-4">
         <PaymentFeature />
       </div>
-      <div className="flex items-center px-24">
+      <div className="flex items-center px-4">
         <TierSummaryCard />
       </div>
     </div>

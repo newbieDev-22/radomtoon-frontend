@@ -4,6 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
+import { Suspense } from "react";
 
 function PaymentFeature() {
   const { tierId } = useParams();
@@ -29,7 +30,7 @@ function PaymentFeature() {
 
   return (
     <div className="w-full">
-      <h1 className="text-2xl font-bold pb-5">Payment Methods</h1>
+      <h1 className="text-4xl font-bold pb-5">Payment Methods</h1>
       {clientSecret && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <CheckoutForm />
