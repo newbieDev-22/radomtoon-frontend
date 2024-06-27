@@ -34,10 +34,10 @@ export default function AddMilestone({
       <div className="flex justify-center items-center gap-20 mb-20 border w-2/4 h-auto shadow-md border-gray-200 rounded-md py-5">
         <div className="flex flex-col w-72">
           <span className="text-2xl font-bold">{name}</span>
-          <span className="text-xl font-bold">
-            Product name : {product_name}
+          <span className="text-xl font-bold text-creator-saturate mt-2">
+            Product name : <span className="text-gray-500">{product_name}</span>
           </span>
-          <div className="mt-2 ">
+          <div className="mt-2 text-creator-saturate ">
             <span className="font-bold">Product detail :</span>
             {isEditing ? (
               <textarea
@@ -57,17 +57,17 @@ export default function AddMilestone({
                 onClick={handleFocus}
                 style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}
               >
-                <p className="text-[11px]  text-gray-400 font-bold">
+                <p className="text-[11px]  text-gray-500 font-bold">
                   {note || "Click to edit your tier detail"}
                 </p>
               </div>
             )}
             {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
             <div className="mt-2 mb-5">
-              <span className="font-bold">Estimated Delivery</span>
-              <p className="text-[10px] text-gray-400 font-bold">{estimated_date}</p>
+              <span className="font-bold text-creator-saturate">Estimated Delivery</span>
+              <p className="text-[10px] text-gray-500 font-bold">{estimated_date}</p>
             </div>
-            <Button Link bg="creator-saturate" width="full" height="11">
+            <Button Link bg="creator-saturate" width="full" height="11" color="white">
               Pledge {price} BATH
             </Button>
           </div>
