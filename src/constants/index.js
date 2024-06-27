@@ -4,8 +4,8 @@ export const STATUS_PRODUCT = {
   REJECT: "Reject",
   FAILED: "Failed",
   SUCCESS: "Success",
-  DELETE: "Delete",
 };
+
 export const widthMap = {
   small: "w-[300px]",
   medium: "w-80",

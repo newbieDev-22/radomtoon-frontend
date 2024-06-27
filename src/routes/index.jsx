@@ -11,6 +11,7 @@ const PaymentPage = lazy(() => import("../pages/PaymentPage"));
 const SupporterHistoryPage = lazy(() => import("../pages/SupporterHistoryPage"));
 const CreatorPanel = lazy(() => import("../pages/CreatorPanel"));
 const AdminPanel = lazy(() => import("../pages/AdminPanel"));
+const ProductManagePage = lazy(() => import("../pages/ProductManagePage"));
 
 const HomeDummy = lazy(() => import("../pages/HomeDummy"));
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
 
       { path: "/supporter-histories", element: <SupporterHistoryPage /> },
       { path: "/creator-panel", element: <CreatorPanel /> },
+      { path: "/product/:productId/status", element: <ProductManagePage /> },
       { path: "/admin-panel", element: <AdminPanel /> },
 
       { path: "/home-dummy", element: <HomeDummy /> },
