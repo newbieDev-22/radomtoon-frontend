@@ -13,19 +13,25 @@ const project = {
 export default function Campaign() {
   return (
     <div>
-      <CampaignContent title={project.title} img={project.img} amountGet={200} amountGoal={500} supporters="20" remainingDay='20' />
+      <CampaignContent
+        title={project.title}
+        img={project.img}
+        amountGet={200}
+        amountGoal={500}
+        supporters="20"
+        remainingDay="20"
+      />
       <CampaignSection />
 
       {/* milestone */}
-      {/* <Milestone /> */}
+      <Milestone />
 
-      {/* <div className="flex justify-center gap-2">
+      <div className="flex justify-center gap-2">
         <AddMilestone name="Milestone 1" />
         <AddMilestone name="Milestone 2" />
         <AddMilestone name="Milestone 3" />
-      </div> */}
-        <EditRewardCard name="Tier 1" product_name="Spiderman" estimated_date='20 DEC 2024' price='20'  />
-      
+      </div>
+      {/* <EditRewardCard name="Tier 1" product_name="Spiderman" estimated_date='20 DEC 2024' price='20'  /> */}
     </div>
   );
 }
