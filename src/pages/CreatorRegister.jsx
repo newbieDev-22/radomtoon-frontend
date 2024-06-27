@@ -4,6 +4,87 @@ import Modal from "../components/Modal";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import validateRegister from "../validators/validate-register";
+import Dropdown from "../components/Dropdown";
+
+const provinces = [
+  "Amnat Charoen",
+  "Ang Thong",
+  "Bangkok",
+  "Bueng Kan",
+  "Buri Ram",
+  "Chachoengsao",
+  "Chai Nat",
+  "Chaiyaphum",
+  "Chanthaburi",
+  "Chiang Mai",
+  "Chiang Rai",
+  "Chonburi",
+  "Chumphon",
+  "Kalasin",
+  "Kamphaeng Phet",
+  "Kanchanaburi",
+  "Khon Kaen",
+  "Krabi",
+  "Lampang",
+  "Lamphun",
+  "Loei",
+  "Lopburi",
+  "Mae Hong Son",
+  "Maha Sarakham",
+  "Mukdahan",
+  "Nakhon Nayok",
+  "Nakhon Pathom",
+  "Nakhon Phanom",
+  "Nakhon Ratchasima",
+  "Nakhon Sawan",
+  "Nakhon Si Thammarat",
+  "Nan",
+  "Narathiwat",
+  "Nong Bua Lam Phu",
+  "Nong Khai",
+  "Nonthaburi",
+  "Pathum Thani",
+  "Pattani",
+  "Phangnga",
+  "Phatthalung",
+  "Phayao",
+  "Phetchabun",
+  "Phetchaburi",
+  "Phichit",
+  "Phitsanulok",
+  "Phra Nakhon Si Ayutthaya",
+  "Phrae",
+  "Phuket",
+  "Prachin Buri",
+  "Prachuap Khiri Khan",
+  "Ranong",
+  "Ratchaburi",
+  "Rayong",
+  "Roi Et",
+  "Sa Kaeo",
+  "Sakon Nakhon",
+  "Samut Prakan",
+  "Samut Sakhon",
+  "Samut Songkhram",
+  "Saraburi",
+  "Satun",
+  "Si Sa Ket",
+  "Sing Buri",
+  "Songkhla",
+  "Sukhothai",
+  "Suphan Buri",
+  "Surat Thani",
+  "Surin",
+  "Tak",
+  "Trang",
+  "Trat",
+  "Ubon Ratchathani",
+  "Udon Thani",
+  "Uthai Thani",
+  "Uttaradit",
+  "Yala",
+  "Yasothon",
+];
 
 const CreatorRegisterData = {
   firstName: "",
@@ -37,6 +118,7 @@ export default function CreatorRegister() {
   const [openPolicyModal, setOpenPolicyModal] = useState(false);
   const [isPolicyChecked, setIsPolicyChecked] = useState(false);
   const [checkboxError, setCheckboxError] = useState("");
+  const [selectedProvince, setSelectedProvince] = useState("");
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -58,6 +140,10 @@ export default function CreatorRegister() {
     if (e.target.checked) {
       setCheckboxError("");
     }
+  };
+
+  const handleProvinceChange = (value) => {
+    setSelectedProvince(value);
   };
 
   const handleSubmit = async (e) => {
@@ -164,6 +250,13 @@ export default function CreatorRegister() {
                   onChange={handleChangeInput}
                   error={errorCreatorData.address}
                 />
+
+                <Dropdown
+                  data={provinces}
+                  onChange={handleProvinceChange}
+                  title="Choose your province..."
+                />
+
                 {selectedImage ? (
                   <h1 className=" block mb-10 border-[1.5px] border-green-500 rounded-lg p-8 text-center text-green-500 bg-white">
                     Picture upload successful
@@ -248,47 +341,89 @@ export default function CreatorRegister() {
         </div>
       </div>
 
-      {/* <Modal title="Policy">
-        <ol>
-          <li>
-            <p className="font-bold text-lg">1. ขั้นตอนการสมัคร</p>
-            <p className='font-semibold'>การสร้างบัญชี:</p>
-            <p>ผู้สมัครต้องสร้างบัญชีผู้ใช้งานบนแพลตฟอร์มโดยใช้ข้อมูลที่ถูกต้องและเป็นปัจจุบัน ยืนยันตัวตนผ่านอีเมลหรือเบอร์โทรศัพท์</p>
-            <p className='font-semibold'>การยืนยันตัวตน:</p>
-            <p>ผู้สมัครต้องส่งสำเนาบัตรประชาชนหรือหนังสือเดินทางเพื่อยืนยันตัวตน อาจมีการตรวจสอบเพิ่มเติม เช่น การส่งเอกสารรับรองที่อยู่หรือเอกสารรับรองการทำงาน</p>
-            <p className='font-semibold'>การส่งรายละเอียดโครงการ:</p>
-            <p>ผู้สมัครต้องกรอกรายละเอียดโครงการ เช่น ชื่อโครงการ วัตถุประสงค์ เป้าหมายทางการเงิน และระยะเวลาในการระดมทุน แนบแผนการดำเนินงาน งบประมาณ และตารางเวลาการทำงาน แนบวีดีโอหรือสื่อที่เกี่ยวข้องเพื่ออธิบายโครงการเพิ่มเติม</p>
-          </li>
-          <br />
-          <li>
-            <p className="font-bold text-lg">2. ข้อกำหนดและเงื่อนไข</p>
-            <p className='font-semibold'>ข้อกำหนดเกี่ยวกับโครงการ:</p>
-            <p>โครงการต้องไม่ขัดต่อกฎหมายและศีลธรรม โครงการต้องมีความโปร่งใสในการใช้เงินและมีเป้าหมายที่ชัดเจน ห้ามนำเงินที่ระดมทุนได้ไปใช้ในทางที่ผิดหรือไม่เกี่ยวข้องกับโครงการ</p>
-            <p className='font-semibold'>ความโปร่งใส:</p>
-            <p>ผู้สมัครต้องอัพเดตสถานะของโครงการอย่างสม่ำเสมอและแจ้งผู้สนับสนุนหากมีการเปลี่ยนแปลงใด ๆ ในโครงการ รายงานการใช้เงินระดมทุนต้องมีความชัดเจนและโปร่งใส</p>
-            <p className='font-semibold'>การคืนเงิน:</p>
-            <p>หากโครงการไม่สามารถดำเนินการได้ตามแผน ผู้สมัครต้องมีนโยบายในการคืนเงินให้กับผู้สนับสนุนตามสัดส่วนที่เหมาะสม</p>
-          </li>
-          <br />
-          <li>
-            <p className="font-bold text-lg">3. การบริหารจัดการเงินที่ระดมทุนได้</p>
-            <p className='font-semibold'>บัญชีแยกต่างหาก:</p>
-            <p>ผู้สมัครต้องมีบัญชีธนาคารแยกต่างหากสำหรับเงินที่ระดมทุนได้ เพื่อแยกจากเงินส่วนตัว</p>
-            <p className='font-semibold'>การใช้เงินตามแผน:</p>
-            <p>ผู้สมัครต้องใช้เงินตามแผนการที่ได้ยื่นเสนอไว้เท่านั้น หากมีความจำเป็นต้องเปลี่ยนแปลงการใช้เงิน ผู้สมัครต้องแจ้งและได้รับความเห็นชอบจากผู้สนับสนุน</p>
-            <p className='font-semibold'>การตรวจสอบบัญชี:</p>
-            <p>แพลตฟอร์มอาจขอให้ผู้สมัครส่งรายงานการใช้เงินเป็นระยะ หรือขอทำการตรวจสอบบัญชีเพื่อความโปร่งใส</p>
-          </li>
-          <br />
-          <li>
-            <p className="font-bold text-lg">4. สิทธิและหน้าที่ของผู้สมัคร</p>
-            <p className='font-semibold'>สิทธิของผู้สมัคร:</p>
-            <p>สิทธิในการระดมทุนตามเงื่อนไขที่กำหนด สิทธิในการรับการสนับสนุนและคำแนะนำจากแพลตฟอร์ม</p>
-            <p className='font-semibold'>หน้าที่ของผู้สมัคร:</p>
-            <p>หน้าที่ในการปฏิบัติตามเงื่อนไขและข้อกำหนดที่กำหนดไว้ หน้าที่ในการแจ้งข้อมูลที่เป็นความจริงและถูกต้อง</p>
-          </li>
-        </ol>
-    </Modal> */}
+      {openPolicyModal && (
+        <Modal onClose={() => setOpenPolicyModal(false)} title="Policy">
+          <ol>
+            <li>
+              <p className="font-bold text-lg">1. ขั้นตอนการสมัคร</p>
+              <p className="font-semibold">การสร้างบัญชี:</p>
+              <p>
+                ผู้สมัครต้องสร้างบัญชีผู้ใช้งานบนแพลตฟอร์มโดยใช้ข้อมูลที่ถูกต้องและเป็นปัจจุบัน
+                ยืนยันตัวตนผ่านอีเมลหรือเบอร์โทรศัพท์
+              </p>
+              <p className="font-semibold">การยืนยันตัวตน:</p>
+              <p>
+                ผู้สมัครต้องส่งสำเนาบัตรประชาชนหรือหนังสือเดินทางเพื่อยืนยันตัวตน
+                อาจมีการตรวจสอบเพิ่มเติม เช่น
+                การส่งเอกสารรับรองที่อยู่หรือเอกสารรับรองการทำงาน
+              </p>
+              <p className="font-semibold">การส่งรายละเอียดโครงการ:</p>
+              <p>
+                ผู้สมัครต้องกรอกรายละเอียดโครงการ เช่น ชื่อโครงการ วัตถุประสงค์
+                เป้าหมายทางการเงิน และระยะเวลาในการระดมทุน แนบแผนการดำเนินงาน
+                งบประมาณ และตารางเวลาการทำงาน
+                แนบวีดีโอหรือสื่อที่เกี่ยวข้องเพื่ออธิบายโครงการเพิ่มเติม
+              </p>
+            </li>
+            <br />
+            <li>
+              <p className="font-bold text-lg">2. ข้อกำหนดและเงื่อนไข</p>
+              <p className="font-semibold">ข้อกำหนดเกี่ยวกับโครงการ:</p>
+              <p>
+                โครงการต้องไม่ขัดต่อกฎหมายและศีลธรรม
+                โครงการต้องมีความโปร่งใสในการใช้เงินและมีเป้าหมายที่ชัดเจน
+                ห้ามนำเงินที่ระดมทุนได้ไปใช้ในทางที่ผิดหรือไม่เกี่ยวข้องกับโครงการ
+              </p>
+              <p className="font-semibold">ความโปร่งใส:</p>
+              <p>
+                ผู้สมัครต้องอัพเดตสถานะของโครงการอย่างสม่ำเสมอและแจ้งผู้สนับสนุนหากมีการเปลี่ยนแปลงใด
+                ๆ ในโครงการ รายงานการใช้เงินระดมทุนต้องมีความชัดเจนและโปร่งใส
+              </p>
+              <p className="font-semibold">การคืนเงิน:</p>
+              <p>
+                หากโครงการไม่สามารถดำเนินการได้ตามแผน
+                ผู้สมัครต้องมีนโยบายในการคืนเงินให้กับผู้สนับสนุนตามสัดส่วนที่เหมาะสม
+              </p>
+            </li>
+            <br />
+            <li>
+              <p className="font-bold text-lg">
+                3. การบริหารจัดการเงินที่ระดมทุนได้
+              </p>
+              <p className="font-semibold">บัญชีแยกต่างหาก:</p>
+              <p>
+                ผู้สมัครต้องมีบัญชีธนาคารแยกต่างหากสำหรับเงินที่ระดมทุนได้
+                เพื่อแยกจากเงินส่วนตัว
+              </p>
+              <p className="font-semibold">การใช้เงินตามแผน:</p>
+              <p>
+                ผู้สมัครต้องใช้เงินตามแผนการที่ได้ยื่นเสนอไว้เท่านั้น
+                หากมีความจำเป็นต้องเปลี่ยนแปลงการใช้เงิน
+                ผู้สมัครต้องแจ้งและได้รับความเห็นชอบจากผู้สนับสนุน
+              </p>
+              <p className="font-semibold">การตรวจสอบบัญชี:</p>
+              <p>
+                แพลตฟอร์มอาจขอให้ผู้สมัครส่งรายงานการใช้เงินเป็นระยะ
+                หรือขอทำการตรวจสอบบัญชีเพื่อความโปร่งใส
+              </p>
+            </li>
+            <br />
+            <li>
+              <p className="font-bold text-lg">4. สิทธิและหน้าที่ของผู้สมัคร</p>
+              <p className="font-semibold">สิทธิของผู้สมัคร:</p>
+              <p>
+                สิทธิในการระดมทุนตามเงื่อนไขที่กำหนด
+                สิทธิในการรับการสนับสนุนและคำแนะนำจากแพลตฟอร์ม
+              </p>
+              <p className="font-semibold">หน้าที่ของผู้สมัคร:</p>
+              <p>
+                หน้าที่ในการปฏิบัติตามเงื่อนไขและข้อกำหนดที่กำหนดไว้
+                หน้าที่ในการแจ้งข้อมูลที่เป็นความจริงและถูกต้อง
+              </p>
+            </li>
+          </ol>
+        </Modal>
+      )}
     </>
   );
 }
