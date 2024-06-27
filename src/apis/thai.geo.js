@@ -19523,13 +19523,28 @@ const geoDataMap = {
   YASOTHON: "YASOTHON",
 };
 
+// const geoData = {
+//   type: "FeatureCollection",
+//   features: [
+//     {
+//       type: "Feature",
+//       properties: { name: "AmnatCharoen", p: 112.9 },
+//     },
+//   ]
+// };
+
+console.log(geoData.features[0]);
+console.log("----------------------------------------");
+
 function updatePropertyByProvinceName(provinceName, newP) {
-  const newGeoData = { ...geoData };
-  newGeoData.features.forEach((feature) => {
+  let newGeodata = { ...geoData };
+  newGeodata.features.forEach((feature) => {
     if (feature.properties.name.toLowerCase() === provinceName.toLowerCase()) {
       feature.properties.p = newP;
     }
   });
+  return newGeodata;
 }
 
-updatePropertyByProvinceName("AmnatCharoen", 150.0);
+const result = updatePropertyByProvinceName("amnatcharoen", 1500);
+console.log(result.features[0]);
