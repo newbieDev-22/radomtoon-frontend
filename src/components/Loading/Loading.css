@@ -1,0 +1,47 @@
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #05262D;
+  z-index: 9999;
+}
+
+.logo-mask {
+  position: relative;
+  width: 1200px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logo-mask svg {
+  width: 100%; 
+  height: auto;
+}
+
+.logo-mask-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #05262D;
+  transform: translateX(0);
+  animation: fill-left-to-right 1s normal;
+}
+
+@keyframes fill-left-to-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
