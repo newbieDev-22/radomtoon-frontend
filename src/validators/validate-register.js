@@ -9,15 +9,20 @@ const registerSchema = Joi.object({
     .required()
     .trim()
     .messages({ "string.empty": "Last name is required." }),
-  email: Joi.string().required().email({ tlds: false }).messages({
-    "alternatives.match": "Invalid Email address",
-  }),
+  email: Joi.string()
+    .required()
+    .email({ tlds: false })
+    .messages({
+      "alternatives.match": "Invalid Email address",
+    })
+    .messages({ "string.empty": "Email is required." }),
   phoneNumber: Joi.string()
     .pattern(/^[0-9]{10}$/)
     .required()
     .messages({
       "alternatives.match": "Invalid Mobile number",
-    }),
+    })
+    .messages({ "string.empty": "Phone number is required." }),
   password: Joi.string()
     .required()
     .pattern(/^[0-9a-zA-Z]{6,}$/)
@@ -33,6 +38,9 @@ const registerSchema = Joi.object({
     .messages({
       "any.only": "Password and Confirm password did not match",
     }),
+  address: Joi.string()
+    .required()
+    .messages({ "string.empty": "Address is required." }),
 });
 
 const validateRegister = (input) => {

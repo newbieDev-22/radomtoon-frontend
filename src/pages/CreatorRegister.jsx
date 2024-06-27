@@ -12,6 +12,7 @@ const CreatorRegisterData = {
   phoneNumber: "",
   password: "",
   confirmPassword: "",
+  address: "",
 };
 
 const ErrorCreatorRegisterData = {
@@ -21,16 +22,19 @@ const ErrorCreatorRegisterData = {
   phoneNumber: "",
   password: "",
   confirmPassword: "",
-  policy: ""
+  policy: "",
+  address: "",
 };
 
 export default function CreatorRegister() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [creatorData, setCreatorData] = useState(CreatorRegisterData);
-  const [errorCreatorData, setErrorCreatorData] = useState(ErrorCreatorRegisterData);
-  const [openPolicyModal, setOpenPolicyModal] = useState(false)
+  const [errorCreatorData, setErrorCreatorData] = useState(
+    ErrorCreatorRegisterData
+  );
+  const [openPolicyModal, setOpenPolicyModal] = useState(false);
   const [isPolicyChecked, setIsPolicyChecked] = useState(false);
   const [checkboxError, setCheckboxError] = useState("");
 
@@ -88,13 +92,13 @@ export default function CreatorRegister() {
     <>
       <div className="min-w-screen min-h-screen">
         <div className="grid grid-cols-2 shadow-lg rounded-lg">
-
           <div className="px-20 bg-cyan-100 flex w-full h-full flex-col justify-center">
             <h1 className="text-5xl mb-2 font-semibold text-radomtoon-dark">
               Turn your imagination into reality.
             </h1>
             <h2 className="text-base mb-8 text-gray-600">
-              A hub for early adopters and visionaries to explore cutting-edge technology ahead of the curve.
+              A hub for early adopters and visionaries to explore cutting-edge
+              technology ahead of the curve.
             </h2>
             <form onSubmit={handleSubmit} action="">
               <div className="flex flex-col ">
@@ -152,15 +156,28 @@ export default function CreatorRegister() {
                     error={errorCreatorData.confirmPassword}
                   />
                 </div>
+                <Input
+                  type="text"
+                  placeholder="Address"
+                  value={creatorData.address}
+                  name="address"
+                  onChange={handleChangeInput}
+                  error={errorCreatorData.address}
+                />
                 {selectedImage ? (
                   <h1 className=" block mb-10 border-[1.5px] border-green-500 rounded-lg p-8 text-center text-green-500 bg-white">
                     Picture upload successful
                   </h1>
                 ) : (
                   <div>
-                    <label htmlFor="file-upload" className="cursor-pointer text-center">
+                    <label
+                      htmlFor="file-upload"
+                      className="cursor-pointer text-center"
+                    >
                       <span
-                        className={`block mb-10 border-[1.5px] border-gray rounded-lg p-8 bg-gray-200 hover:bg-gray-100 transition duration-300 ${errorCreatorData?.password && "mt-1" }`}
+                        className={`block mb-10 border-[1.5px] border-gray rounded-lg p-8 bg-gray-200 hover:bg-gray-100 transition duration-300 ${
+                          errorCreatorData?.password && "mt-1"
+                        }`}
                       >
                         + Add your identity card with you image
                       </span>
@@ -185,17 +202,31 @@ export default function CreatorRegister() {
                     checked={isPolicyChecked}
                     onChange={handleCheckboxChange}
                   />
-                  <label htmlFor="policy-checkbox" className="text-gray-600 cursor-pointer text-sm">
-                    I have read understand and accept the <a onClick={() => setOpenPolicyModal(true)} className="text-blue-500 hover:underline">terms and conditions</a> 
+                  <label
+                    htmlFor="policy-checkbox"
+                    className="text-gray-600 cursor-pointer text-sm"
+                  >
+                    I have read understand and accept the{" "}
+                    <a
+                      onClick={() => setOpenPolicyModal(true)}
+                      className="text-blue-500 hover:underline"
+                    >
+                      terms and conditions
+                    </a>
                   </label>
                 </div>
                 {checkboxError && (
                   <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
                 )}
-           
 
-
-                <Button width={"full"} height='14' bg="creator-saturate" color="white" >Request Approve</Button>
+                <Button
+                  width={"full"}
+                  height="14"
+                  bg="creator-saturate"
+                  color="white"
+                >
+                  Request Approve
+                </Button>
               </div>
             </form>
           </div>
@@ -206,7 +237,12 @@ export default function CreatorRegister() {
               className="h-full w-full object-cover"
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-700 ease-in-out delay-300">
-              <button onClick={() => navigate('/login')} className="text-white font-bold text-3xl opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out delay-500">Go to login</button>
+              <button
+                onClick={() => navigate("/login")}
+                className="text-white font-bold text-3xl opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out delay-500"
+              >
+                Go to login
+              </button>
             </div>
           </div>
         </div>
