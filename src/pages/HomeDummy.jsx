@@ -1,5 +1,6 @@
-import CategoryContainer from "../features/home-filter/components/CategoryContainer";
+
+import Map from "../components/MapComponent/Map";
 
 export default function HomeDummy() {
-  return <CategoryContainer />;
+  return <Map />;
 }
