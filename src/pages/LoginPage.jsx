@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import LoginImage from "../features/authentication/components/LoginImage";
@@ -6,6 +7,8 @@ import LoginImage from "../features/authentication/components/LoginImage";
 const loginData = { emailOrPhone: "", password: "" };
 
 export default function LoginPage() {
+  const navigate = useNavigate()
+
   const [input, setInput] = useState(loginData);
 
   const handleChangInput = (e) => {
@@ -23,7 +26,7 @@ export default function LoginPage() {
         <div className="h-screen w-full">
           <LoginImage />
         </div>
-        <div className="px-20 bg-creator-normal flex w-full h-full flex-col justify-center">
+        <div className="px-20 bg-slate-100 flex w-full h-full flex-col justify-center">
           <h1 className="text-3xl font-bold text-center">SIGN IN</h1>
 
           <form onSubmit={handleSubmitForm}>
@@ -46,13 +49,13 @@ export default function LoginPage() {
               </div>
 
               <div className="flex justify-center">
-                <div className="rounded-box grid place-items-center font-bold">
-                  Create Creator Account
-                </div>
-                <div className="divider lg:divider-horizontal">OR</div>
-                <div className="rounded-box grid place-items-center font-bold">
-                  Create Supporter Account
-                </div>
+                <button className="rounded-box grid place-items-center font-bold hover:text-creator-saturate transition duration-300" onClick={()=>navigate('/creator-register')}>
+                  Become a Creator
+                </button>
+                <div className="divider lg:divider-horizontal">|</div>
+                <button className="rounded-box grid place-items-center font-bold hover:text-yellow-500 transition duration-300" onClick={()=>navigate('/creator-register')}>
+                Join as a Supporter
+                </button>
               </div>
             </div>
           </form>
