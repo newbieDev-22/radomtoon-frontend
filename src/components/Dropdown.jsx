@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Dropdown({ data, onChange, title }) {
   return (
     <div className="w-full mb-4">

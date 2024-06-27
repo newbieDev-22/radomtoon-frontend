@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
-import { Suspense } from "react";
 
 function PaymentFeature() {
   const { tierId } = useParams();
