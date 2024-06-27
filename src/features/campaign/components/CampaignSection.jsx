@@ -10,7 +10,7 @@ const sections = [
 
 export default function CampaignSection({ handleSubPageChange }) {
   return (
-    <section className="h-[10vh] flex items-center gap-20 text-white pl-[10vw] bg-radomtoon-dark sticky top-0 z-10">
+    <section className="h-[10vh] mt-10 flex items-center gap-20 text-white pl-[10vw] bg-radomtoon-dark sticky top-0 z-10">
       {sections.map((sec) => (
         <CampaignSectionItem
           onClick={() => {
