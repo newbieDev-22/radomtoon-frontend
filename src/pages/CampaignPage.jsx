@@ -6,41 +6,43 @@ import { subPageMap } from "../constants";
 import ProductCommentContainer from "../features/product-comment/components/ProductCommentContainer";
 import ProductRewardContainer from "../features/product-reward/components/ProductRewardContainer";
 import Editor from "../components/EditorComponent/Editor";
-import Button from "../components/Button";
-import { useNavigate } from "react-router-dom";
 import CampaignContent from "../features/campaign/components/CampaignContent";
 
 const project = {
   id: 1,
-  title: "EASYPLAY1s - Portable Music Keyboard with MIDI",
-  img: "https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_1.0,f_auto,h_460/k6og9yhnskzqbc5o3ldg",
+  title: `Bria's Mythical Menagerie: Creature-Collecting & Plush`,
+  img: "https://i.kickstarter.com/assets/044/665/040/4701c73df8b68838ac143981ab5aa350_original.jpg?anim=false&fit=cover&gravity=auto&height=576&origin=ugc&q=92&width=1024&sig=Icl7GqhaIdWe9RTm9tgYXQvkIktgy3wTpAhAI75efqQ%3D",
+  amountGet: 157983,
+  amountGoal: 10500,
+  supporters: 1376,
+  remainingDay: 15,
 };
-
-const mockSelectTierPath = "/campaign/1/tier";
-
 export default function CampaignPage() {
   const [subPage, setSubPage] = useState(subPageMap.STORY);
-  const navigate = useNavigate();
   const handleSubPageChange = (subPage) => {
     setSubPage(subPage);
   };
-
-const project = {
-  id: 1,
-  title: "OneXPlayer X1 Series: 3-in-1 Console w. AMD 8840U",
-  img: "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/pgtsxevrajyxxfvah7pj",
-  amountGet: 50000,
-  amountGoal: 10000,
-  supporters: 4261,
-  remainingDay: 7
-};
-
+  const isCreator = false;
 
   return (
-    <div>
-      <CampaignContent title={project.title} img={project.img} amountGet={project.amountGet} amountGoal={project.amountGoal} supporters={project.supporters} remainingDay={project.remainingDay} />
-      <CampaignSection handleSubPageChange={handleSubPageChange} />
-      {subPage === subPageMap.STORY && <Editor />}
+    <div className="py-10">
+      <CampaignContent
+        title={project.title}
+        img={project.img}
+        amountGet={project.amountGet}
+        amountGoal={project.amountGoal}
+        supporters={project.supporters}
+        remainingDay={project.remainingDay}
+        isCreator={isCreator}
+      />
+      <div className="pt-10">
+        <CampaignSection handleSubPageChange={handleSubPageChange} />
+      </div>
+      {subPage === subPageMap.STORY && (
+        <div className="px-16 py-4">
+          <Editor isCreator={isCreator} />
+        </div>
+      )}
       {subPage === subPageMap.MILESTONE && (
         <div>
           <Milestone />

@@ -14,6 +14,7 @@ const mockProductPath = "/campaign/1";
 
 export default function HomePage() {
   const navigate = useNavigate();
+
   return (
     <div>
       <h1 className="flex justify-center text-5xl text-semibold mt-10">Home</h1>

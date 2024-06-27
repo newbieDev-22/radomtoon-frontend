@@ -10,9 +10,8 @@ import "./editor-bubble.css";
 // Register the resize module with Quill
 Quill.register("modules/resize", ResizeModule);
 
-export default function Editor() {
+export default function Editor({ isCreator }) {
   const quillRef = useRef(null);
-  const [disable, setDisable] = useState(true);
   const [content, setContent] = useState(mockData);
 
   // Handle form submission
@@ -78,21 +77,21 @@ export default function Editor() {
 
   return (
     <div className="editor">
-      {disable || (
-        <button type="button" onClick={handleSubmit} >
-        Submit
-      </button>
+      {isCreator && (
+        <button type="button" onClick={handleSubmit}>
+          Submit
+        </button>
       )}
       <ReactQuill
         ref={quillRef}
-        theme={disable ? "bubble" : "snow"}
+        theme={isCreator ? "snow" : "bubble"}
         placeholder="Start writing..."
-        modules={disable ? readOnlyModules : modules}
+        modules={isCreator ? modules : readOnlyModules}
         formats={formats}
         value={content}
         onChange={handleChange}
         style={{ width: "100%" }}
-        readOnly={disable}
+        readOnly={!isCreator}
       />
     </div>
   );

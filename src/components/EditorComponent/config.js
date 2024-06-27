@@ -28,4 +28,5 @@ export const formats = [
   "height",
   "width",
   "float",
+  "size",
 ];
