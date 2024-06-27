@@ -1,4 +1,6 @@
 import AddMilestone from "../components/AddMilestone";
+import CampaignContent from "../components/CampaignContent";
+import EditRewardCard from "../components/EditRewardCard";
 import Milestone from "../components/Milestone";
 import CampaignSection from "../layouts/CampaignSection";
 
@@ -11,49 +13,19 @@ const project = {
 export default function Campaign() {
   return (
     <div>
-      <content className="flex flex-col items-center">
-        <h1 className="text-3xl font-semibold my-[5vh] w-[50vw] text-center">
-          {project.title}
-        </h1>
-        <div className="grid grid-cols-2">
-          <div className="w-[564px] h-[452px] overflow-hidden  rounded-xl">
-            <img
-              src={project.img}
-              className="w-full h-full object-cover"
-              alt=""
-            />
-          </div>
-          <div className="flex flex-col">
-            <div className="">line</div>
-            <div>
-              <div className="text-4xl font-bold text-supporter-saturate">
-                THB {50000}
-              </div>
-              <div className="text-gray-500 font-semibold">
-                supported of THB {"10,000"} goal
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl font-extrabold">{5000}</div>
-              <div className="text-gray-500 font-semibold">supporters</div>
-            </div>
-            <div>
-              <div className="text-3xl font-extrabold">{7}</div>
-              <div className="text-gray-500 font-semibold">days to go</div>
-            </div>
-          </div>
-        </div>
-      </content>
+      <CampaignContent title={project.title} img={project.img} amountGet={200} amountGoal={500} supporters="20" remainingDay='20' />
       <CampaignSection />
 
       {/* milestone */}
-      <Milestone />
+      {/* <Milestone /> */}
 
-      <div className="flex justify-center gap-2">
+      {/* <div className="flex justify-center gap-2">
         <AddMilestone name="Milestone 1" />
         <AddMilestone name="Milestone 2" />
         <AddMilestone name="Milestone 3" />
-      </div>
+      </div> */}
+        <EditRewardCard name="Tier 1" product_name="Spiderman" estimated_date='20 DEC 2024' price='20'  />
+      
     </div>
   );
 }
