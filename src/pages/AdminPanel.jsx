@@ -15,6 +15,7 @@ const mockDataStatsBar = [
   { id: 4, amount: 2035636, title: "RADOMTOON's profits", currency: "THB" },
 ];
 
+
 const adminMenuStyleMap = {
   isNotSelected:
     "outline-none px-6 py-2 m-2 hover:rounded-md hover:bg-gray-300 focus:outline-none hover:scale-110 active:scale-100 transition-all",

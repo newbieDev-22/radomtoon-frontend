@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { heightMap, imageMap, progressBar, widthMap } from "../../../constants";
 import { DotMenu, TimeIcon } from "../../../icons";
 // import { DotMenu, TimeIcon } from "../icons";
@@ -14,14 +15,20 @@ export default function ProductImageCard({
   imageSize = "medium",
   mainCard = false,
 }) {
+
+  const productId = 1
+
+  const navigate = useNavigate()
+
+  const handleClickDotMenu = () => {
+    navigate(`/product/${productId}/status`)
+  }
   return (
     <div className="relative items-center gap-4">
       <div
-        className={`group ${widthMap[widthSize]} ${
-          heightMap[heightSize]
-        } shadow-lg rounded-md ${
-          mainCard ? "h-[542px]" : "z-20 overflow-hidden bg-white"
-        }`}
+        className={`group ${widthMap[widthSize]} ${heightMap[heightSize]
+          } shadow-lg rounded-md ${mainCard ? "h-[542px]" : "z-20 overflow-hidden bg-white"
+          }`}
       >
         <div className="h-40 relative overflow-hidden">
           <img
@@ -55,7 +62,13 @@ export default function ProductImageCard({
           </div>
         </div>
         <div className="absolute bottom-2 right-2 hover:scale-125 active:scale-100 transition-all">
-          <DotMenu />
+          <div
+            className=" cursor-pointer"
+            onClick={handleClickDotMenu}
+          >
+            <DotMenu />
+          </div>
+
         </div>
       </div>
     </div>

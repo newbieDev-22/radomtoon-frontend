@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
+
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const CreatorRegister = lazy(() => import("../pages/CreatorRegister"));
@@ -12,6 +13,7 @@ const SupporterHistoryPage = lazy(() => import("../pages/SupporterHistoryPage"))
 const CreatorPanel = lazy(() => import("../pages/CreatorPanel"));
 const AdminPanel = lazy(() => import("../pages/AdminPanel"));
 const ProductManagePage = lazy(() => import("../pages/ProductManagePage"));
+const CampaignSetup = lazy(() => import("../pages/CampaignSetup"))
 
 const HomeDummy = lazy(() => import("../pages/HomeDummy"));
 
@@ -31,6 +33,7 @@ const router = createBrowserRouter([
 
       { path: "/supporter-histories", element: <SupporterHistoryPage /> },
       { path: "/creator-panel", element: <CreatorPanel /> },
+      { path: "/creator-campaign-setup", element: <CampaignSetup /> },
       { path: "/product/:productId/status", element: <ProductManagePage /> },
       { path: "/admin-panel", element: <AdminPanel /> },
 

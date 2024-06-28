@@ -35,7 +35,7 @@ export default function CampaignPage() {
         remainingDay={project.remainingDay}
         isCreator={isCreator}
       />
-        <CampaignSection handleSubPageChange={handleSubPageChange} />
+      <CampaignSection handleSubPageChange={handleSubPageChange} />
       {subPage === subPageMap.STORY && (
         <div className="px-16 py-4">
           <Editor isCreator={isCreator} />
