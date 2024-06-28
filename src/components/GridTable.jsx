@@ -5,13 +5,7 @@ const dataGridColsMapping = {
   6: "grid-cols-6",
 };
 
-export default function GridTable({
-  openDelivery,
-  openEvidence,
-  data,
-  index,
-  isHeader = false,
-}) {
+export default function GridTable({ data, index, isHeader = false }) {
   const tableColor = {
     isEven: `grid ${
       dataGridColsMapping[data.length]
@@ -22,14 +16,6 @@ export default function GridTable({
     isHeader: `grid ${
       dataGridColsMapping[data.length]
     } gap-4 bg-creator-normal text-lg font-semibold border-b-2 border-gray-100 text-center p-2 rounded-t-md`,
-  };
-
-  const handleClickOpenModal = (el) => {
-    if (el.props && el.props.children === "Send Evidence") {
-      openEvidence();
-    } else if (el.props && el.props.children === "Waiting product...") {
-      openDelivery();
-    }
   };
 
   return (
@@ -43,11 +29,7 @@ export default function GridTable({
       }
     >
       {data.map((el, subIndex) => (
-        <div
-          onClick={() => handleClickOpenModal(el)}
-          key={subIndex}
-          className="flex justify-center items-center"
-        >
+        <div key={subIndex} className="flex justify-center items-center">
           {el}
         </div>
       ))}

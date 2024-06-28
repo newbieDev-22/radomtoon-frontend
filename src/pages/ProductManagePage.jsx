@@ -18,117 +18,121 @@ const columns = [
   "Delivery Status",
 ];
 
-const data = [
-  ["Product A", 1, 100, <div className="text-red-600">Failed</div>, "-"],
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-green-600">Success</div>,
-    <DeliveryButton isSend={true} className="text-green-600">
-      Delivered
-    </DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
-  ],
-];
-
-const milestoneDataColumns = ["Project", "Milestone status", "Evidence"];
-
-const milestoneData = [
-  [
-    "Product A",
-    <div className="text-red-600">Failed</div>,
-    <Button>Send Evidence</Button>,
-  ],
-  [
-    "Product A",
-    <div className="text-green-600">Pass</div>,
-    <Button>Send Evidence</Button>,
-  ],
-  [
-    "Product A",
-    <div className="text-gray-600">Pending</div>,
-    <Button>Send Evidence</Button>,
-  ],
-];
-
 export default function ProductManagePage() {
+  const [filterData, setFilterData] = useState([]);
+  const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
+  const [openDeliveryModal, setOpenDeliveryModal] = useState(false);
+
+  const data = [
+    ["Product A", 1, 100, <div className="text-red-600">Failed</div>, "-"],
+    [
+      "Product A",
+      1,
+      100,
+      <div className="text-green-600">Success</div>,
+      <DeliveryButton isSend={true} className="text-green-600">
+        Delivered
+      </DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+    [
+      "Product A",
+      1,
+      100,
+      <div>Pending</div>,
+      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+    ],
+  ];
+
+  const milestoneDataColumns = ["Project", "Milestone status", "Evidence"];
+
+  const milestoneData = [
+    [
+      "Product A",
+      <div className="text-red-600">Failed</div>,
+      <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>,
+    ],
+    [
+      "Product A",
+      <div className="text-green-600">Pass</div>,
+      <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>,
+    ],
+    [
+      "Product A",
+      <div className="text-gray-600">Pending</div>,
+      <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>,
+    ],
+  ];
+
   const itemInOnePage = 10;
   const pageCount = Math.ceil(data.length / itemInOnePage);
   const allFalseStateList = [];
@@ -144,9 +148,6 @@ export default function ProductManagePage() {
   dummyAllFalseStateList[0].selected = true;
 
   const [selectPage, setSelectPage] = useState(dummyAllFalseStateList);
-  const [filterData, setFilterData] = useState([]);
-  const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
-  const [openDeliveryModal, setOpenDeliveryModal] = useState(false);
 
   const handleSelectPage = (page) => {
     const newState = [];
@@ -185,12 +186,7 @@ export default function ProductManagePage() {
           <div className="flex flex-col px-48 justify-center">
             <GridTable data={milestoneDataColumns} isHeader={true} />
             {milestoneData.map((el, index) => (
-              <GridTable
-                openEvidence={() => setOpenEvidenceModal(true)}
-                key={el.page}
-                index={index}
-                data={Object.values(el)}
-              />
+              <GridTable key={el.page} index={index} data={Object.values(el)} />
             ))}
           </div>
         </div>
@@ -199,12 +195,7 @@ export default function ProductManagePage() {
           <div className="flex flex-col px-20 justify-center">
             <GridTable data={columns} isHeader={true} />
             {filterData.map((el, index) => (
-              <GridTable
-                openDelivery={() => setOpenDeliveryModal(true)}
-                key={el.page}
-                index={index}
-                data={Object.values(el)}
-              />
+              <GridTable key={el.page} index={index} data={Object.values(el)} />
             ))}
           </div>
           <div className="join flex justify-center">
@@ -230,16 +221,6 @@ export default function ProductManagePage() {
           open={true}
         >
           <EvidenceModal />
-        </Modal>
-      )}
-      {openDeliveryModal && (
-        <Modal
-          onClose={() => setOpenDeliveryModal(false)}
-          title="Delivery"
-          width={30}
-          open={true}
-        >
-          <ConfirmModal subTitle={"Are you sure to confirm delivery?"} />
         </Modal>
       )}
     </>
