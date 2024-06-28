@@ -1,6 +1,8 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
+import CampaignSetup from "../pages/CampaignSetup";
+
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const CreatorRegister = lazy(() => import("../pages/CreatorRegister"));
@@ -31,6 +33,7 @@ const router = createBrowserRouter([
 
       { path: "/supporter-histories", element: <SupporterHistoryPage /> },
       { path: "/creator-panel", element: <CreatorPanel /> },
+      { path: "/creator-campaign-setup", element: <CampaignSetup /> },
       { path: "/product/:productId/status", element: <ProductManagePage /> },
       { path: "/admin-panel", element: <AdminPanel /> },
 
