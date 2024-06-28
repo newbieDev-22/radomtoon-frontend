@@ -54,9 +54,14 @@ export default function CampaignContent({
               <Button width="full">Send project to approve</Button>
             </div>
           ) : (
-            <Button width="full" onClick={() => navigate(mockSelectTierPath)}>
-              Support this project
-            </Button>
+            <>
+              <Button width="full" onClick={() => navigate(mockSelectTierPath)}>
+                Support this project
+              </Button>
+              <Button bg="creator-normal" width="full">
+                {true ? "Save" : "Edit"} Milestone
+              </Button>
+            </>
           )}
         </div>
       </div>
