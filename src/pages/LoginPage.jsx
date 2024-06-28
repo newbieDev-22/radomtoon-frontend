@@ -7,7 +7,7 @@ import LoginImage from "../features/authentication/components/LoginImage";
 const loginData = { emailOrPhone: "", password: "" };
 
 export default function LoginPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [input, setInput] = useState(loginData);
 
@@ -49,12 +49,18 @@ export default function LoginPage() {
               </div>
 
               <div className="flex justify-center">
-                <button className="rounded-box grid place-items-center font-bold hover:text-creator-saturate transition duration-300" onClick={()=>navigate('/creator-register')}>
+                <button
+                  className="rounded-box grid place-items-center font-bold hover:text-creator-saturate transition duration-300"
+                  onClick={() => navigate("/creator-register")}
+                >
                   Become a Creator
                 </button>
                 <div className="divider lg:divider-horizontal">|</div>
-                <button className="rounded-box grid place-items-center font-bold hover:text-yellow-500 transition duration-300" onClick={()=>navigate('/creator-register')}>
-                Join as a Supporter
+                <button
+                  className="rounded-box grid place-items-center font-bold hover:text-yellow-500 transition duration-300"
+                  onClick={() => navigate("/creator-register")}
+                >
+                  Join as a Supporter
                 </button>
               </div>
             </div>
