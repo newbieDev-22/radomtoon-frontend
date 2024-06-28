@@ -1,5 +1,10 @@
 import { useState } from "react";
 import StatsBar from "../components/StatsBannerComponent/StatsBanner";
+import GridTable from "../components/GridTable";
+import Modal from "../components/Modal";
+import CreatorRegisterForm from "../tmp/CreatorRegisterForm";
+import EvidenceModal from "../tmp/EvidenceModal";
+import ApproveEvidenceModal from "../tmp/ApproveMilestoneModal";
 import Approval from "../features/admin/components/Approval";
 import Overview from "../features/admin/components/Overview";
 
@@ -24,7 +29,13 @@ const adminMenu = {
 };
 
 export default function AdminPanel() {
+  const [openCreatorFormModal, setOpenCreatorFormModal] = useState(false);
+  const [openApproveMilestoneModal, setOpenApproveMilestoneModal] =
+    useState(true);
+  const [openDeclineMilestoneModal, setOpenDeclineMilestoneModal] =
+    useState(true);
   const [selectMenu, setSelectMenu] = useState(adminMenu.Overview);
+
   return (
     <div>
       <StatsBar data={mockDataStatsBar} bg={mockImgStatsBar} />
@@ -50,6 +61,27 @@ export default function AdminPanel() {
           Approval
         </button>
       </div>
+      {openCreatorFormModal && (
+        <Modal
+          onClose={() => setOpenApproveMilestoneModal(false)}
+          title="CREATOR REGISTER FORM"
+          width={40}
+          open={true}
+        >
+          <CreatorRegisterForm />
+        </Modal>
+      )}
+      {openApproveMilestoneModal && (
+        <Modal
+          onClose={() => setOpenApproveMilestoneModal(false)}
+          title="Milestone 1"
+          width={40}
+          open={true}
+        >
+          <ApproveEvidenceModal
+            onClose={() => setOpenApproveMilestoneModal(false)}
+          />
+        </Modal>
       {selectMenu === adminMenu.Overview && (
         <div className="px-20">
           <Overview />

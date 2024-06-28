@@ -6,7 +6,7 @@ const data = {
   milestoneName: "Milestone Name",
 };
 
-export default function EvidenceModal() {
+export default function ApproveMilestoneModal({ onClose }) {
   const [input, setInput] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -19,11 +19,6 @@ export default function EvidenceModal() {
       };
       reader.readAsDataURL(file);
     }
-  };
-
-  const handleClearEvidence = () => {
-    setInput("");
-    setSelectedImage(null);
   };
 
   return (
@@ -61,16 +56,16 @@ export default function EvidenceModal() {
         </label>
       )}
       <div className="flex justify-center gap-4 mt-4">
-        <Button
-          onClick={handleClearEvidence}
-          width={"small"}
-          bg={"white"}
-          border={"creator-normal"}
-        >
-          clear
+        <Button width={"small"} bg={"white"} border={"supporter-normal"}>
+          Decline
         </Button>
-        <Button width={"large"} bg={"creator-saturate"} color={"white"}>
-          send evidence to Admin
+        <Button
+          onClick={onClose}
+          width={"large"}
+          bg={"supporter-saturate"}
+          color={"white"}
+        >
+          Accept
         </Button>
       </div>
     </form>
