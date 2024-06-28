@@ -29,7 +29,10 @@ export default function GridTable({ data, index, isHeader = false }) {
       }
     >
       {data.map((el, subIndex) => (
-        <div key={subIndex} className="flex justify-center items-center">
+        <div
+          key={subIndex}
+          className="flex justify-center items-center border-black h-full"
+        >
           {el}
         </div>
       ))}

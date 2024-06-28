@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-import GridTable from "../components/GridTable";
 import { STATUS_PRODUCT } from "../constants";
-import { useState } from "react";
 import DeliveryButton from "../components/DeliveryButton";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
@@ -16,7 +13,12 @@ const columns = [
   "Price",
   "Project Status",
   "Delivery Status",
-];
+
+import TablePagination from "../components/TablePagination";
+
+const mockProductName = `Bria's Mythical Menagerie: Creature-Collecting & Plush`;
+const mockStatus = STATUS_PRODUCT.PENDING;
+const columns = ["Project", "Tier", "Spending Fund", "Delivery Status"];
 
 export default function ProductManagePage() {
   const [filterData, setFilterData] = useState([]);
@@ -174,6 +176,7 @@ export default function ProductManagePage() {
     );
   }, [selectPage]);
 
+export default function ProductManagePage() {
   return (
     <>
       <div className="w-[100vw] m-auto flex flex-col justify-center py-4">
@@ -212,6 +215,19 @@ export default function ProductManagePage() {
             ))}
           </div>
         </div>
+
+      <div className="pt-8 px-36">
+        <h1 className="font-bold text-3xl py-4">Milestone Status</h1>
+        <TablePagination
+          data={milestoneData}
+          columns={milestoneDataColumns}
+          itemInOnePage={3}
+        />
+      </div>
+
+      <div className="pb-4 px-36">
+        <h1 className="font-bold text-3xl py-4">Supporter Management</h1>
+        <TablePagination data={data} columns={columns} />
       </div>
       {openEvidenceModal && (
         <Modal

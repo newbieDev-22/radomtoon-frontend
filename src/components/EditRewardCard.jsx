@@ -1,12 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
 
-export default function AddMilestone({
-  name,
-  product_name,
-  estimated_date,
-  price,
-}) {
+export default function EditRewardCard({ name, product_name, estimated_date, price }) {
   const [note, setNote] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState("");
