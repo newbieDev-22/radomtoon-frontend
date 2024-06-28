@@ -1,12 +1,7 @@
-import Modal from "../components/Modal";
-import Button from "../components/Button";
+import Button from "../../../components/Button";
 import { useState } from "react";
 
-const data = {
-  milestoneName: "Milestone Name",
-};
-
-export default function EvidenceModal() {
+export default function EvidenceModalDetail() {
   const [input, setInput] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
 

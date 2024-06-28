@@ -1,12 +1,7 @@
-import Modal from "../components/Modal";
 import Button from "../components/Button";
 import { useState } from "react";
 
-const data = {
-  milestoneName: "Milestone Name",
-};
-
-export default function ApproveMilestoneModal({ onClose }) {
+export default function ApproveMilestoneModalDetail({ onClose }) {
   const [input, setInput] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
 

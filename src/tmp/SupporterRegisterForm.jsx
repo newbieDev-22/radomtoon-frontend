@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Input from "../components/Input";
-import Modal from "../components/Modal";
 import Button from "../components/Button";
 import validateRegister from "../validators/validate-rigister";
 

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Input from "../components/Input";
-import Modal from "../components/Modal";
 import validateRegister from "../validators/validate-register";
 import Button from "../components/Button";
 
@@ -25,9 +24,7 @@ const ErrorCreatorRegisterData = {
 export default function CreatorRegisterForm() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [creatorData, setCreatorData] = useState(CreatorRegisterData);
-  const [errorCreatorData, setErrorCreatorData] = useState(
-    ErrorCreatorRegisterData
-  );
+  const [errorCreatorData, setErrorCreatorData] = useState(ErrorCreatorRegisterData);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];

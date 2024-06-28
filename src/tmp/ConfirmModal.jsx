@@ -1,4 +1,3 @@
-import Modal from "../components/Modal";
 import Button from "../components/Button";
 
 export default function ConfirmModal({ subTitle }) {
