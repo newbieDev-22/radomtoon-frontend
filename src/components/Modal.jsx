@@ -18,17 +18,19 @@ export default function Modal({ width = 30, title, children, open, onClose }) {
       {open
         ? createPortal(
             <>
-              <div className="fixed inset-0 bg-[#000000]/45 z-30"></div>
+              <div className=" fixed inset-0 bg-[#000000]/45 z-30"></div>
               <div className="fixed inset-0 z-40" onClick={onClose}>
                 <div className="flex justify-center items-center min-h-screen">
                   <div
-                    className="bg-[#030303] rounded-lg shadow-lg"
+                    className="bg-white rounded-lg shadow-lg"
                     style={{ width: `${width}rem` }}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <div className="relative">
+                    <div className="relative mb-6">
                       <div className="flex justify-center items-center pt-8 pb-2 relative rounded-t-lg">
-                        <h5 className="text-white text-4xl font-bold ">{title}</h5>
+                        <h5 className="text-black text-4xl font-bold ">
+                          {title}
+                        </h5>
                       </div>
                       <div className="relative ">
                         <button
@@ -40,7 +42,9 @@ export default function Modal({ width = 30, title, children, open, onClose }) {
                       </div>
                     </div>
 
-                    <div className="px-12 pb-6">{children}</div>
+                    <div className="px-12 pb-6 flex justify-center">
+                      {children}
+                    </div>
                   </div>
                 </div>
               </div>

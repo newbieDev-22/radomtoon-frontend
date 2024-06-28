@@ -17,6 +17,7 @@ export default function GridTable({ data, index, isHeader = false }) {
       dataGridColsMapping[data.length]
     } gap-4 bg-creator-normal text-lg font-semibold border-b-2 border-gray-100 text-center p-2 rounded-t-md`,
   };
+
   return (
     <div
       className={
