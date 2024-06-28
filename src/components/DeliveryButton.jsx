@@ -6,7 +6,7 @@ const deliveryBtnColorMap = {
     "bg-yellow-300 w-3/4 px-2 py-2 rounded-xl hover:bg-yellow-500 hover:scale-110 active:scale-100",
 };
 
-export default function DeliveryButton({ isSend }) {
+export default function DeliveryButton({ isSend, isDisable = false }) {
   const [isClick, setIsClick] = useState(isSend);
 
   const handleClick = () => {
@@ -15,6 +15,7 @@ export default function DeliveryButton({ isSend }) {
 
   return (
     <button
+      disabled={isDisable}
       className={
         isClick ? deliveryBtnColorMap.isDelivery : deliveryBtnColorMap.isNotDelivery
       }

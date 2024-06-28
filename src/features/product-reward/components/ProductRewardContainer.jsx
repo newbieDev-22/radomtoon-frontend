@@ -1,3 +1,4 @@
+import EditRewardCard from "../../../components/EditRewardCard";
 import TierCard from "../../tier/components/TierCard";
 
 const mockTierNumber = "1";
@@ -49,6 +50,12 @@ export default function ProductRewardContainer() {
           dateEstimated={mockDateEstimated}
           amountSupporters={mockAmountSupporters}
           productImage={mockImageProduct}
+        />
+        <EditRewardCard
+          name="Tier 1"
+          product_name="Spiderman"
+          estimated_date="20 DEC 2024"
+          price="20"
         />
       </div>
     </div>
