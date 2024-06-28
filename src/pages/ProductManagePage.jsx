@@ -2,28 +2,20 @@ import { STATUS_PRODUCT } from "../constants";
 import DeliveryButton from "../components/DeliveryButton";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
-import EvidenceModal from "../tmp/EvidenceModal";
+import EvidenceModal from "../features/admin/components/EvidenceModalDetail";
 import ConfirmModal from "../tmp/ConfirmModal";
-
-const mockProductName = `Bria's Mythical Menagerie: Creature-Collecting & Plush`;
-const mockStatus = STATUS_PRODUCT.PENDING;
-const columns = [
-  "Project",
-  "Tier",
-  "Price",
-  "Project Status",
-  "Delivery Status",
-
 import TablePagination from "../components/TablePagination";
+import { useState, useEffect } from "react";
+import GridTable from "../components/GridTable";
 
 const mockProductName = `Bria's Mythical Menagerie: Creature-Collecting & Plush`;
 const mockStatus = STATUS_PRODUCT.PENDING;
-const columns = ["Project", "Tier", "Spending Fund", "Delivery Status"];
 
 export default function ProductManagePage() {
   const [filterData, setFilterData] = useState([]);
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
   const [openDeliveryModal, setOpenDeliveryModal] = useState(false);
+  const columns = ["Project", "Tier", "Price", "Project Status", "Delivery Status"];
 
   const data = [
     ["Product A", 1, 100, <div className="text-red-600">Failed</div>, "-"],
@@ -176,47 +168,12 @@ export default function ProductManagePage() {
     );
   }, [selectPage]);
 
-export default function ProductManagePage() {
   return (
-    <>
-      <div className="w-[100vw] m-auto flex flex-col justify-center py-4">
-        <h1 className="text-center font-bold text-3xl my-3">
-          {mockProductName}
-        </h1>
-        <h2 className="text-center font-semibold text-2xl py-1 text-gray-500">{`Status : ${mockStatus}`}</h2>
+    <div className="m-auto flex flex-col justify-center py-4">
+      <h1 className="text-center font-bold text-3xl my-3">{mockProductName}</h1>
+      <h2 className="text-center font-semibold text-2xl py-1 text-gray-500">{`Status : ${mockStatus}`}</h2>
 
-        <div className="flex flex-col gap-4 py-8">
-          <div className="flex flex-col px-48 justify-center">
-            <GridTable data={milestoneDataColumns} isHeader={true} />
-            {milestoneData.map((el, index) => (
-              <GridTable key={el.page} index={index} data={Object.values(el)} />
-            ))}
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-4 py-8">
-          <div className="flex flex-col px-20 justify-center">
-            <GridTable data={columns} isHeader={true} />
-            {filterData.map((el, index) => (
-              <GridTable key={el.page} index={index} data={Object.values(el)} />
-            ))}
-          </div>
-          <div className="join flex justify-center">
-            {selectPage.map((el) => (
-              <button
-                key={el.page}
-                className={`join-item btn btn-md ${
-                  el.selected ? "btn-active " : null
-                }`}
-                onClick={() => handleSelectPage(el.page)}
-              >
-                {el.page + 1}
-              </button>
-            ))}
-          </div>
-        </div>
-
-      <div className="pt-8 px-36">
+      <div className="pt-4 px-36">
         <h1 className="font-bold text-3xl py-4">Milestone Status</h1>
         <TablePagination
           data={milestoneData}
@@ -229,6 +186,7 @@ export default function ProductManagePage() {
         <h1 className="font-bold text-3xl py-4">Supporter Management</h1>
         <TablePagination data={data} columns={columns} />
       </div>
+
       {openEvidenceModal && (
         <Modal
           onClose={() => setOpenEvidenceModal(false)}
@@ -239,6 +197,6 @@ export default function ProductManagePage() {
           <EvidenceModal />
         </Modal>
       )}
-    </>
+    </div>
   );
 }
