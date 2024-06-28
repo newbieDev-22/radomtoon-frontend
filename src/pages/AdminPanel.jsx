@@ -1,5 +1,10 @@
 import { useState } from "react";
 import StatsBar from "../components/StatsBannerComponent/StatsBanner";
+import GridTable from "../components/GridTable";
+import Modal from "../components/Modal";
+import CreatorRegisterForm from "../tmp/CreatorRegisterForm";
+import EvidenceModal from "../tmp/EvidenceModal";
+import ApproveEvidenceModal from "../tmp/ApproveMilestoneModal";
 
 const mockImgStatsBar =
   "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/bmt7dsxiwpfjlnxpcazs";
@@ -23,6 +28,11 @@ const adminMenuStyleMap = {
 };
 
 export default function AdminPanel() {
+  const [openCreatorFormModal, setOpenCreatorFormModal] = useState(false);
+  const [openApproveMilestoneModal, setOpenApproveMilestoneModal] =
+    useState(true);
+  const [openDeclineMilestoneModal, setOpenDeclineMilestoneModal] =
+    useState(true);
   const [selectMenu, setSelectMenu] = useState(adminMenu.CreatorApproval);
   return (
     <div>
@@ -60,6 +70,28 @@ export default function AdminPanel() {
         </button>
       </div>
       <div></div>
+      {openCreatorFormModal && (
+        <Modal
+          onClose={() => setOpenApproveMilestoneModal(false)}
+          title="CREATOR REGISTER FORM"
+          width={40}
+          open={true}
+        >
+          <CreatorRegisterForm />
+        </Modal>
+      )}
+      {openApproveMilestoneModal && (
+        <Modal
+          onClose={() => setOpenApproveMilestoneModal(false)}
+          title="Milestone 1"
+          width={40}
+          open={true}
+        >
+          <ApproveEvidenceModal
+            onClose={() => setOpenApproveMilestoneModal(false)}
+          />
+        </Modal>
+      )}
     </div>
   );
 }

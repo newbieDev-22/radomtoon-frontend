@@ -4,10 +4,19 @@ import { STATUS_PRODUCT } from "../constants";
 import { useState } from "react";
 import DeliveryButton from "../components/DeliveryButton";
 import Button from "../components/Button";
+import Modal from "../components/Modal";
+import EvidenceModal from "../tmp/EvidenceModal";
+import ConfirmModal from "../tmp/ConfirmModal";
 
 const mockProductName = `Bria's Mythical Menagerie: Creature-Collecting & Plush`;
 const mockStatus = STATUS_PRODUCT.PENDING;
-const columns = ["Project", "Tier", "Price", "Project Status", "Delivery Status"];
+const columns = [
+  "Project",
+  "Tier",
+  "Price",
+  "Project Status",
+  "Delivery Status",
+];
 
 const data = [
   ["Product A", 1, 100, <div className="text-red-600">Failed</div>, "-"],
@@ -136,6 +145,8 @@ export default function ProductManagePage() {
 
   const [selectPage, setSelectPage] = useState(dummyAllFalseStateList);
   const [filterData, setFilterData] = useState([]);
+  const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
+  const [openDeliveryModal, setOpenDeliveryModal] = useState(false);
 
   const handleSelectPage = (page) => {
     const newState = [];
@@ -163,38 +174,74 @@ export default function ProductManagePage() {
   }, [selectPage]);
 
   return (
-    <div className="w-[100vw] m-auto flex flex-col justify-center py-4">
-      <h1 className="text-center font-bold text-3xl my-3">{mockProductName}</h1>
-      <h2 className="text-center font-semibold text-2xl py-1 text-gray-500">{`Status : ${mockStatus}`}</h2>
+    <>
+      <div className="w-[100vw] m-auto flex flex-col justify-center py-4">
+        <h1 className="text-center font-bold text-3xl my-3">
+          {mockProductName}
+        </h1>
+        <h2 className="text-center font-semibold text-2xl py-1 text-gray-500">{`Status : ${mockStatus}`}</h2>
 
-      <div className="flex flex-col gap-4 py-8">
-        <div className="flex flex-col px-48 justify-center">
-          <GridTable data={milestoneDataColumns} isHeader={true} />
-          {milestoneData.map((el, index) => (
-            <GridTable key={el.page} index={index} data={Object.values(el)} />
-          ))}
+        <div className="flex flex-col gap-4 py-8">
+          <div className="flex flex-col px-48 justify-center">
+            <GridTable data={milestoneDataColumns} isHeader={true} />
+            {milestoneData.map((el, index) => (
+              <GridTable
+                openEvidence={() => setOpenEvidenceModal(true)}
+                key={el.page}
+                index={index}
+                data={Object.values(el)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 py-8">
+          <div className="flex flex-col px-20 justify-center">
+            <GridTable data={columns} isHeader={true} />
+            {filterData.map((el, index) => (
+              <GridTable
+                openDelivery={() => setOpenDeliveryModal(true)}
+                key={el.page}
+                index={index}
+                data={Object.values(el)}
+              />
+            ))}
+          </div>
+          <div className="join flex justify-center">
+            {selectPage.map((el) => (
+              <button
+                key={el.page}
+                className={`join-item btn btn-md ${
+                  el.selected ? "btn-active " : null
+                }`}
+                onClick={() => handleSelectPage(el.page)}
+              >
+                {el.page + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
-
-      <div className="flex flex-col gap-4 py-8">
-        <div className="flex flex-col px-20 justify-center">
-          <GridTable data={columns} isHeader={true} />
-          {filterData.map((el, index) => (
-            <GridTable key={el.page} index={index} data={Object.values(el)} />
-          ))}
-        </div>
-        <div className="join flex justify-center">
-          {selectPage.map((el) => (
-            <button
-              key={el.page}
-              className={`join-item btn btn-md ${el.selected ? "btn-active " : null}`}
-              onClick={() => handleSelectPage(el.page)}
-            >
-              {el.page + 1}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
+      {openEvidenceModal && (
+        <Modal
+          onClose={() => setOpenEvidenceModal(false)}
+          title="Milestone : 1"
+          width={45}
+          open={true}
+        >
+          <EvidenceModal />
+        </Modal>
+      )}
+      {openDeliveryModal && (
+        <Modal
+          onClose={() => setOpenDeliveryModal(false)}
+          title="Delivery"
+          width={30}
+          open={true}
+        >
+          <ConfirmModal subTitle={"Are you sure to confirm delivery?"} />
+        </Modal>
+      )}
+    </>
   );
 }
