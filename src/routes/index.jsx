@@ -1,7 +1,6 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
-import CampaignSetup from "../pages/CampaignSetup";
 
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -14,6 +13,7 @@ const SupporterHistoryPage = lazy(() => import("../pages/SupporterHistoryPage"))
 const CreatorPanel = lazy(() => import("../pages/CreatorPanel"));
 const AdminPanel = lazy(() => import("../pages/AdminPanel"));
 const ProductManagePage = lazy(() => import("../pages/ProductManagePage"));
+const CampaignSetup = lazy(() => import("../pages/CampaignSetup"))
 
 const HomeDummy = lazy(() => import("../pages/HomeDummy"));
 
