@@ -1,5 +1,6 @@
 import ImgCard from "../components/ImageCard";
 
+
 const mockImage =
   "https://static.thairath.co.th/media/B6FtNKtgSqRqbnNsbKEfQbPGELW2YjCcDQUpDilBzR4jVwhRbzfUfbngdYegm1bTfTXjc.webp";
 const mockAvatar = "https://mdbcdn.b-cdn.net/img/new/avatars/1.webp";
@@ -13,6 +14,7 @@ const loopCard = 6;
 export default function Home() {
   return (
     <div>
+
       <h1 className="flex justify-center text-5xl text-semibold mt-10">Home</h1>
       <div className="flex justify-center gap-10 mt-10 mb-20">
         <div>

@@ -4,6 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
+import { data } from "autoprefixer";
 
 function PaymentFeature() {
   const { tierId } = useParams();
@@ -26,6 +27,7 @@ function PaymentFeature() {
       setClientSecret(clientSecret);
     });
   }, []);
+
 
   return (
     <div className="w-full">

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
+import "./index.css"
 
 
 export default function CheckoutForm() {
