@@ -57,70 +57,72 @@ export default function SupporterRegisterForm() {
   };
 
   return (
-    <div className="flex justify-center">
-      <Modal title="SUPPORTER REGISTER">
-        <form onSubmit={handleSubmit} action="">
-          <div className="flex flex-col gap-6">
-            <div className="flex gap-4">
-              <Input
-                type="text"
-                placeholder="First name"
-                value={supporterData.firstName}
-                name="firstName"
-                onChange={handleChangeInput}
-                error={errorSupporterData.firstName}
-              />
-              <Input
-                type="text"
-                placeholder="Last name"
-                value={supporterData.lastName}
-                name="lastName"
-                onChange={handleChangeInput}
-                error={errorSupporterData.lastName}
-              />
-            </div>
+    <form onSubmit={handleSubmit} action="">
+      <div className="flex flex-col gap-6">
+        <div className="flex gap-4">
+          <Input
+            type="text"
+            placeholder="First name"
+            value={supporterData.firstName}
+            name="firstName"
+            onChange={handleChangeInput}
+            error={errorSupporterData.firstName}
+          />
+          <Input
+            type="text"
+            placeholder="Last name"
+            value={supporterData.lastName}
+            name="lastName"
+            onChange={handleChangeInput}
+            error={errorSupporterData.lastName}
+          />
+        </div>
 
-            <Input
-              type="text"
-              placeholder="Email"
-              value={supporterData.email}
-              name="email"
-              onChange={handleChangeInput}
-              error={errorSupporterData.email}
-            />
-            <Input
-              type="text"
-              placeholder="Phone number"
-              value={supporterData.phoneNumber}
-              name="phoneNumber"
-              onChange={handleChangeInput}
-              error={errorSupporterData.phoneNumber}
-            />
+        <Input
+          type="text"
+          placeholder="Email"
+          value={supporterData.email}
+          name="email"
+          onChange={handleChangeInput}
+          error={errorSupporterData.email}
+        />
+        <Input
+          type="text"
+          placeholder="Phone number"
+          value={supporterData.phoneNumber}
+          name="phoneNumber"
+          onChange={handleChangeInput}
+          error={errorSupporterData.phoneNumber}
+        />
 
-            <div className="flex gap-4">
-              <Input
-                type="password"
-                placeholder="Password"
-                value={supporterData.password}
-                name="password"
-                onChange={handleChangeInput}
-                error={errorSupporterData.password}
-              />
-              <Input
-                type="password"
-                placeholder="Confirm password"
-                value={supporterData.confirmPassword}
-                name="confirmPassword"
-                onChange={handleChangeInput}
-                error={errorSupporterData.confirmPassword}
-              />
-            </div>
-            <Button moveDown={errorSupporterData?.password && "mt-6"} color="orange">
-              Register
-            </Button>
-          </div>
-        </form>
-      </Modal>
-    </div>
+        <div className="flex gap-4">
+          <Input
+            type="password"
+            placeholder="Password"
+            value={supporterData.password}
+            name="password"
+            onChange={handleChangeInput}
+            error={errorSupporterData.password}
+          />
+          <Input
+            type="password"
+            placeholder="Confirm password"
+            value={supporterData.confirmPassword}
+            name="confirmPassword"
+            onChange={handleChangeInput}
+            error={errorSupporterData.confirmPassword}
+          />
+        </div>
+        <div className="flex justify-center">
+          <Button
+            moveDown={errorSupporterData?.password && "mt-6"}
+            color="orange"
+            width={"full"}
+          >
+            Register
+          </Button>
+        </div>
+      </div>
+    </form>
   );
 }
