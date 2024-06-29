@@ -1,27 +1,20 @@
 import { useState } from "react";
 import Button from "../../../components/Button";
-import { useEffect } from "react";
 import { useRef } from "react";
 import { USER_ROLE } from "../../../constants";
 
 export default function TierCard({ el, isEdit, currentUser, onClick }) {
   const fileEl = useRef()
-  console.log("el", el)
   const initUpdateProductValue = {
     newProductName: el.mockProductName,
     newDetail: el.mockDetail,
     newPrice: el.mockPrice,
     newProductImage: el.mockImageProduct,
-
   }
 
   const [updateProductValue, setUpdateProductValue] = useState(initUpdateProductValue)
 
-  useEffect(() => {
-    console.log("newProductName", updateProductValue.newProductName)
-    console.log("newDetail", updateProductValue.newDetail)
-    console.log("newPrice", updateProductValue.newPrice)
-  }, [updateProductValue])
+
 
   const hoverAndActive = isEdit && currentUser === USER_ROLE.CREATOR ? "" : "hover:scale-[101%] active:scale-100"
   const imgHoverAndActive = !isEdit ? "" : "hover:rotate-6 hover:duration-500 active:scale-95 hover:opacity-30"
