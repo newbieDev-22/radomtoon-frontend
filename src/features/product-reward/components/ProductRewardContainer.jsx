@@ -30,7 +30,7 @@ export default function ProductRewardContainer({ currentUser }) {
           className="flex flex-col gap-4
         "
         >
-          {currentUser === USER_ROLE.SUPPORTER ? <>
+          {currentUser === USER_ROLE.SUPPORTER || currentUser === USER_ROLE.CREATOR ? <>
             <TierCard
               tierNumber={mockTierNumber}
               productName={mockProductName}
@@ -38,6 +38,9 @@ export default function ProductRewardContainer({ currentUser }) {
               dateEstimated={mockDateEstimated}
               amountSupporters={mockAmountSupporters}
               productImage={mockImageProduct}
+              isEdit={true}
+              price={20}
+              currentUser={currentUser}
             />
             <TierCard
               tierNumber={mockTierNumber}
@@ -46,6 +49,7 @@ export default function ProductRewardContainer({ currentUser }) {
               dateEstimated={mockDateEstimated}
               amountSupporters={mockAmountSupporters}
               productImage={mockImageProduct}
+              price={20}
             />
             <TierCard
               tierNumber={mockTierNumber}
@@ -54,6 +58,7 @@ export default function ProductRewardContainer({ currentUser }) {
               dateEstimated={mockDateEstimated}
               amountSupporters={mockAmountSupporters}
               productImage={mockImageProduct}
+              price={20}
             /></> : null}
 
           {currentUser === USER_ROLE.CREATOR ? <>

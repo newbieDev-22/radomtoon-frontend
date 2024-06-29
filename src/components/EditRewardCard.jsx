@@ -60,7 +60,7 @@ export default function EditRewardCard({
             {updateProductName}
           </textarea>
           <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-semibold">Detail</h3>
+            {/* <h3 className="text-xl font-semibold">Detail</h3> */}
             <textarea
               className=" min-h-32 p-2 rounded-lg border-2"
               onChange={(e) => setDetailState(e.target.value)}
