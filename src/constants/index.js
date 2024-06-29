@@ -88,6 +88,7 @@ export const colorBtnMap = {
 export const widthBtnMap = {
   full: "w-full",
   40: "w-40",
+  60: "w-60",
   20: "w-20",
 };
 

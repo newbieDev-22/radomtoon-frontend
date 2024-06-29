@@ -4,27 +4,14 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { USER_ROLE } from "../../../constants";
 
-
-
-export default function TierCard({
-  tierNumber,
-  productName,
-  detail,
-  dateEstimated,
-  amountSupporters,
-  productImage,
-  onClick,
-  isEdit,
-  price,
-  currentUser
-}) {
+export default function TierCard({ el, isEdit, currentUser, onClick }) {
   const fileEl = useRef()
-
+  console.log("el", el)
   const initUpdateProductValue = {
-    newProductName: productName,
-    newDetail: detail,
-    newPrice: price,
-    newProductImage: productImage,
+    newProductName: el.mockProductName,
+    newDetail: el.mockDetail,
+    newPrice: el.mockPrice,
+    newProductImage: el.mockImageProduct,
 
   }
 
@@ -49,34 +36,30 @@ export default function TierCard({
 
       <div className="grid grid-cols-7">
         <div className="flex flex-col gap-5 max-w-3xl col-span-4 justify-center">
-          <h2 className="font-bold text-3xl">{`Tier ${tierNumber}`}</h2>
+          <h2 className="font-bold text-3xl">{`Tier ${el.mockTierNumber}`}</h2>
 
           {
             isEdit && currentUser === USER_ROLE.CREATOR ? <textarea
               className="rounded-lg border-2 text-2xl font-semibold"
-              defaultValue={productName}
+              defaultValue={el.mockProductName}
               onChange={(e) => setUpdateProductValue({ ...updateProductValue, newProductName: e.target.value })}
-            /> : <h3 className="text-2xl font-semibold  overflow-hidden">{productName}</h3>
+            /> : <h3 className="text-2xl font-semibold  overflow-hidden">{el.mockProductName}</h3>
           }
-
-
-
 
           <div className="flex flex-col gap-2">
             <h3 className="text-xl font-semibold">Detail</h3>
             {isEdit && currentUser === USER_ROLE.CREATOR ? <textarea
               className=" min-h-32 p-2 rounded-lg border-2"
-              defaultValue={detail}
+              defaultValue={el.mockDetail}
               onChange={(e) => setUpdateProductValue({ ...updateProductValue, newDetail: e.target.value })}
-            /> : <p className="">{detail}`</p>}
-
+            /> : <p className="">{el.mockDetail}`</p>}
           </div>
 
           {isEdit && currentUser === USER_ROLE.CREATOR ? null : <>  <div className="max-w-2xl">
             <p className="text-xl font-semibold">Estimated Delivery</p>
-            <h3 className="">{dateEstimated}</h3>
+            <h3 className="">{el.mockDateEstimated}</h3>
           </div>
-            <div className="bg-gray-300 w-40 rounded py-2 text-center font-semibold">{`${amountSupporters} Supporters`}</div>
+            <div className="bg-gray-300 w-40 rounded py-2 text-center font-semibold">{`${el.mockAmountSupporters} Supporters`}</div>
           </>
           }
 
@@ -116,8 +99,6 @@ export default function TierCard({
             src={updateProductValue?.newProductImage}
             alt="product's picture"
             className={`aspect-auto w-full rounded-lg absolute max-w-96 ${imgHoverAndActive}`}
-
-
           />
           <p className="font-bold text-2xl">Click for Change Picture</p>
 
