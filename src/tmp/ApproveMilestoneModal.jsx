@@ -1,7 +1,10 @@
 import Button from "../components/Button";
 import { useState } from "react";
 
-export default function ApproveMilestoneModalDetail({ onClose }) {
+export default function ApproveMilestoneModalDetail({
+  onClose,
+  onOpenDecline,
+}) {
   const [input, setInput] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -14,6 +17,11 @@ export default function ApproveMilestoneModalDetail({ onClose }) {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const hadleClickOpenDeclineAndCloseApprove = () => {
+    onClose();
+    onOpenDecline();
   };
 
   return (
@@ -51,7 +59,12 @@ export default function ApproveMilestoneModalDetail({ onClose }) {
         </label>
       )}
       <div className="flex justify-center gap-4 mt-4">
-        <Button width={"small"} bg={"white"} border={"supporter-normal"}>
+        <Button
+          onClick={hadleClickOpenDeclineAndCloseApprove}
+          width={"small"}
+          bg={"white"}
+          border={"supporter-normal"}
+        >
           Decline
         </Button>
         <Button

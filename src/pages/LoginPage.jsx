@@ -5,6 +5,7 @@ import Input from "../components/Input";
 import LoginImage from "../features/authentication/components/LoginImage";
 import Modal from "../components/Modal";
 import SupporterRegisterForm from "../tmp/SupporterRegisterForm";
+import { Slide, toast } from "react-toastify";
 
 const loginData = { emailOrPhone: "", password: "" };
 
@@ -20,12 +21,10 @@ export default function LoginPage() {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log("submit");
   };
 
   return (
     <>
-      {" "}
       <div className="min-w-screen min-h-screen">
         <div className="grid grid-cols-2 shadow-lg rounded-lg">
           <div className="h-screen w-full">

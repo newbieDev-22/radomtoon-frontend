@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../components/Button";
 
-export default function MilestoneDeclineReasonModal() {
+export default function MilestoneDeclineReasonModal({ onClose }) {
   const [input, setInput] = useState("");
 
   return (
@@ -16,10 +16,20 @@ export default function MilestoneDeclineReasonModal() {
         onChange={(e) => setInput(e.target.value)}
       />
       <div className="flex justify-center gap-4 mt-4">
-        <Button width={"small"} bg={"white"} border={"supporter-normal"}>
+        <Button
+          onClick={onClose}
+          width={"small"}
+          bg={"white"}
+          border={"supporter-normal"}
+        >
           Cancel
         </Button>
-        <Button width={"large"} bg={"supporter-saturate"} color={"black"}>
+        <Button
+          onClick={onClose}
+          width={"large"}
+          bg={"supporter-saturate"}
+          color={"black"}
+        >
           Accept
         </Button>
       </div>

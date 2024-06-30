@@ -10,18 +10,33 @@ export default function CreatorApproval() {
   const creatorApprovalData = [
     [
       "John Doe",
-      <Button onClick={() => setOpenCreatorFormModal(true)}>See form...</Button>,
-      <Button bg="green">Approve</Button>,
+      <Button onClick={() => setOpenCreatorFormModal(true)}>
+        See form...
+      </Button>,
+      <div className="flex gap-2">
+        <Button bg="green">Approve</Button>
+        <Button bg="yellow">Cancel</Button>
+      </div>,
     ],
     [
       "John Doe",
-      <Button onClick={() => setOpenCreatorFormModal(true)}>See form...</Button>,
-      <Button bg="green">Approve</Button>,
+      <Button onClick={() => setOpenCreatorFormModal(true)}>
+        See form...
+      </Button>,
+      <div className="flex gap-2">
+        <Button bg="green">Approve</Button>
+        <Button bg="yellow">Cancel</Button>
+      </div>,
     ],
     [
       "John Doe",
-      <Button onClick={() => setOpenCreatorFormModal(true)}>See form...</Button>,
-      <Button bg="green">Approve</Button>,
+      <Button onClick={() => setOpenCreatorFormModal(true)}>
+        See form...
+      </Button>,
+      <div className="flex gap-2">
+        <Button bg="green">Approve</Button>
+        <Button bg="yellow">Cancel</Button>
+      </div>,
     ],
   ];
 
@@ -29,7 +44,10 @@ export default function CreatorApproval() {
     <div>
       <div className="px-28">
         <h1 className="font-bold text-3xl py-4">Creator Approval</h1>
-        <TablePagination data={creatorApprovalData} columns={creatorApprovalColumns} />
+        <TablePagination
+          data={creatorApprovalData}
+          columns={creatorApprovalColumns}
+        />
       </div>
       {openCreatorFormModal && (
         <Modal

@@ -15,7 +15,13 @@ export default function ProductManagePage() {
   const [filterData, setFilterData] = useState([]);
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
   const [openDeliveryModal, setOpenDeliveryModal] = useState(false);
-  const columns = ["Project", "Tier", "Price", "Project Status", "Delivery Status"];
+  const columns = [
+    "Project",
+    "Tier",
+    "Price",
+    "Project Status",
+    "Delivery Status",
+  ];
 
   const data = [
     ["Product A", 1, 100, <div className="text-red-600">Failed</div>, "-"],
@@ -33,77 +39,132 @@ export default function ProductManagePage() {
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
     [
       "Product A",
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
     [
       "Product A",
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
     [
       "Product A",
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
     [
       "Product A",
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
     [
       "Product A",
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
     [
       "Product A",
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
     [
       "Product A",
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
     [
       "Product A",
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
     [
       "Product A",
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
     [
       "Product A",
       1,
       100,
       <div>Pending</div>,
-      <DeliveryButton isSend={false}>Waiting product...</DeliveryButton>,
+      <DeliveryButton
+        openDelivery={() => setOpenDeliveryModal(true)}
+        isSend={false}
+      >
+        Waiting product...
+      </DeliveryButton>,
     ],
   ];
 
@@ -195,6 +256,16 @@ export default function ProductManagePage() {
           open={true}
         >
           <EvidenceModal />
+        </Modal>
+      )}
+      {openDeliveryModal && (
+        <Modal
+          onClose={() => setOpenDeliveryModal(false)}
+          title="Confirm"
+          width={45}
+          open={true}
+        >
+          <ConfirmModal subTitle="Confirm this delivery?" />
         </Modal>
       )}
     </div>

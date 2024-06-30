@@ -17,10 +17,15 @@ function PaymentFeature() {
   }, []);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/stripe/create-payment-intent/tier/${tierId}`, {
-      method: "POST",
-      body: JSON.stringify({}),
-    }).then(async (result) => {
+    fetch(
+      `${
+        import.meta.env.VITE_API_URL
+      }/stripe/create-payment-intent/tier/${tierId}`,
+      {
+        method: "POST",
+        body: JSON.stringify({}),
+      }
+    ).then(async (result) => {
       const { clientSecret } = await result.json();
       setClientSecret(clientSecret);
     });
