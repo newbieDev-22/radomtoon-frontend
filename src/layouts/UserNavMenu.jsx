@@ -4,7 +4,6 @@ import { USER_ROLE } from "../constants";
 
 export default function UserNavMenu({ inLanding, currentUser }) {
   const navigate = useNavigate();
-  currentUser = USER_ROLE.CREATOR;
   return (
     <div className="grid grid-cols-2">
       {currentUser === USER_ROLE.SUPPORTER && (
