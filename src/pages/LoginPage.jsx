@@ -2,30 +2,60 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import LoginImage from "../features/authentication/components/LoginImage";
 import Modal from "../components/Modal";
-import SupporterRegisterForm from "../tmp/SupporterRegisterForm";
+import LoginImage from "../features/authentication/components/LoginImage";
+import SupporterRegisterForm from "../features/authentication/components/SupporterRegisterForm";
+import { useStore } from "../store/useStore";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
+import validateLogin from "../validators/validate-login";
 
-const loginData = { emailOrPhone: "", password: "" };
+const initialInput = {
+  email: "",
+  password: "",
+};
+
+const initialInputError = {
+  email: "",
+  password: "",
+};
 
 export default function LoginPage() {
-  const [openRgisterModal, setOpenRgisterModal] = useState(false);
+  const [openRegisterModal, setOpenRegisterModal] = useState(false);
+  const [input, setInput] = useState(initialInput);
+  const [inputError, setInputError] = useState(initialInputError);
+  const login = useStore((state) => state.login);
   const navigate = useNavigate();
-
-  const [input, setInput] = useState(loginData);
 
   const handleChangInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
-    console.log("submit");
+  const handleSubmitForm = async (e) => {
+    try {
+      e.preventDefault();
+      const error = validateLogin(input);
+      if (error) {
+        setInputError((prev) => ({ ...prev, ...error }));
+      } else {
+        setInputError((prev) => ({ ...prev, ...initialInputError }));
+        login(input);
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
+      if (err instanceof AxiosError) {
+        const message =
+          err.response.status === 400
+            ? "Invalid email or password"
+            : "Internet Server Error";
+        return toast.error(message);
+      }
+    }
   };
 
   return (
     <>
-      {" "}
       <div className="min-w-screen min-h-screen">
         <div className="grid grid-cols-2 shadow-lg rounded-lg">
           <div className="h-screen w-full">
@@ -38,10 +68,11 @@ export default function LoginPage() {
               <div className="flex flex-col ">
                 <div className="flex flex-col justify-center pt-8">
                   <Input
-                    name="emailOrPhone"
-                    placeholder="Email or phone number"
+                    name="email"
+                    placeholder="Email"
                     onChange={handleChangInput}
-                    value={input.emailOrPhone}
+                    value={input.email}
+                    error={inputError.email}
                   />
                   <Input
                     type="password"
@@ -49,6 +80,7 @@ export default function LoginPage() {
                     placeholder="Password"
                     onChange={handleChangInput}
                     value={input.password}
+                    error={inputError.password}
                   />
                   <Button width={"full"}>LOGIN</Button>
                 </div>
@@ -63,7 +95,7 @@ export default function LoginPage() {
                   <div className="divider lg:divider-horizontal">|</div>
                   <button
                     className="rounded-box grid place-items-center font-bold hover:text-yellow-500 transition duration-300"
-                    onClick={() => setOpenRgisterModal(true)}
+                    onClick={() => setOpenRegisterModal(true)}
                   >
                     Join as a Supporter
                   </button>
@@ -73,14 +105,14 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-      {openRgisterModal && (
+      {openRegisterModal && (
         <Modal
-          onClose={() => setOpenRgisterModal(false)}
-          title="SUPPORTER REGISTER FORM"
-          width={45}
+          onClose={() => setOpenRegisterModal(false)}
+          title="Supporter Registration"
+          width={60}
           open={true}
         >
-          <SupporterRegisterForm />
+          <SupporterRegisterForm onClose={() => setOpenRegisterModal(false)} />
         </Modal>
       )}
     </>
