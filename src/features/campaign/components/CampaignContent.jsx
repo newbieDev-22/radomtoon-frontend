@@ -1,12 +1,9 @@
 import dayjs from 'dayjs'
+import ReactPlayer from 'react-player/youtube'
 import { progressBar } from "../../../constants";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
-import ReactPlayer from 'react-player/youtube'
 import { useState } from "react";
-import DatePicker from "react-datepicker"
-import { useEffect } from "react";
-import { data } from 'autoprefixer';
 
 const mockSelectTierPath = "/campaign/1/tier";
 
@@ -51,7 +48,7 @@ export default function CampaignContent({
       <div className="w-[40rem] ">
         {url ? <ReactPlayer
           className="w-full h-full object-cover aspect-[16/9] rounded-lg"
-          url={url}
+          url={newUrl}
           playing={true}
         // controls={true}
         /> : <img src={img} className="w-full h-full object-cover aspect-[16/9]" alt="" />}
@@ -63,7 +60,7 @@ export default function CampaignContent({
                 role="button"
                 htmlFor="inputImg"
                 className="font-semibold text-xl "
-              >Input products picture</label>
+              >Input products picture link</label>
               <input
                 id="inputImg"
                 className="border-2 w-full font-semibold px-2 text-gray-500 rounded-lg p-1"
@@ -102,6 +99,7 @@ export default function CampaignContent({
             supported of THB{isEdit ? <input
               className="border-2  font-semibold text-xl px-2 text-gray-500 mx-2 max-w-56 rounded-lg"
               value={newgold}
+              type='number'
               onChange={(e) => setNewGold(+e.target.value)}
             /> : <p className="pl-1 inline-block">{newgold.toLocaleString("en-US")}</p>}  goal
           </div>
