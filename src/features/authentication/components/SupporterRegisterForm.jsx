@@ -4,7 +4,9 @@ import Button from "../../../components/Button";
 import validateRegister from "../../../validators/validate-register";
 import Dropdown from "../../../components/Dropdown";
 import { PROVINCE_MAP } from "../../../constants";
-import { useStore } from "../../../store/useStore";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import authApi from "../../../apis/auth";
 
 const initialInput = {
   firstName: "",
@@ -31,7 +33,6 @@ const initialInputError = {
 export default function SupporterRegisterForm({ onClose }) {
   const [input, setInput] = useState(initialInput);
   const [inputError, setInputError] = useState(initialInputError);
-  const supporterRegister = useStore((state) => state.supporterRegister);
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -51,10 +52,29 @@ export default function SupporterRegisterForm({ onClose }) {
         setInputError((prev) => ({ ...prev, ...error }));
       } else {
         setInputError((prev) => ({ ...prev, ...initialInputError }));
-        supporterRegister(input, onClose, setInputError);
+
+        await authApi.supporterRegister(input);
+        toast.success("Registered successfully, please log in to continue", {
+          position: "bottom-right",
+          autoClose: 2000,
+        });
+        onClose();
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err.response.data.field === "email") {
+          setInputError((prev) => ({
+            ...prev,
+            email: "Email is already in use",
+          }));
+        }
+        if (err.response.data.field === "phone") {
+          setInputError((prev) => ({
+            ...prev,
+            phone: "Phone number is already in use",
+          }));
+        }
+      }
     }
   };
 

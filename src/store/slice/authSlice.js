@@ -5,32 +5,6 @@ import { toast } from "react-toastify";
 
 export const createAuthSlice = (set) => ({
   authUser: { user: null, loading: false, error: null },
-  supporterRegister: async (registerData, onSuccess, setInputError) => {
-    try {
-      await authApi.supporterRegister(registerData);
-      onSuccess();
-      toast.success("Registered successfully, please log in to continue", {
-        position: "bottom-right",
-        autoClose: 2000,
-      });
-    } catch (err) {
-      console.dir(err);
-      if (err instanceof AxiosError) {
-        if (err.response.data.field === "email") {
-          setInputError((prev) => ({
-            ...prev,
-            email: "Email is already in use",
-          }));
-        }
-        if (err.response.data.field === "phone") {
-          setInputError((prev) => ({
-            ...prev,
-            phone: "Phone number is already in use",
-          }));
-        }
-      }
-    }
-  },
   creatorRegister: {},
   login: async (credentials) => {
     try {
