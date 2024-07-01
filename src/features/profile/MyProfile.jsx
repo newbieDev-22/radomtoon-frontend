@@ -1,7 +1,6 @@
-import { useState } from "react";
 
-export default function MyProfile({ firstName, size = 14, text = "text-2xl" }) {
-    const [image, setImage] = useState();
+export default function MyProfile({ firstName, image }) {
+
     const initial = firstName ? firstName.charAt(0) : "?";
 
     return (
@@ -9,7 +8,7 @@ export default function MyProfile({ firstName, size = 14, text = "text-2xl" }) {
             {image ? (<div
                 role="button"
                 className="avatar w-14 ">
-                <div className="w-24 rounded-full">
+                <div className="rounded-full" role="button">
                     <img src={image} />
                 </div>
             </div>)
@@ -18,10 +17,10 @@ export default function MyProfile({ firstName, size = 14, text = "text-2xl" }) {
 
                 (<div
                     role="button"
-                    className={`w-${size} h-${size}  bg-creator-normal hover:bg-creator-saturate 
+                    className={`w-14 h-14  bg-creator-normal hover:bg-creator-saturate 
                     active:scale-95  rounded-full flex justify-center items-center`}
                 >
-                    <p className={`${text} text-white`}>{initial}</p>
+                    <p className={`text-2xl text-white`}>{initial}</p>
                 </div>)
 
 

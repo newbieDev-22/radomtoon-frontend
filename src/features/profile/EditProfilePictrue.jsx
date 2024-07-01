@@ -1,18 +1,13 @@
-import { useRef } from "react"
-import MyProfile from "./MyProfile"
-import { useState } from "react"
-import { useEffect } from "react"
 
+export default function EditProfilePictrue({ fileEl, image, handelChangeImage, firstName }) {
+    const initial = firstName.charAt(0) || "?";
 
-export default function EditProfilePictrue() {
-
-    const fileEl = useRef()
-
-    const [newPicture, setNewPicture] = useState(null)
-
-    useEffect(() => {
-        console.log(newPicture)
-    }, [newPicture])
+    const handleFileChange = (e) => {
+        if (e.target.files[0]) {
+            const newPicture = URL.createObjectURL(e.target.files[0]);
+            handelChangeImage(newPicture);
+        }
+    };
 
     return (
         <>
@@ -20,21 +15,33 @@ export default function EditProfilePictrue() {
                 type="file"
                 ref={fileEl}
                 className="hidden"
-                onChange={e => {
-                    if (e.target.files[0]) {
-                        const newPicture = URL.createObjectURL(e.target.files[0])
-                        setNewPicture(newPicture)
-                    }
-                }}
+                onChange={handleFileChange}
             />
-            <div className="text-center">
-                <div
-                    className="bg-black rounded-full"
-                    onClick={() => fileEl.current.click()}
-                >
-                    <MyProfile firstName="Radomtoon" size={80} text="text-[10rem]" propImg={newPicture} />
 
-                </div>
+            <div className="text-center">
+
+                {image ? (<div
+                    role="button"
+                    onClick={() => fileEl.current.click()}
+                    className="avatar w-80 "
+                >
+                    <div className="w-80 rounded-full" role="button">
+                        <img src={image} />
+                    </div>
+                </div>)
+
+                    :
+
+                    (<div
+                        role="button"
+                        onClick={() => fileEl.current.click()}
+                        className={`w-80 h-80 h-text-[10rem]  bg-creator-normal hover:bg-creator-saturate 
+                     rounded-full flex justify-center items-center`}
+                    >
+                        <p className={`text-[10rem] text-white`}>{initial}</p>
+                    </div>)}
+
+
                 <h1
                     role="button"
                     onClick={() => fileEl.current.click()}
