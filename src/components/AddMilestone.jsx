@@ -3,11 +3,15 @@ import Button from "./Button";
 
 export default function AddMilestone({ name }) {
   const [note, setNote] = useState("");
+  const [savedNote, setSavedNote] = useState("");
   const [isEditing, setIsEditing] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsEditing(!isEditing);
+    //text
+    setSavedNote(note);
+    // not edit
+    setIsEditing(false);
   };
 
   return (
@@ -25,15 +29,16 @@ export default function AddMilestone({ name }) {
               className="border border-solid-2 rounded-md p-4 max-h-64 w-full"
             />
           ) : (
-            <div className="w-96 h-56 border rounded-md border-creator-normal p-4">
-              <p>{note || "No Milestone available"}</p>
+            <div className="w-full max-h-64 p-4 overflow-auto">
+              <p>{savedNote || "No Milestone available"}</p>
             </div>
           )}
         </div>
-        <Button bg="creator-normal" width="full">
+        <Button bg="creator-normal" width="full" onClick={handleSubmit}>
           {isEditing ? "Save" : "Edit"} Milestone
         </Button>
       </div>
     </div>
   );
 }
+
