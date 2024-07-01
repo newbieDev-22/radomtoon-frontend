@@ -9,6 +9,7 @@ import {
   mockImage,
   mockProjectName,
 } from "../constants";
+import BarChart from "../components/chart/barChart/BarChartEx";
 
 const mockProductPath = "/campaign/1";
 
