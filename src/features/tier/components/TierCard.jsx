@@ -3,6 +3,7 @@ import Button from "../../../components/Button";
 import { useRef } from "react";
 import { USER_ROLE } from "../../../constants";
 
+
 export default function TierCard({ el, isEdit, currentUser, onClick }) {
   const fileEl = useRef()
   const initUpdateProductValue = {
@@ -48,6 +49,7 @@ export default function TierCard({ el, isEdit, currentUser, onClick }) {
             /> : (<p className="">{el.mockDetail}`</p>)}
           </div>
 
+
           {isEdit && currentUser === USER_ROLE.CREATOR ? null : <>  <div className="max-w-2xl">
             <p className="text-xl font-semibold">Estimated Delivery</p>
             <h3 className="">{el.mockDateEstimated}</h3>
@@ -92,7 +94,7 @@ export default function TierCard({ el, isEdit, currentUser, onClick }) {
           <img
             src={updateProductValue?.newProductImage}
             alt="product's picture"
-            className={`aspect-auto w-full rounded-lg absolute max-w-96 ${imgHoverAndActive}`}
+            className={`aspect-auto w-full rounded-lg absolute max-w-96 max-h-80 object-contain ${imgHoverAndActive}`}
           />
           <p className="font-bold text-2xl">Click for Change Picture</p>
 
