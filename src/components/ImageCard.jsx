@@ -42,13 +42,17 @@ export default function ImgCard({
         </div>
         <div className="flex ml-4 gap-4 py-2 px-2">
           <div className="py-1">
-            <div name="avatar">
+            {avatarImage ? (
               <img
                 src={avatarImage}
-                className="w-72 rounded-full shadow-lg"
+                className="w-48 rounded-full shadow-lg"
                 alt="Avatar"
               />
-            </div>
+            ) : (
+              <div className="w-10 h-10 font-semibold text-lg text-white rounded-full bg-gray-500 flex justify-center items-center">
+                {creatorName[0].toUpperCase()}
+              </div>
+            )}
           </div>
           <div className="overflow-hidden px-2">
             <p className="text-lg font-semibold truncate">{productName}</p>

@@ -8,7 +8,7 @@ import Dropdown from "../components/Dropdown";
 import { PROVINCE_MAP } from "../constants";
 import Policy from "../features/authentication/components/Policy";
 
-const CreatorRegisterData = {
+const initialInput = {
   firstName: "",
   lastName: "",
   email: "",
@@ -16,9 +16,10 @@ const CreatorRegisterData = {
   password: "",
   confirmPassword: "",
   address: "",
+  provinceId: 1,
 };
 
-const ErrorCreatorRegisterData = {
+const initialInputError = {
   firstName: "",
   lastName: "",
   email: "",
@@ -27,18 +28,18 @@ const ErrorCreatorRegisterData = {
   confirmPassword: "",
   policy: "",
   address: "",
+  provinceId: "",
 };
 
 export default function CreatorRegister() {
   const navigate = useNavigate();
 
+  const [input, setInput] = useState(initialInput);
+  const [inputError, setInputError] = useState(initialInputError);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [creatorData, setCreatorData] = useState(CreatorRegisterData);
-  const [errorCreatorData, setErrorCreatorData] = useState(ErrorCreatorRegisterData);
   const [openPolicyModal, setOpenPolicyModal] = useState(false);
   const [isPolicyChecked, setIsPolicyChecked] = useState(false);
   const [checkboxError, setCheckboxError] = useState(false);
-  const [selectedProvince, setSelectedProvince] = useState(null);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -52,7 +53,7 @@ export default function CreatorRegister() {
   };
 
   const handleChangeInput = (e) => {
-    setCreatorData({ ...creatorData, [e.target.name]: e.target.value });
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   const handleCheckboxChange = (e) => {
@@ -63,7 +64,10 @@ export default function CreatorRegister() {
   };
 
   const handleProvinceChange = (value) => {
-    setSelectedProvince(value);
+    const provinceId = PROVINCE_MAP.filter((el) => el.name === value).map(
+      (el) => el.id
+    )[0];
+    setInput((prev) => ({ ...prev, provinceId }));
   };
 
   const handleSubmit = async (e) => {
@@ -73,12 +77,12 @@ export default function CreatorRegister() {
         setCheckboxError("You must agree to the policy to continue.");
         return;
       }
-      const error = validateRegister(creatorData);
-      console.log(errorCreatorData);
+      const error = validateRegister(input);
+      console.log(inputError);
       if (error) {
-        return setErrorCreatorData(error);
+        return setInputError(error);
       }
-      setErrorCreatorData("");
+      setInputError("");
     } catch (error) {
       console.log(error);
     }
@@ -101,63 +105,63 @@ export default function CreatorRegister() {
                   <Input
                     type="text"
                     placeholder="First name"
-                    value={creatorData.firstName}
+                    value={input.firstName}
                     name="firstName"
                     onChange={handleChangeInput}
-                    error={errorCreatorData.firstName}
+                    error={inputError.firstName}
                   />
                   <Input
                     type="text"
                     placeholder="Last name"
-                    value={creatorData.lastName}
+                    value={input.lastName}
                     name="lastName"
                     onChange={handleChangeInput}
-                    error={errorCreatorData.lastName}
+                    error={inputError.lastName}
                   />
                 </div>
 
                 <Input
                   type="text"
                   placeholder="Email"
-                  value={creatorData.email}
+                  value={input.email}
                   name="email"
                   onChange={handleChangeInput}
-                  error={errorCreatorData.email}
+                  error={inputError.email}
                 />
                 <Input
                   type="text"
                   placeholder="Phone number"
-                  value={creatorData.phoneNumber}
+                  value={input.phoneNumber}
                   name="phoneNumber"
                   onChange={handleChangeInput}
-                  error={errorCreatorData.phoneNumber}
+                  error={inputError.phoneNumber}
                 />
 
                 <div className="flex gap-4">
                   <Input
                     type="password"
                     placeholder="Password"
-                    value={creatorData.password}
+                    value={input.password}
                     name="password"
                     onChange={handleChangeInput}
-                    error={errorCreatorData.password}
+                    error={inputError.password}
                   />
                   <Input
                     type="password"
                     placeholder="Confirm password"
-                    value={creatorData.confirmPassword}
+                    value={input.confirmPassword}
                     name="confirmPassword"
                     onChange={handleChangeInput}
-                    error={errorCreatorData.confirmPassword}
+                    error={inputError.confirmPassword}
                   />
                 </div>
                 <Input
                   type="text"
                   placeholder="Address"
-                  value={creatorData.address}
+                  value={input.address}
                   name="address"
                   onChange={handleChangeInput}
-                  error={errorCreatorData.address}
+                  error={inputError.address}
                 />
 
                 <Dropdown
@@ -175,7 +179,7 @@ export default function CreatorRegister() {
                     <label htmlFor="file-upload" className="cursor-pointer text-center">
                       <span
                         className={`block mb-10 border-[1.5px] border-gray rounded-lg p-8 bg-gray-200 hover:bg-gray-100 transition duration-300 ${
-                          errorCreatorData?.password && "mt-1"
+                          inputError?.password && "mt-1"
                         }`}
                       >
                         + Add your identity card with you image
