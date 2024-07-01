@@ -1,18 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ImgCard from "../components/ImageCard";
-import {
-  daysLeft,
-  loopCard,
-  mockAvatar,
-  mockContent,
-  mockCreatorName,
-  mockImage,
-  mockVid,
-  mockProjectName,
-  mockDataStatsBar,
-  mockImgStatsBar,
-} from "../constants";
-
+import { mockDataStatsBar } from "../constants";
 import { useStore } from "../store/useStore";
 import dayjs from "dayjs";
 
@@ -24,7 +12,7 @@ export default function HomePage() {
   const navigate = useNavigate();
   const product = useStore((state) => state.product.data);
   const today = useStore((state) => state.product.today);
-
+  console.log(product);
   return (
     <div>
       <StatsBanner data={mockDataStatsBar} />
@@ -45,8 +33,8 @@ export default function HomePage() {
                 : 0
             }
             content={el.summaryDetail}
-            avatarImage={mockAvatar}
-            vid={mockVid}
+            avatarImage={el.creatorProfileImage}
+            vid={el.productVideo}
             mainCard={true}
             onClick={() => navigate(mockProductPath)}
           />
@@ -65,8 +53,8 @@ export default function HomePage() {
                   : 0
               }
               content={el.summaryDetail}
-              avatarImage={mockAvatar}
-              vid={mockVid}
+              avatarImage={el.creatorProfileImage}
+              vid={el.productVideo}
               onClick={() => navigate(mockProductPath)}
             />
           ))}
