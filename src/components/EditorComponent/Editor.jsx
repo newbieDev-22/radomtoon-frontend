@@ -6,6 +6,7 @@ import mockData from "./mock-data";
 import uploadToCloudinary from "./upload-cloudinary";
 import "./editor-snow.css";
 import "./editor-bubble.css";
+import Button from "../Button";
 
 // Register the resize module with Quill
 Quill.register("modules/resize", ResizeModule);
@@ -78,9 +79,11 @@ export default function Editor({ isCreator }) {
   return (
     <div className="editor">
       {isCreator && (
-        <button type="button" onClick={handleSubmit}>
-          Submit
-        </button>
+        <div className="py-2 flex justify-end">
+          <Button type="button" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </div>
       )}
       <ReactQuill
         ref={quillRef}

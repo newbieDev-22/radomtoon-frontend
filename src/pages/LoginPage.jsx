@@ -27,7 +27,7 @@ export default function LoginPage() {
   const login = useStore((state) => state.login);
   const navigate = useNavigate();
 
-  const handleChangInput = (e) => {
+  const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -39,8 +39,13 @@ export default function LoginPage() {
         setInputError((prev) => ({ ...prev, ...error }));
       } else {
         setInputError((prev) => ({ ...prev, ...initialInputError }));
-        login(input);
-        navigate("/");
+        const response = await login(input);
+        if (response === true) {
+          toast.success("Login successfully");
+          navigate("/");
+        } else {
+          toast.error(response);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -65,43 +70,56 @@ export default function LoginPage() {
             <h1 className="text-3xl font-bold text-center">SIGN IN</h1>
 
             <form onSubmit={handleSubmitForm}>
-              <div className="flex flex-col ">
-                <div className="flex flex-col justify-center pt-8">
-                  <Input
-                    name="email"
-                    placeholder="Email"
-                    onChange={handleChangInput}
-                    value={input.email}
-                    error={inputError.email}
-                  />
-                  <Input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    onChange={handleChangInput}
-                    value={input.password}
-                    error={inputError.password}
-                  />
-                  <Button width={"full"}>LOGIN</Button>
-                </div>
-
-                <div className="flex justify-center">
-                  <button
-                    className="rounded-box grid place-items-center font-bold hover:text-creator-saturate transition duration-300"
-                    onClick={() => navigate("/creator-register")}
-                  >
-                    Become a Creator
-                  </button>
-                  <div className="divider lg:divider-horizontal">|</div>
-                  <button
-                    className="rounded-box grid place-items-center font-bold hover:text-yellow-500 transition duration-300"
-                    onClick={() => setOpenRegisterModal(true)}
-                  >
-                    Join as a Supporter
-                  </button>
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col justify-center gap-2">
+                  <label className="form-control w-full">
+                    <div className="label">
+                      <span className="label-text">Email</span>
+                    </div>
+                    <Input
+                      type="text"
+                      placeholder="Email"
+                      value={input.email}
+                      name="email"
+                      onChange={handleChangeInput}
+                      error={inputError.email}
+                    />
+                  </label>
+                  <label className="form-control w-full">
+                    <div className="label">
+                      <span className="label-text">Password</span>
+                    </div>
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      value={input.password}
+                      name="password"
+                      onChange={handleChangeInput}
+                      error={inputError.password}
+                    />
+                  </label>
+                  <div className="py-2">
+                    <Button width={"full"}>LOGIN</Button>
+                  </div>
                 </div>
               </div>
             </form>
+
+            <div className="flex justify-center">
+              <button
+                className="rounded-box grid place-items-center font-bold hover:text-creator-saturate transition duration-300"
+                onClick={() => navigate("/creator-register")}
+              >
+                Become a Creator
+              </button>
+              <div className="divider lg:divider-horizontal">|</div>
+              <button
+                className="rounded-box grid place-items-center font-bold hover:text-yellow-500 transition duration-300"
+                onClick={() => setOpenRegisterModal(true)}
+              >
+                Join as a Supporter
+              </button>
+            </div>
           </div>
         </div>
       </div>
