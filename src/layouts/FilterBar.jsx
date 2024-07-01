@@ -15,7 +15,7 @@ const categoryList = [
 
 export default function FilterBar() {
   return (
-    <div className="flex w-full items-end gap-5 overflow-auto sm:justify-start px-5 md:justify-center py-2  border-b-2 border-b-gray">
+    <div className="scroll-hidden flex w-full items-end gap-5 overflow-auto sm:justify-start px-5 md:justify-center py-2  border-b-2 border-b-gray">
       <div className="flex gap-8">
         {categoryList.map((cat) => (
           <FilterItem key={cat.id} page={cat.page} onClick={() => {}} />

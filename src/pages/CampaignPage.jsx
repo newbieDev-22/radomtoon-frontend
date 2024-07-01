@@ -37,7 +37,7 @@ export default function CampaignPage() {
       />
       <CampaignSection handleSubPageChange={handleSubPageChange} />
       {subPage === subPageMap.STORY && (
-        <div className="px-16 py-4">
+        <div className="px-32 py-4">
           <Editor isCreator={isCreator} />
         </div>
       )}

@@ -12,16 +12,11 @@ export const widthMap = {
   large: "w-96",
 };
 
-export const imageMap = {
-  small: "h-32",
-  medium: "h-48",
-  large: "h-60",
-};
 
 export const heightMap = {
   small: "h-48",
   medium: "h-60",
-  large: "h-64",
+  large: "h-[260px]",
 };
 
 export const colorMap = {
@@ -115,14 +110,102 @@ export const subPageMap = {
   FORUM: "FORUM",
 };
 
+const geoDataMap = {
+  AMNATCHAROEN: "AMNATCHAROEN",
+  ANGTHONG: "ANGTHONG",
+  BANGKOK: "BANGKOK",
+  BURIRAM: "BURIRAM",
+  CHACHOENGSAO: "CHACHOENGSAO",
+  CHAINAT: "CHAINAT",
+  CHAIYAPHUM: "CHAIYAPHUM",
+  CHANTHABURI: "CHANTHABURI",
+  CHIANGMAI: "CHIANGMAI",
+  CHIANGRAI: "CHIANGRAI",
+  CHONBURI: "CHONBURI",
+  CHUMPHON: "CHUMPHON",
+  KALASIN: "KALASIN",
+  KAMPAENGPHET: "KAMPAENGPHET",
+  KANCHANABURI: "KANCHANABURI",
+  KHONKAEN: "KHONKAEN",
+  KRABI: "KRABI",
+  LAMPANG: "LAMPANG",
+  LAMPHUN: "LAMPHUN",
+  LOEI: "LOEI",
+  LOPBURI: "LOPBURI",
+  MAEHONGSON: "MAEHONGSON",
+  MAHASARAKHAM: "MAHASARAKHAM",
+  MUKDAHAN: "MUKDAHAN",
+  NAKHONNAYOK: "NAKHONNAYOK",
+  NAKHONPATHOM: "NAKHONPATHOM",
+  NAKHONPHANOM: "NAKHONPHANOM",
+  NAKHONRATCHASIMA: "NAKHONRATCHASIMA",
+  NAKHONSAWAN: "NAKHONSAWAN",
+  NAKHONSITHAMMARAT: "NAKHONSITHAMMARAT",
+  NAN: "NAN",
+  NARATHIWAT: "NARATHIWAT",
+  NONGBUALAMPHU: "NONGBUALAMPHU",
+  NONGKHAI: "NONGKHAI",
+  NONTHABURI: "NONTHABURI",
+  PATHUMTHANI: "PATHUMTHANI",
+  PATTANI: "PATTANI",
+  PHACHINBURI: "PHACHINBURI",
+  PHANGNGA: "PHANGNGA",
+  PHATTHALUNG: "PHATTHALUNG",
+  PHAYAO: "PHAYAO",
+  PHETCHABUN: "PHETCHABUN",
+  PHETCHABURI: "PHETCHABURI",
+  PHICHIT: "PHICHIT",
+  PHITSANULOK: "PHITSANULOK",
+  PHRANAKHONSIAYUDHYA: "PHRANAKHONSIAYUDHYA",
+  PHRAE: "PHRAE",
+  PHUKET: "PHUKET",
+  PRACHUAPKHILIKHAN: "PRACHUAPKHILIKHAN",
+  RANONG: "RANONG",
+  RATCHABURI: "RATCHABURI",
+  RAYONG: "RAYONG",
+  ROIET: "ROIET",
+  SAKAEO: "SAKAEO",
+  SAKONNAKHON: "SAKONNAKHON",
+  SAMUTPRAKARN: "SAMUTPRAKARN",
+  SAMUTSAKHON: "SAMUTSAKHON",
+  SAMUTSONGKHAM: "SAMUTSONGKHAM",
+  SARABURI: "SARABURI",
+  SATUN: "SATUN",
+  SISAKET: "SISAKET",
+  SINGBURI: "SINGBURI",
+  SONGKHLA: "SONGKHLA",
+  SUKHOTHAI: "SUKHOTHAI",
+  SUPHANBURI: "SUPHANBURI",
+  SURATTHANI: "SURATTHANI",
+  SURIN: "SURIN",
+  TAK: "TAK",
+  TRAD: "TRAD",
+  TRANG: "TRANG",
+  UBONRATCHATHANI: "UBONRATCHATHANI",
+  UDONTHANI: "UDONTHANI",
+  UTHAITHANI: "UTHAITHANI",
+  UTTARADIT: "UTTARADIT",
+  YALA: "YALA",
+  YASOTHON: "YASOTHON",
+};
+
 export const mockImage =
-  "https://static.thairath.co.th/media/B6FtNKtgSqRqbnNsbKEfQbPGELW2YjCcDQUpDilBzR4jVwhRbzfUfbngdYegm1bTfTXjc.webp";
+  "https://i.kickstarter.com/assets/044/665/040/4701c73df8b68838ac143981ab5aa350_original.jpg?anim=false&fit=cover&gravity=auto&height=576&origin=ugc&q=92&width=1024&sig=Icl7GqhaIdWe9RTm9tgYXQvkIktgy3wTpAhAI75efqQ%3D";
 export const mockAvatar = "https://mdbcdn.b-cdn.net/img/new/avatars/1.webp";
-export const mockProjectName = "Test name";
+export const mockProjectName = "Project name";
 export const mockCreatorName = "creator name";
 export const daysLeft = 23;
 export const loopCard = 6;
+export const mockVid = "https://www.youtube.com/watch?v=TRGxbp-jlCs";
 export const mockContent = `  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 Lorem Ipsum has been the industry standard dummy text ever since the
                 1500s, when an unknown printer took a galley of type and scrambled it to
                 make a type specimen book.`;
+
+ export const mockImgStatsBar =
+  "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/bmt7dsxiwpfjlnxpcazs";
+ export const mockDataStatsBar = [
+  { id: 1, amount: 194504, title: "projects supported" },
+  { id: 2, amount: 1062035636, title: "towards ideas", currency: "THB" },
+  { id: 3, amount: 84372090, title: "contributions" },
+  ];

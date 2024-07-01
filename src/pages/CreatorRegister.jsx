@@ -180,7 +180,7 @@ export default function CreatorRegister() {
         <div className="grid grid-cols-2 shadow-lg rounded-lg">
           <div className="px-20 bg-cyan-100 flex w-full h-full flex-col justify-center">
             <h1 className="text-5xl mb-2 font-semibold text-radomtoon-dark">
-              Turn your imagination into reality.
+              Turn your imagination <br /> into reality.
             </h1>
             <h2 className="text-base mb-8 text-gray-600">
               A hub for early adopters and visionaries to explore cutting-edge
@@ -272,7 +272,7 @@ export default function CreatorRegister() {
                           errorCreatorData?.password && "mt-1"
                         }`}
                       >
-                        + Add your identity card with you image
+                        + Add your identity card with your image
                       </span>
 
                       <input
@@ -299,7 +299,7 @@ export default function CreatorRegister() {
                     htmlFor="policy-checkbox"
                     className="text-gray-600 cursor-pointer text-sm"
                   >
-                    I have read understand and accept the{" "}
+                    I have read, understand and accept the{" "}
                     <a
                       onClick={() => setOpenPolicyModal(true)}
                       className="text-blue-500 hover:underline"
@@ -331,10 +331,10 @@ export default function CreatorRegister() {
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-700 ease-in-out delay-300">
               <button
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/supporter-register")}
                 className="text-white font-bold text-3xl opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out delay-500"
               >
-                Go to login
+                Register as Supporter
               </button>
             </div>
           </div>

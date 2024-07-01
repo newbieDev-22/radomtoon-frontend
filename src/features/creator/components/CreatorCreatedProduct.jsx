@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ProductImageCard from "./ProductImageCard";
+import Button from "../../../components/Button";
 const mockImage =
   "https://static.thairath.co.th/media/B6FtNKtgSqRqbnNsbKEfQbPGELW2YjCcDQUpDilBzR4jVwhRbzfUfbngdYegm1bTfTXjc.webp";
 const mockAvatar = "https://mdbcdn.b-cdn.net/img/new/avatars/1.webp";
@@ -20,19 +21,13 @@ export default function CreatorCreatedProduct() {
 
   return (
     <div>
+      <div className="flex justify-center mt-10">
+        <Button width={60} bg="creator-saturate" color="white" onClick={handleClickAddNewProject} >
+          Start new project
+        </Button>
+      </div>
       <div className="flex justify-center gap-10 mt-20 mb-20">
         <div className="grid grid-cols-3 gap-10 mb-20 ">
-
-          <div
-            className="border-dashed border-4 border-gray-500 rounded-lg bg-red-300 
-            flex justify-center items-center cursor-pointer 
-            hover:scale-[102%] active:scale-100 transition-all shadow-lg  "
-            onClick={handleClickAddNewProject}
-          >
-
-            <span className="text-2xl text-white ">+ Add new project</span>
-          </div>
-
           {Array.from({ length: loopCard }).map((_, index) => (
             <ProductImageCard
               key={index}

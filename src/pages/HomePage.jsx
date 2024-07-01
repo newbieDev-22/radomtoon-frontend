@@ -7,8 +7,13 @@ import {
   mockContent,
   mockCreatorName,
   mockImage,
+  mockVid,
   mockProjectName,
+  mockDataStatsBar,
+  mockImgStatsBar
 } from "../constants";
+
+import StatsBanner from "../components/StatsBannerComponent/StatsBanner";
 
 const mockProductPath = "/campaign/1";
 
@@ -17,7 +22,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1 className="flex justify-center text-5xl text-semibold mt-10">Home</h1>
+      <StatsBanner data={mockDataStatsBar} />
       <div className="flex justify-center gap-10 mt-10 mb-20">
         <ImgCard
           widthSize="large"
@@ -30,19 +35,20 @@ export default function HomePage() {
           daysLeft={daysLeft}
           avatarImage={mockAvatar}
           content={mockContent}
+          vid={mockVid}
           mainCard={true}
           onClick={() => navigate(mockProductPath)}
         />
-        <div className="grid grid-cols-2 gap-10 mb-20 ">
-          {Array.from({ length: loopCard }).map((_, index) => (
+        <div className="grid grid-cols-2 gap-4 mb-20 ">
+          {Array.from({ length: 4 }).map((_, index) => (
             <ImgCard
               key={index}
-              size="medium"
               imageSrc={mockImage}
               productName={mockProjectName}
               creatorName={mockCreatorName}
               daysLeft={daysLeft}
               content={mockContent}
+              vid={mockVid}
               avatarImage={mockAvatar}
               onClick={() => navigate(mockProductPath)}
             />
