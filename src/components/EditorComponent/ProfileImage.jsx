@@ -16,6 +16,7 @@ const ProfileImage = ({ firstName , lastName }) => {
   };
 
   return (
+    <div className="bg-gray-100 flex flex-col items-center h-[300px] justify-end shadow-md ">
     <div className="relative w-44 h-44">
       <input
         type="file"
@@ -36,7 +37,8 @@ const ProfileImage = ({ firstName , lastName }) => {
         
       </div>
       {/* show firstname & lastname */}
-     
+    </div>
+     <span className="text-3xl font-semibold my-2">{firstName} {lastName}</span>
     </div>
   );
 };
