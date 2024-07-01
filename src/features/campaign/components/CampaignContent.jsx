@@ -46,7 +46,7 @@ export default function CampaignContent({
   return (
     <div className="flex justify-center gap-8 items-center">
       <div className="w-[40rem] ">
-        {url ? <ReactPlayer
+        {newUrl ? <ReactPlayer
           className="w-full h-full object-cover aspect-[16/9] rounded-lg"
           url={newUrl}
           playing={true}

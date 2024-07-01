@@ -14,7 +14,7 @@ export default function TierCard({ el, isEdit, currentUser, onClick }) {
 
   const [updateProductValue, setUpdateProductValue] = useState(initUpdateProductValue)
 
-
+  const functionChangePicture = isEdit ? () => fileEl.current.click() : null
 
   const hoverAndActive = isEdit && currentUser === USER_ROLE.CREATOR ? "" : "hover:scale-[101%] active:scale-100"
   const imgHoverAndActive = !isEdit ? "" : "hover:rotate-6 hover:duration-500 active:scale-95 hover:opacity-30"
@@ -36,7 +36,7 @@ export default function TierCard({ el, isEdit, currentUser, onClick }) {
               className="rounded-lg border-2 text-2xl font-semibold"
               defaultValue={el.mockProductName}
               onChange={(e) => setUpdateProductValue({ ...updateProductValue, newProductName: e.target.value })}
-            /> : <h3 className="text-2xl font-semibold  overflow-hidden">{el.mockProductName}</h3>
+            /> : (<h3 className="text-2xl font-semibold  overflow-hidden">{el.mockProductName}</h3>)
           }
 
           <div className="flex flex-col gap-2">
@@ -45,7 +45,7 @@ export default function TierCard({ el, isEdit, currentUser, onClick }) {
               className=" min-h-32 p-2 rounded-lg border-2"
               defaultValue={el.mockDetail}
               onChange={(e) => setUpdateProductValue({ ...updateProductValue, newDetail: e.target.value })}
-            /> : <p className="">{el.mockDetail}`</p>}
+            /> : (<p className="">{el.mockDetail}`</p>)}
           </div>
 
           {isEdit && currentUser === USER_ROLE.CREATOR ? null : <>  <div className="max-w-2xl">
@@ -83,9 +83,10 @@ export default function TierCard({ el, isEdit, currentUser, onClick }) {
             }
           }}
         />
+
         <div
           className="flex items-center justify-center col-span-3 p-4 relative"
-          onClick={() => fileEl.current.click()}
+          onClick={functionChangePicture}
 
         >
           <img
@@ -98,6 +99,6 @@ export default function TierCard({ el, isEdit, currentUser, onClick }) {
 
         </div>
       </div>
-    </div>
+    </div >
   );
 }
