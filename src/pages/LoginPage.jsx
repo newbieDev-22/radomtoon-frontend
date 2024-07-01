@@ -6,14 +6,17 @@ import LoginImage from "../features/authentication/components/LoginImage";
 import Modal from "../components/Modal";
 import SupporterRegisterForm from "../tmp/SupporterRegisterForm";
 import { Slide, toast } from "react-toastify";
+import validateLogin from "../validators/validate-login";
 
 const loginData = { emailOrPhone: "", password: "" };
+const errorLoginData = { emailOrPhone: "", password: "" };
 
 export default function LoginPage() {
   const [openRgisterModal, setOpenRgisterModal] = useState(false);
   const navigate = useNavigate();
 
   const [input, setInput] = useState(loginData);
+  const [errorInput, setErrorInput] = useState(errorLoginData);
 
   const handleChangInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -21,7 +24,17 @@ export default function LoginPage() {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    const error = validateLogin(input);
+    if (error) {
+      return setErrorInput(error);
+    }
+    setErrorInput("");
+    toast.success("Login success");
+    console.log(error);
   };
+  // const handleSubmitForm = (e) => {
+  //   e.preventDefault();
+  // };
 
   return (
     <>
@@ -41,6 +54,7 @@ export default function LoginPage() {
                     placeholder="Email or phone number"
                     onChange={handleChangInput}
                     value={input.emailOrPhone}
+                    error={errorInput.emailOrPhone}
                   />
                   <Input
                     type="password"
@@ -48,6 +62,7 @@ export default function LoginPage() {
                     placeholder="Password"
                     onChange={handleChangInput}
                     value={input.password}
+                    error={errorInput.password}
                   />
                   <Button width={"full"}>LOGIN</Button>
                 </div>

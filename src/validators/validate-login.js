@@ -1,7 +1,9 @@
 import Joi from "joi";
 
 const loginSchema = Joi.object({
-  emailOrPhone: Joi.string().required(),
+  emailOrPhone: Joi.string()
+    .required()
+    .messages({ "string.empty": "Email or Phone number is required." }),
   password: Joi.string()
     .required()
     .pattern(/^[0-9a-zA-Z]{6,}$/)

@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import Button from "../components/Button";
 import { useState } from "react";
 
@@ -24,8 +25,14 @@ export default function ApproveMilestoneModalDetail({
     onOpenDecline();
   };
 
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    toast.success("Milesone has been accepted");
+    onClose();
+  };
+
   return (
-    <form onSubmit={(e) => e.preventDefault()} action="">
+    <form onSubmit={handleSubmitForm} action="">
       <p className="mb-2">Evidence Detail</p>
       <textarea
         className="mb-4 w-[500px] h-[175px] rounded-lg p-2 border-[1.5px] border-gray-200 outline-none"
@@ -67,12 +74,7 @@ export default function ApproveMilestoneModalDetail({
         >
           Decline
         </Button>
-        <Button
-          onClick={onClose}
-          width={"large"}
-          bg={"supporter-saturate"}
-          color={"white"}
-        >
+        <Button width={"large"} bg={"supporter-saturate"} color={"white"}>
           Accept
         </Button>
       </div>

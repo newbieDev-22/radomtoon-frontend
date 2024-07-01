@@ -1,9 +1,12 @@
 import Button from "../../../components/Button";
 import { useState } from "react";
+import validateEvidenceDetail from "../../../validators/validate-send-evidence-modal";
+import { toast } from "react-toastify";
 
 export default function EvidenceModalDetail() {
   const [input, setInput] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -21,12 +24,34 @@ export default function EvidenceModalDetail() {
     setSelectedImage(null);
   };
 
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    const validationErrors = validateEvidenceDetail({
+      evidenceDetail: input,
+      image: selectedImage,
+    });
+    if (validationErrors) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    toast.success("Evidence has been sent.");
+    setInput("");
+    setSelectedImage(null);
+    setErrors("");
+  };
+
   return (
-    <form onSubmit={(e) => e.preventDefault()} action="">
+    <form onSubmit={handleSubmitForm} action="">
       <p className="mb-2">Evidence Detail</p>
+      {errors.evidenceDetail && (
+        <p className="text-red-500">{errors.evidenceDetail}</p>
+      )}
       <textarea
-        className="mb-4 w-[500px] h-[175px] rounded-lg p-2 border-[1.5px] border-gray-200 outline-none"
-        name=""
+        className={`mb-5 w-[500px] h-[175px] rounded-lg p-2 border-[1.5px] border-gray-200 outline-none ${
+          errors.evidenceDetail ? "border-[1.5px] border-red-500" : ""
+        } `}
+        name="evidenceDetail"
         id=""
         placeholder="Please fill your evidence detail...."
         value={input}
@@ -42,7 +67,12 @@ export default function EvidenceModalDetail() {
         </div>
       ) : (
         <label htmlFor="file-upload" className="cursor-pointer ">
-          <span className="flex justify-center items-center w-[500px] h-[175px] block border-[1.5px] border-gray rounded-lg p-8">
+          {errors.image && <p className="text-red-500">{errors.image}</p>}
+          <span
+            className={`flex justify-center items-center w-[500px] h-[175px] block border-[1.5px] border-gray rounded-lg p-8 ${
+              errors.image ? "border-[1.5px] border-red-500" : null
+            }`}
+          >
             + Add your image Evidence
           </span>
 

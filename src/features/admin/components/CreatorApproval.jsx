@@ -3,6 +3,7 @@ import Button from "../../../components/Button";
 import TablePagination from "../../../components/TablePagination";
 import Modal from "../../../components/Modal";
 import CreatorRegisterForm from "../../../tmp/CreatorRegisterForm";
+import { toast } from "react-toastify";
 const creatorApprovalColumns = ["Creator name", "Register form", "Approval"];
 
 export default function CreatorApproval() {
@@ -14,8 +15,18 @@ export default function CreatorApproval() {
         See form...
       </Button>,
       <div className="flex gap-2">
-        <Button bg="green">Approve</Button>
-        <Button bg="yellow">Cancel</Button>
+        <Button
+          onClick={() => toast.success("Request has been approved")}
+          bg="green"
+        >
+          Approve
+        </Button>
+        <Button
+          onClick={() => toast.error("Request has been canceled")}
+          bg="yellow"
+        >
+          Cancel
+        </Button>
       </div>,
     ],
     [
@@ -24,8 +35,18 @@ export default function CreatorApproval() {
         See form...
       </Button>,
       <div className="flex gap-2">
-        <Button bg="green">Approve</Button>
-        <Button bg="yellow">Cancel</Button>
+        <Button
+          onClick={() => toast.success("Request has been approved")}
+          bg="green"
+        >
+          Approve
+        </Button>
+        <Button
+          onClick={() => toast.error("Request has been canceled")}
+          bg="yellow"
+        >
+          Cancel
+        </Button>
       </div>,
     ],
     [
@@ -34,8 +55,18 @@ export default function CreatorApproval() {
         See form...
       </Button>,
       <div className="flex gap-2">
-        <Button bg="green">Approve</Button>
-        <Button bg="yellow">Cancel</Button>
+        <Button
+          onClick={() => toast.success("Request has been approved")}
+          bg="green"
+        >
+          Approve
+        </Button>
+        <Button
+          onClick={() => toast.error("Request has been canceled")}
+          bg="yellow"
+        >
+          Cancel
+        </Button>
       </div>,
     ],
   ];

@@ -5,6 +5,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import validateRegister from "../validators/validate-register";
 import Dropdown from "../components/Dropdown";
+import { toast } from "react-toastify";
 
 const provinces = [
   "Amnat Charoen",
@@ -94,6 +95,7 @@ const CreatorRegisterData = {
   password: "",
   confirmPassword: "",
   address: "",
+  province: "",
 };
 
 const ErrorCreatorRegisterData = {
@@ -105,13 +107,18 @@ const ErrorCreatorRegisterData = {
   confirmPassword: "",
   policy: "",
   address: "",
+  province: "",
 };
 
 export default function CreatorRegister() {
   const navigate = useNavigate();
 
   const [selectedImage, setSelectedImage] = useState(null);
-  const [creatorData, setCreatorData] = useState(CreatorRegisterData);
+  // const [creatorData, setCreatorData] = useState(CreatorRegisterData);
+  const [creatorData, setCreatorData] = useState({
+    ...CreatorRegisterData,
+    province: "",
+  });
   const [errorCreatorData, setErrorCreatorData] = useState(
     ErrorCreatorRegisterData
   );
@@ -144,6 +151,8 @@ export default function CreatorRegister() {
 
   const handleProvinceChange = (value) => {
     setSelectedProvince(value);
+    setCreatorData((prevData) => ({ ...prevData, province: value }));
+    setErrorCreatorData((prevErrors) => ({ ...prevErrors, province: "" }));
   };
 
   const handleSubmit = async (e) => {
@@ -159,9 +168,9 @@ export default function CreatorRegister() {
         return setErrorCreatorData(error);
       }
       setErrorCreatorData("");
+      toast.success("Register successfully");
       // setErrorCreatorData({ ...creatorData });
       // await authApi.register(creatorData);
-      // alert(`Register successfully, please log in to continue`);
     } catch (error) {
       console.log(error);
       // if (error instanceof AxiosError) {
@@ -255,6 +264,7 @@ export default function CreatorRegister() {
                   data={provinces}
                   onChange={handleProvinceChange}
                   title="Choose your province..."
+                  error={errorCreatorData.province}
                 />
 
                 {selectedImage ? (

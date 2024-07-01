@@ -5,6 +5,7 @@ import TablePagination from "../../../components/TablePagination";
 import ApproveMilestoneModalDetail from "../../../tmp/ApproveMilestoneModal";
 import MilestoneDeclineReasonModal from "../../../tmp/MilestoneDeclineReasonModal";
 import ConfirmModal from "../../../tmp/ConfirmModal";
+import { toast } from "react-toastify";
 
 export default function MilestoneApproval() {
   const milestoneApprovalColumns = [
@@ -25,8 +26,18 @@ export default function MilestoneApproval() {
         See Evidence...
       </Button>,
       <div className="flex gap-2">
-        <Button bg="green">Approve</Button>
-        <Button bg="yellow">Cancel</Button>
+        <Button
+          onClick={() => toast.success("Request has been approved")}
+          bg="green"
+        >
+          Approve
+        </Button>
+        <Button
+          onClick={() => toast.error("Request has been canceled")}
+          bg="yellow"
+        >
+          Cancel
+        </Button>
       </div>,
     ],
     [
@@ -35,8 +46,18 @@ export default function MilestoneApproval() {
         See Evidence...
       </Button>,
       <div className="flex gap-2">
-        <Button bg="green">Approve</Button>
-        <Button bg="yellow">Cancel</Button>
+        <Button
+          onClick={() => toast.success("Request has been approved")}
+          bg="green"
+        >
+          Approve
+        </Button>
+        <Button
+          onClick={() => toast.error("Request has been canceled")}
+          bg="yellow"
+        >
+          Cancel
+        </Button>
       </div>,
     ],
     [
@@ -45,8 +66,18 @@ export default function MilestoneApproval() {
         See Evidence...
       </Button>,
       <div className="flex gap-2">
-        <Button bg="green">Approve</Button>
-        <Button bg="yellow">Cancel</Button>
+        <Button
+          onClick={() => toast.success("Request has been approved")}
+          bg="green"
+        >
+          Approve
+        </Button>
+        <Button
+          onClick={() => toast.error("Request has been canceled")}
+          bg="yellow"
+        >
+          Cancel
+        </Button>
       </div>,
     ],
   ];

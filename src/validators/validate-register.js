@@ -41,6 +41,9 @@ const registerSchema = Joi.object({
   address: Joi.string()
     .required()
     .messages({ "string.empty": "Address is required." }),
+  province: Joi.string()
+    .required()
+    .messages({ "string.empty": "Province is required." }),
 });
 
 const validateRegister = (input) => {
@@ -51,6 +54,7 @@ const validateRegister = (input) => {
       acc[el.path[0]] = el.message;
       return acc;
     }, {});
+    console.log(result);
     return result;
   }
 };

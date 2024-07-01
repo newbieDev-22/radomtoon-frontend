@@ -1,8 +1,11 @@
-export default function Dropdown({ data, onChange, title }) {
+export default function Dropdown({ data, onChange, title, error }) {
   return (
-    <div className="w-full mb-4">
+    <div className="flex flex-col w-full mb-4">
       <select
-        className="bg-gray-200 p-2 rounded-lg"
+        className={`bg-gray-200 p-2 rounded-lg w-64 ${
+          error ? "border-red-500 border-[1.5px]" : ""
+        }`}
+        // className="bg-gray-200 p-2 rounded-lg w-64 focus:outline-none"
         onChange={(e) => onChange(e.target.value)}
       >
         <option value="">{title}</option>
@@ -12,6 +15,7 @@ export default function Dropdown({ data, onChange, title }) {
           </option>
         ))}
       </select>
+      {error && <small className="text-red-500">{error}</small>}
     </div>
   );
 }

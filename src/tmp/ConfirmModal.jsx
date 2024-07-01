@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import Button from "../components/Button";
 
 export default function ConfirmModal({ subTitle }) {

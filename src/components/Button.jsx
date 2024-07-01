@@ -7,6 +7,7 @@ import {
 } from "../constants";
 
 export default function Button({
+  type,
   children,
   bg = "supporter-saturate",
   border,
@@ -32,6 +33,7 @@ export default function Button({
 
   return (
     <button
+      type={type}
       className={isNotActive ? notActiveClasses : commonClasses}
       onClick={onClick}
       disabled={disabled}
