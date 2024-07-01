@@ -1,17 +1,21 @@
 import dayjs from "dayjs";
-import ReactPlayer from "react-player/youtube";
 import { useState, useRef } from "react";
 import Button from "../components/Button";
 import { PictureIcon } from "../icons";
+import ReactPlayer from "react-player/youtube";
+import AddSummary from "../features/campaign/components/AddSummary";
 
 export default function CampaignSetup({ isCreator = true }) {
-  const fileEl = useRef();
+
   const [isEdit, setIsEdit] = useState(true);
   const [date, setDate] = useState(new Date());
   const [newImg, setNewImg] = useState("");
   const [newUrl, setNewUrl] = useState("");
   const [newGoal, setNewGoal] = useState(0);
   const [title, setTitle] = useState("Your product title");
+  const [summary, setSummary] = useState("Add your summary . .")
+
+  const fileEl = useRef();
 
   const handleClickSave = () => {
     setIsEdit(false);
@@ -28,6 +32,10 @@ export default function CampaignSetup({ isCreator = true }) {
   const handleClickSendToApproval = () => {
     alert("Click Send To Approval");
   };
+
+  const handleOnChangeSummary = (e) => {
+    setSummary(e.target.value)
+  }
 
   return (
     <div className="flex justify-between gap-8 items-center mt-10 w-[80rem] m-auto relative ">
@@ -51,7 +59,7 @@ export default function CampaignSetup({ isCreator = true }) {
               width="100%"
               height="100%"
               loop={true}
-              // controls={true}
+            // controls={true}
             />
           </div>
         ) : newImg ? (
@@ -105,6 +113,11 @@ export default function CampaignSetup({ isCreator = true }) {
           </>
         ) : null}
       </div>
+
+
+
+
+
       <div className="flex flex-col gap-4 w-[35vw] justify-center border-2 p-10 rounded-2xl">
         {!isEdit ? (
           <h1 className="text-4xl font-semibold ">{title}</h1>
@@ -142,7 +155,7 @@ export default function CampaignSetup({ isCreator = true }) {
           goal
         </div>
         <div>
-          <p className="text-gray-500 font-semibold ml-1 ">Last day for fundraising</p>
+
           {isEdit ? (
             <>
               <input
@@ -151,9 +164,17 @@ export default function CampaignSetup({ isCreator = true }) {
                 onChange={(e) => setDate(dayjs(e.target.value).toISOString())}
                 className="bg-gray-50 border w-56 border-gray-300 text-gray-900 text-ls rounded-lg block  p-2.5 "
               />
+
+              <AddSummary handleOnChangeSummary={handleOnChangeSummary} summary={summary} />
+
             </>
           ) : (
-            <h1 className=" font-semibold">{dayjs(date).format("dddd,MMMM D,YYYY")}</h1>
+            <div >
+              <p className="text-gray-500 font-semibold ">Last day for fundraising</p>
+              <h1 className=" font-semibold">{dayjs(date).format("dddd,MMMM D,YYYY")}</h1>
+              <p className="text-gray-500 font-semibold mt-2">Summary</p>
+              <h1 className=" font-semibold">{summary}</h1>
+            </div>
           )}
         </div>
         <div className="flex gap-4">

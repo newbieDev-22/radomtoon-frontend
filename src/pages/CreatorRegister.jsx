@@ -262,6 +262,7 @@ export default function CreatorRegister() {
                 ) : (
                   <div className="col-span-2">
                     <label htmlFor="file-upload" className="cursor-pointer text-center">
+
                       <span
                         className={`block border-[1.5px] border-gray rounded-lg p-8 my-4 bg-gray-200 hover:bg-gray-100 transition duration-300 ${
                           inputError?.password && "mt-1"
@@ -317,6 +318,7 @@ export default function CreatorRegister() {
                     Request Approve
                   </Button>
                 </div>
+
               </div>
             </form>
           </div>
