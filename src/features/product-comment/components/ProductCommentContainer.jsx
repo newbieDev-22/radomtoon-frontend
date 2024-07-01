@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "../../../components/Button";
 import ProductCommentCard from "./ProductCommentCard";
-import { useEffect } from "react";
 
 const data = [
   {
@@ -17,7 +16,8 @@ we have a wonderful Discord community, and a dedicated Bria's channel where you 
 -Help us spread the word and hit those stretch goals! Share, Comment, tell your friends... you know the drill!
 
 Happy creature collecting!`,
-    avatarImage: "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
+    avatarImage:
+      "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
     id: 59249,
   },
   {
@@ -33,56 +33,59 @@ we have a wonderful Discord community, and a dedicated Bria's channel where you 
 -Help us spread the word and hit those stretch goals! Share, Comment, tell your friends... you know the drill!
 
 Happy creature collecting!`,
-    avatarImage: "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
+    avatarImage:
+      "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
     id: 59859,
-
-  }
-]
+  },
+];
 
 const commentInit = {
   userName: "Grant Mielke",
   content: ``,
-  avatarImage: "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
-  id: ""
-}
-
+  avatarImage:
+    "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
+  id: "",
+};
 
 export default function ProductCommentContainer() {
-
-  const [allComment, setAllComment] = useState(data)
+  const [allComment, setAllComment] = useState(data);
   const [comment, setComment] = useState(commentInit);
-  const [isUserComment, setIsUserComment] = useState(true)
+  const [isUserComment, setIsUserComment] = useState(true);
 
   const handleClickSend = (e) => {
-    e.preventDefault()
-    setAllComment([...allComment, comment])
-    setComment(commentInit)
-  }
+    e.preventDefault();
+    setAllComment([...allComment, comment]);
+    setComment(commentInit);
+  };
 
   const handleClickDelete = (e) => {
-    const newAllComment = allComment.filter(el => el.id !== e.id)
-    setAllComment(newAllComment)
-  }
+    const newAllComment = allComment.filter((el) => el.id !== e.id);
+    setAllComment(newAllComment);
+  };
 
   const handleClickSaveEdit = (id, data) => {
-    const newAllComment = allComment
-    const commentIndex = allComment.findIndex(el => el.id === id)
-    newAllComment[commentIndex] = { ...newAllComment[commentIndex], content: data }
-    setAllComment(newAllComment)
-  }
+    const newAllComment = allComment;
+    const commentIndex = allComment.findIndex((el) => el.id === id);
+    newAllComment[commentIndex] = { ...newAllComment[commentIndex], content: data };
+    setAllComment(newAllComment);
+  };
 
   return (
     <div className=" bg-slate-200 m-auto px-20 py-10">
-
       <form
         className="flex gap-5 justify-between mb-10 items-center"
         onSubmit={handleClickSend}
-
       >
         <textarea
           className="w-full px-8 py-4 min-h-16 max-h-32 outline-none rounded-xl text-lg"
           value={comment.content}
-          onChange={(e) => setComment({ ...comment, content: e.target.value, id: Math.floor(Math.random() * 88888888888888) })}
+          onChange={(e) =>
+            setComment({
+              ...comment,
+              content: e.target.value,
+              id: Math.floor(Math.random() * 88888888888888),
+            })
+          }
           placeholder="Write your comment here..."
         ></textarea>
         <Button bg="green" height={11} width={40}>
@@ -90,13 +93,15 @@ export default function ProductCommentContainer() {
         </Button>
       </form>
 
-      {allComment.toReversed().map(el => <ProductCommentCard
-        key={el.id} el={el}
-        isUserComment={isUserComment}
-        handleClickDelete={handleClickDelete}
-        handleClickSaveEdit={handleClickSaveEdit}
-      />)}
-
+      {allComment.toReversed().map((el) => (
+        <ProductCommentCard
+          key={el.id}
+          el={el}
+          isUserComment={isUserComment}
+          handleClickDelete={handleClickDelete}
+          handleClickSaveEdit={handleClickSaveEdit}
+        />
+      ))}
     </div>
   );
 }
