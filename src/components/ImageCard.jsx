@@ -63,6 +63,7 @@ export default function ImgCard({
         <div className="h-2 bg-neutral-300">
           <div className={`h-2 ${progressBar[progressSize]} bg-supporter-saturate`}></div>
         </div>
+
         <div className="flex p-2">
             <div name="avatar" className={`${mainCard ? 'w-40' : 'w-96'}`}>
               <img
@@ -78,6 +79,7 @@ export default function ImgCard({
             <span className="text-gray-600 text-xs block">
               {creatorName}    
             </span>
+            
             <span className="mr-2 text-xs text-gray-500 font-medium">
               <div className="flex items-center gap-1 py-1">
                 <TimeIcon className={"w-4 h-4"} />

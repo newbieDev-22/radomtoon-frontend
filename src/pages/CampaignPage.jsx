@@ -12,6 +12,7 @@ const project = {
   id: 1,
   title: `Bria's Mythical Menagerie: Creature-Collecting & Plush`,
   img: "https://i.kickstarter.com/assets/044/665/040/4701c73df8b68838ac143981ab5aa350_original.jpg?anim=false&fit=cover&gravity=auto&height=576&origin=ugc&q=92&width=1024&sig=Icl7GqhaIdWe9RTm9tgYXQvkIktgy3wTpAhAI75efqQ%3D",
+  url: "https://youtu.be/TRGxbp-jlCs",
   amountGet: 157983,
   amountGoal: 10500,
   supporters: 1376,
@@ -33,7 +34,8 @@ export default function CampaignPage() {
         amountGoal={project.amountGoal}
         supporters={project.supporters}
         remainingDay={project.remainingDay}
-        isCreator={isCreator}
+        url={project.url}
+      // isCreator={isCreator}
       />
       <CampaignSection handleSubPageChange={handleSubPageChange} />
       {subPage === subPageMap.STORY && (

@@ -5,88 +5,10 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import validateRegister from "../validators/validate-register";
 import Dropdown from "../components/Dropdown";
+import { PROVINCE_MAP } from "../constants";
+import Policy from "../features/authentication/components/Policy";
 
-const provinces = [
-  "Amnat Charoen",
-  "Ang Thong",
-  "Bangkok",
-  "Bueng Kan",
-  "Buri Ram",
-  "Chachoengsao",
-  "Chai Nat",
-  "Chaiyaphum",
-  "Chanthaburi",
-  "Chiang Mai",
-  "Chiang Rai",
-  "Chonburi",
-  "Chumphon",
-  "Kalasin",
-  "Kamphaeng Phet",
-  "Kanchanaburi",
-  "Khon Kaen",
-  "Krabi",
-  "Lampang",
-  "Lamphun",
-  "Loei",
-  "Lopburi",
-  "Mae Hong Son",
-  "Maha Sarakham",
-  "Mukdahan",
-  "Nakhon Nayok",
-  "Nakhon Pathom",
-  "Nakhon Phanom",
-  "Nakhon Ratchasima",
-  "Nakhon Sawan",
-  "Nakhon Si Thammarat",
-  "Nan",
-  "Narathiwat",
-  "Nong Bua Lam Phu",
-  "Nong Khai",
-  "Nonthaburi",
-  "Pathum Thani",
-  "Pattani",
-  "Phangnga",
-  "Phatthalung",
-  "Phayao",
-  "Phetchabun",
-  "Phetchaburi",
-  "Phichit",
-  "Phitsanulok",
-  "Phra Nakhon Si Ayutthaya",
-  "Phrae",
-  "Phuket",
-  "Prachin Buri",
-  "Prachuap Khiri Khan",
-  "Ranong",
-  "Ratchaburi",
-  "Rayong",
-  "Roi Et",
-  "Sa Kaeo",
-  "Sakon Nakhon",
-  "Samut Prakan",
-  "Samut Sakhon",
-  "Samut Songkhram",
-  "Saraburi",
-  "Satun",
-  "Si Sa Ket",
-  "Sing Buri",
-  "Songkhla",
-  "Sukhothai",
-  "Suphan Buri",
-  "Surat Thani",
-  "Surin",
-  "Tak",
-  "Trang",
-  "Trat",
-  "Ubon Ratchathani",
-  "Udon Thani",
-  "Uthai Thani",
-  "Uttaradit",
-  "Yala",
-  "Yasothon",
-];
-
-const CreatorRegisterData = {
+const initialInput = {
   firstName: "",
   lastName: "",
   email: "",
@@ -94,9 +16,10 @@ const CreatorRegisterData = {
   password: "",
   confirmPassword: "",
   address: "",
+  provinceId: 1,
 };
 
-const ErrorCreatorRegisterData = {
+const initialInputError = {
   firstName: "",
   lastName: "",
   email: "",
@@ -105,20 +28,18 @@ const ErrorCreatorRegisterData = {
   confirmPassword: "",
   policy: "",
   address: "",
+  provinceId: "",
 };
 
 export default function CreatorRegister() {
   const navigate = useNavigate();
 
+  const [input, setInput] = useState(initialInput);
+  const [inputError, setInputError] = useState(initialInputError);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [creatorData, setCreatorData] = useState(CreatorRegisterData);
-  const [errorCreatorData, setErrorCreatorData] = useState(
-    ErrorCreatorRegisterData
-  );
   const [openPolicyModal, setOpenPolicyModal] = useState(false);
   const [isPolicyChecked, setIsPolicyChecked] = useState(false);
-  const [checkboxError, setCheckboxError] = useState("");
-  const [selectedProvince, setSelectedProvince] = useState("");
+  const [checkboxError, setCheckboxError] = useState(false);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -132,7 +53,7 @@ export default function CreatorRegister() {
   };
 
   const handleChangeInput = (e) => {
-    setCreatorData({ ...creatorData, [e.target.name]: e.target.value });
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   const handleCheckboxChange = (e) => {
@@ -143,7 +64,10 @@ export default function CreatorRegister() {
   };
 
   const handleProvinceChange = (value) => {
-    setSelectedProvince(value);
+    const provinceId = PROVINCE_MAP.filter((el) => el.name === value).map(
+      (el) => el.id
+    )[0];
+    setInput((prev) => ({ ...prev, provinceId }));
   };
 
   const handleSubmit = async (e) => {
@@ -153,24 +77,14 @@ export default function CreatorRegister() {
         setCheckboxError("You must agree to the policy to continue.");
         return;
       }
-      const error = validateRegister(creatorData);
-      console.log(errorCreatorData);
+      const error = validateRegister(input);
+      console.log(inputError);
       if (error) {
-        return setErrorCreatorData(error);
+        return setInputError(error);
       }
-      setErrorCreatorData("");
-      // setErrorCreatorData({ ...creatorData });
-      // await authApi.register(creatorData);
-      // alert(`Register successfully, please log in to continue`);
+      setInputError("");
     } catch (error) {
       console.log(error);
-      // if (error instanceof AxiosError) {
-      //   if (error.response.data.field === "emailOrMobile")
-      //     setinputError((prev) => ({
-      //       ...prev,
-      //       emailOrMobile: "email or mobile already in use",
-      //     }));
-      // }
     }
   };
 
@@ -179,12 +93,13 @@ export default function CreatorRegister() {
       <div className="min-w-screen min-h-screen">
         <div className="grid grid-cols-2 shadow-lg rounded-lg">
           <div className="px-20 bg-cyan-100 flex w-full h-full flex-col justify-center">
-            <h1 className="text-5xl mb-2 font-semibold text-radomtoon-dark">
-              Turn your imagination <br /> into reality.
+
+            <h1 className="text-4xl text-center mb-2 font-bold text-radomtoon-dark">
+              Bring your imagination to life
+
             </h1>
-            <h2 className="text-base mb-8 text-gray-600">
-              A hub for early adopters and visionaries to explore cutting-edge
-              technology ahead of the curve.
+            <h2 className="text-center  text-gray-600">
+              A hub for visionaries to explore cutting-edge technology early.
             </h2>
             <form onSubmit={handleSubmit} action="">
               <div className="flex flex-col ">
@@ -192,67 +107,67 @@ export default function CreatorRegister() {
                   <Input
                     type="text"
                     placeholder="First name"
-                    value={creatorData.firstName}
+                    value={input.firstName}
                     name="firstName"
                     onChange={handleChangeInput}
-                    error={errorCreatorData.firstName}
+                    error={inputError.firstName}
                   />
                   <Input
                     type="text"
                     placeholder="Last name"
-                    value={creatorData.lastName}
+                    value={input.lastName}
                     name="lastName"
                     onChange={handleChangeInput}
-                    error={errorCreatorData.lastName}
+                    error={inputError.lastName}
                   />
                 </div>
 
                 <Input
                   type="text"
                   placeholder="Email"
-                  value={creatorData.email}
+                  value={input.email}
                   name="email"
                   onChange={handleChangeInput}
-                  error={errorCreatorData.email}
+                  error={inputError.email}
                 />
                 <Input
                   type="text"
                   placeholder="Phone number"
-                  value={creatorData.phoneNumber}
+                  value={input.phoneNumber}
                   name="phoneNumber"
                   onChange={handleChangeInput}
-                  error={errorCreatorData.phoneNumber}
+                  error={inputError.phoneNumber}
                 />
 
                 <div className="flex gap-4">
                   <Input
                     type="password"
                     placeholder="Password"
-                    value={creatorData.password}
+                    value={input.password}
                     name="password"
                     onChange={handleChangeInput}
-                    error={errorCreatorData.password}
+                    error={inputError.password}
                   />
                   <Input
                     type="password"
                     placeholder="Confirm password"
-                    value={creatorData.confirmPassword}
+                    value={input.confirmPassword}
                     name="confirmPassword"
                     onChange={handleChangeInput}
-                    error={errorCreatorData.confirmPassword}
+                    error={inputError.confirmPassword}
                   />
                 </div>
                 <Input
                   type="text"
                   placeholder="Address"
-                  value={creatorData.address}
+                  value={input.address}
                   name="address"
                   onChange={handleChangeInput}
-                  error={errorCreatorData.address}
+                  error={inputError.address}
                 />
 
                 <Dropdown
-                  data={provinces}
+                  data={PROVINCE_MAP.map((el) => el.name)}
                   onChange={handleProvinceChange}
                   title="Choose your province..."
                 />
@@ -263,13 +178,10 @@ export default function CreatorRegister() {
                   </h1>
                 ) : (
                   <div>
-                    <label
-                      htmlFor="file-upload"
-                      className="cursor-pointer text-center"
-                    >
+                    <label htmlFor="file-upload" className="cursor-pointer text-center">
                       <span
                         className={`block mb-10 border-[1.5px] border-gray rounded-lg p-8 bg-gray-200 hover:bg-gray-100 transition duration-300 ${
-                          errorCreatorData?.password && "mt-1"
+                          inputError?.password && "mt-1"
                         }`}
                       >
                         + Add your identity card with your image
@@ -312,12 +224,7 @@ export default function CreatorRegister() {
                   <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
                 )}
 
-                <Button
-                  width={"full"}
-                  height="14"
-                  bg="creator-saturate"
-                  color="white"
-                >
+                <Button width={"full"} height="14" bg="creator-saturate" color="white">
                   Request Approve
                 </Button>
               </div>
@@ -341,89 +248,14 @@ export default function CreatorRegister() {
         </div>
       </div>
 
-      {openPolicyModal && (
-        <Modal onClose={() => setOpenPolicyModal(false)} title="Policy">
-          <ol>
-            <li>
-              <p className="font-bold text-lg">1. ขั้นตอนการสมัคร</p>
-              <p className="font-semibold">การสร้างบัญชี:</p>
-              <p>
-                ผู้สมัครต้องสร้างบัญชีผู้ใช้งานบนแพลตฟอร์มโดยใช้ข้อมูลที่ถูกต้องและเป็นปัจจุบัน
-                ยืนยันตัวตนผ่านอีเมลหรือเบอร์โทรศัพท์
-              </p>
-              <p className="font-semibold">การยืนยันตัวตน:</p>
-              <p>
-                ผู้สมัครต้องส่งสำเนาบัตรประชาชนหรือหนังสือเดินทางเพื่อยืนยันตัวตน
-                อาจมีการตรวจสอบเพิ่มเติม เช่น
-                การส่งเอกสารรับรองที่อยู่หรือเอกสารรับรองการทำงาน
-              </p>
-              <p className="font-semibold">การส่งรายละเอียดโครงการ:</p>
-              <p>
-                ผู้สมัครต้องกรอกรายละเอียดโครงการ เช่น ชื่อโครงการ วัตถุประสงค์
-                เป้าหมายทางการเงิน และระยะเวลาในการระดมทุน แนบแผนการดำเนินงาน
-                งบประมาณ และตารางเวลาการทำงาน
-                แนบวีดีโอหรือสื่อที่เกี่ยวข้องเพื่ออธิบายโครงการเพิ่มเติม
-              </p>
-            </li>
-            <br />
-            <li>
-              <p className="font-bold text-lg">2. ข้อกำหนดและเงื่อนไข</p>
-              <p className="font-semibold">ข้อกำหนดเกี่ยวกับโครงการ:</p>
-              <p>
-                โครงการต้องไม่ขัดต่อกฎหมายและศีลธรรม
-                โครงการต้องมีความโปร่งใสในการใช้เงินและมีเป้าหมายที่ชัดเจน
-                ห้ามนำเงินที่ระดมทุนได้ไปใช้ในทางที่ผิดหรือไม่เกี่ยวข้องกับโครงการ
-              </p>
-              <p className="font-semibold">ความโปร่งใส:</p>
-              <p>
-                ผู้สมัครต้องอัพเดตสถานะของโครงการอย่างสม่ำเสมอและแจ้งผู้สนับสนุนหากมีการเปลี่ยนแปลงใด
-                ๆ ในโครงการ รายงานการใช้เงินระดมทุนต้องมีความชัดเจนและโปร่งใส
-              </p>
-              <p className="font-semibold">การคืนเงิน:</p>
-              <p>
-                หากโครงการไม่สามารถดำเนินการได้ตามแผน
-                ผู้สมัครต้องมีนโยบายในการคืนเงินให้กับผู้สนับสนุนตามสัดส่วนที่เหมาะสม
-              </p>
-            </li>
-            <br />
-            <li>
-              <p className="font-bold text-lg">
-                3. การบริหารจัดการเงินที่ระดมทุนได้
-              </p>
-              <p className="font-semibold">บัญชีแยกต่างหาก:</p>
-              <p>
-                ผู้สมัครต้องมีบัญชีธนาคารแยกต่างหากสำหรับเงินที่ระดมทุนได้
-                เพื่อแยกจากเงินส่วนตัว
-              </p>
-              <p className="font-semibold">การใช้เงินตามแผน:</p>
-              <p>
-                ผู้สมัครต้องใช้เงินตามแผนการที่ได้ยื่นเสนอไว้เท่านั้น
-                หากมีความจำเป็นต้องเปลี่ยนแปลงการใช้เงิน
-                ผู้สมัครต้องแจ้งและได้รับความเห็นชอบจากผู้สนับสนุน
-              </p>
-              <p className="font-semibold">การตรวจสอบบัญชี:</p>
-              <p>
-                แพลตฟอร์มอาจขอให้ผู้สมัครส่งรายงานการใช้เงินเป็นระยะ
-                หรือขอทำการตรวจสอบบัญชีเพื่อความโปร่งใส
-              </p>
-            </li>
-            <br />
-            <li>
-              <p className="font-bold text-lg">4. สิทธิและหน้าที่ของผู้สมัคร</p>
-              <p className="font-semibold">สิทธิของผู้สมัคร:</p>
-              <p>
-                สิทธิในการระดมทุนตามเงื่อนไขที่กำหนด
-                สิทธิในการรับการสนับสนุนและคำแนะนำจากแพลตฟอร์ม
-              </p>
-              <p className="font-semibold">หน้าที่ของผู้สมัคร:</p>
-              <p>
-                หน้าที่ในการปฏิบัติตามเงื่อนไขและข้อกำหนดที่กำหนดไว้
-                หน้าที่ในการแจ้งข้อมูลที่เป็นความจริงและถูกต้อง
-              </p>
-            </li>
-          </ol>
-        </Modal>
-      )}
+      <Modal
+        open={openPolicyModal}
+        onClose={() => setOpenPolicyModal(false)}
+        title="Policy"
+        width={80}
+      >
+        <Policy />
+      </Modal>
     </>
   );
 }

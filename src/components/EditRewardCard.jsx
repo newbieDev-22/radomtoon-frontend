@@ -1,7 +1,4 @@
-import { useState } from "react";
-import Button from "./Button";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function EditRewardCard({
   tierNumber,
@@ -10,21 +7,21 @@ export default function EditRewardCard({
   dateEstimated,
   amountSupporters,
   productImage,
-  tierPrice
+  tierPrice,
 }) {
-  tierPrice = 20
+  tierPrice = 20;
 
-  const fileEl = useRef()
+  const fileEl = useRef();
   // { name, product_name, estimated_date, price }
   // const [note, setNote] = useState("");
-  const [detailState, setDetailState] = useState(detail)
-  const [price, setPrice] = useState(tierPrice)
-  const [updateProductName, setUpdateProductName] = useState(productName)
+  const [detailState, setDetailState] = useState(detail);
+  const [price, setPrice] = useState(tierPrice);
+  const [updateProductName, setUpdateProductName] = useState(productName);
   // const [isEditing, setIsEditing] = useState(false);
   // const [error, setError] = useState("");
   useEffect(() => {
-    console.log(detailState)
-  }, [detailState])
+    console.log(detailState);
+  }, [detailState]);
 
   // const handleBlur = () => {
   //   setIsEditing(false);
@@ -44,70 +41,67 @@ export default function EditRewardCard({
   //   }
   // };
 
-  return (<>
-    <div
-      role="button"
-      className="shadow-lg border-gray-300 border py-8 px-12 hover:border-gray-500 
+  return (
+    <>
+      <div
+        role="button"
+        className="shadow-lg border-gray-300 border py-8 px-12 hover:border-gray-500 
     transition-all  rounded-xl "
-    >
-      <div className="grid grid-cols-7">
-        <div className="flex flex-col gap-5 max-w-3xl col-span-4 justify-center">
-          <h2 className="font-bold text-3xl">{`Tier ${tierNumber}`}</h2>
-          {/* <h3 className="text-2xl font-semibold  overflow-hidden">{updateProductName}</h3> */}
-          <textarea
-            className="rounded-lg border-2 text-2xl font-semibold"
-          >
-            {updateProductName}
-          </textarea>
-          <div className="flex flex-col gap-2">
-            {/* <h3 className="text-xl font-semibold">Detail</h3> */}
-            <textarea
-              className=" min-h-32 p-2 rounded-lg border-2"
-              onChange={(e) => setDetailState(e.target.value)}
-            >
-              {detailState}
+      >
+        <div className="grid grid-cols-7">
+          <div className="flex flex-col gap-5 max-w-3xl col-span-4 justify-center">
+            <h2 className="font-bold text-3xl">{`Tier ${tierNumber}`}</h2>
+            {/* <h3 className="text-2xl font-semibold  overflow-hidden">{updateProductName}</h3> */}
+            <textarea className="rounded-lg border-2 text-2xl font-semibold">
+              {updateProductName}
             </textarea>
-          </div>
-          <div className="max-w-2xl">
-            <p className="text-xl font-semibold">Estimated Delivery</p>
-            <h3 className="">{dateEstimated}</h3>
-          </div>
+            <div className="flex flex-col gap-2">
+              {/* <h3 className="text-xl font-semibold">Detail</h3> */}
+              <textarea
+                className=" min-h-32 p-2 rounded-lg border-2"
+                onChange={(e) => setDetailState(e.target.value)}
+              >
+                {detailState}
+              </textarea>
+            </div>
+            <div className="max-w-2xl">
+              <p className="text-xl font-semibold">Estimated Delivery</p>
+              <h3 className="">{dateEstimated}</h3>
+            </div>
 
-          <div className="bg-gray-300 w-40 rounded py-2 text-center font-semibold">{`${amountSupporters} Supporters`}</div>
-          {/* <Button isNotActive={true}>Pledge 20 &#x0E3F;</Button> */}
-          <div className="flex gap-2 pl-2 justify-start items-center">
-            <p className="text-lg font-bold">Pledge</p>
-            <input
-              className="text-lg font-bold border-2 max-w-28 text-center rounded-lg"
-              type="number"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-            <p>&#x0E3F;</p>
+            <div className="bg-gray-300 w-40 rounded py-2 text-center font-semibold">{`${amountSupporters} Supporters`}</div>
+            {/* <Button isNotActive={true}>Pledge 20 &#x0E3F;</Button> */}
+            <div className="flex gap-2 pl-2 justify-start items-center">
+              <p className="text-lg font-bold">Pledge</p>
+              <input
+                className="text-lg font-bold border-2 max-w-28 text-center rounded-lg"
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+              <p>&#x0E3F;</p>
+            </div>
           </div>
-
-        </div>
-        <input
-          type="file"
-          ref={fileEl}
-          className="hidden"
-          onChange={e => {
-            if (e.target.files[0]) {
-              setFile(e.target.files[0])
-            }
-          }}
-        />
-        <div className="flex items-center justify-center col-span-3 p-4">
-          <img
-            src={productImage}
-            alt="product's picture"
-            className="aspect-auto w-full rounded-lg"
+          <input
+            type="file"
+            ref={fileEl}
+            className="hidden"
+            onChange={(e) => {
+              if (e.target.files[0]) {
+                setFile(e.target.files[0]);
+              }
+            }}
           />
+          <div className="flex items-center justify-center col-span-3 p-4">
+            <img
+              src={productImage}
+              alt="product's picture"
+              className="aspect-auto w-full rounded-lg"
+            />
+          </div>
         </div>
       </div>
-    </div>
-  </>
-
+    </>
   );
 }
 

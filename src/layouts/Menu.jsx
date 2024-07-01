@@ -4,7 +4,7 @@ import UserNavMenu from "./UserNavMenu";
 import { USER_ROLE } from "../constants";
 
 export default function Menu() {
-  const currentUser = USER_ROLE.CREATOR;
+  const currentUser = USER_ROLE.GUEST;
   const location = useLocation();
   const inLanding = location.pathname == "/landing";
 
