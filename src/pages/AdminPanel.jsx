@@ -1,8 +1,5 @@
 import { useState } from "react";
 import StatsBar from "../components/StatsBannerComponent/StatsBanner";
-import Modal from "../components/Modal";
-import CreatorRegisterForm from "../tmp/CreatorRegisterForm";
-import ApproveEvidenceModal from "../tmp/ApproveMilestoneModal";
 import Approval from "../features/admin/components/Approval";
 import Overview from "../features/admin/components/Overview";
 
@@ -14,7 +11,6 @@ const mockDataStatsBar = [
   { id: 3, amount: 84372090, title: "contributions" },
   { id: 4, amount: 2035636, title: "RADOMTOON's profits", currency: "THB" },
 ];
-
 
 const adminMenuStyleMap = {
   isNotSelected:

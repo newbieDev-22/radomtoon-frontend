@@ -7,7 +7,6 @@ import ApproveMilestoneModalDetail from "../../../tmp/ApproveMilestoneModal";
 export default function MilestoneApproval() {
   const milestoneApprovalColumns = ["Project name", "Milestone Evidence", "Approval"];
   const [openApproveMilestoneModal, setOpenApproveMilestoneModal] = useState(false);
-  const [openDeclineMilestoneModal, setOpenDeclineMilestoneModal] = useState(false);
 
   const milestoneApprovalData = [
     [
