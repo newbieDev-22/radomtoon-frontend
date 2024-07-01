@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const CreatorRegister = lazy(() => import("../pages/CreatorRegister"));
+const SupporterRegister = lazy(() => import("../pages/SupporterRegister"));
 const HomePage = lazy(() => import("../pages/HomePage"));
 const CampaignPage = lazy(() => import("../pages/CampaignPage"));
 const SelectTierPage = lazy(() => import("../pages/SelectTierPage"));
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
   { path: "*", element: <Navigate to="/" /> },
   { path: "/login", element: <LoginPage /> },
   { path: "/creator-register", element: <CreatorRegister /> },
-  { path: "/supporter-register", element: <CreatorRegister /> },
+  { path: "/supporter-register", element: <SupporterRegister /> },
 ]);
 
 export default function Router() {

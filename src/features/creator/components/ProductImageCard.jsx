@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { heightMap, imageMap, progressBar, widthMap } from "../../../constants";
+import { heightMap, progressBar, widthMap } from "../../../constants";
 import { DotMenu, TimeIcon } from "../../../icons";
 // import { DotMenu, TimeIcon } from "../icons";
 
@@ -12,7 +12,6 @@ export default function ProductImageCard({
   widthSize = "medium",
   heightSize = "large",
   progressSize = "medium",
-  imageSize = "medium",
   mainCard = false,
 }) {
 
@@ -33,7 +32,7 @@ export default function ProductImageCard({
         <div className="h-40 relative overflow-hidden">
           <img
             src={imageSrc}
-            className={`absolute rounded-md top-0 left-0 ${imageMap[imageSize]} object-cover`}
+            className={`absolute rounded-md top-0 left-0 object-cover`}
             alt="src"
           />
         </div>
