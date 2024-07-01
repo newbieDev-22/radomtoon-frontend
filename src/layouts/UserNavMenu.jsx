@@ -10,7 +10,7 @@ export default function UserNavMenu({ inLanding, currentUser }) {
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate("/login");
     toast.success("Logout successfully");
   };
 

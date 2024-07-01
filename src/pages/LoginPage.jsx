@@ -9,6 +9,7 @@ import { useStore } from "../store/useStore";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import validateLogin from "../validators/validate-login";
+import Spinner from "../components/Spinner";
 
 const initialInput = {
   email: "",
@@ -24,6 +25,7 @@ export default function LoginPage() {
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [input, setInput] = useState(initialInput);
   const [inputError, setInputError] = useState(initialInputError);
+  const [loading, setLoading] = useState(false);
   const login = useStore((state) => state.login);
   const navigate = useNavigate();
 
@@ -39,6 +41,8 @@ export default function LoginPage() {
         setInputError((prev) => ({ ...prev, ...error }));
       } else {
         setInputError((prev) => ({ ...prev, ...initialInputError }));
+        setLoading(true);
+
         const response = await login(input);
         if (response === true) {
           toast.success("Login successfully");
@@ -56,11 +60,14 @@ export default function LoginPage() {
             : "Internet Server Error";
         return toast.error(message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
+      {loading && <Spinner transparent />}
       <div className="min-w-screen min-h-screen">
         <div className="grid grid-cols-2 shadow-lg rounded-lg">
           <div className="h-screen w-full">
