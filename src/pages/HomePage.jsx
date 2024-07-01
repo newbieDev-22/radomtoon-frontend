@@ -12,7 +12,7 @@ export default function HomePage() {
   const navigate = useNavigate();
   const product = useStore((state) => state.product.data);
   const today = useStore((state) => state.product.today);
-  console.log(product);
+
   return (
     <div>
       <StatsBanner data={mockDataStatsBar} />

@@ -1,11 +1,14 @@
 import { AxiosError } from "axios";
 import authApi from "../../apis/auth";
-import { getAccessToken, setAccessToken } from "../../utils/localStorage";
-import { toast } from "react-toastify";
+import {
+  getAccessToken,
+  removeAccessToken,
+  setAccessToken,
+} from "../../utils/localStorage";
+import { USER_ROLE } from "../../constants";
 
 export const authSlice = (set) => ({
-  authUser: { user: null, loading: false, error: null },
-  creatorRegister: {},
+  authUser: { user: null, loading: false, error: null, role: USER_ROLE.GUEST },
   login: async (credentials) => {
     try {
       const loginResponse = await authApi.login(credentials);
@@ -16,16 +19,17 @@ export const authSlice = (set) => ({
           ...state.authUser,
           user: getAuthUserResponse.data.user,
           error: null,
+          role: getAuthUserResponse.data.user.role,
         },
       }));
-      toast.success("Login success");
+      return true;
     } catch (err) {
       if (err instanceof AxiosError) {
         const message =
           err.response.status === 400
             ? "Invalid email or password"
             : "Internet Server Error";
-        return toast.error(message);
+        return message;
       }
     }
   },
@@ -39,13 +43,20 @@ export const authSlice = (set) => ({
             ...state.authUser,
             user: getAuthUserResponse.data.user,
             error: null,
+            role: getAuthUserResponse.data.user.role,
           },
         }));
       }
     } catch (err) {
       console.log(err);
     } finally {
-      set((state) => ({ authUser: { ...state.authUser, loading: false, error: null } }));
+      set((state) => ({ authUser: { ...state.authUser, loading: false } }));
     }
+  },
+  logout: () => {
+    removeAccessToken();
+    set(() => ({
+      authUser: { user: null, loading: false, error: null, role: USER_ROLE.GUEST },
+    }));
   },
 });
