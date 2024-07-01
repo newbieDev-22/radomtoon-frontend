@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../../../components/Button";
 
 export default function CreateEditProfile() {
   const [note, setNote] = useState("");
@@ -31,12 +32,14 @@ export default function CreateEditProfile() {
               </div>
             )}
           </div>
-          <button
+          <Button
             type="submit"
-            className="border-solid-1 border-black bg-gray-400 h-5 p-4 flex justify-center items-center rounded-md hover:rounded-md focus:rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-300"
+            width='full'
+            bg="creator-normal"
+            
           >
             {isEditing ? "Save" : "Edit"} Profile
-          </button>
+            </Button>
         </div>
       </div>
     </form>
