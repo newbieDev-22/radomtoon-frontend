@@ -23,7 +23,11 @@ export default function ImgCard({
   const handleMouseLeave = () => setHover(false);
 
   return (
-    <div role="button" className={`relative items-center gap-4 ${mainCard && 'h-96'}`} onClick={onClick}>
+    <div
+      role="button"
+      className={`relative items-center gap-4 ${mainCard && "h-96"}`}
+      onClick={onClick}
+    >
       <div
         className={`group ${widthMap[widthSize]} ${
           heightMap[heightSize]
@@ -34,7 +38,9 @@ export default function ImgCard({
         }  `}
       >
         <div
-          className={`${ mainCard ? "h-80  rounded-t-md" : "h-40" } relative overflow-hidden`}
+          className={`${
+            mainCard ? "h-80  rounded-t-md" : "h-40"
+          } relative overflow-hidden`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -55,31 +61,38 @@ export default function ImgCard({
                 height="100%"
                 className="absolute top-0 left-0 rounded-t-lg"
               />
-              <div className="absolute w-full h-full cursor-pointer" onClick={onClick}
-              />
-          </div>
+              <div className="absolute w-full h-full cursor-pointer" onClick={onClick} />
+            </div>
           )}
         </div>
         <div className="h-2 bg-neutral-300">
           <div className={`h-2 ${progressBar[progressSize]} bg-supporter-saturate`}></div>
         </div>
 
-        <div className="flex p-2">
-            <div name="avatar" className={`${mainCard ? 'w-40' : 'w-96'}`}>
+        <div className="flex ml-4 gap-4 py-2">
+          <div className="py-1">
+            {avatarImage ? (
               <img
                 src={avatarImage}
-                className="w-72 mt-1 rounded-full object-cover border"
+                className={`${mainCard ? "w-28" : "w-56"} rounded-full shadow-lg`}
                 alt="Avatar"
               />
-            </div>
+            ) : (
+              <div className="w-10 h-10 font-semibold text-lg text-white rounded-full bg-gray-500 flex justify-center items-center">
+                {creatorName[0].toUpperCase()}
+              </div>
+            )}
+          </div>
           <div className="overflow-hidden px-2 group">
-            <p className={`font-medium truncate group-hover:underline ${mainCard && 'text-xl' }`}>
+            <p
+              className={`font-medium truncate group-hover:underline ${
+                mainCard && "text-xl"
+              }`}
+            >
               {productName}
             </p>
-            <span className="text-gray-600 text-xs block">
-              {creatorName}    
-            </span>
-            
+            <span className="text-gray-600 text-xs block">{creatorName}</span>
+
             <span className="mr-2 text-xs text-gray-500 font-medium">
               <div className="flex items-center gap-1 py-1">
                 <TimeIcon className={"w-4 h-4"} />
