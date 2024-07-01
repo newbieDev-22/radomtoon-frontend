@@ -67,7 +67,7 @@ export default function CampaignSetup({ isCreator = true }) {
             role="button"
             src={newImg}
             onClick={() => fileEl.current.click()}
-            className="w-full h-full object-cover aspect-[16/9] hover:rotate-6 hover:duration-500 active:scale-95 hover:opacity-30 rounded-lg"
+            className="w-full h-full object-contain aspect-[16/9] hover:duration-500 active:scale-95 hover:opacity-30 rounded-lg "
             alt=""
           />
         ) : (
@@ -78,7 +78,7 @@ export default function CampaignSetup({ isCreator = true }) {
               onClick={() => fileEl.current.click()}
             >
               <div
-                className={`aspect-auto w-full rounded-lg  max-w-96 hover:rotate-6 hover:duration-500 active:scale-95 hover:opacity-30`}
+                className={`aspect-auto w-full rounded-lg  max-w-96 hover:duration-500 active:scale-95 hover:opacity-30`}
               >
                 <PictureIcon />
               </div>

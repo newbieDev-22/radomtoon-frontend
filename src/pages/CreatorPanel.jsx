@@ -16,13 +16,13 @@ const creatorMenu = {
 };
 
 const firstName = "Swn"
-const lastName ="ssssss"
+const lastName = "ssssss"
 
 export default function CreatorPanel() {
   const [selectMenu, setSelectMenu] = useState(creatorMenu.About);
   return (
     <>
-    <ProfileImage firstName={firstName} lastName={lastName} />
+      <ProfileImage firstName={firstName} lastName={lastName} />
       <div>
         <div className="flex flex-row justify-center w-full border-b-1 shadow-md py-4">
           <button
