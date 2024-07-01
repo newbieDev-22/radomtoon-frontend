@@ -3,7 +3,7 @@ import authApi from "../../apis/auth";
 import { getAccessToken, setAccessToken } from "../../utils/localStorage";
 import { toast } from "react-toastify";
 
-export const createAuthSlice = (set) => ({
+export const authSlice = (set) => ({
   authUser: { user: null, loading: false, error: null },
   creatorRegister: {},
   login: async (credentials) => {
@@ -12,9 +12,11 @@ export const createAuthSlice = (set) => ({
       setAccessToken(loginResponse.data.accessToken);
       const getAuthUserResponse = await authApi.getAuthUser();
       set((state) => ({
-        ...state.authUser,
-        user: getAuthUserResponse.data.user,
-        error: null,
+        authUser: {
+          ...state.authUser,
+          user: getAuthUserResponse.data.user,
+          error: null,
+        },
       }));
       toast.success("Login success");
     } catch (err) {
@@ -33,15 +35,17 @@ export const createAuthSlice = (set) => ({
       if (getAccessToken()) {
         const getAuthUserResponse = await authApi.getAuthUser();
         set((state) => ({
-          ...state.authUser,
-          user: getAuthUserResponse.data.user,
-          error: null,
+          authUser: {
+            ...state.authUser,
+            user: getAuthUserResponse.data.user,
+            error: null,
+          },
         }));
       }
     } catch (err) {
       console.log(err);
     } finally {
-      set((state) => ({ ...state.authUser, loading: false, error: null }));
+      set((state) => ({ authUser: { ...state.authUser, loading: false, error: null } }));
     }
   },
 });

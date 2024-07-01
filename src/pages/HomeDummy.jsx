@@ -1,13 +1,5 @@
-import Modal from "../components/Modal";
-
-import ApproveEvidenceModal from "../tmp/ApproveMilestoneModal";
-import MilestoneDeclineReasonModal from "../tmp/MilestoneDeclineReasonModal";
+import CategoryContainer from "../features/home-filter/components/CategoryContainer";
 
 export default function HomeDummy() {
-  // return <CategoryContainer />;
-  return (
-    <Modal title="Milestone 1 : Decline Reason" width={47} open={true}>
-      <MilestoneDeclineReasonModal />
-    </Modal>
-  );
+  return <CategoryContainer />;
 }

@@ -1,6 +1,10 @@
 import { create } from "zustand";
-import { createAuthSlice } from "./slice/authSlice";
-
-export const useStore = create((...a) => ({
-  ...createAuthSlice(...a),
-}));
+import { authSlice } from "./slice/authSlice";
+import { productSlice } from "./slice/productSlice";
+import { devtools } from "zustand/middleware";
+export const useStore = create(
+  devtools((...a) => ({
+    ...authSlice(...a),
+    ...productSlice(...a),
+  }))
+);

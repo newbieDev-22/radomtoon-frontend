@@ -3,20 +3,15 @@ import DeliveryButton from "../components/DeliveryButton";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
 import EvidenceModal from "../features/admin/components/EvidenceModalDetail";
-import ConfirmModal from "../tmp/ConfirmModal";
 import TablePagination from "../components/TablePagination";
-import { useState, useEffect } from "react";
-import GridTable from "../components/GridTable";
+import { useState } from "react";
 
 const mockProductName = `Bria's Mythical Menagerie: Creature-Collecting & Plush`;
 const mockStatus = STATUS_PRODUCT.PENDING;
 
 export default function ProductManagePage() {
-  const [filterData, setFilterData] = useState([]);
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
-  const [openDeliveryModal, setOpenDeliveryModal] = useState(false);
   const columns = ["Project", "Tier", "Price", "Project Status", "Delivery Status"];
-
   const data = [
     ["Product A", 1, 100, <div className="text-red-600">Failed</div>, "-"],
     [
@@ -108,7 +103,6 @@ export default function ProductManagePage() {
   ];
 
   const milestoneDataColumns = ["Project", "Milestone status", "Evidence"];
-
   const milestoneData = [
     [
       "Product A",
@@ -126,47 +120,6 @@ export default function ProductManagePage() {
       <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>,
     ],
   ];
-
-  const itemInOnePage = 10;
-  const pageCount = Math.ceil(data.length / itemInOnePage);
-  const allFalseStateList = [];
-
-  for (let i = 0; i < pageCount; i++) {
-    const allFalseState = {};
-    allFalseState["page"] = i;
-    allFalseState["selected"] = false;
-    allFalseStateList.push(allFalseState);
-  }
-
-  const dummyAllFalseStateList = [...allFalseStateList];
-  dummyAllFalseStateList[0].selected = true;
-
-  const [selectPage, setSelectPage] = useState(dummyAllFalseStateList);
-
-  const handleSelectPage = (page) => {
-    const newState = [];
-    for (let i = 0; i < pageCount; i++) {
-      const allFalseState = {};
-      allFalseState["page"] = i;
-      if (page === i) {
-        allFalseState["selected"] = true;
-      } else {
-        allFalseState["selected"] = false;
-      }
-      newState.push(allFalseState);
-    }
-    setSelectPage(newState);
-  };
-
-  useEffect(() => {
-    const selectPageNum = selectPage.filter((el) => el.selected === true)[0];
-    setFilterData(
-      data.slice(
-        selectPageNum.page * itemInOnePage,
-        selectPageNum.page * itemInOnePage + 10
-      )
-    );
-  }, [selectPage]);
 
   return (
     <div className="m-auto flex flex-col justify-center py-4">

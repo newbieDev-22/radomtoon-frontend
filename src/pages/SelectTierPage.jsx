@@ -1,8 +1,7 @@
-import { useState } from "react";
 import TierContainer from "../features/tier/components/TierContainer";
 
 export default function SelectTierPage() {
-  const [productName, setProductName] = useState("Product name");
+  const productName = "Product name";
 
   return (
     <div>
