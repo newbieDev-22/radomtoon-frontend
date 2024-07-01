@@ -93,10 +93,8 @@ export default function CreatorRegister() {
       <div className="min-w-screen min-h-screen">
         <div className="grid grid-cols-2 shadow-lg rounded-lg">
           <div className="px-20 bg-cyan-100 flex w-full h-full flex-col justify-center">
-
             <h1 className="text-4xl text-center mb-2 font-bold text-radomtoon-dark">
               Bring your imagination to life
-
             </h1>
             <h2 className="text-center  text-gray-600">
               A hub for visionaries to explore cutting-edge technology early.
@@ -173,12 +171,17 @@ export default function CreatorRegister() {
                 />
 
                 {selectedImage ? (
-                  <h1 className=" block mb-10 border-[1.5px] border-green-500 rounded-lg p-8 text-center text-green-500 bg-white">
-                    Picture upload successful
-                  </h1>
+                  <img
+                    src={selectedImage}
+                    alt="Selected"
+                    className="w-full h-[175px] object-cover rounded-lg"
+                  />
                 ) : (
                   <div>
-                    <label htmlFor="file-upload" className="cursor-pointer text-center">
+                    <label
+                      htmlFor="file-upload"
+                      className="cursor-pointer text-center"
+                    >
                       <span
                         className={`block mb-10 border-[1.5px] border-gray rounded-lg p-8 bg-gray-200 hover:bg-gray-100 transition duration-300 ${
                           inputError?.password && "mt-1"
@@ -224,7 +227,12 @@ export default function CreatorRegister() {
                   <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
                 )}
 
-                <Button width={"full"} height="14" bg="creator-saturate" color="white">
+                <Button
+                  width={"full"}
+                  height="14"
+                  bg="creator-saturate"
+                  color="white"
+                >
                   Request Approve
                 </Button>
               </div>
