@@ -177,21 +177,10 @@ export default function CampaignSetup({ isCreator = true }) {
             </div>
           )}
         </div>
-        <div className="flex gap-4">
-          <Button bg="green" onClick={handleClickSave}>
+        <div className="flex gap-4 justify-center ">
+          <Button bg="green" onClick={handleClickSave} width="full">
             Save
           </Button>
-          <Button bg="yellow" onClick={handleClickEdit}>
-            Edit
-          </Button>
-          <Button bg="red" onClick={handleClickDelete}>
-            Delete
-          </Button>
-          <div className=" text-sm">
-            <Button bg="creator-saturate" onClick={handleClickSendToApproval}>
-              Send to Approval
-            </Button>
-          </div>
         </div>
       </div>
     </div>
