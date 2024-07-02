@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
 import Input from "../components/Input";
@@ -7,12 +7,16 @@ import validateRegister from "../validators/validate-register";
 import Dropdown from "../components/Dropdown";
 import { PROVINCE_MAP } from "../constants";
 import Policy from "../features/authentication/components/Policy";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import authApi from "../apis/auth";
+import Spinner from "../components/Spinner";
 
 const initialInput = {
   firstName: "",
   lastName: "",
   email: "",
-  phoneNumber: "",
+  phone: "",
   password: "",
   confirmPassword: "",
   address: "",
@@ -23,23 +27,24 @@ const initialInputError = {
   firstName: "",
   lastName: "",
   email: "",
-  phoneNumber: "",
+  phone: "",
   password: "",
   confirmPassword: "",
-  policy: "",
   address: "",
   provinceId: "",
 };
 
 export default function CreatorRegister() {
   const navigate = useNavigate();
-
+  const fileEl = useRef();
+  const [file, setFile] = useState(null);
   const [input, setInput] = useState(initialInput);
   const [inputError, setInputError] = useState(initialInputError);
   const [selectedImage, setSelectedImage] = useState(null);
   const [openPolicyModal, setOpenPolicyModal] = useState(false);
   const [isPolicyChecked, setIsPolicyChecked] = useState(false);
   const [checkboxError, setCheckboxError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -71,25 +76,63 @@ export default function CreatorRegister() {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formErrors = validateRegister(input);
+    if (formErrors) {
+      setInputError({ ...initialInputError, ...formErrors });
+      return;
+    }
+
+    setInputError(initialInputError);
+
+    if (!isPolicyChecked) {
+      toast.error("You must agree to the policy to continue");
+      return;
+    }
+
+    if (!file) {
+      toast.error("Please select an image");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("identityImage", file);
+
+    for (const [key, value] of Object.entries(input)) {
+      if (value) {
+        formData.append(key, value);
+      }
+    }
+
     try {
-      e.preventDefault();
-      if (!isPolicyChecked) {
-        setCheckboxError("You must agree to the policy to continue.");
-        return;
-      }
-      const error = validateRegister(input);
-      console.log(inputError);
-      if (error) {
-        return setInputError(error);
-      }
-      setInputError("");
+      setIsLoading(true);
+      await authApi.creatorRegister(formData);
+      toast.success("Creator registered successfully", {
+        position: "bottom-right",
+        autoClose: 2000,
+      });
+      navigate("/login");
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        const errorField = error.response.data.field;
+        const errorMessage = {
+          email: "Email is already in use",
+          phone: "Phone number is already in use",
+        }[errorField];
+        if (errorMessage) {
+          setInputError((prev) => ({ ...prev, [errorField]: errorMessage }));
+        }
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
+      {isLoading && <Spinner transparent />}
+
       <div className="min-w-screen min-h-screen">
         <div className="grid grid-cols-2 shadow-lg rounded-lg">
           <div className="px-20 bg-cyan-100 flex w-full h-full flex-col justify-center">
@@ -100,8 +143,11 @@ export default function CreatorRegister() {
               A hub for visionaries to explore cutting-edge technology early.
             </h2>
             <form onSubmit={handleSubmit} action="">
-              <div className="flex flex-col ">
-                <div className="flex gap-4">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                <label className="form-control w-full">
+                  <div className="label">
+                    <span className="label-text">First name</span>
+                  </div>
                   <Input
                     type="text"
                     placeholder="First name"
@@ -110,6 +156,12 @@ export default function CreatorRegister() {
                     onChange={handleChangeInput}
                     error={inputError.firstName}
                   />
+                </label>
+
+                <label className="form-control w-full">
+                  <div className="label">
+                    <span className="label-text">Last name</span>
+                  </div>
                   <Input
                     type="text"
                     placeholder="Last name"
@@ -118,26 +170,65 @@ export default function CreatorRegister() {
                     onChange={handleChangeInput}
                     error={inputError.lastName}
                   />
-                </div>
+                </label>
 
-                <Input
-                  type="text"
-                  placeholder="Email"
-                  value={input.email}
-                  name="email"
-                  onChange={handleChangeInput}
-                  error={inputError.email}
-                />
-                <Input
-                  type="text"
-                  placeholder="Phone number"
-                  value={input.phoneNumber}
-                  name="phoneNumber"
-                  onChange={handleChangeInput}
-                  error={inputError.phoneNumber}
-                />
+                <label className="form-control w-full">
+                  <div className="label">
+                    <span className="label-text">Email</span>
+                  </div>
+                  <Input
+                    type="text"
+                    placeholder="Email"
+                    value={input.email}
+                    name="email"
+                    onChange={handleChangeInput}
+                    error={inputError.email}
+                  />
+                </label>
 
-                <div className="flex gap-4">
+                <label className="form-control w-full">
+                  <div className="label">
+                    <span className="label-text">Phone number</span>
+                  </div>
+                  <Input
+                    type="text"
+                    placeholder="Phone number"
+                    value={input.phone}
+                    name="phone"
+                    onChange={handleChangeInput}
+                    error={inputError.phone}
+                  />
+                </label>
+
+                <label className="form-control w-full col-span-2">
+                  <div className="label">
+                    <span className="label-text">Address</span>
+                  </div>
+                  <Input
+                    type="text"
+                    placeholder="Address"
+                    value={input.address}
+                    name="address"
+                    onChange={handleChangeInput}
+                    error={inputError.address}
+                  />
+                </label>
+
+                <label className="form-control w-full col-span-2">
+                  <div className="label">
+                    <span className="label-text">Province</span>
+                  </div>
+                  <Dropdown
+                    data={PROVINCE_MAP.map((el) => el.name)}
+                    onChange={handleProvinceChange}
+                    title="Choose your province..."
+                  />
+                </label>
+
+                <label className="form-control w-full">
+                  <div className="label">
+                    <span className="label-text">Password</span>
+                  </div>
                   <Input
                     type="password"
                     placeholder="Password"
@@ -146,6 +237,12 @@ export default function CreatorRegister() {
                     onChange={handleChangeInput}
                     error={inputError.password}
                   />
+                </label>
+
+                <label className="form-control w-full">
+                  <div className="label">
+                    <span className="label-text">Confirm password</span>
+                  </div>
                   <Input
                     type="password"
                     placeholder="Confirm password"
@@ -154,36 +251,20 @@ export default function CreatorRegister() {
                     onChange={handleChangeInput}
                     error={inputError.confirmPassword}
                   />
-                </div>
-                <Input
-                  type="text"
-                  placeholder="Address"
-                  value={input.address}
-                  name="address"
-                  onChange={handleChangeInput}
-                  error={inputError.address}
-                />
-
-                <Dropdown
-                  data={PROVINCE_MAP.map((el) => el.name)}
-                  onChange={handleProvinceChange}
-                  title="Choose your province..."
-                />
+                </label>
 
                 {selectedImage ? (
                   <img
                     src={selectedImage}
                     alt="Selected"
-                    className="w-full h-[175px] object-cover rounded-lg"
+                    className="object-cover rounded-lg col-span-2 aspect-[16/9] my-4"
                   />
                 ) : (
-                  <div>
-                    <label
-                      htmlFor="file-upload"
-                      className="cursor-pointer text-center"
-                    >
+                  <div className="col-span-2">
+                    <label htmlFor="file-upload" className="cursor-pointer text-center">
+
                       <span
-                        className={`block mb-10 border-[1.5px] border-gray rounded-lg p-8 bg-gray-200 hover:bg-gray-100 transition duration-300 ${
+                        className={`block border-[1.5px] border-gray rounded-lg p-8 my-4 bg-gray-200 hover:bg-gray-100 transition duration-300 ${
                           inputError?.password && "mt-1"
                         }`}
                       >
@@ -191,17 +272,23 @@ export default function CreatorRegister() {
                       </span>
 
                       <input
-                        hidden="invisible"
+                        hidden
                         type="file"
                         id="file-upload"
                         name="file-upload"
-                        onChange={handleImageChange}
+                        ref={fileEl}
+                        onChange={(e) => {
+                          handleImageChange(e);
+                          if (e.target.files[0]) {
+                            setFile(e.target.files[0]);
+                          }
+                        }}
                       />
                     </label>
                   </div>
                 )}
 
-                <div className="flex items-center mb-4">
+                <div className="flex items-center col-span-2">
                   <input
                     id="policy-checkbox"
                     type="checkbox"
@@ -215,26 +302,23 @@ export default function CreatorRegister() {
                     className="text-gray-600 cursor-pointer text-sm"
                   >
                     I have read, understand and accept the{" "}
-                    <a
+                    <button
                       onClick={() => setOpenPolicyModal(true)}
                       className="text-blue-500 hover:underline"
                     >
                       terms and conditions
-                    </a>
+                    </button>
                   </label>
                 </div>
                 {checkboxError && (
                   <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
                 )}
+                <div className="col-span-2 pt-2">
+                  <Button width={"full"} height="14" bg="creator-saturate" color="white">
+                    Request Approve
+                  </Button>
+                </div>
 
-                <Button
-                  width={"full"}
-                  height="14"
-                  bg="creator-saturate"
-                  color="white"
-                >
-                  Request Approve
-                </Button>
               </div>
             </form>
           </div>

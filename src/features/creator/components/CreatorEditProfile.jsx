@@ -13,8 +13,8 @@ export default function CreateEditProfile() {
   return (
 
     <form onSubmit={onSubmit}>
-      <div className="flex justify-center">
-        <div className="flex justify-center flex-row gap-10 mt-6 w-2/4">
+      <div className="flex justify-center ">
+        <div className="flex justify-center flex-row gap-10 mt-6 w-2/4 mb-10 ">
           <span>Biography</span>
           <div>
             {isEditing ? (
@@ -34,11 +34,11 @@ export default function CreateEditProfile() {
           </div>
           <Button
             type="submit"
-            width='full'
+            width='40'
             bg="creator-normal"
             
           >
-            {isEditing ? "Save" : "Edit"} Profile
+            {isEditing ? "Save" : "Edit"}
             </Button>
         </div>
       </div>

@@ -12,7 +12,6 @@ export const widthMap = {
   large: "w-96",
 };
 
-
 export const heightMap = {
   small: "h-48",
   medium: "h-60",
@@ -110,7 +109,7 @@ export const subPageMap = {
   FORUM: "FORUM",
 };
 
-const geoDataMap = {
+export const geoDataMap = {
   AMNATCHAROEN: "AMNATCHAROEN",
   ANGTHONG: "ANGTHONG",
   BANGKOK: "BANGKOK",
@@ -202,13 +201,13 @@ export const mockContent = `  Lorem Ipsum is simply dummy text of the printing a
                 1500s, when an unknown printer took a galley of type and scrambled it to
                 make a type specimen book.`;
 
- export const mockImgStatsBar =
+export const mockImgStatsBar =
   "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/bmt7dsxiwpfjlnxpcazs";
- export const mockDataStatsBar = [
+export const mockDataStatsBar = [
   { id: 1, amount: 194504, title: "projects supported" },
   { id: 2, amount: 1062035636, title: "towards ideas", currency: "THB" },
   { id: 3, amount: 84372090, title: "contributions" },
-  ];
+];
 
 export const PROVINCE_LIST = [
   "Amnat Charoen",
