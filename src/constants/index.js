@@ -448,3 +448,26 @@ export const PROVINCE_MAP = [
   { id: 76, name: "Yala" },
   { id: 77, name: "Yasothon" },
 ];
+
+export const IS_CREATOR_ACCEPT_STATUS = {
+  PENDING: 1,
+  ACCEPTED: 2,
+};
+
+export const APPROVAL_STATUS_ID = {
+  PENDING: 1,
+  FAILED: 2,
+  SUCCESS: 3,
+};
+
+export const PRODUCT_STATUS = {
+  PENDING: "PENDING",
+  FAILED: "FAILED",
+  SUCCESS: "SUCCESS",
+};
+
+export const PRODUCT_STATUS_ID = {
+  PENDING: 1,
+  FAILED: 2,
+  SUCCESS: 3,
+};
