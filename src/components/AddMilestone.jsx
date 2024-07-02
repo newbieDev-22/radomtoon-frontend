@@ -4,14 +4,14 @@ import Button from "./Button";
 export default function AddMilestone({ name }) {
   const [note, setNote] = useState("");
   const [savedNote, setSavedNote] = useState("");
-  const [isEditing, setIsEditing] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //text
-    setSavedNote(note);
-    // not edit
-    setIsEditing(false);
+    if (isEditing) {
+      setSavedNote(note);
+    }
+    setIsEditing(!isEditing);
   };
 
   return (
@@ -41,4 +41,3 @@ export default function AddMilestone({ name }) {
     </div>
   );
 }
-
