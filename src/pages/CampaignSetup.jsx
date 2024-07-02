@@ -50,53 +50,58 @@ export default function CampaignSetup({ isCreator = true }) {
   }
 
   return (
-    <div
-      className="flex justify-between gap-8 items-center 
-   w-[80rem] m-auto relative text-gray-500 pt-24"
-    >
+    <>
+      <h1 className="text-5xl font-bold m-auto text-center mt-10" >CREATE YOUR PROJECT</h1>
+      <div
+        className="flex justify-between gap-8 items-center 
+   w-[80rem] m-auto relative text-gray-500 pt-16"
+      >
 
-      <AddPictureProduct
-        isEdit={isEdit}
-        fileEl={fileEl}
-        newUrl={newUrl}
-        newImg={newImg}
-        handleChangeImg={handleChangeImg}
-      />
 
-      <div className="flex flex-col gap-4 w-[35vw] justify-center border-2 p-10 rounded-2xl">
-
-        <AddProductName
-          title={title}
+        <AddPictureProduct
           isEdit={isEdit}
-          handleChangeTitle={handleChangeTitle}
-        />
-
-        <AddGoalProject
-          isEdit={isEdit}
-          newGoal={newGoal}
-          handleChangeGoal={handleChangeGoal}
-        />
-
-        <AddDeadlineAndSummary
-          handleOnChangeSummary={handleOnChangeSummary}
-          summary={summary}
-          isEdit={isEdit}
-          date={date}
-          handleChangeDate={handleChangeDate}
-        />
-
-        <AddProductVdoLink
-          handleOnChangeVdoLink={handleOnChangeVdoLink}
-          isCreator={isCreator}
-          isEdit={isEdit}
+          fileEl={fileEl}
           newUrl={newUrl}
+          newImg={newImg}
+          handleChangeImg={handleChangeImg}
         />
 
-        <Button bg="green" width="full" onClick={handleClickSave}>
-          Save
-        </Button>
+        <div className="flex flex-col gap-4 w-[35vw] justify-center border-2 p-10 rounded-2xl">
+
+          <AddProductName
+            title={title}
+            isEdit={isEdit}
+            handleChangeTitle={handleChangeTitle}
+          />
+
+          <AddGoalProject
+            isEdit={isEdit}
+            newGoal={newGoal}
+            handleChangeGoal={handleChangeGoal}
+          />
+
+          <AddDeadlineAndSummary
+            handleOnChangeSummary={handleOnChangeSummary}
+            summary={summary}
+            isEdit={isEdit}
+            date={date}
+            handleChangeDate={handleChangeDate}
+          />
+
+          <AddProductVdoLink
+            handleOnChangeVdoLink={handleOnChangeVdoLink}
+            isCreator={isCreator}
+            isEdit={isEdit}
+            newUrl={newUrl}
+          />
+
+          <Button bg="green" width="full" onClick={handleClickSave}>
+            Save
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
+
   );
 }
 
