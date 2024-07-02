@@ -24,9 +24,7 @@ const ErrorCreatorRegisterData = {
 export default function CreatorRegisterForm() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [creatorData, setCreatorData] = useState(CreatorRegisterData);
-  const [errorCreatorData, setErrorCreatorData] = useState(
-    ErrorCreatorRegisterData
-  );
+  const [errorCreatorData, setErrorCreatorData] = useState(ErrorCreatorRegisterData);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];

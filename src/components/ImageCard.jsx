@@ -2,6 +2,9 @@ import { heightMap, progressBar, widthMap } from "../constants";
 import ReactPlayer from "react-player";
 import { useState } from "react";
 import { TimeIcon } from "../icons";
+import { useNavigate } from "react-router-dom";
+
+const mockProductPath = "/campaign/1";
 
 export default function ImgCard({
   imageSrc,
@@ -18,9 +21,9 @@ export default function ImgCard({
   onClick,
 }) {
   const [hover, setHover] = useState(false);
-
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
+  const navigate = useNavigate();
 
   return (
     <div

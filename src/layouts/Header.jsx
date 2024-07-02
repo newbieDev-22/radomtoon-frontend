@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`2xl:px-48 mt-5 md:mt-0 items-start md:items-center grid z-20 h-[14vh] bg-transparent
+        className={`2xl:px-48 md:mt-0 items-start md:items-center grid z-20 h-[12vh] bg-transparent
           grid-cols-1 md:flex grid-rows-2 md:justify-between  ${
             inLanding && "absolute w-full"
           } `}
@@ -26,7 +26,7 @@ export default function Header() {
           </div>
         </div>
         {location.pathname !== LANDING_PATH ? (
-          <div className="flex justify-center px-6 md:px-0 w-full md:w-[30vw]">
+          <div className="flex justify-center px-6 md:px-0 w-full md:w-[32vw]">
             <SearchBar />
           </div>
         ) : (

@@ -6,6 +6,7 @@ import {
   setAccessToken,
 } from "../../utils/localStorage";
 import { USER_ROLE } from "../../constants";
+import creatorApi from "../../apis/creator";
 
 export const authSlice = (set, get) => ({
   authUser: { user: null, loading: false, error: null, role: USER_ROLE.GUEST },
@@ -84,7 +85,6 @@ export const authSlice = (set, get) => ({
 
       if (role === USER_ROLE.CREATOR) {
         getAuthUserResponse = await authApi.creatorProfileImage(formData);
-        console.log("getAuthUserResponse.data.user", getAuthUserResponse.data.user);
       } else if (role === USER_ROLE.SUPPORTER) {
         getAuthUserResponse = await authApi.supporterProfileImage(formData);
       } else {
@@ -102,6 +102,27 @@ export const authSlice = (set, get) => ({
       console.error(err);
       set((state) => ({
         authUser: { ...state.authUser, error: "Failed to update profile image" },
+      }));
+      return false;
+    }
+  },
+
+  updateInfo: async (data) => {
+    try {
+      const getResponse = await creatorApi.updateInfoCreator(data);
+      console.log("getResponse.data.user", getResponse.data.creatorInfo);
+
+      set((state) => ({
+        authUser: {
+          ...state.authUser,
+          user: getResponse.data.creatorInfo,
+        },
+      }));
+      return true;
+    } catch (err) {
+      console.error(err);
+      set((state) => ({
+        authUser: { ...state.authUser, error: "Failed to update info" },
       }));
       return false;
     }
