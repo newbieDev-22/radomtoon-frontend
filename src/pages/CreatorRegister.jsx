@@ -69,48 +69,54 @@ export default function CreatorRegister() {
     try {
       setIsLoading(true);
       e.preventDefault();
+
       if (!isPolicyChecked) {
         setCheckboxError("You must agree to the policy to continue.");
         return;
       }
-      const error = validateRegister(input);
-      if (error) {
-        setInputError((prev) => ({ ...prev, ...error }));
-      } else {
-        setInputError((prev) => ({ ...prev, ...initialInputError }));
 
-        if (file) {
-          const formData = new FormData();
-          formData.append("identityImage", file);
-          for (const [key, value] of Object.entries(input)) {
-            if (value) {
-              formData.append(key, value);
-            }
-          }
-          await authApi.creatorRegister(formData);
-          toast.success("Registered successfully, wait admin approval", {
-            position: "bottom-right",
-            autoClose: 2000,
-          });
-          navigate("/login");
-        } else {
-          toast.error("Please upload your identity image");
-          return;
+      const error = validateRegister(input);
+
+      if (error) {
+        setInputError({ ...inputError, ...error });
+        return;
+      }
+
+      setInputError({ ...initialInputError });
+
+      if (!file) {
+        toast.error("Please upload identity image");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("identityImage", file);
+
+      for (const [key, value] of Object.entries(input)) {
+        if (value) {
+          formData.append(key, value);
         }
       }
+
+      await authApi.creatorRegister(formData);
+
+      toast.success("Registered successfully, wait admin approval", {
+        position: "bottom-right",
+        autoClose: 2000,
+      });
+      navigate("/login");
     } catch (err) {
-      console.error(err);
       if (err instanceof AxiosError) {
-        if (err.response.data.field === "email") {
-          setInputError((prev) => ({
-            ...prev,
-            email: "Email is already in use",
-          }));
-        }
-        if (err.response.data.field === "phone") {
-          setInputError((prev) => ({
-            ...prev,
-            phone: "Phone number is already in use",
+        const errorField = err.response.data.field;
+        const errorMessage = {
+          email: "Email is already in use",
+          phone: "Phone number is already in use",
+        }[errorField];
+
+        if (errorMessage) {
+          setInputError((prevInputError) => ({
+            ...prevInputError,
+            [errorField]: errorMessage,
           }));
         }
       }

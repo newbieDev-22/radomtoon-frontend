@@ -13,32 +13,23 @@ export default function CreatorEditProfile() {
   const updateInfo = useStore((state) => state.updateInfo);
   const updateCreatorUser = useStore((state) => state.updateCreatorUser);
   const selectedCreator = useStore((state) => state.selectCreator(creatorId));
-
+  const authLoading = useStore((state) => state.authLoading);
   const initialInput = {
     biography: selectedCreator.biography || "No content",
     website: selectedCreator.website || "No content",
   };
 
   const [aboutInput, setAboutInput] = useState(initialInput);
-
   const [isEditing, setIsEditing] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnSave = async () => {
     try {
-      setIsLoading(true);
-      const result = await updateInfo(aboutInput);
-      if (result) {
-        updateCreatorUser(creatorId, aboutInput);
-        toast.success("Profile updated successfully");
-        setIsEditing(false);
-      } else {
-        toast.error("Failed to update profile");
-      }
+      await updateInfo(aboutInput);
+      updateCreatorUser(creatorId, aboutInput);
+      toast.success("Profile updated successfully");
+      setIsEditing(false);
     } catch (err) {
       console.error(err);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -48,7 +39,7 @@ export default function CreatorEditProfile() {
 
   return (
     <>
-      {isLoading && <Spinner transparent />}
+      {authLoading && <Spinner transparent />}
       <div className="py-4 md:w-3/5 sm:w-full m-auto my-8">
         <div className="w-full flex flex-col gap-4 px-20">
           <div className="flex justify-end px-4">

@@ -5,13 +5,14 @@ import EditProfilePicture from "../../authentication/components/EditProfilePictu
 import { USER_ROLE } from "../../../constants";
 
 export default function ProfileImage({ selectedCreator }) {
-  const authUser = useStore((state) => state.authUser.user);
-  const profileImage = selectedCreator.profileImage || null;
+  const user = useStore((state) => state.authUser.user);
+  const role = useStore((state) => state.authUser.role);
+  const profileImage = user.profileImage || selectedCreator.profileImage || null;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const profileUpload = useStore((state) => state.updateProfileImage);
 
   const handleModalOpen = () => {
-    if (authUser.role === USER_ROLE.CREATOR && authUser.id === selectedCreator.id) {
+    if (role === USER_ROLE.CREATOR && user.id === selectedCreator.id) {
       setIsModalOpen(true);
     }
   };

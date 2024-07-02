@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { motion } from "framer-motion";
-import { scales } from "chart.js";
 
 const ExCarousel = {
   img: "https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/rdvnkdwgeg1xihqm941e",

@@ -22,7 +22,7 @@ export default function LoginPage() {
   const [input, setInput] = useState(initialInput);
   const [inputError, setInputError] = useState(initialInputError);
   const login = useStore((state) => state.login);
-  const [isLoading, setIsLoading] = useState(false);
+  const authLoading = useStore((state) => state.authLoading);
   const navigate = useNavigate();
 
   const handleChangInput = (e) => {
@@ -37,9 +37,12 @@ export default function LoginPage() {
         setInputError((prev) => ({ ...prev, ...error }));
       } else {
         setInputError((prev) => ({ ...prev, ...initialInputError }));
-        setIsLoading(true);
-        await login(input);
-        navigate("/");
+        const res = await login(input);
+        if (res === true) {
+          navigate("/");
+        } else {
+          toast.error(res);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -50,14 +53,12 @@ export default function LoginPage() {
             : "Internet Server Error";
         return toast.error(message);
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
     <>
-      {isLoading && <Spinner transparent />}
+      {authLoading && <Spinner transparent />}
       <div className="min-w-screen min-h-screen">
         <div className="flex shadow-lg rounded-lg">
           <div className="relative h-screen w-full">

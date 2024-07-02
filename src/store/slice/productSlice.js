@@ -1,9 +1,10 @@
 import productApi from "../../apis/product";
-import { APPROVAL_STATUS_ID, IS_CREATOR_ACCEPT_STATUS } from "../../constants";
+import { APPROVAL_STATUS_ID } from "../../constants";
 
 export const productSlice = (set, get) => ({
   product: { data: [], loading: false, error: null, today: new Date() },
   approvalProduct: [],
+  productLoading: false,
   fetchProduct: async () => {
     try {
       set((state) => ({ product: { ...state.product, loading: true, error: null } }));
@@ -15,7 +16,7 @@ export const productSlice = (set, get) => ({
       const approvalProduct = productList.filter(
         (el) => el.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS
       );
-      set((state) => ({ approvalProduct: approvalProduct }));
+      set(() => ({ approvalProduct: approvalProduct }));
     } catch (err) {
       console.error(err);
       set((state) => ({ product: { ...state.product, error: err.message } }));
@@ -34,6 +35,8 @@ export const productSlice = (set, get) => ({
   },
   createProduct: async (formData) => {
     try {
+      set(() => ({ productLoading: true }));
+
       set((state) => ({ product: { ...state.product, error: null } }));
       const productResponse = await productApi.createProduct(formData);
       set((state) => ({
@@ -45,6 +48,8 @@ export const productSlice = (set, get) => ({
     } catch (err) {
       console.error(err);
       set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
     }
   },
 });
