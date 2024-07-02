@@ -5,7 +5,6 @@ import { TimeIcon } from "../icons";
 import { motion } from "framer-motion";
 
 export default function ImgCard({
-  variants,
   imageSrc,
   productName,
   creatorName,
@@ -25,8 +24,7 @@ export default function ImgCard({
   const handleMouseLeave = () => setHover(false);
 
   return (
-    <motion.div
-      variants={variants}
+    <div
       role="button"
       className={`relative items-center gap-4 ${mainCard && "h-96"}`}
       onClick={onClick}
@@ -122,6 +120,6 @@ export default function ImgCard({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

@@ -75,23 +75,23 @@ export default function HomePage() {
           className="grid grid-cols-2 gap-4 mb-20"
         >
           {product.slice(1, 5).map((el) => (
-            <ImgCard
-              key={el.id}
-              variants={itemVariants}
-              size="medium"
-              imageSrc={el.productImage}
-              productName={el.productName}
-              creatorName={el.creatorName}
-              daysLeft={
-                dayjs(el.deadline).diff(dayjs(today), "day") >= 0
-                  ? dayjs(el.deadline).diff(dayjs(today), "day")
-                  : 0
-              }
-              content={el.summaryDetail}
-              avatarImage={el.creatorProfileImage}
-              vid={el.productVideo}
-              onClick={() => navigate(mockProductPath)}
-            />
+            <motion.div key={el.id} variants={itemVariants}>
+              <ImgCard
+                size="medium"
+                imageSrc={el.productImage}
+                productName={el.productName}
+                creatorName={el.creatorName}
+                daysLeft={
+                  dayjs(el.deadline).diff(dayjs(today), "day") >= 0
+                    ? dayjs(el.deadline).diff(dayjs(today), "day")
+                    : 0
+                }
+                content={el.summaryDetail}
+                avatarImage={el.creatorProfileImage}
+                vid={el.productVideo}
+                onClick={() => navigate(mockProductPath)}
+              />
+            </motion.div>
           ))}
         </motion.div>
       </div>
