@@ -71,6 +71,7 @@ export default function ImgCard({
             </div>
           )}
         </div>
+
         <div className="h-2 bg-neutral-300">
           <div
             className={`h-2 ${progressBar[progressSize]} bg-supporter-saturate`}
