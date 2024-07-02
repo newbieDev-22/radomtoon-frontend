@@ -142,7 +142,7 @@ export default function CreatorRegister() {
             <h2 className="text-center text-gray-600 mb-8">
               A hub for visionaries to explore cutting-edge technology early.
             </h2>
-            <form onSubmit={handleSubmit} action="">
+            <form onSubmit={handleSubmit}>
               <div>
                 <div className="grid grid-col-2 gap-x-4 gap-y-2">
                   <div>
@@ -218,7 +218,7 @@ export default function CreatorRegister() {
                       error={inputError.address}
                     />
                   </div>
-                  <div className="col-span-2 w-full">
+                  <div className="col-span-2 w-full h-12">
                     <Dropdown
                       data={PROVINCE_MAP.map((el) => el.name)}
                       onChange={handleProvinceChange}

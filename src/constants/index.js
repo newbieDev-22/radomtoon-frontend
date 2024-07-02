@@ -471,3 +471,17 @@ export const PRODUCT_STATUS_ID = {
   FAILED: 2,
   SUCCESS: 3,
 };
+export const CATEGORIES_TYPE = [
+  { id: 1, name: "ART" },
+  { id: 2, name: "COMICS" },
+  { id: 3, name: "CRAFTS" },
+  { id: 4, name: "DANCE" },
+  { id: 5, name: "DESIGN" },
+  { id: 6, name: "FASHION" },
+  { id: 7, name: "FILM" },
+  { id: 8, name: "GAMES" },
+  { id: 9, name: "MUSIC" },
+  { id: 10, name: "TECHNOLOGY" },
+];
+
+export const MIN_DEADLINE_DAYS = 15;

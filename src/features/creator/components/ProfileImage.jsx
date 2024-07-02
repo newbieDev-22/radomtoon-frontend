@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useStore } from "../../store/useStore";
-import Modal from "../Modal";
-import EditProfilePicture from "../../features/authentication/components/EditProfilePicture";
-import { USER_ROLE } from "../../constants";
+import { useStore } from "../../../store/useStore";
+import Modal from "../../../components/Modal";
+import EditProfilePicture from "../../authentication/components/EditProfilePicture";
+import { USER_ROLE } from "../../../constants";
 
 export default function ProfileImage({ selectedCreator }) {
   const authUser = useStore((state) => state.authUser.user);

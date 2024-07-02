@@ -74,7 +74,14 @@ export default function CreatorEditProfile() {
                 />
               ) : (
                 <div className="w-full outline-none rounded-md py-2 px-4 h-48 col-span-6 text-justify">
-                  <p>{aboutInput.biography}</p>
+                  <textarea
+                    rows="6"
+                    placeholder="Write your biography"
+                    name="biography"
+                    value={aboutInput.biography}
+                    disabled
+                    className="w-full outline-none border border-gray-300 rounded-md py-2 px-4 min-h-48 max-h-48 col-span-6"
+                  />
                 </div>
               )}
             </div>
