@@ -50,7 +50,7 @@ export default function DropdownProfile({ fileEl, image, handelChangeImage, firs
                 }
             </div>
 
-            <Modal open={isOpenModal} onClose={() => setIsOpenModal(false)} >
+            <Modal title={"Edit profile picture"} open={isOpenModal} onClose={() => setIsOpenModal(false)} >
                 <EditProfilePictrue
                     fileEl={fileEl}
                     image={image}
