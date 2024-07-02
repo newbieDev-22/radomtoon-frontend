@@ -9,6 +9,8 @@ import { AxiosError } from "axios";
 import authApi from "../apis/auth";
 import { PROVINCE_MAP } from "../constants";
 import Spinner from "../components/Spinner";
+import Modal from "../components/Modal";
+import Policy from "../features/authentication/components/Policy";
 
 const initialInput = {
   firstName: "",
@@ -39,6 +41,7 @@ export default function SupporterRegister() {
   const [isLoading, setIsLoading] = useState(false);
   const [isPolicyChecked, setIsPolicyChecked] = useState(false);
   const [checkboxError, setCheckboxError] = useState("");
+  const [openPolicyModal, setOpenPolicyModal] = useState(false);
 
   const handleCheckboxChange = (e) => {
     setIsPolicyChecked(e.target.checked);
@@ -195,7 +198,7 @@ export default function SupporterRegister() {
                       error={inputError.address}
                     />
                   </div>
-                  <div className="col-span-2 w-full">
+                  <div className="col-span-2 w-full h-12">
                     <Dropdown
                       data={PROVINCE_MAP.map((el) => el.name)}
                       onChange={handleProvinceChange}
@@ -238,6 +241,14 @@ export default function SupporterRegister() {
           </div>
         </div>
       </div>
+      <Modal
+        open={openPolicyModal}
+        onClose={() => setOpenPolicyModal(false)}
+        title="Policy"
+        width={80}
+      >
+        <Policy />
+      </Modal>
     </>
   );
 }
