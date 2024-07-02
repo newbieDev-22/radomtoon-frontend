@@ -10,7 +10,6 @@ export default function App() {
   const fetchUser = useStore((state) => state.fetchUser);
   const fetchCreatorProduct = useStore((state) => state.fetchCreatorProduct);
   const fetchCreatorUser = useStore((state) => state.fetchCreatorUser);
-  const creatorUser = useStore((state) => state.creatorUser.data);
   const resetCreatorProduct = useStore((state) => state.resetCreatorProduct);
   const productLoading = useStore((state) => state.product.loading);
   const userLoading = useStore((state) => state.authUser.loading);
@@ -30,8 +29,6 @@ export default function App() {
       resetCreatorProduct();
     }
   }, [fetchCreatorProduct, resetCreatorProduct, role]);
-
-  console.log("creatorUser", creatorUser);
 
   if (userLoading || productLoading || creatorUserLoading || creatorProductLoading) {
     return <Loading />;
