@@ -32,4 +32,19 @@ export const productSlice = (set, get) => ({
       return data.filter((el) => el.creatorId === +creatorId);
     }
   },
+  createProduct: async (formData) => {
+    try {
+      set((state) => ({ product: { ...state.product, error: null } }));
+      const productResponse = await productApi.createProduct(formData);
+      set((state) => ({
+        product: {
+          ...state.product,
+          data: [productResponse.data.productDetail, ...state.product.data],
+        },
+      }));
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    }
+  },
 });

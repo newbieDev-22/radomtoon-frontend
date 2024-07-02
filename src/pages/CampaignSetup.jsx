@@ -2,13 +2,15 @@ import { useState, useRef } from "react";
 import Button from "../components/Button";
 import dayjs from "dayjs";
 import { useStore } from "../store/useStore";
-import { CATEGORIES_TYPE, USER_ROLE } from "../constants";
+import { CATEGORIES_TYPE, MIN_DEADLINE_DAYS, USER_ROLE } from "../constants";
 import { Navigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import Input from "../components/Input";
 import { PictureIcon } from "../icons";
 import { toast } from "react-toastify";
 import validateProduct from "../validators/validate-create-project";
+import Spinner from "../components/Spinner";
+import { useNavigate } from "react-router-dom";
 
 const initialInput = {
   productName: "",
@@ -30,17 +32,22 @@ const initialInputError = {
 
 export default function CampaignSetup() {
   const role = useStore((state) => state.authUser.role);
+  const user = useStore((state) => state.authUser.user);
+  const today = useStore((state) => state.product.today);
+  const createProduct = useStore((state) => state.createProduct);
   const fileEl = useRef();
   const [file, setFile] = useState(null);
-  const [input, setInput] = useState(initialInput);
+  const [input, setInput] = useState({
+    ...initialInput,
+    deadline: dayjs(today).format("YYYY-MM-DD"),
+  });
   const [inputError, setInputError] = useState(initialInputError);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   if (role !== USER_ROLE.CREATOR) {
     return <Navigate to="/" />;
   }
-
-  console.log(inputError);
 
   const handleCategoryChange = (value) => {
     const categoryId = CATEGORIES_TYPE.filter((el) => el.name === value).map(
@@ -56,23 +63,39 @@ export default function CampaignSetup() {
     try {
       e.preventDefault();
       setIsLoading(true);
+
+      const today = dayjs(new Date());
+      const dateFromDB = dayjs(new Date(input.deadline));
+      if (dateFromDB.diff(today, "day") < MIN_DEADLINE_DAYS) {
+        return setInputError((prev) => ({
+          ...prev,
+          deadline: "Deadline must be at least 15 days from today.",
+        }));
+      }
+
       const error = validateProduct(input);
       if (error) {
         return setInputError(error);
       }
 
       setInputError(initialInputError);
+
       if (file) {
         const formData = new FormData();
         formData.append("productImage", file);
-
+        input.deadline = dayjs(input.deadline).format("YYYY-MM-DD");
         for (const [key, value] of Object.entries(input)) {
           if (value) {
             formData.append(key, value);
           }
         }
-
+        console.log("input", input);
+        setIsLoading(true);
+        await createProduct(formData);
         toast.success("Created project successfully");
+        navigate(`/creator-panel/${user.id}`);
+      } else {
+        toast.error("Please upload your product image");
       }
     } catch (err) {
       console.log(err);
@@ -84,6 +107,7 @@ export default function CampaignSetup() {
 
   return (
     <>
+      {isLoading && <Spinner transparent />}
       <input
         type="file"
         placeholder="Poster image"
@@ -159,10 +183,18 @@ export default function CampaignSetup() {
                 </div>
                 <input
                   type="date"
-                  value={dayjs(input.date).format("YYYY-MM-DD")}
+                  value={dayjs(input.deadline).format("YYYY-MM-DD")}
+                  name="deadline"
                   onChange={handleInputChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-ls rounded-lg block p-2.5 w-full"
+                  className={`bg-gray-50 border  ${
+                    inputError.deadline ? "border-red-500" : "border-gray-300"
+                  } text-gray-900 text-ls rounded-lg block p-2.5 w-full`}
                 />
+                {inputError.deadline && (
+                  <small className="text-red-500 font-semibold">
+                    {inputError.deadline}
+                  </small>
+                )}
               </label>
               <label className="form-control w-full">
                 <div className="label">
@@ -184,6 +216,8 @@ export default function CampaignSetup() {
               </div>
               <textarea
                 placeholder="Please fill summary detail"
+                name="summaryDetail"
+                onChange={handleInputChange}
                 className={`placeholder-gray-500 indent-1 min-h-24 max-h-24 bg-gray-50 border ${
                   inputError.summaryDetail ? "border-red-500" : "border-gray-300"
                 }  text-gray-900 text-ls rounded-lg block p-2.5 w-full`}

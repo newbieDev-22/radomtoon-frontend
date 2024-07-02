@@ -1,5 +1,5 @@
 import { useParams, Navigate } from "react-router-dom";
-import ProfileImage from "../components/EditorComponent/ProfileImage";
+import ProfileImage from "../features/creator/components/ProfileImage";
 import CreatorMenu from "../features/creator/components/CreatorMenu";
 import { useStore } from "../store/useStore";
 

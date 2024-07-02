@@ -483,3 +483,5 @@ export const CATEGORIES_TYPE = [
   { id: 9, name: "MUSIC" },
   { id: 10, name: "TECHNOLOGY" },
 ];
+
+export const MIN_DEADLINE_DAYS = 15;
