@@ -10,7 +10,6 @@ import creatorApi from "../../apis/creator";
 
 export const authSlice = (set, get) => ({
   authUser: { user: null, loading: false, error: null, role: USER_ROLE.GUEST },
-
   // Function to handle user login
   login: async (credentials) => {
     try {
