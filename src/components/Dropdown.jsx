@@ -1,7 +1,7 @@
 export default function Dropdown({ data, onChange, title }) {
   return (
     <select
-      className="p-2 indent-1 rounded-lg outline-none focus:outline-none border border-gray"
+      className="p-2 indent-1 rounded-lg outline-none focus:outline-none border border-gray w-full"
       onChange={(e) => onChange(e.target.value)}
     >
       <option disabled>{title}</option>
