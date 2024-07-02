@@ -1,68 +1,50 @@
-import React, { useState } from "react";
-import { useLocation} from "react-router-dom";
+import { useState } from "react";
+import { useStore } from "../../store/useStore";
+import Modal from "../Modal";
+import EditProfilePicture from "../../features/authentication/components/EditProfilePictrue";
 
-const ProfileImage = ({ firstName , lastName }) => {
-  const location = useLocation();
-  const [image, setImage] = useState(null);
-  const creatorName = firstName ? firstName.charAt(0) : "?";
-const inCreatorPanel = location.pathname == '/creator-panel'
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  
+export default function ProfileImage() {
+  const creator = useStore((state) => state.authUser.user);
+  const profileImage = creator.profileImage || null;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const profileUpload = useStore((state) => state.updateProfileImage);
 
   return (
     <>
-      { inCreatorPanel ?
-      (<>
-          <div className="relative w-44 h-44">
-      <input
-        type="file"
-        accept="image"
-        onChange={handleImageUpload}
-        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-      />
-      <div className="border border-black w-44 h-44 rounded-full flex justify-center items-center bg-white text-6xl text-black overflow-hidden">
-        {image ? (
-          <img
-            src={image}
-            alt="Profile"
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          creatorName
-        )}
-        
+      <div className="bg-gray-100 flex flex-col items-center justify-center p-10">
+        <div>
+          <button
+            className="w-56 h-56 rounded-full flex justify-center items-center overflow-hidden bg-white"
+            onClick={() => setIsModalOpen(true)}
+          >
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="text-8xl">{creator.firstName[0].toUpperCase()}</div>
+            )}
+          </button>
+        </div>
+        <span className="text-4xl font-semibold mt-5">
+          {`${creator.firstName} ${creator.lastName}`}
+        </span>
       </div>
-    </div>
-     <span className="text-3xl font-semibold my-2">{firstName} {lastName}</span>
-      </>)
-      :
-      ( <div className="border border-black w-10 h-10 rounded-full flex justify-center items-center bg-white text-2xl text-black font-medium overflow-hidden">
-        {image ? (
-          <img
-            src={image}
-            alt="Profile"
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          initial
-        )}
-      </div>)}
-</>
+      <Modal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Profile Image"
+        width={30}
+      >
+        <EditProfilePicture
+          profileImage={profileImage}
+          creatorFirstLetter={creator.firstName[0].toUpperCase()}
+          handleProfileImageSave={profileUpload}
+          onSuccess={() => setIsModalOpen(false)}
+        />
+      </Modal>
+    </>
   );
-};
-
-export default  ProfileImage
-
-/*
-
-*/
+}

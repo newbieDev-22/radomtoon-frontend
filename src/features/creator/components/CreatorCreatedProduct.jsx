@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ProductImageCard from "./ProductImageCard";
 import Button from "../../../components/Button";
+import { useStore } from "../../../store/useStore";
 const mockImage =
   "https://static.thairath.co.th/media/B6FtNKtgSqRqbnNsbKEfQbPGELW2YjCcDQUpDilBzR4jVwhRbzfUfbngdYegm1bTfTXjc.webp";
 const mockAvatar = "https://mdbcdn.b-cdn.net/img/new/avatars/1.webp";
@@ -12,17 +13,23 @@ const daysLeft = 23;
 const loopCard = 6;
 
 export default function CreatorCreatedProduct() {
-
-  const navigate = useNavigate()
+  const creatorProduct = useStore((state) => state.creatorProduct.data);
+  // console.log("creatorProduct", creatorProduct);
+  const navigate = useNavigate();
 
   const handleClickAddNewProject = () => {
-    navigate("/creator-campaign-setup")
-  }
+    navigate("/creator-campaign-setup");
+  };
 
   return (
     <div>
       <div className="flex justify-center mt-10">
-        <Button width={60} bg="creator-saturate" color="white" onClick={handleClickAddNewProject} >
+        <Button
+          width={60}
+          bg="creator-saturate"
+          color="white"
+          onClick={handleClickAddNewProject}
+        >
           Start new project
         </Button>
       </div>

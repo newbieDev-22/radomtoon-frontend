@@ -3,17 +3,31 @@ import Loading from "./components/Loading/Loading";
 import Router from "./routes";
 import { Suspense, useEffect } from "react";
 import { useStore } from "./store/useStore";
+import { USER_ROLE } from "./constants";
 export default function App() {
   const fetchProduct = useStore((state) => state.fetchProduct);
+  const role = useStore((state) => state.authUser.role);
   const fetchUser = useStore((state) => state.fetchUser);
+  const fetchCreatorProduct = useStore((state) => state.fetchCreatorProduct);
+  const resetCreatorProduct = useStore((state) => state.resetCreatorProduct);
+  const productLoading = useStore((state) => state.product.loading);
   const userLoading = useStore((state) => state.authUser.loading);
+  const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
 
   useEffect(() => {
     fetchProduct();
     fetchUser();
   }, []);
 
-  if (userLoading) {
+  useEffect(() => {
+    if (role === USER_ROLE.CREATOR) {
+      fetchCreatorProduct();
+    } else {
+      resetCreatorProduct();
+    }
+  }, [fetchCreatorProduct, resetCreatorProduct, role]);
+
+  if (userLoading || productLoading || creatorProductLoading) {
     return <Loading />;
   }
 
