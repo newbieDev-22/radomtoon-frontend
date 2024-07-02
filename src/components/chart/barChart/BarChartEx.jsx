@@ -9,8 +9,7 @@ export default function BarChart() {
 
     return (
         <>
-            <div>BarChart</div>
-            <div className="w-[50rem] m-auto border-2 p-[3rem] rounded-xl  border-orange-500">
+            <div className="w-full py-4 px-10 flex justify-center rounded-xl bg-white ">
                 <Bar
                     className=" cursor-pointer"
                     data={{

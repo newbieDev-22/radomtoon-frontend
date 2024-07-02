@@ -1,9 +1,13 @@
 
 import { Line } from "react-chartjs-2"
 import revenueData from "./data/revenueDate.json"
-export default function LineChat() {
+export default function LineChart({ title }) {
     return (
-        <div className="w-[50rem] m-auto border-2 p-[3rem] rounded-xl  border-orange-500 flex justify-center my-10">
+        <div className="w-full py-5 rounded-2xl bg-white flex flex-col justify-center items-center ">
+          <div className="w-full px-10 justify-start text-xl font-semibold text-radomtoon-bright">
+            {title}
+          </div>
+          <div className="h-96 w-full flex justify-center">
             <Line
                 data={{
                     labels: revenueData.map((data) => data.label),
@@ -23,7 +27,7 @@ export default function LineChat() {
                     ],
                 }}
             />
-
+          </div>
         </div>
     )
 }

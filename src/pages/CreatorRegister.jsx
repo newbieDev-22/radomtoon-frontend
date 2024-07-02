@@ -93,16 +93,14 @@ export default function CreatorRegister() {
       <div className="min-w-screen min-h-screen">
         <div className="grid grid-cols-2 shadow-lg rounded-lg">
           <div className="px-20 bg-cyan-100 flex w-full h-full flex-col justify-center">
-
             <h1 className="text-4xl text-center mb-2 font-bold text-radomtoon-dark">
               Bring your imagination to life
-
             </h1>
-            <h2 className="text-center  text-gray-600">
+            <h2 className="text-center text-gray-600 mb-8">
               A hub for visionaries to explore cutting-edge technology early.
             </h2>
             <form onSubmit={handleSubmit} action="">
-              <div className="flex flex-col ">
+              <div className="flex flex-col gap-1">
                 <div className="flex gap-4">
                   <Input
                     type="text"
@@ -173,12 +171,17 @@ export default function CreatorRegister() {
                 />
 
                 {selectedImage ? (
-                  <h1 className=" block mb-10 border-[1.5px] border-green-500 rounded-lg p-8 text-center text-green-500 bg-white">
-                    Picture upload successful
-                  </h1>
+                  <img
+                    src={selectedImage}
+                    alt="Selected"
+                    className="w-full h-[175px] object-cover rounded-lg"
+                  />
                 ) : (
                   <div>
-                    <label htmlFor="file-upload" className="cursor-pointer text-center">
+                    <label
+                      htmlFor="file-upload"
+                      className="cursor-pointer text-center"
+                    >
                       <span
                         className={`block mb-10 border-[1.5px] border-gray rounded-lg p-8 bg-gray-200 hover:bg-gray-100 transition duration-300 ${
                           inputError?.password && "mt-1"
@@ -224,7 +227,12 @@ export default function CreatorRegister() {
                   <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
                 )}
 
-                <Button width={"full"} height="14" bg="creator-saturate" color="white">
+                <Button
+                  width={"full"}
+                  height="14"
+                  bg="creator-saturate"
+                  color="white"
+                >
                   Request Approve
                 </Button>
               </div>
@@ -232,7 +240,7 @@ export default function CreatorRegister() {
           </div>
           <div className="relative h-screen w-full group">
             <img
-              src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://plus.unsplash.com/premium_photo-1683749810427-9f460939f702?q=80&w=2815&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
               className="h-full w-full object-cover"
             />

@@ -36,34 +36,34 @@ export default function Map() {
       return this._div;
     };
 
-    info.update = function (props) {
-      this._div.innerHTML = '<h4>Supporter Density</h4>' +
+    info.update = function (props) {4
+      this._div.innerHTML = '<h4 ">Supporter Density</h4>' + 
         (props ? `<b>${props.name}</b><br />${props.p} people / km<sup>2</sup>` : 'Hover over a province');
     };
 
     info.addTo(map);
 
-    function getColor(d) {
-      return d > 1000 ? '#800026' :
-        d > 500 ? '#BD0026' :
-        d > 200 ? '#E31A1C' :
-        d > 100 ? '#FC4E2A' :
-        d > 50 ? '#FD8D3C' :
-        d > 20 ? '#FEB24C' :
-        d > 10 ? '#FED976' :
-        '#FFEDA0';
-    }
-    // ### YELLOW ###
     // function getColor(d) {
-    //   return d > 1000 ? '#78350F' :
-    //     d > 500 ? '#92400E' :
-    //     d > 200 ? '#B45309' :
-    //     d > 100 ? '#F59E0B' :
-    //     d > 50 ? '#FBBF24' :
-    //     d > 20 ? '#FDE68A' :
-    //     d > 10 ? '#FEF3C7' :
-    //     '#FFFBEB';
+    //   return d > 1000 ? '#800026' :
+    //     d > 500 ? '#BD0026' :
+    //     d > 200 ? '#E31A1C' :
+    //     d > 100 ? '#FC4E2A' :
+    //     d > 50 ? '#FD8D3C' :
+    //     d > 20 ? '#FEB24C' :
+    //     d > 10 ? '#FED976' :
+    //     '#FFEDA0';
     // }
+    // ### YELLOW ###
+    function getColor(d) {
+      return d > 1000 ? '#78350F' :
+        d > 500 ? '#92400E' :
+        d > 200 ? '#B45309' :
+        d > 100 ? '#F59E0B' :
+        d > 50 ? '#FBBF24' :
+        d > 20 ? '#FDE68A' :
+        d > 10 ? '#FEF3C7' :
+        '#FFFBEB';
+    }
     // ### CYAN ###
     // function getColor(d) {
     //   return d > 1000 ? '#164E63' : 
@@ -154,5 +154,5 @@ export default function Map() {
     };
   }, [geojsonData]);
 
-  return <div id="mapid" className='h-[70vh] w-[50vw]' />;
+  return <div id="mapid" className='h-full w-full rounded-2xl' />;
 };

@@ -26,7 +26,7 @@ export default function Input({
         name={name}
         onChange={onChange}
       />
-      {error && <small className="text-red-500 font-semibold">{error}</small>}
+      {error && <small className="text-red-500 text-xs font-semibold">{error}</small>}
     </>
   );
 }

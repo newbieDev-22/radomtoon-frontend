@@ -2,8 +2,8 @@ import { Pie } from "react-chartjs-2"
 import sourceData from "../doughnutChart/data/sourceData.json"
 export default function PieChart() {
     return (
-        <div className="w-[50rem] m-auto border-2 p-[3rem] rounded-xl  border-orange-500">
-            <Pie
+      <div className="w-full h-80 py-5 rounded-2xl bg-white flex justify-center ">
+      <Pie
                 className=" cursor-pointer"
                 data={{
                     labels: sourceData.map((data) => data.lable),
@@ -24,6 +24,6 @@ export default function PieChart() {
                     ]
                 }}
             />
-        </div>
+  </div>
     )
 }

@@ -4,7 +4,7 @@ import { Bar, Pie, Doughnut, Line } from "react-chartjs-2"
 import sourceData from "./data/sourceData.json"
 export default function DoughnutChart() {
     return (
-        <div className="w-[50rem] m-auto border-2 p-[3rem] rounded-xl  border-orange-500 flex justify-center my-10">
+        <div className="w-full h-80 py-5 rounded-2xl bg-white flex justify-center ">
             <Doughnut
                 className=" cursor-pointer"
                 data={{

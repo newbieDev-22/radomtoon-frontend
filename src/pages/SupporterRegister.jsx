@@ -4,177 +4,80 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import validateRegister from "../validators/validate-register";
 import Dropdown from "../components/Dropdown";
+import { PROVINCE_MAP } from "../constants";
+import { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import authApi from "../apis/auth";
 
-const provinces = [
-  "Amnat Charoen",
-  "Ang Thong",
-  "Bangkok",
-  "Bueng Kan",
-  "Buri Ram",
-  "Chachoengsao",
-  "Chai Nat",
-  "Chaiyaphum",
-  "Chanthaburi",
-  "Chiang Mai",
-  "Chiang Rai",
-  "Chonburi",
-  "Chumphon",
-  "Kalasin",
-  "Kamphaeng Phet",
-  "Kanchanaburi",
-  "Khon Kaen",
-  "Krabi",
-  "Lampang",
-  "Lamphun",
-  "Loei",
-  "Lopburi",
-  "Mae Hong Son",
-  "Maha Sarakham",
-  "Mukdahan",
-  "Nakhon Nayok",
-  "Nakhon Pathom",
-  "Nakhon Phanom",
-  "Nakhon Ratchasima",
-  "Nakhon Sawan",
-  "Nakhon Si Thammarat",
-  "Nan",
-  "Narathiwat",
-  "Nong Bua Lam Phu",
-  "Nong Khai",
-  "Nonthaburi",
-  "Pathum Thani",
-  "Pattani",
-  "Phangnga",
-  "Phatthalung",
-  "Phayao",
-  "Phetchabun",
-  "Phetchaburi",
-  "Phichit",
-  "Phitsanulok",
-  "Phra Nakhon Si Ayutthaya",
-  "Phrae",
-  "Phuket",
-  "Prachin Buri",
-  "Prachuap Khiri Khan",
-  "Ranong",
-  "Ratchaburi",
-  "Rayong",
-  "Roi Et",
-  "Sa Kaeo",
-  "Sakon Nakhon",
-  "Samut Prakan",
-  "Samut Sakhon",
-  "Samut Songkhram",
-  "Saraburi",
-  "Satun",
-  "Si Sa Ket",
-  "Sing Buri",
-  "Songkhla",
-  "Sukhothai",
-  "Suphan Buri",
-  "Surat Thani",
-  "Surin",
-  "Tak",
-  "Trang",
-  "Trat",
-  "Ubon Ratchathani",
-  "Udon Thani",
-  "Uthai Thani",
-  "Uttaradit",
-  "Yala",
-  "Yasothon",
-];
-
-const SupporterRegisterData = {
+const initialInput = {
   firstName: "",
   lastName: "",
   email: "",
-  phoneNumber: "",
+  phone: "",
   password: "",
   confirmPassword: "",
   address: "",
-  province: "",
+  provinceId: 1,
 };
 
-const ErrorSupporterRegisterData = {
+const initialInputError = {
   firstName: "",
   lastName: "",
   email: "",
-  phoneNumber: "",
+  phone: "",
   password: "",
   confirmPassword: "",
-  policy: "",
   address: "",
-  province: "",
+  provinceId: "",
 };
 
 export default function SupporterRegister() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [SupporterData, setSupporterData] = useState(SupporterRegisterData);
-  const [errorSupporterData, setErrorSupporterData] = useState(
-    ErrorSupporterRegisterData
-  );
-  const [isPolicyChecked, setIsPolicyChecked] = useState(false);
-  const [checkboxError, setCheckboxError] = useState("");
-  const [selectedProvince, setSelectedProvince] = useState("");
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectedImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const [input, setInput] = useState(initialInput);
+  const [inputError, setInputError] = useState(initialInputError);
 
   const handleChangeInput = (e) => {
-    setSupporterData({ ...SupporterData, [e.target.name]: e.target.value });
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
-
-  const handleCheckboxChange = (e) => {
-    setIsPolicyChecked(e.target.checked);
-    if (e.target.checked) {
-      setCheckboxError("");
-    }
-  };
-
   const handleProvinceChange = (value) => {
-    setSelectedProvince(value);
-    setSupporterData((prevData) => ({ ...prevData, province: value }));
-    setErrorSupporterData((prevErrors) => ({ ...prevErrors, province: "" }));
+    const provinceId = PROVINCE_MAP.filter((el) => el.name === value).map(
+      (el) => el.id
+    )[0];
+    setInput((prev) => ({ ...prev, provinceId }));
   };
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      if (!isPolicyChecked) {
-        setCheckboxError("You must agree to the policy to continue.");
-        return;
-      }
-      const error = validateRegister(SupporterData);
-      console.log(errorSupporterData);
+      const error = validateRegister(input);
       if (error) {
-        return setErrorSupporterData(error);
+        setInputError((prev) => ({ ...prev, ...error }));
+      } else {
+        setInputError((prev) => ({ ...prev, ...initialInputError }));
+
+        await authApi.supporterRegister(input);
+        toast.success("Registered successfully, please log in to continue", {
+          position: "bottom-right",
+          autoClose: 2000,
+        });
+        onClose();
       }
-      setErrorSupporterData("");
-      toast.success("Register successful");
-      // setErrorSupporterData({ ...SupporterData });
-      // await authApi.register(SupporterData);
-      // alert(`Register successfully, please log in to continue`);
-    } catch (error) {
-      console.log(error);
-      // if (error instanceof AxiosError) {
-      //   if (error.response.data.field === "emailOrMobile")
-      //     setinputError((prev) => ({
-      //       ...prev,
-      //       emailOrMobile: "email or mobile already in use",
-      //     }));
-      // }
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err.response.data.field === "email") {
+          setInputError((prev) => ({
+            ...prev,
+            email: "Email is already in use",
+          }));
+        }
+        if (err.response.data.field === "phone") {
+          setInputError((prev) => ({
+            ...prev,
+            phone: "Phone number is already in use",
+          }));
+        }
+      }
     }
   };
 
@@ -204,108 +107,124 @@ export default function SupporterRegister() {
             <h2 className="text-base mb-8 text-gray-600">
               Become part of a community driving change and innovation.
             </h2>
-            <form onSubmit={handleSubmit} action="">
-              <div className="flex flex-col ">
-                <div className="flex gap-4">
-                  <Input
-                    type="text"
-                    placeholder="First name"
-                    value={SupporterData.firstName}
-                    name="firstName"
-                    onChange={handleChangeInput}
-                    error={errorSupporterData.firstName}
-                  />
-                  <Input
-                    type="text"
-                    placeholder="Last name"
-                    value={SupporterData.lastName}
-                    name="lastName"
-                    onChange={handleChangeInput}
-                    error={errorSupporterData.lastName}
-                  />
-                </div>
+            <form onSubmit={handleSubmit} className="w-full px-12">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text">First name</span>
+          </div>
+          <Input
+            type="text"
+            placeholder="First name"
+            value={input.firstName}
+            name="firstName"
+            onChange={handleChangeInput}
+            error={inputError.firstName}
+          />
+        </label>
 
-                <Input
-                  type="text"
-                  placeholder="Email"
-                  value={SupporterData.email}
-                  name="email"
-                  onChange={handleChangeInput}
-                  error={errorSupporterData.email}
-                />
-                <Input
-                  type="text"
-                  placeholder="Phone number"
-                  value={SupporterData.phoneNumber}
-                  name="phoneNumber"
-                  onChange={handleChangeInput}
-                  error={errorSupporterData.phoneNumber}
-                />
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text">Last name</span>
+          </div>
+          <Input
+            type="text"
+            placeholder="Last name"
+            value={input.lastName}
+            name="lastName"
+            onChange={handleChangeInput}
+            error={inputError.lastName}
+          />
+        </label>
 
-                <div className="flex gap-4">
-                  <Input
-                    type="password"
-                    placeholder="Password"
-                    value={SupporterData.password}
-                    name="password"
-                    onChange={handleChangeInput}
-                    error={errorSupporterData.password}
-                  />
-                  <Input
-                    type="password"
-                    placeholder="Confirm password"
-                    value={SupporterData.confirmPassword}
-                    name="confirmPassword"
-                    onChange={handleChangeInput}
-                    error={errorSupporterData.confirmPassword}
-                  />
-                </div>
-                <Input
-                  type="text"
-                  placeholder="Address"
-                  value={SupporterData.address}
-                  name="address"
-                  onChange={handleChangeInput}
-                  error={errorSupporterData.address}
-                />
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text">Email</span>
+          </div>
+          <Input
+            type="text"
+            placeholder="Email"
+            value={input.email}
+            name="email"
+            onChange={handleChangeInput}
+            error={inputError.email}
+          />
+        </label>
 
-                <Dropdown
-                  data={provinces}
-                  onChange={handleProvinceChange}
-                  title="Choose your province..."
-                  error={errorSupporterData.province}
-                />
-                <div className="flex items-center mb-4">
-                  <input
-                    id="policy-checkbox"
-                    type="checkbox"
-                    className="mr-2"
-                    name="policy"
-                    checked={isPolicyChecked}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label
-                    htmlFor="policy-checkbox"
-                    className="text-gray-600 cursor-pointer text-sm"
-                  >
-                    I have read understand and accept the{" "}
-                    <a
-                      onClick={() => setOpenPolicyModal(true)}
-                      className="text-blue-500 hover:underline"
-                    >
-                      terms and conditions
-                    </a>
-                  </label>
-                </div>
-                {checkboxError && (
-                  <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
-                )}
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text">Phone number</span>
+          </div>
+          <Input
+            type="text"
+            placeholder="Phone number"
+            value={input.phone}
+            name="phone"
+            onChange={handleChangeInput}
+            error={inputError.phone}
+          />
+        </label>
 
-                <Button width={"full"} height="14">
-                  Register
-                </Button>
-              </div>
-            </form>
+        <label className="form-control w-full col-span-2">
+          <div className="label">
+            <span className="label-text">Address</span>
+          </div>
+          <Input
+            type="text"
+            placeholder="Address"
+            value={input.address}
+            name="address"
+            onChange={handleChangeInput}
+            error={inputError.address}
+          />
+        </label>
+
+        <label className="form-control w-full col-span-2">
+          <div className="label">
+            <span className="label-text">Province</span>
+          </div>
+          <Dropdown
+            data={PROVINCE_MAP.map((el) => el.name)}
+            onChange={handleProvinceChange}
+            title="Choose your province..."
+          />
+        </label>
+
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text">Password</span>
+          </div>
+          <Input
+            type="password"
+            placeholder="Password"
+            value={input.password}
+            name="password"
+            onChange={handleChangeInput}
+            error={inputError.password}
+          />
+        </label>
+
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text">Confirm password</span>
+          </div>
+          <Input
+            type="password"
+            placeholder="Confirm password"
+            value={input.confirmPassword}
+            name="confirmPassword"
+            onChange={handleChangeInput}
+            error={inputError.confirmPassword}
+          />
+        </label>
+
+        <div className="col-span-2 flex justify-center py-6">
+          <Button moveDown={inputError?.password} color="orange">
+            SIGN UP
+          </Button>
+        </div>
+      </div>
+    </form>
           </div>
         </div>
       </div>
