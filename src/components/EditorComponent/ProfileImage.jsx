@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useLocation} from "react-router-dom";
 
 const ProfileImage = ({ firstName , lastName }) => {
+  const location = useLocation();
   const [image, setImage] = useState(null);
-  const initial = firstName ? firstName.charAt(0) : "?";
+  const creatorName = firstName ? firstName.charAt(0) : "?";
+const inCreatorPanel = location.pathname == '/creator-panel'
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -14,10 +17,13 @@ const ProfileImage = ({ firstName , lastName }) => {
       reader.readAsDataURL(file);
     }
   };
+  
 
   return (
-    <div className="bg-gray-100 flex flex-col items-center h-[300px] justify-end shadow-md ">
-    <div className="relative w-44 h-44">
+    <>
+      { inCreatorPanel ?
+      (<>
+          <div className="relative w-44 h-44">
       <input
         type="file"
         accept="image"
@@ -32,15 +38,31 @@ const ProfileImage = ({ firstName , lastName }) => {
             className="w-full h-full object-cover"
           />
         ) : (
-          initial
+          creatorName
         )}
         
       </div>
-      {/* show firstname & lastname */}
     </div>
      <span className="text-3xl font-semibold my-2">{firstName} {lastName}</span>
-    </div>
+      </>)
+      :
+      ( <div className="border border-black w-10 h-10 rounded-full flex justify-center items-center bg-white text-2xl text-black font-medium overflow-hidden">
+        {image ? (
+          <img
+            src={image}
+            alt="Profile"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          initial
+        )}
+      </div>)}
+</>
   );
 };
 
-export default ProfileImage;
+export default  ProfileImage
+
+/*
+
+*/
