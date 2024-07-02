@@ -29,6 +29,7 @@ export default function CreatorEditProfile() {
               <p>{note || "No biography available"}</p>
             </div>
           )}
+
         </div>
         <Button
           type="button"
