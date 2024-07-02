@@ -42,7 +42,7 @@ export default function CampaignSetup() {
     deadline: dayjs(today).format("YYYY-MM-DD"),
   });
   const [inputError, setInputError] = useState(initialInputError);
-  const [isLoading, setIsLoading] = useState(false);
+  const productLoading = useStore((state) => state.productLoading);
   const navigate = useNavigate();
 
   if (role !== USER_ROLE.CREATOR) {
@@ -62,11 +62,9 @@ export default function CampaignSetup() {
   const handleSubmitForm = async (e) => {
     try {
       e.preventDefault();
-      setIsLoading(true);
-
-      const today = dayjs(new Date());
-      const dateFromDB = dayjs(new Date(input.deadline));
-      if (dateFromDB.diff(today, "day") < MIN_DEADLINE_DAYS) {
+      const todayFormat = dayjs(today);
+      const deadlineFormat = dayjs(new Date(input.deadline));
+      if (deadlineFormat.diff(todayFormat, "day") < MIN_DEADLINE_DAYS) {
         return setInputError((prev) => ({
           ...prev,
           deadline: "Deadline must be at least 15 days from today.",
@@ -89,8 +87,6 @@ export default function CampaignSetup() {
             formData.append(key, value);
           }
         }
-        console.log("input", input);
-        setIsLoading(true);
         await createProduct(formData);
         toast.success("Created project successfully");
         navigate(`/creator-panel/${user.id}`);
@@ -100,14 +96,12 @@ export default function CampaignSetup() {
     } catch (err) {
       console.log(err);
       toast.error(err.message);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
     <>
-      {isLoading && <Spinner transparent />}
+      {productLoading && <Spinner transparent />}
       <input
         type="file"
         placeholder="Poster image"
