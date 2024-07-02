@@ -15,9 +15,7 @@ export default function App() {
   const userLoading = useStore((state) => state.authUser.loading);
   const creatorUserLoading = useStore((state) => state.creatorUser.loading);
   const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
-  const product = useStore((state) => state.product.data);
 
-  console.log("product", product);
   useEffect(() => {
     fetchProduct();
     fetchUser();

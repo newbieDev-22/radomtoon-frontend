@@ -35,7 +35,7 @@ export default function LoginPage() {
         setInputError((prev) => ({ ...prev, ...error }));
       } else {
         setInputError((prev) => ({ ...prev, ...initialInputError }));
-        login(input);
+        await login(input);
         navigate("/");
       }
     } catch (err) {
