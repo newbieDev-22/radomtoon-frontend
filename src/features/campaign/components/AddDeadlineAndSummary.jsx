@@ -22,7 +22,7 @@ export default function AddDeadlineAndSummary({ handleOnChangeSummary, summary, 
                 <div >
                     <p className="text-gray-500 font-semibold text-ls">Deadline</p>
                     <h1 className=" font-semibold text-ls text-black">{dayjs(date).format("dddd,MMMM D,YYYY")}</h1>
-                    <p className="text-gray-500 font-semibold  text-ls">Summary</p>
+                    <p className="text-gray-500 font-semibold mt-2 text-ls">Summary</p>
                     <h1 className=" font-semibold text-ls text-black">{summary}</h1>
                 </div>
             )}
