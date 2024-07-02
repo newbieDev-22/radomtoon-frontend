@@ -2,12 +2,14 @@ import { create } from "zustand";
 import { authSlice } from "./slice/authSlice";
 import { productSlice } from "./slice/productSlice";
 import { devtools } from "zustand/middleware";
-import { creatorSlice } from "./slice/creatorSlice";
+import { creatorProductSlice } from "./slice/creatorProductSlice";
+import { creatorUserSlice } from "./slice/creatorUserSlice";
 
 export const useStore = create(
   devtools((...a) => ({
     ...authSlice(...a),
     ...productSlice(...a),
-    ...creatorSlice(...a),
+    ...creatorProductSlice(...a),
+    ...creatorUserSlice(...a),
   }))
 );

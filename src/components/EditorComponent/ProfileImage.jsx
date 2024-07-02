@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { useStore } from "../../store/useStore";
 import Modal from "../Modal";
-import EditProfilePicture from "../../features/authentication/components/EditProfilePictrue";
+import EditProfilePicture from "../../features/authentication/components/EditProfilePicture";
+import { USER_ROLE } from "../../constants";
 
-export default function ProfileImage() {
-  const creator = useStore((state) => state.authUser.user);
-  const profileImage = creator.profileImage || null;
+export default function ProfileImage({ selectedCreator }) {
+  const authUser = useStore((state) => state.authUser.user);
+  const profileImage = selectedCreator.profileImage || null;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const profileUpload = useStore((state) => state.updateProfileImage);
+
+  const handleModalOpen = () => {
+    if (authUser.role === USER_ROLE.CREATOR && authUser.id === selectedCreator.id) {
+      setIsModalOpen(true);
+    }
+  };
 
   return (
     <>
@@ -15,7 +22,7 @@ export default function ProfileImage() {
         <div>
           <button
             className="w-56 h-56 rounded-full flex justify-center items-center overflow-hidden bg-white"
-            onClick={() => setIsModalOpen(true)}
+            onClick={handleModalOpen}
           >
             {profileImage ? (
               <img
@@ -24,12 +31,12 @@ export default function ProfileImage() {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="text-8xl">{creator.firstName[0].toUpperCase()}</div>
+              <div className="text-8xl">{selectedCreator.firstName[0].toUpperCase()}</div>
             )}
           </button>
         </div>
         <span className="text-4xl font-semibold mt-5">
-          {`${creator.firstName} ${creator.lastName}`}
+          {`${selectedCreator.firstName} ${selectedCreator.lastName}`}
         </span>
       </div>
       <Modal
@@ -40,7 +47,7 @@ export default function ProfileImage() {
       >
         <EditProfilePicture
           profileImage={profileImage}
-          creatorFirstLetter={creator.firstName[0].toUpperCase()}
+          creatorFirstLetter={selectedCreator.firstName[0].toUpperCase()}
           handleProfileImageSave={profileUpload}
           onSuccess={() => setIsModalOpen(false)}
         />

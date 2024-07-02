@@ -25,13 +25,11 @@ export default function CampaignPage() {
   const [subPage, setSubPage] = useState(subPageMap.STORY);
   const role = useStore((state) => state.authUser.role);
   const authUser = useStore((state) => state.authUser.user);
-  console.log("authUser", authUser);
   const handleSubPageChange = (subPage) => {
     setSubPage(subPage);
   };
 
-  const isCreator =
-    role === USER_ROLE.CREATOR && authUser.id === project.creatorId ? true : false;
+  const isCreator = role === USER_ROLE.CREATOR && authUser.id === project.creatorId;
 
   return (
     <div className="py-10">

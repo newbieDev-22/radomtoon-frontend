@@ -1,15 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import ImgCard from "../components/ImageCard";
 import { mockDataStatsBar } from "../constants";
 import { useStore } from "../store/useStore";
+import StatsBanner from "../components/StatsBannerComponent/StatsBanner";
 import dayjs from "dayjs";
 
-import StatsBanner from "../components/StatsBannerComponent/StatsBanner";
-
-const mockProductPath = "/campaign/1";
-
 export default function HomePage() {
-  const navigate = useNavigate();
   const product = useStore((state) => state.product.data);
   const today = useStore((state) => state.product.today);
 
@@ -36,7 +31,8 @@ export default function HomePage() {
             avatarImage={el.creatorProfileImage}
             vid={el.productVideo}
             mainCard={true}
-            onClick={() => navigate(mockProductPath)}
+            productId={el.id}
+            creator={el.creatorId}
           />
         ))}
         <div className="grid grid-cols-2 gap-4 mb-20">
@@ -55,7 +51,8 @@ export default function HomePage() {
               content={el.summaryDetail}
               avatarImage={el.creatorProfileImage}
               vid={el.productVideo}
-              onClick={() => navigate(mockProductPath)}
+              productId={el.id}
+              creator={el.creatorId}
             />
           ))}
         </div>

@@ -5,6 +5,7 @@ import { useStore } from "../store/useStore";
 import { toast } from "react-toastify";
 
 export default function UserNavMenu({ inLanding, currentUser }) {
+  const user = useStore((state) => state.authUser.user);
   const navigate = useNavigate();
   const logout = useStore((state) => state.logout);
 
@@ -28,7 +29,7 @@ export default function UserNavMenu({ inLanding, currentUser }) {
       )}
       {currentUser === USER_ROLE.CREATOR && (
         <Button
-          onClick={() => navigate("/creator-panel")}
+          onClick={() => navigate(`/creator-panel/${user.id}`)}
           bg="creator-normal"
           width="40"
           height="14"

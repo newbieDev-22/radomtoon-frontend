@@ -1,6 +1,6 @@
 import productApi from "../../apis/product";
 
-export const creatorSlice = (set) => ({
+export const creatorProductSlice = (set) => ({
   creatorProduct: { data: [], loading: false, error: null, today: new Date() },
   fetchCreatorProduct: async () => {
     try {

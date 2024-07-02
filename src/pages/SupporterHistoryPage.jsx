@@ -1,16 +1,39 @@
+import Button from "../components/Button";
 import TablePagination from "../components/TablePagination";
 
-const columns = ["Project", "Tier", "Price", "Project Status", "Delivery Status"];
+const columns = [
+  "Project",
+  "Tier",
+  "Price",
+  "Project Status",
+  "Delivery Status",
+  "Cancel support",
+];
 const data = [
-  ["Product A", 1, 100, <div className="text-red-600">Failed</div>, <div>-</div>],
+  [
+    "Product A",
+    1,
+    100,
+    <div className="text-red-600">Failed</div>,
+    <div>-</div>,
+    <Button>Cancel support</Button>,
+  ],
   [
     "Product A",
     1,
     100,
     <div className="text-green-600">Success</div>,
     <div className="text-green-600">Delivered</div>,
+    <Button>Cancel support</Button>,
   ],
-  ["Product A", 1, 100, <div>Pending</div>, <div>Waiting product...</div>],
+  [
+    "Product A",
+    1,
+    100,
+    <div>Pending</div>,
+    <div>Waiting product...</div>,
+    <Button>Cancel support</Button>,
+  ],
   ["Product A", 1, 100, <div className="text-red-600">Failed</div>, <div>-</div>],
   [
     "Product A",
