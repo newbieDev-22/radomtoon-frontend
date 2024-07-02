@@ -2,8 +2,10 @@ import { heightMap, progressBar, widthMap } from "../constants";
 import ReactPlayer from "react-player";
 import { useState } from "react";
 import { TimeIcon } from "../icons";
+import { motion } from "framer-motion";
 
 export default function ImgCard({
+  variants,
   imageSrc,
   productName,
   creatorName,
@@ -23,7 +25,8 @@ export default function ImgCard({
   const handleMouseLeave = () => setHover(false);
 
   return (
-    <div
+    <motion.div
+      variants={variants}
       role="button"
       className={`relative items-center gap-4 ${mainCard && "h-96"}`}
       onClick={onClick}
@@ -61,12 +64,17 @@ export default function ImgCard({
                 height="100%"
                 className="absolute top-0 left-0 rounded-t-lg"
               />
-              <div className="absolute w-full h-full cursor-pointer" onClick={onClick} />
+              <div
+                className="absolute w-full h-full cursor-pointer"
+                onClick={onClick}
+              />
             </div>
           )}
         </div>
         <div className="h-2 bg-neutral-300">
-          <div className={`h-2 ${progressBar[progressSize]} bg-supporter-saturate`}></div>
+          <div
+            className={`h-2 ${progressBar[progressSize]} bg-supporter-saturate`}
+          ></div>
         </div>
 
         <div className="flex ml-4 gap-4 py-2">
@@ -74,7 +82,9 @@ export default function ImgCard({
             {avatarImage ? (
               <img
                 src={avatarImage}
-                className={`${mainCard ? "w-28" : "w-56"} rounded-full shadow-lg`}
+                className={`${
+                  mainCard ? "w-28" : "w-56"
+                } rounded-full shadow-lg`}
                 alt="Avatar"
               />
             ) : (
@@ -111,6 +121,6 @@ export default function ImgCard({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
