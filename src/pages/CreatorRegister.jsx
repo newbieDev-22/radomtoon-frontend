@@ -319,7 +319,7 @@ export default function CreatorRegister() {
               </div>
             ) : (
               <div
-                className="cursor-pointer flex flex-col items-center justify-center m-8 bg-creator-saturate p-8 rounded-xl"
+                className="cursor-pointer flex flex-col items-center justify-center m-8 border-2 border-radomtoon-bright bg-creator-saturate p-8 rounded-xl"
                 onClick={() => fileEl.current.click()}
               >
                 <img
