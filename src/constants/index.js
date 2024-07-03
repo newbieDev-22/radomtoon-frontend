@@ -1,11 +1,14 @@
 export const STATUS_PRODUCT = {
-  PENDING: "Waiting for admin approval",
-  IN_PROGRESS: "Project in progress",
-  REJECT: "Reject",
-  FAILED: "Failed",
-  SUCCESS: "Success",
-  Drafting: "Drafting project"
+  PENDING: { text: "Waiting for project approval", bg: "bg-yellow-300", color: "text-yellow-400" },
+  IN_PROGRESS: { text: "Project in progress", bg: "bg-creator-normal", color: "text-creator-saturate" },
+  REJECT: { text: "Rejected", bg: "bg-orange-300", color: "text-orange-500" },
+  FAILED: { text: "Failed", bg: "bg-red-300", color: "text-red-500" },
+  SUCCESS: { text: "Success", bg: "bg-green-300", color: "text-green-400" },
+  DRAFTING: { text: "Drafting project", bg: "bg-gray-300", color: "text-gray-400" },
 };
+
+
+
 
 export const widthMap = {
   small: "w-[300px]",
