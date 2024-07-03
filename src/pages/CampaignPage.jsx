@@ -31,7 +31,9 @@ export default function CampaignPage() {
   };
 
   const isCreator =
-    role === USER_ROLE.CREATOR && authUser.id === project.creatorId ? true : false;
+    role === USER_ROLE.CREATOR && authUser.id === project.creatorId
+      ? true
+      : false;
 
   return (
     <div className="py-10">
@@ -54,7 +56,6 @@ export default function CampaignPage() {
       {subPage === subPageMap.MILESTONE && (
         <div>
           <Milestone />
-
           <div className="grid grid-cols-3  w-full">
             <AddMilestone name="Milestone 1" />
             <AddMilestone name="Milestone 2" />
