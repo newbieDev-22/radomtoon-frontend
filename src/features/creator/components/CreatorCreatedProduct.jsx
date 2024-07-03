@@ -38,6 +38,7 @@ export default function CreatorCreatedProduct() {
               width={60}
               bg="creator-saturate"
               onClick={handleClickAddNewProject}
+              color="white"
             >
               Start new project
             </Button>
