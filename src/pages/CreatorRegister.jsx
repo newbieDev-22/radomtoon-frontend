@@ -12,6 +12,7 @@ import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import authApi from "../apis/auth";
 import Spinner from "../components/Spinner";
+import { motion } from "framer-motion";
 
 const initialInput = {
   firstName: "",
@@ -34,6 +35,12 @@ const initialInputError = {
   policy: "",
   address: "",
   provinceId: "",
+};
+
+const popupImg = {
+  initial: { opacity: 0, scale: 0.8 },
+  animate: { opacity: 1, scale: 1 },
+  transition: { type: "spring", duration: 0.6, ease: "easeOut" },
 };
 
 export default function CreatorRegister() {
@@ -259,7 +266,12 @@ export default function CreatorRegister() {
                   <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
                 )}
 
-                <Button width={"full"} height="14" bg="creator-saturate" color="white">
+                <Button
+                  width={"full"}
+                  height="14"
+                  bg="creator-saturate"
+                  color="white"
+                >
                   Request Approve
                 </Button>
               </div>
@@ -274,15 +286,16 @@ export default function CreatorRegister() {
                 className=" flex items-center justify-center w-full p-16"
                 onClick={() => fileEl.current.click()}
               >
-                <img
+                <motion.img
                   src={URL.createObjectURL(file)}
                   alt="Selected"
                   className="object-cover aspect-[16/9] w-full rounded-xl"
+                  {...popupImg}
                 />
               </div>
             ) : (
               <div
-                className=" flex flex-col items-center justify-center m-8 bg-[#3a96a9] p-8 rounded-xl"
+                className="cursor-pointer flex flex-col items-center justify-center m-8 bg-[#3a96a9] p-8 rounded-xl"
                 onClick={() => fileEl.current.click()}
               >
                 <img
