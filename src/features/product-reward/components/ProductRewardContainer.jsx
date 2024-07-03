@@ -3,11 +3,96 @@ import Button from "../../../components/Button";
 import { USER_ROLE } from "../../../constants";
 import TierCard from "../../tier/components/TierCard";
 import { motion } from "framer-motion";
-import { animate } from "framer-motion";
-import { easeIn } from "framer-motion";
-import { stagger } from "framer-motion";
 
 const data = [
+  {
+    mockTierNumber: "1",
+    mockProductName: "Starter Kit",
+    mockDetail: `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
+INCLUDES,`,
+    mockDateEstimated: "Dec 2024",
+    mockAmountSupporters: "456",
+    mockImageProduct:
+      "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D",
+    mockPrice: 20,
+  },
+  {
+    mockTierNumber: "1",
+    mockProductName: "Starter Kit",
+    mockDetail: `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
+INCLUDES,`,
+    mockDateEstimated: "Dec 2024",
+    mockAmountSupporters: "456",
+    mockImageProduct:
+      "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D",
+    mockPrice: 20,
+  },
+  {
+    mockTierNumber: "1",
+    mockProductName: "Starter Kit",
+    mockDetail: `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
+INCLUDES,`,
+    mockDateEstimated: "Dec 2024",
+    mockAmountSupporters: "456",
+    mockImageProduct:
+      "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D",
+    mockPrice: 20,
+  },
+  {
+    mockTierNumber: "1",
+    mockProductName: "Starter Kit",
+    mockDetail: `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
+INCLUDES,`,
+    mockDateEstimated: "Dec 2024",
+    mockAmountSupporters: "456",
+    mockImageProduct:
+      "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D",
+    mockPrice: 20,
+  },
+  {
+    mockTierNumber: "1",
+    mockProductName: "Starter Kit",
+    mockDetail: `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
+INCLUDES,`,
+    mockDateEstimated: "Dec 2024",
+    mockAmountSupporters: "456",
+    mockImageProduct:
+      "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D",
+    mockPrice: 20,
+  },
+  {
+    mockTierNumber: "1",
+    mockProductName: "Starter Kit",
+    mockDetail: `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
+INCLUDES,`,
+    mockDateEstimated: "Dec 2024",
+    mockAmountSupporters: "456",
+    mockImageProduct:
+      "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D",
+    mockPrice: 20,
+  },
+  {
+    mockTierNumber: "1",
+    mockProductName: "Starter Kit",
+    mockDetail: `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
+INCLUDES,`,
+    mockDateEstimated: "Dec 2024",
+    mockAmountSupporters: "456",
+    mockImageProduct:
+      "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D",
+    mockPrice: 20,
+  },
+  {
+    mockTierNumber: "1",
+    mockProductName: "Starter Kit",
+    mockDetail: `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
+INCLUDES,`,
+    mockDateEstimated: "Dec 2024",
+    mockAmountSupporters: "456",
+    mockImageProduct:
+      "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D",
+    mockPrice: 20,
+  },
   {
     mockTierNumber: "1",
     mockProductName: "Starter Kit",
