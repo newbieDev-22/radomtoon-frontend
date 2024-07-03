@@ -52,4 +52,57 @@ export const productSlice = (set, get) => ({
       set(() => ({ productLoading: false }));
     }
   },
+  updateProduct: async (productId, formData) => {
+    try {
+      set(() => ({ productLoading: true }));
+      const productResponse = await productApi.updateProduct(productId, formData);
+      const productDetail = productResponse.data.productDetail;
+
+      const { data } = get().product;
+
+      const productIndex = data.findIndex((el) => el.id === productDetail.id);
+      data[productIndex] = productDetail;
+
+      set((state) => ({
+        product: {
+          ...state.product,
+          data: data,
+        },
+      }));
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
+  },
+  deleteProduct: async (productId) => {
+    try {
+      set(() => ({ productLoading: true }));
+      await productApi.deleteProduct(productId);
+      const { data } = get().product;
+
+      const productFilter = data.filter((el) => el.id !== productId);
+
+      set((state) => ({
+        product: {
+          ...state.product,
+          data: productFilter,
+        },
+      }));
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
+  },
+  filterProductByProductId: (productId) => {
+    const { data } = get().product;
+    const selectedProduct = data.filter((el) => el.id === +productId);
+    if (selectedProduct.length > 0) {
+      return selectedProduct[0];
+    }
+    return null;
+  },
 });

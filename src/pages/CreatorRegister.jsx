@@ -37,6 +37,17 @@ const initialInputError = {
   provinceId: "",
 };
 
+const slideRegisterForm = {
+  initial: { opacity: 0, x: -20 },
+  animate: { opacity: 1, x: 0 },
+  transition: { type: "spring", duration: 0.6, ease: "easeOut" },
+};
+const slideUploadId = {
+  initial: { opacity: 0, x: 20 },
+  animate: { opacity: 1, x: 0 },
+  transition: { type: "spring", duration: 0.6, ease: "easeOut" },
+};
+
 const popupImg = {
   initial: { opacity: 0, scale: 0.8 },
   animate: { opacity: 1, scale: 1 },
@@ -147,8 +158,18 @@ export default function CreatorRegister() {
         }}
       ></input>
       <div className="min-w-screen min-h-screen">
-        <div className="grid grid-cols-2 shadow-lg rounded-lg bg-cyan-100">
-          <div className="px-20  flex w-full h-full flex-col justify-center">
+        <div className="relative h-screen w-full">
+          <img
+            src="https://img.freepik.com/free-photo/business-people-are-brainstorming_53876-137640.jpg?t=st=1719998012~exp=1720001612~hmac=57706cfbab3adaf7d9e782f3488b605a361057959f0c33ba7d32b9e033af5c84&w=1480"
+            alt=""
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 flex justify-between items-center rounded-lg w-full px-8">
+          <motion.div
+            {...slideRegisterForm}
+            className="shadow-lg bg-slate-100 bg-opacity-70 backdrop-blur-md px-20 rounded-xl flex w-[800px] h-[700px] flex-col justify-center"
+          >
             <h1 className="text-4xl text-center mb-2 font-bold text-radomtoon-dark">
               Bring your imagination to life
             </h1>
@@ -276,8 +297,11 @@ export default function CreatorRegister() {
                 </Button>
               </div>
             </form>
-          </div>
-          <div className="h-screen w-full flex flex-col items-center justify-center ">
+          </motion.div>
+          <motion.div
+            {...slideUploadId}
+            className="shadow-lg bg-slate-100 bg-opacity-70 backdrop-blur-md rounded-xl w-[800px] h-[700px]  flex flex-col items-center justify-center "
+          >
             <h3 className="text-4xl text-center font-bold text-radomtoon-dark">
               Identity Image Preview
             </h3>
@@ -295,7 +319,7 @@ export default function CreatorRegister() {
               </div>
             ) : (
               <div
-                className="cursor-pointer flex flex-col items-center justify-center m-8 bg-[#3a96a9] p-8 rounded-xl"
+                className="cursor-pointer flex flex-col items-center justify-center m-8 bg-creator-saturate p-8 rounded-xl"
                 onClick={() => fileEl.current.click()}
               >
                 <img
@@ -303,12 +327,12 @@ export default function CreatorRegister() {
                   alt="Selected"
                   className="object-cover aspect-square w-1/2 opacity-50"
                 />
-                <div className="text-2xl font-bold text-center">
+                <div className="text-white text-2xl font-bold text-center">
                   Add your identity card with your image
                 </div>
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
 

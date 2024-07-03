@@ -181,7 +181,7 @@ export default function CampaignSetup() {
                   name="deadline"
                   onChange={handleInputChange}
                   className={`bg-gray-50 border  ${
-                    inputError.deadline ? "border-red-500" : "border-gray-300"
+                    inputError.deadline ? "border-red-500" : "border-gray"
                   } text-gray-900 text-ls rounded-lg block p-2.5 w-full`}
                 />
                 {inputError.deadline && (
@@ -211,10 +211,11 @@ export default function CampaignSetup() {
               <textarea
                 placeholder="Please fill summary detail"
                 name="summaryDetail"
+                value={input.summaryDetail}
                 onChange={handleInputChange}
-                className={`placeholder-gray-500 indent-1 min-h-24 max-h-24 bg-gray-50 border ${
-                  inputError.summaryDetail ? "border-red-500" : "border-gray-300"
-                }  text-gray-900 text-ls rounded-lg block p-2.5 w-full`}
+                className={`placeholder-gray-500 indent-1 min-h-24 max-h-24 border ${
+                  inputError.summaryDetail ? "border-red-500" : "border-gray"
+                }  text-gray-500 text-ls rounded-lg block p-2.5 w-full`}
               ></textarea>
               {inputError.summaryDetail && (
                 <small className="text-red-500 font-semibold">
