@@ -13,8 +13,6 @@ import Spinner from "../../../components/Spinner";
 import Modal from "../../../components/Modal";
 import ConfirmModal from "../../../components/ConfirmModal";
 
-const mockSelectTierPath = "/campaign/1/tier";
-
 const initialInputError = {
   productName: "",
   goal: "",
@@ -37,24 +35,25 @@ export default function CampaignContent() {
   const { productId } = useParams();
   const filterData = filterProductByProductId(+productId);
 
-  const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData.creatorId;
-  const isApproved = filterData.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
+  const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData?.creatorId;
+  const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
 
   console.log("filterData", filterData);
 
   const initialInput = {
-    productName: filterData.productName,
-    goal: filterData.goal,
-    deadline: dayjs(filterData.deadline).format("YYYY-MM-DD"),
-    categoryId: filterData.categoryId,
-    productImage: filterData.productImage,
-    productVideo: filterData.productVideo,
-    summaryDetail: filterData.summaryDetail,
-    supportCount: filterData.supporterCount,
-    totalFund: filterData.totalFund,
+    productName: filterData?.productName,
+    goal: filterData?.goal,
+    deadline: dayjs(filterData?.deadline).format("YYYY-MM-DD"),
+    categoryId: filterData?.categoryId,
+    productImage: filterData?.productImage,
+    productVideo: filterData?.productVideo,
+    summaryDetail: filterData?.summaryDetail,
+    supportCount: filterData?.supporterCount,
+    totalFund: filterData?.totalFund,
   };
 
   const [input, setInput] = useState(initialInput);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [inputError, setInputError] = useState(initialInputError);
   const [isEdit, setIsEdit] = useState(false);
   const fileEl = useRef();
@@ -117,11 +116,12 @@ export default function CampaignContent() {
     }
   };
 
-  const handleClickDelete = async () => {
+  const handleDelete = async () => {
     try {
       await deleteProduct(+productId);
+      setIsDeleteModalOpen(false);
       toast.success("Deleted project successfully");
-      navigate("/");
+      navigate(`/creator-panel/${authUser.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -212,7 +212,7 @@ export default function CampaignContent() {
                   <Button width={30} bg="yellow" onClick={handleClickEdit}>
                     Edit
                   </Button>
-                  <Button width={30} bg="red" onClick={handleClickDelete}>
+                  <Button width={30} bg="red" onClick={() => setIsDeleteModalOpen(true)}>
                     Delete
                   </Button>
                   <Button
@@ -225,7 +225,10 @@ export default function CampaignContent() {
                 </div>
               ) : (
                 <div className="w-full">
-                  <Button width="full" onClick={() => navigate(mockSelectTierPath)}>
+                  <Button
+                    width="full"
+                    onClick={() => navigate(`/campaign/${productId}/tier`)}
+                  >
                     Support this project
                   </Button>
                 </div>
@@ -235,11 +238,18 @@ export default function CampaignContent() {
         </div>
       </div>
 
-      <Modal open={isEdit} onClose={() => setIsEdit(false)}>
+      <Modal
+        open={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        title={"Confirm Delete Product"}
+        width={40}
+      >
         <ConfirmModal
           subTitle={"Are you sure you want to delete this project?"}
-          onCancel={""}
-          onConfirm={""}
+          onCancel={() => setIsDeleteModalOpen(false)}
+          onConfirm={() => {
+            handleDelete();
+          }}
         />
       </Modal>
     </>
