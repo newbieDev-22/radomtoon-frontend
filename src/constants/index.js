@@ -4,6 +4,7 @@ export const STATUS_PRODUCT = {
   REJECT: "Reject",
   FAILED: "Failed",
   SUCCESS: "Success",
+  Drafting: "Drafting project"
 };
 
 export const widthMap = {
