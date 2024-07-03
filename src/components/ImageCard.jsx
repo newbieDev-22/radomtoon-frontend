@@ -49,7 +49,7 @@ export default function ImgCard({
       mainCard
         ? "h-auto w-[580px]"
         : "border border-transparent hover:h-auto hover:absolute z-20 overflow-hidden hover:bg-white hover:border-slate-300 hover:shadow-lg"
-    }  `,
+      }  `,
   };
 
   return (
@@ -58,9 +58,8 @@ export default function ImgCard({
         <div className="relative">
           <div className={isEditCardMap[isEdit]}>
             <div
-              className={`${
-                mainCard ? "h-80  rounded-t-md" : "h-40"
-              } relative overflow-hidden`}
+              className={`${mainCard ? "h-80  rounded-t-md" : "h-40"
+                } relative overflow-hidden`}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
@@ -126,9 +125,8 @@ export default function ImgCard({
               <div className="overflow-hidden px-2 group w-5/6">
                 <div
                   role="button"
-                  className={`font-medium truncate group-hover:underline ${
-                    mainCard && "text-xl"
-                  }`}
+                  className={`font-medium truncate group-hover:underline ${mainCard && "text-xl"
+                    }`}
                   onClick={() => navigate(`/campaign/${productId}`)}
                 >
                   {productName}
@@ -145,11 +143,10 @@ export default function ImgCard({
                 </span>
                 {!isEdit && (
                   <div
-                    className={`${
-                      mainCard
-                        ? "opacity-100 -translate-y-3"
-                        : "opacity-0 group-hover:opacity-100 duration-[1s] group-hover:-translate-y-4"
-                    }`}
+                    className={`${mainCard
+                      ? "opacity-100 -translate-y-3"
+                      : "opacity-0 group-hover:opacity-100 duration-[1s] group-hover:-translate-y-4"
+                      }`}
                   >
                     <p>{content}</p>
                   </div>

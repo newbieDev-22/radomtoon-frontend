@@ -26,10 +26,17 @@ export default function CreatorCreatedProduct() {
       <div className="flex flex-col justify-center gap-8 ">
         {shouldFilterByApprovalStatus ? (
           <div className="flex justify-end w-full">
-            <Button
+            {/* <Button
               width={60}
               bg="creator-saturate"
               color="white"
+              onClick={handleClickAddNewProject}
+            >
+              Start new project
+            </Button> */}
+            <Button
+              width={60}
+              bg="creator-saturate"
               onClick={handleClickAddNewProject}
             >
               Start new project
