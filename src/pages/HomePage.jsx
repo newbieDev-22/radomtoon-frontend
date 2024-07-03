@@ -15,14 +15,14 @@ const containerVariants = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.2,
     },
   },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
+  show: { opacity: 1, y: 0, transition: { duration: 1 } },
 };
 
 const mainCardVariants = {
@@ -31,7 +31,7 @@ const mainCardVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      staggerChildren: 0.1,
+      duration: 0.7,
     },
   },
 };
