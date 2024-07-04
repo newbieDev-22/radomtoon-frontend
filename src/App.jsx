@@ -14,7 +14,9 @@ export default function App() {
   const productLoading = useStore((state) => state.product.loading);
   const userLoading = useStore((state) => state.authUser.loading);
   const creatorUserLoading = useStore((state) => state.creatorUser.loading);
-  const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
+  const creatorProductLoading = useStore(
+    (state) => state.creatorProduct.loading
+  );
 
   useEffect(() => {
     fetchProduct();
@@ -30,7 +32,12 @@ export default function App() {
     }
   }, [fetchCreatorProduct, resetCreatorProduct, role]);
 
-  if (userLoading || productLoading || creatorUserLoading || creatorProductLoading) {
+  if (
+    userLoading ||
+    productLoading ||
+    creatorUserLoading ||
+    creatorProductLoading
+  ) {
     return <Loading />;
   }
 

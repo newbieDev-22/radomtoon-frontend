@@ -3,9 +3,10 @@ import CreatorCreatedProduct from "./CreatorCreatedProduct";
 import CreatorEditProfile from "./CreatorEditProfile";
 
 const adminMenuStyleMap = {
-  isNotSelected:
-    "outline-none px-6 py-2 m-2 hover:rounded-md hover:bg-gray-300 focus:outline-none hover:scale-110 active:scale-100 transition-all",
-  isSelected: "outline-none px-6 py-2 m-2 bg-gray-400 rounded-md",
+  isNotSelected: `outline-none px-6 py-2 m-2 hover:rounded-md hover:bg-wight
+  focus:outline-none hover:scale-110 active:scale-100 transition-all `,
+
+  isSelected: "outline-none px-6 py-2 m-2 bg-creator-saturate rounded-md",
 };
 
 const CREATOR_MENU = {
@@ -18,7 +19,7 @@ export default function CreatorMenu() {
 
   return (
     <div>
-      <div className="flex flex-row justify-center w-full border-b-1 shadow-md py-4">
+      <div className="flex flex-row justify-center w-full border-b-1 shadow-md py-4 text-lg font-semibold ">
         <button
           onClick={() => setSelectMenu(CREATOR_MENU.ABOUT)}
           className={

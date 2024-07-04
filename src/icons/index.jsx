@@ -162,7 +162,11 @@ export function PictureIcon({ className }) {
       className={className}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
 
       <g id="SVGRepo_iconCarrier">
         <path
@@ -210,6 +214,7 @@ export function Verified() {
   );
 }
 
+
 export function SpinnerIcon({ className = null }) {
   return (
     <svg
@@ -224,23 +229,25 @@ export function SpinnerIcon({ className = null }) {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-        fill="#000000"
+        fill="#01C7D0"
       />
       <path
         d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z"
-        fill="#000000"
+        fill="#A1E3D9"
       />
     </svg>
   );
 }
 
+
 export function FilterIcon({ className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="24px"
+      height="full"
       viewBox="0 -960 960 960"
-      width="24px"
+      width="full"
+
       fill="#5f6368"
       className={className}
     >
@@ -249,13 +256,29 @@ export function FilterIcon({ className }) {
   );
 }
 
+export function Error({ className }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="300px"
+      viewBox="0 -960 960 960"
+      width="300px"
+      fill="#EA3323"
+      className={className}
+    >
+      <path d="M479.98-280q14.02 0 23.52-9.48t9.5-23.5q0-14.02-9.48-23.52t-23.5-9.5q-14.02 0-23.52 9.48t-9.5 23.5q0 14.02 9.48 23.52t23.5 9.5ZM453-433h60v-253h-60v253Zm27.27 353q-82.74 0-155.5-31.5Q252-143 197.5-197.5t-86-127.34Q80-397.68 80-480.5t31.5-155.66Q143-709 197.5-763t127.34-85.5Q397.68-880 480.5-880t155.66 31.5Q709-817 763-763t85.5 127Q880-563 880-480.27q0 82.74-31.5 155.5Q817-252 763-197.68q-54 54.31-127 86Q563-80 480.27-80Zm.23-60Q622-140 721-239.5t99-241Q820-622 721.19-721T480-820q-141 0-240.5 98.81T140-480q0 141 99.5 240.5t241 99.5Zm-.5-340Z" />
+    </svg>
+  );
+}
+
 export function FilterMonth({ className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="24px"
+      height="full"
       viewBox="0 -960 960 960"
-      width="24px"
+      width="full"
+
       fill="#5f6368"
       className={className}
     >
