@@ -4,8 +4,6 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import validateRegister from "../validators/validate-register";
 import Dropdown from "../components/Dropdown";
-import { PROVINCE_MAP } from "../constants";
-import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import authApi from "../apis/auth";
