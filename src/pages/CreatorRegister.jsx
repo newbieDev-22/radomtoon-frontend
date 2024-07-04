@@ -42,11 +42,6 @@ const slideRegisterForm = {
   animate: { opacity: 1, x: 0 },
   transition: { type: "spring", duration: 0.8, ease: "easeOut" },
 };
-const slideUploadId = {
-  initial: { opacity: 0, x: 20 },
-  animate: { opacity: 1, x: 0 },
-  transition: { type: "spring", duration: 0.8, ease: "easeOut" },
-};
 
 const popupImg = {
   initial: { opacity: 0, scale: 0.8 },

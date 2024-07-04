@@ -77,7 +77,7 @@ export default function LoginPage() {
           </div>
           <motion.div
             {...popupForm}
-            className="absolute rounded-xl inset-0 m-auto px-20 w-1/3 bg-slate-100 bg-opacity-80 backdrop-blur-md flex h-1/2 flex-col justify-center"
+            className="absolute rounded-xl inset-0 m-auto px-20 w-1/3 bg-slate-100 bg-opacity-70 backdrop-blur-md flex h-1/2 flex-col justify-center"
           >
             <h1 className="text-3xl font-bold text-center">LOG IN</h1>
 

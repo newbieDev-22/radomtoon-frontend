@@ -11,6 +11,7 @@ import { PROVINCE_MAP } from "../constants";
 import Spinner from "../components/Spinner";
 import Modal from "../components/Modal";
 import Policy from "../features/authentication/components/Policy";
+import { motion } from "framer-motion";
 
 const initialInput = {
   firstName: "",
@@ -32,6 +33,12 @@ const initialInputError = {
   confirmPassword: "",
   address: "",
   provinceId: "",
+};
+
+const slideRegisterForm = {
+  initial: { opacity: 0, x: 20 },
+  animate: { opacity: 1, x: 0 },
+  transition: { type: "spring", duration: 0.8, ease: "easeOut" },
 };
 
 export default function SupporterRegister() {
@@ -98,24 +105,19 @@ export default function SupporterRegister() {
   return (
     <>
       {isLoading && <Spinner transparent />}
-      <div className="min-w-screen min-h-screen">
-        <div className="grid grid-cols-2 shadow-lg rounded-lg">
-          <div className="relative h-screen w-full group">
-            <img
-              src="https://images.unsplash.com/photo-1496024840928-4c417adf211d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-700 ease-in-out delay-300">
-              <button
-                onClick={() => navigate("/creator-register")}
-                className="text-white font-bold text-3xl opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out delay-500"
-              >
-                Register as Creator
-              </button>
-            </div>
-          </div>
-          <div className="px-20 bg-yellow-100 flex w-full h-full flex-col justify-center">
+      <div className="min-w-screen min-h-screen flex justify-center">
+        <div className="relative h-screen w-full">
+          <img
+            src="https://images.unsplash.com/photo-1633158829875-e5316a358c6f?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <motion.div
+          {...slideRegisterForm}
+          className="absolute mt-16 w-[50vw] h-[85vh]"
+        >
+          <div className="px-20 bg-white bg-opacity-70 backdrop-blur-md flex w-full h-full flex-col justify-center rounded-lg shadow-lg">
             <h1 className="text-5xl mb-2 font-semibold text-radomtoon-dark">
               Join the movement.
             </h1>
@@ -233,13 +235,18 @@ export default function SupporterRegister() {
                   <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
                 )}
 
-                <Button width={"full"} height="14" bg="creator-saturate" color="white">
+                <Button
+                  width={"full"}
+                  height="14"
+                  bg="creator-saturate"
+                  color="white"
+                >
                   Request Approve
                 </Button>
               </div>
             </form>
           </div>
-        </div>
+        </motion.div>
       </div>
       <Modal
         open={openPolicyModal}
@@ -251,4 +258,22 @@ export default function SupporterRegister() {
       </Modal>
     </>
   );
+}
+
+{
+  /* <div className="relative h-screen w-full group">
+            <img
+              src="https://images.unsplash.com/photo-1496024840928-4c417adf211d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt=""
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-700 ease-in-out delay-300">
+              <button
+                onClick={() => navigate("/creator-register")}
+                className="text-white font-bold text-3xl opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out delay-500"
+              >
+                Register as Creator
+              </button>
+            </div>
+          </div> */
 }
