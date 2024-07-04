@@ -1,29 +1,53 @@
 import { Pie } from "react-chartjs-2"
-import sourceData from "../doughnutChart/data/sourceData.json"
-export default function PieChart() {
+import { getResponsiveValue } from "../../../utils/responsive"
+
+export default function PieChart({ title, data }) {
+  const zoomLevels = {
+    sm: 'right',
+    '2xl': 'bottom'
+  }
+  const setZoomLevel = getResponsiveValue(zoomLevels)
+
     return (
-        <div className="w-[50rem] m-auto border-2 p-[3rem] rounded-xl  border-orange-500">
-            <Pie
-                className=" cursor-pointer"
-                data={{
-                    labels: sourceData.map((data) => data.lable),
-                    datasets: [
-                        {
-                            label: "Count",
-                            data: sourceData.map((data) => data.value),
-                            backgroundColor: [
-                                "rgba(42, 63, 229, 0.8)",
-                                "rgba(250, 192, 19, 0.8)",
-                                "rgba(253, 135, 135, 0.8)",
-                                "rgba(42, 263, 229, 0.8)",
-                                "rgba(452, 163, 279, 0.8)",
-                            ],
-                        },
-
-
-                    ]
-                }}
-            />
+      <div className="h-full w-full py-5 rounded-2xl bg-white flex flex-col gap-2 justify-between items-center ">
+        <div className="w-full px-10 justify-start text-lg font-semibold text-radomtoon-bright">
+          {title}
         </div>
+        <div className=" w-[60%] flex justify-center">
+          <Pie
+              className="cursor-pointer"
+              data={{
+                labels: data.map((data) => data.label),
+                datasets: [
+                  {
+                    label: "Count",
+                    data: data.map((data) => data.value),
+                    backgroundColor: [
+                      "#4290C0",
+                      "#54E6ED",
+                      "#91C4D9",
+                    ],
+                  },
+                ],
+              }}
+              options={{
+                plugins: {
+                  legend: {
+                    position: setZoomLevel,
+                  },
+                },
+              }}
+            />
+      </div>
+      <div className="grid gap-4 grid-cols-3 w-full text-center">
+        <span className="font-extrabold text-2xl xl:text-4xl text-[#4290C0]">{(data[0].value/(data.reduce( (acc, cur) => acc + cur.value, 0))*100).toFixed(0)}%</span>
+        <span className="font-extrabold text-2xl xl:text-4xl text-[#54E6ED]">{(data[1].value/(data.reduce( (acc, cur) => acc + cur.value, 0))*100).toFixed(0)}%</span>
+        <span className="font-extrabold text-2xl xl:text-4xl text-[#91C4D9]">{(data[2].value/(data.reduce( (acc, cur) => acc + cur.value, 0))*100).toFixed(0)}%</span>
+
+        <span className="font-semibold text-base xl:text-xl text-radomtoon-bright">THB {data[0].value.toLocaleString()}</span>
+        <span className="font-semibold text-base xl:text-xl text-radomtoon-bright">THB {data[1].value.toLocaleString()}</span>
+        <span className="font-semibold text-base xl:text-xl text-radomtoon-bright">THB {data[2].value.toLocaleString()}</span>
+      </div>
+    </div>
     )
 }

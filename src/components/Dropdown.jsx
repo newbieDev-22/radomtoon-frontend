@@ -1,7 +1,9 @@
-export default function Dropdown({ data, onChange, title }) {
+const CLASSNAME_DEFAULT = "h-full indent-2 rounded-lg outline-none focus:outline-none border border-gray w-full"
+
+export default function Dropdown({ data, onChange, title, className = CLASSNAME_DEFAULT }) {
   return (
     <select
-      className="h-full indent-2 rounded-lg outline-none focus:outline-none border border-gray w-full"
+      className={className}
       onChange={(e) => onChange(e.target.value)}
     >
       <option disabled>{title}</option>

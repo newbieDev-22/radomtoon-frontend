@@ -41,7 +41,7 @@ export default function ImgCard({
     }  active:scale-100 transition duration-300 rounded-xl ${
       mainCard
         ? "h-auto w-[580px]"
-        : "border border-transparent overflow-hidden"
+        : "border border-transparent overflow-hidden shadow-lg"
     }  `,
     false: `group ${widthMap[widthSize]} ${
       heightMap[heightSize]
@@ -93,20 +93,12 @@ export default function ImgCard({
                 className={`h-2 ${progressBar[progressSize]} bg-supporter-saturate`}
               ></div>
             </div>
-            <div className="mt-1 flex justify-end">
-              {isEdit && (
-                <span
-                  className={`flex w-fit h-5 p-1 rounded-lg items-center  text-xs text-semibold font-medium  px-2 ${mockStatus.bg}`}
-                >
-                  {mockStatus.text}
-                </span>
-              )}
-            </div>
+           
 
-            <div className={`flex px-2 gap-2 ${mainCard ? "py-4" : "py-2"} `}>
+            <div className={`flex px-2 gap-2 ${mainCard ? "py-4" : "py-1"} `}>
               <div
                 role="button"
-                className="w-1/6 py-1"
+                className="w-1/6"
                 onClick={() => navigate(`/creator-panel/${creatorId}`)}
               >
                 {avatarImage ? (
@@ -131,9 +123,12 @@ export default function ImgCard({
                 >
                   {productName}
                 </div>
+                <div className="flex flex-row justify-between">
                 <span className="text-gray-600 text-xs block">
                   {creatorName}
                 </span>
+            
+              </div>
 
                 <span className="mr-2 text-xs text-gray-500 font-medium">
                   <div className="flex items-center gap-1 py-1">
@@ -156,13 +151,18 @@ export default function ImgCard({
           </div>
         </div>
       </div>
-      {isEdit && (
-        <div className="absolute bottom-2 right-0 hover:scale-125 active:scale-100 transition-all">
-          <div className=" cursor-pointer" onClick={handleClickDotMenu}>
-            <DotMenu />
-          </div>
+      {/* button */}
+        <div className="absolute bottom-2 right-0 hover:brightness-110 active:scale-100 transition-all mr-1">
+        {isEdit && (
+                <button
+                  className={`flex w-fit h-4 rounded-md items-center  text-xs text-semibold font-medium px-2 py-3 ${mockStatus.bg}`}
+                  onClick={handleClickDotMenu}
+                >
+                  {mockStatus.text}
+                </button>
+              )}
         </div>
-      )}
+
     </div>
   );
 }
