@@ -16,9 +16,10 @@ export default function Button({
   disabled,
   onClick,
   isNotActive = false,
+  rounded = false
 }) {
-  const commonClasses = `flex justify-center items-center transition hover:brightness-110 active:brightness-75 duration-300 font-bold px-4  rounded-md 
-                         h-10 md:${heightBtnMap[height]} ${widthBtnMap[width]} ${
+  const commonClasses = `flex justify-center items-center transition hover:brightness-110 active:brightness-75 duration-300 font-bold px-4   
+                         h-10 ${rounded ? 'rounded-full' : 'rounded-md'} md:${heightBtnMap[height]} ${widthBtnMap[width]} ${
     bgBtnMap[bg]
   } ${borderBtnMap[border]} ${colorBtnMap[color]} ${border && "border-4"}`;
 

@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import AddMilestone from "../features/product-milestone/components/AddMilestone";
+import Milestone from "../features/product-milestone/components/Milestone";
 import CampaignSection from "../features/campaign/components/CampaignSection";
 import { USER_ROLE, subPageMap } from "../constants";
 import ProductCommentContainer from "../features/product-comment/components/ProductCommentContainer";
@@ -7,7 +9,7 @@ import Editor from "../components/EditorComponent/Editor";
 import CampaignContent from "../features/campaign/components/CampaignContent";
 import { useStore } from "../store/useStore";
 import { useParams, Navigate } from "react-router-dom";
-import MilestoneContainer from "../features/milestone/components/MilestoneContainer";
+import MilestoneContainer from "../features/product-milestone/MilestoneContainer";
 
 const project = {
   id: 1,
@@ -56,8 +58,9 @@ export default function CampaignPage() {
           <Editor />
         </div>
       )}
-
-      {subPage === subPageMap.MILESTONE && <MilestoneContainer />}
+      {subPage === subPageMap.MILESTONE && (
+          <MilestoneContainer />
+      )}
       {subPage === subPageMap.REWARD && <ProductRewardContainer isCreator={isCreator} />}
       {subPage === subPageMap.FORUM && <ProductCommentContainer />}
     </div>
