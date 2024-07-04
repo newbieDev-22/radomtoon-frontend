@@ -149,8 +149,6 @@ export default function ImgCard({
               </div>
             </div>
           </div>
-        </div>
-      </div>
       {/* button */}
         <div className="absolute bottom-2 right-0 hover:brightness-110 active:scale-100 transition-all mr-1">
         {isEdit && (
@@ -162,6 +160,8 @@ export default function ImgCard({
                 </button>
               )}
         </div>
+        </div>
+      </div>
 
     </div>
   );
