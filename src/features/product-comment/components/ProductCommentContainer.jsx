@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../../../components/Button";
 import ProductCommentCard from "./ProductCommentCard";
 import { USER_ROLE } from "../../../constants";
+import { motion } from "framer-motion";
 
 const data = [
   {
@@ -69,14 +70,32 @@ export default function ProductCommentContainer() {
   const handleClickSaveEdit = (id, data) => {
     const newAllComment = allComment;
     const commentIndex = allComment.findIndex((el) => el.id === id);
-    newAllComment[commentIndex] = { ...newAllComment[commentIndex], content: data };
+    newAllComment[commentIndex] = {
+      ...newAllComment[commentIndex],
+      content: data,
+    };
     setAllComment(newAllComment);
+  };
+
+  const commentContainer = {
+    hidden: { opacity: 1 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const showComment = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
   };
 
   return (
     <>
-      <div className="bg-gray-200  m-auto px-20 pt-10 pb-10">
 
+      <div className=" bg-gray-200 m-auto px-20 py-10">
         <form
           className="flex gap-5 justify-between mb-10 items-center"
           onSubmit={handleClickSend}
@@ -98,15 +117,18 @@ export default function ProductCommentContainer() {
           </Button>
         </form>
 
-        {allComment.toReversed().map((el) => (
-          <ProductCommentCard
-            key={el.id}
-            el={el}
-            isUserComment={isUserComment}
-            handleClickDelete={handleClickDelete}
-            handleClickSaveEdit={handleClickSaveEdit}
-          />
-        ))}
+        <motion.div variants={commentContainer} initial="hidden" animate="show">
+          {allComment.toReversed().map((el) => (
+            <motion.div key={el.id} variants={showComment}>
+              <ProductCommentCard
+                el={el}
+                isUserComment={isUserComment}
+                handleClickDelete={handleClickDelete}
+                handleClickSaveEdit={handleClickSaveEdit}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </>
   );

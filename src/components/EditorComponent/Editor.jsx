@@ -105,7 +105,7 @@ export default function Editor() {
         {isCreator && !isApproved && (
           <div className="py-2 flex justify-end">
             <Button type="button" onClick={handleSubmit}>
-              Submit
+              Save
             </Button>
           </div>
         )}

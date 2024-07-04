@@ -4,7 +4,12 @@ export default function CampaignShowContent({ input, remainingDay }) {
   return (
     <div className="flex flex-col gap-4 w-[35vw] justify-evenly">
       <div className="py-1">
-        <ProgressBar Numerator={input.totalFund} Denominator={input.goal} />
+        <ProgressBar
+          Numerator={input.totalFund}
+          Denominator={input.goal}
+          height="large"
+          rounded={true}
+        />
       </div>
       <div>
         <div className="text-4xl font-bold text-supporter-saturate">

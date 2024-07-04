@@ -3,14 +3,13 @@ import Button from "../components/Button";
 import dayjs from "dayjs";
 import { useStore } from "../store/useStore";
 import { CATEGORIES_TYPE, MIN_DEADLINE_DAYS, USER_ROLE } from "../constants";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import Input from "../components/Input";
-import { PictureIcon } from "../icons";
 import { toast } from "react-toastify";
 import validateProduct from "../validators/validate-create-project";
 import Spinner from "../components/Spinner";
-import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const initialInput = {
   productName: "",
@@ -28,6 +27,18 @@ const initialInputError = {
   categoryId: "",
   productVideo: "",
   summaryDetail: "",
+};
+
+const popupImg = {
+  initial: { opacity: 0, scale: 0.8 },
+  animate: { opacity: 1, scale: 1 },
+  transition: { type: "spring", duration: 0.6, ease: "easeOut" },
+};
+
+const slidDownForm = {
+  initial: { opacity: 0, y: -20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { type: "spring", duration: 0.6, ease: "easeOut" },
 };
 
 export default function CampaignSetup() {
@@ -113,39 +124,52 @@ export default function CampaignSetup() {
           }
         }}
       />
-      <div className="flex flex-col justify-center py-8 ">
-        <h1 className="text-5xl font-bold m-auto text-center">CREATE YOUR PROJECT</h1>
-        <div className="flex justify-center items-center mx-20 my-8">
-          <div className="w-2/5 flex justify-center">
+
+      <div className="flex flex-col justify-center p-4 sm:p-6 lg:p-8 xl:p-10 2xl:p-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mx-auto text-center mb-3">
+          CREATE YOUR PROJECT
+        </h1>
+
+        <motion.div
+          {...slidDownForm}
+          className="bg-white flex flex-col md:flex-row justify-center items-center mx-2 sm:mx-4 md:mx-8 lg:mx-12 xl:mx-16 2xl:mx-20 my-4 sm:my-6 lg:my-8 rounded-3xl shadow-[2px_6px_14px_1px_#00000024]"
+        >
+          <div className="w-full md:w-1/2 flex justify-center p-2 sm:p-4">
             {file ? (
-              <div onClick={() => fileEl.current.click()} className="w-full p-16">
-                <img
+              <div onClick={() => fileEl.current.click()} className="w-full">
+                <motion.img
+                  {...popupImg}
                   src={URL.createObjectURL(file)}
-                  className=" object-cover aspect-[16/9] rounded-xl bg-red-200"
+                  className="object-cover aspect-[16/9] rounded-xl bg-red-200"
                   alt="product"
                 />
               </div>
             ) : (
               <div
                 role="button"
-                className="w-3/5 flex flex-col justify-center items-center"
+                className="w-3/5 flex flex-col justify-center items-center p-4 sm:p-6 md:p-10 hover:rounded-xl hover:scale-105 duration-500"
                 onClick={() => fileEl.current.click()}
               >
-                <div className="w-full object-cover rounded-lg aspect-[16/9]  opacity-50 ">
-                  <PictureIcon />
-                </div>
-                <h3 className="text-4xl font-semibold">Add product image</h3>
+                <img
+                  src="https://img.freepik.com/premium-vector/upload-file-flat-illustration_120816-71603.jpg?w=996"
+                  alt="Upload"
+                />
+                <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold text-center">
+                  Add product image
+                </h3>
               </div>
             )}
           </div>
 
           <form
             onSubmit={handleSubmitForm}
-            className="flex flex-col gap-1 bg-gray-200 rounded-xl w-1/2 px-16 py-8"
+            className="flex flex-col gap-2 bg-[#e7f5fc] rounded-xl md:rounded-none md:rounded-tr-xl md:rounded-br-xl w-full md:w-1/2 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 sm:py-6 md:py-8"
           >
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-ls">Product name</span>
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                  Product name
+                </span>
               </div>
               <Input
                 placeholder="Product name"
@@ -158,7 +182,9 @@ export default function CampaignSetup() {
 
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-ls">Goal (THB)</span>
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                  Goal (THB)
+                </span>
               </div>
               <Input
                 placeholder="Goals"
@@ -170,19 +196,21 @@ export default function CampaignSetup() {
               />
             </label>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4">
               <label className="form-control w-full">
                 <div className="label">
-                  <span className="text-gray-500 font-semibold text-ls">Deadline</span>
+                  <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                    Deadline
+                  </span>
                 </div>
                 <input
                   type="date"
                   value={dayjs(input.deadline).format("YYYY-MM-DD")}
                   name="deadline"
                   onChange={handleInputChange}
-                  className={`bg-gray-50 border  ${
-                    inputError.deadline ? "border-red-500" : "border-gray"
-                  } text-gray-900 text-ls rounded-lg block p-2.5 w-full`}
+                  className={`bg-gray-50 border ${
+                    inputError.deadline ? "border-red-500" : "border-gray-300"
+                  } text-gray-900 text-sm sm:text-base md:text-lg lg:text-xl rounded-lg block p-2.5 w-full`}
                 />
                 {inputError.deadline && (
                   <small className="text-red-500 font-semibold">
@@ -192,7 +220,9 @@ export default function CampaignSetup() {
               </label>
               <label className="form-control w-full">
                 <div className="label">
-                  <span className="text-gray-500 font-semibold text-ls">Category</span>
+                  <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                    Category
+                  </span>
                 </div>
                 <Dropdown
                   data={CATEGORIES_TYPE.map((el) => el.name)}
@@ -204,7 +234,7 @@ export default function CampaignSetup() {
 
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-ls">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
                   Summary Detail
                 </span>
               </div>
@@ -214,8 +244,8 @@ export default function CampaignSetup() {
                 value={input.summaryDetail}
                 onChange={handleInputChange}
                 className={`placeholder-gray-500 indent-1 min-h-24 max-h-24 border ${
-                  inputError.summaryDetail ? "border-red-500" : "border-gray"
-                }  text-gray-500 text-ls rounded-lg block p-2.5 w-full`}
+                  inputError.summaryDetail ? "border-red-500" : "border-gray-300"
+                } text-gray-500 text-sm sm:text-base md:text-lg lg:text-xl rounded-lg block p-2.5 w-full`}
               ></textarea>
               {inputError.summaryDetail && (
                 <small className="text-red-500 font-semibold">
@@ -226,8 +256,8 @@ export default function CampaignSetup() {
 
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-ls">
-                  Product video link
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                  Product video link &#40;optional&#41;
                 </span>
               </div>
               <Input
@@ -240,12 +270,12 @@ export default function CampaignSetup() {
             </label>
 
             <div className="py-4">
-              <Button bg="green" width="full">
+              <Button bg="creator-saturate" color="white" width="full">
                 Save
               </Button>
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
     </>
   );
