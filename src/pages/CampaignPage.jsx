@@ -35,6 +35,7 @@ export default function CampaignPage() {
     setSubPage(subPage);
   };
 
+
   const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData.creatorId;
 
   return (
@@ -55,6 +56,7 @@ export default function CampaignPage() {
           <Editor />
         </div>
       )}
+
       {subPage === subPageMap.MILESTONE && <MilestoneContainer />}
       {subPage === subPageMap.REWARD && <ProductRewardContainer isCreator={isCreator} />}
       {subPage === subPageMap.FORUM && <ProductCommentContainer />}
