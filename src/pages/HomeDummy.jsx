@@ -1,5 +1,5 @@
-import CategoryContainer from "../features/home-filter/components/CategoryContainer";
+import Spinner from "../components/Spinner";
 
 export default function HommyDummy() {
-  return <CategoryContainer />;
+  return <Spinner />;
 }
