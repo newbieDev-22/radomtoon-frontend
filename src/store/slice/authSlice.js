@@ -6,13 +6,16 @@ import {
   setAccessToken,
 } from "../../utils/localStorage";
 import { USER_ROLE } from "../../constants";
+import creatorApi from "../../apis/creator";
 
 export const authSlice = (set, get) => ({
   authUser: { user: null, loading: false, error: null, role: USER_ROLE.GUEST },
-
   // Function to handle user login
+  authLoading: false,
   login: async (credentials) => {
     try {
+      set(() => ({ authLoading: true }));
+
       const loginResponse = await authApi.login(credentials);
       setAccessToken(loginResponse.data.accessToken);
 
@@ -28,6 +31,7 @@ export const authSlice = (set, get) => ({
 
       return true;
     } catch (err) {
+      console.error(err)
       if (err instanceof AxiosError) {
         const message =
           err.response.status === 400
@@ -38,6 +42,8 @@ export const authSlice = (set, get) => ({
         console.error(err);
         return "An unexpected error occurred";
       }
+    } finally {
+      set(() => ({ authLoading: false }));
     }
   },
 
@@ -79,14 +85,16 @@ export const authSlice = (set, get) => ({
   // Function to update profile image based on user role
   updateProfileImage: async (formData) => {
     try {
+      set(() => ({ authLoading: true }));
       const { role } = get().authUser;
-      let getAuthUserResponse;
 
+      let result;
       if (role === USER_ROLE.CREATOR) {
-        getAuthUserResponse = await authApi.creatorProfileImage(formData);
-        console.log("getAuthUserResponse.data.user", getAuthUserResponse.data.user);
+        const getAuthUserResponse = await authApi.creatorProfileImage(formData);
+        result = getAuthUserResponse.data.user;
       } else if (role === USER_ROLE.SUPPORTER) {
-        getAuthUserResponse = await authApi.supporterProfileImage(formData);
+        const getAuthUserResponse = await authApi.supporterProfileImage(formData);
+        result = getAuthUserResponse.data.user;
       } else {
         throw new Error("Unsupported user role");
       }
@@ -94,7 +102,7 @@ export const authSlice = (set, get) => ({
       set((state) => ({
         authUser: {
           ...state.authUser,
-          user: getAuthUserResponse.data.user,
+          user: result,
         },
       }));
       return true;
@@ -104,6 +112,30 @@ export const authSlice = (set, get) => ({
         authUser: { ...state.authUser, error: "Failed to update profile image" },
       }));
       return false;
+    } finally {
+      set(() => ({ authLoading: false }));
+    }
+  },
+
+  updateInfo: async (data) => {
+    try {
+      set(() => ({ authLoading: true }));
+
+      const getResponse = await creatorApi.updateInfoCreator(data);
+
+      set((state) => ({
+        authUser: {
+          ...state.authUser,
+          user: getResponse.data.creatorInfo,
+        },
+      }));
+    } catch (err) {
+      console.error(err);
+      set((state) => ({
+        authUser: { ...state.authUser, error: "Failed to update info" },
+      }));
+    } finally {
+      set(() => ({ authLoading: false }));
     }
   },
 });

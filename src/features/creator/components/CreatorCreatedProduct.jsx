@@ -1,20 +1,20 @@
-import { useNavigate } from "react-router-dom";
-import ProductImageCard from "./ProductImageCard";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../../components/Button";
 import { useStore } from "../../../store/useStore";
-const mockImage =
-  "https://static.thairath.co.th/media/B6FtNKtgSqRqbnNsbKEfQbPGELW2YjCcDQUpDilBzR4jVwhRbzfUfbngdYegm1bTfTXjc.webp";
-const mockAvatar = "https://mdbcdn.b-cdn.net/img/new/avatars/1.webp";
-const mockProjectName =
-  "ascsacascasssssssssssssss ssssssssssssssssssssssssssssssssssssssssc";
-const mockCreatorName = "safassafsafsfa";
-const daysLeft = 23;
-
-const loopCard = 6;
+import ImgCard from "../../../components/ImageCard";
+import dayjs from "dayjs";
+import { USER_ROLE } from "../../../constants";
 
 export default function CreatorCreatedProduct() {
-  const creatorProduct = useStore((state) => state.creatorProduct.data);
-  // console.log("creatorProduct", creatorProduct);
+  const { creatorId } = useParams();
+  const user = useStore((state) => state.authUser.user);
+  const role = useStore((state) => state.authUser.role);
+  const filterProductByCreatorId = useStore((state) => state.filterProductByCreatorId);
+  const shouldFilterByApprovalStatus =
+    role === USER_ROLE.CREATOR && user.id === +creatorId;
+  const filterData = filterProductByCreatorId(creatorId, !shouldFilterByApprovalStatus);
+  const today = useStore((state) => state.product.today);
+
   const navigate = useNavigate();
 
   const handleClickAddNewProject = () => {
@@ -22,32 +22,58 @@ export default function CreatorCreatedProduct() {
   };
 
   return (
-    <div>
-      <div className="flex justify-center mt-10">
-        <Button
-          width={60}
-          bg="creator-saturate"
-          color="white"
-          onClick={handleClickAddNewProject}
-        >
-          Start new project
-        </Button>
+    <>
+      {/* button */}
+      <div className="max-w-[64rem] m-auto  flex justify-center mb-5
+      lg:justify-center  
+      xl:justify-end ">
+        {shouldFilterByApprovalStatus ? (
+
+          <Button
+            width={60}
+            bg="creator-normal"
+            onClick={handleClickAddNewProject}
+          >
+            Start new project
+          </Button>
+
+        ) : null}
       </div>
-      <div className="flex justify-center gap-10 mt-20 mb-20">
-        <div className="grid grid-cols-3 gap-10 mb-20 ">
-          {Array.from({ length: loopCard }).map((_, index) => (
-            <ProductImageCard
-              key={index}
+
+      {/* button end*/}
+      <div className="flex flex-wrap gap-8 justify-center  items-center p-2 max-w-[70rem] m-auto  ">
+
+
+
+
+        {filterData.map((el) => (
+          <div className="flex justify-center gap-8 ">
+            <ImgCard
+              key={el.id}
               size="medium"
-              imageSrc={mockImage}
-              productName={mockProjectName}
-              creatorName={mockCreatorName}
-              daysLeft={daysLeft}
-              avatarImage={mockAvatar}
+              imageSrc={el.productImage}
+              productName={el.productName}
+              creatorName={el.creatorName}
+              daysLeft={
+                dayjs(el.deadline).diff(dayjs(today), "day") >= 0
+                  ? dayjs(el.deadline).diff(dayjs(today), "day")
+                  : 0
+              }
+              content={el.summaryDetail}
+              avatarImage={el.profileImage}
+              vid={el.productVideo}
+              productId={el.id}
+              creatorId={el.creatorId}
+              isEdit={true}
             />
-          ))}
-        </div>
+          </div>
+        ))}
+        <div className="w-[20rem] "></div>
+        <div className="w-[20rem] "></div>
+        {/* </div> */}
       </div>
-    </div>
+
+    </>
+
   );
 }

@@ -1,199 +1,286 @@
-import dayjs from "dayjs";
+
+
 import { useState, useRef } from "react";
 import Button from "../components/Button";
+import dayjs from "dayjs";
+import { useStore } from "../store/useStore";
+import { CATEGORIES_TYPE, MIN_DEADLINE_DAYS, USER_ROLE } from "../constants";
+import { Navigate } from "react-router-dom";
+import Dropdown from "../components/Dropdown";
+import Input from "../components/Input";
 import { PictureIcon } from "../icons";
-import ReactPlayer from "react-player/youtube";
-import AddSummary from "../features/campaign/components/AddSummary";
+import { toast } from "react-toastify";
+import validateProduct from "../validators/validate-create-project";
+import Spinner from "../components/Spinner";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
-export default function CampaignSetup({ isCreator = true }) {
+const initialInput = {
+  productName: "",
+  goal: "",
+  deadline: "",
+  categoryId: 1,
+  productVideo: "",
+  summaryDetail: "",
+};
 
-  const [isEdit, setIsEdit] = useState(true);
-  const [date, setDate] = useState(new Date());
-  const [newImg, setNewImg] = useState("");
-  const [newUrl, setNewUrl] = useState("");
-  const [newGoal, setNewGoal] = useState(0);
-  const [title, setTitle] = useState("Your product title");
-  const [summary, setSummary] = useState("Add your summary . .")
+const initialInputError = {
+  productName: "",
+  goal: "",
+  deadline: "",
+  categoryId: "",
+  productVideo: "",
+  summaryDetail: "",
+};
 
+const popupImg = {
+  initial: { opacity: 0, scale: 0.8 },
+  animate: { opacity: 1, scale: 1 },
+  transition: { type: "spring", duration: 0.6, ease: "easeOut" },
+};
+
+const slidDownForm = {
+  initial: { opacity: 0, y: -20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { type: "spring", duration: 0.6, ease: "easeOut" },
+};
+
+export default function CampaignSetup() {
+  const role = useStore((state) => state.authUser.role);
+  const user = useStore((state) => state.authUser.user);
+  const today = useStore((state) => state.product.today);
+  const createProduct = useStore((state) => state.createProduct);
   const fileEl = useRef();
+  const [file, setFile] = useState(null);
+  const [input, setInput] = useState({
+    ...initialInput,
+    deadline: dayjs(today).format("YYYY-MM-DD"),
+  });
+  const [inputError, setInputError] = useState(initialInputError);
+  const productLoading = useStore((state) => state.productLoading);
+  const navigate = useNavigate();
 
-  const handleClickSave = () => {
-    setIsEdit(false);
-  };
-
-  const handleClickEdit = () => {
-    setIsEdit(true);
-  };
-
-  const handleClickDelete = () => {
-    alert("Click delete");
-  };
-
-  const handleClickSendToApproval = () => {
-    alert("Click Send To Approval");
-  };
-
-  const handleOnChangeSummary = (e) => {
-    setSummary(e.target.value)
+  if (role !== USER_ROLE.CREATOR) {
+    return <Navigate to="/" />;
   }
 
+  const handleCategoryChange = (value) => {
+    const categoryId = CATEGORIES_TYPE.filter((el) => el.name === value).map(
+      (el) => el.id
+    )[0];
+    setInput((prev) => ({ ...prev, categoryId }));
+  };
+
+  const handleInputChange = (e) =>
+    setInput({ ...input, [e.target.name]: e.target.value });
+
+  const handleSubmitForm = async (e) => {
+    try {
+      e.preventDefault();
+      const todayFormat = dayjs(today);
+      const deadlineFormat = dayjs(new Date(input.deadline));
+      if (deadlineFormat.diff(todayFormat, "day") < MIN_DEADLINE_DAYS) {
+        return setInputError((prev) => ({
+          ...prev,
+          deadline: "Deadline must be at least 15 days from today.",
+        }));
+      }
+
+      const error = validateProduct(input);
+      if (error) {
+        return setInputError(error);
+      }
+
+      setInputError(initialInputError);
+
+      if (file) {
+        const formData = new FormData();
+        formData.append("productImage", file);
+        input.deadline = dayjs(input.deadline).format("YYYY-MM-DD");
+        for (const [key, value] of Object.entries(input)) {
+          if (value) {
+            formData.append(key, value);
+          }
+        }
+        await createProduct(formData);
+        toast.success("Created project successfully");
+        navigate(`/creator-panel/${user.id}`);
+      } else {
+        toast.error("Please upload your product image");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
+
   return (
-    <div className="flex justify-between gap-8 items-center mt-10 w-[80rem] m-auto relative ">
-      <div className="w-[35rem] ">
-        <input
-          type="file"
-          ref={fileEl}
-          className="hidden"
-          onChange={(e) => {
-            if (e.target.files[0]) {
-              const newPicture = URL.createObjectURL(e.target.files[0]);
-              setNewImg(newPicture);
-            }
-          }}
-        />
-        {newUrl ? (
-          <div className="w-full h-full object-cover aspect-[16/9] ">
-            <ReactPlayer
-              url={newUrl}
-              playing={true}
-              width="100%"
-              height="100%"
-              loop={true}
-            // controls={true}
-            />
-          </div>
-        ) : newImg ? (
-          <img
-            role="button"
-            src={newImg}
-            onClick={() => fileEl.current.click()}
-            className="w-full h-full object-cover aspect-[16/9] hover:rotate-6 hover:duration-500 active:scale-95 hover:opacity-30 rounded-lg"
-            alt=""
-          />
-        ) : (
-          <>
-            <div
-              role="button"
-              className="object-cover max-w-80 m-auto"
-              onClick={() => fileEl.current.click()}
-            >
-              <div
-                className={`aspect-auto w-full rounded-lg  max-w-96 hover:rotate-6 hover:duration-500 active:scale-95 hover:opacity-30`}
-              >
-                <PictureIcon />
+    <>
+      {productLoading && <Spinner transparent />}
+      <input
+        type="file"
+        placeholder="Poster image"
+        hidden
+        ref={fileEl}
+        onChange={(e) => {
+          if (e.target.files[0]) {
+            setFile(e.target.files[0]);
+          }
+        }}
+      />
+
+      <div className="flex flex-col justify-center p-4 sm:p-6 lg:p-8 xl:p-10 2xl:p-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mx-auto text-center mb-3">
+          CREATE YOUR PROJECT
+        </h1>
+
+        <motion.div
+          {...slidDownForm}
+          className="bg-white flex flex-col md:flex-row justify-center items-center mx-2 sm:mx-4 md:mx-8 lg:mx-12 xl:mx-16 2xl:mx-20 my-4 sm:my-6 lg:my-8 rounded-3xl shadow-[2px_6px_14px_1px_#00000024]"
+        >
+          <div className="w-full md:w-1/2 flex justify-center p-2 sm:p-4">
+            {file ? (
+              <div onClick={() => fileEl.current.click()} className="w-full">
+                <motion.img
+                  {...popupImg}
+                  src={URL.createObjectURL(file)}
+                  className="object-cover aspect-[16/9] rounded-xl bg-red-200"
+                  alt="product"
+                />
               </div>
-            </div>
-          </>
-        )}
+            ) : (
+              <div
+                role="button"
+                className="w-3/5 flex flex-col justify-center items-center p-4 sm:p-6 md:p-10 hover:rounded-xl hover:scale-105 duration-500"
+                onClick={() => fileEl.current.click()}
+              >
+                <img
+                  src="https://img.freepik.com/premium-vector/upload-file-flat-illustration_120816-71603.jpg?w=996"
+                  alt="Upload"
+                />
+                <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold text-center">
+                  Add product image
+                </h3>
+              </div>
+            )}
+          </div>
 
-        {isCreator && isEdit ? (
-          <>
-            <div className="my-5">
-              <label role="button" htmlFor="inputImg" className="font-semibold text-xl">
-                Input products picture link
-              </label>
-              <input
-                id="inputImg"
-                className="border-2 w-full font-semibold px-2 text-gray-500 rounded-lg p-1"
-                value={newImg}
-                onChange={(e) => setNewImg(e.target.value)}
+          <form
+            onSubmit={handleSubmitForm}
+            className="flex flex-col gap-2 bg-[#e7f5fc] rounded-xl md:rounded-none md:rounded-tr-xl md:rounded-br-xl w-full md:w-1/2 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 sm:py-6 md:py-8"
+          >
+            <label className="form-control w-full">
+              <div className="label">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                  Product name
+                </span>
+              </div>
+              <Input
+                placeholder="Product name"
+                name="productName"
+                value={input.productName}
+                onChange={handleInputChange}
+                error={inputError.productName}
               />
-            </div>
-            <div className="my-5">
-              <label role="button" htmlFor="inputUrl" className="font-semibold text-xl">
-                Input products video link
-              </label>
-              <input
-                id="inputUrl"
-                className="border-2 w-full font-semibold px-2 text-gray-500 rounded-lg p-1"
-                value={newUrl}
-                onChange={(e) => setNewUrl(e.target.value)}
-              />
-            </div>
-          </>
-        ) : null}
-      </div>
-
-
-
-
-
-      <div className="flex flex-col gap-4 w-[35vw] justify-center border-2 p-10 rounded-2xl">
-        {!isEdit ? (
-          <h1 className="text-4xl font-semibold ">{title}</h1>
-        ) : (
-          <div className="flex items-center w-full gap-2">
-            <label
-              role="button"
-              htmlFor="title"
-              className="font-semibold text-xl text-gray-500"
-            >
-              Input products title :{" "}
             </label>
-            <input
-              id="title"
-              className="border-2  font-semibold px-2 text-gray-500 rounded-lg p-1"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-        )}
-        <div className="text-gray-500 font-semibold ">
-          supported of THB
-          {isEdit ? (
-            <input
-              type="number"
-              className="border-2  font-semibold text-xl px-2 text-gray-500 mx-2 max-w-56 rounded-lg"
-              value={newGoal}
-              onChange={(e) => setNewGoal(+e.target.value)}
-            />
-          ) : (
-            <p className="pl-1 inline-block font-semibold text-black">
-              {newGoal.toLocaleString("en-US")}
-            </p>
-          )}{" "}
-          goal
-        </div>
-        <div>
 
-          {isEdit ? (
-            <>
-              <input
-                type="date"
-                value={dayjs(date).format("YYYY-MM-DD")}
-                onChange={(e) => setDate(dayjs(e.target.value).toISOString())}
-                className="bg-gray-50 border w-56 border-gray-300 text-gray-900 text-ls rounded-lg block  p-2.5 "
+            <label className="form-control w-full">
+              <div className="label">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                  Goal (THB)
+                </span>
+              </div>
+              <Input
+                placeholder="Goals"
+                name="goal"
+                type="number"
+                value={input.goal}
+                onChange={handleInputChange}
+                error={inputError.goal}
               />
+            </label>
 
-              <AddSummary handleOnChangeSummary={handleOnChangeSummary} summary={summary} />
-
-            </>
-          ) : (
-            <div >
-              <p className="text-gray-500 font-semibold ">Last day for fundraising</p>
-              <h1 className=" font-semibold">{dayjs(date).format("dddd,MMMM D,YYYY")}</h1>
-              <p className="text-gray-500 font-semibold mt-2">Summary</p>
-              <h1 className=" font-semibold">{summary}</h1>
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4">
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                    Deadline
+                  </span>
+                </div>
+                <input
+                  type="date"
+                  value={dayjs(input.deadline).format("YYYY-MM-DD")}
+                  name="deadline"
+                  onChange={handleInputChange}
+                  className={`bg-gray-50 border ${
+                    inputError.deadline ? "border-red-500" : "border-gray-300"
+                  } text-gray-900 text-sm sm:text-base md:text-lg lg:text-xl rounded-lg block p-2.5 w-full`}
+                />
+                {inputError.deadline && (
+                  <small className="text-red-500 font-semibold">
+                    {inputError.deadline}
+                  </small>
+                )}
+              </label>
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                    Category
+                  </span>
+                </div>
+                <Dropdown
+                  data={CATEGORIES_TYPE.map((el) => el.name)}
+                  onChange={handleCategoryChange}
+                  title="Choose your category..."
+                />
+              </label>
             </div>
-          )}
-        </div>
-        <div className="flex gap-4">
-          <Button bg="green" onClick={handleClickSave}>
-            Save
-          </Button>
-          <Button bg="yellow" onClick={handleClickEdit}>
-            Edit
-          </Button>
-          <Button bg="red" onClick={handleClickDelete}>
-            Delete
-          </Button>
-          <div className=" text-sm">
-            <Button bg="creator-saturate" onClick={handleClickSendToApproval}>
-              Send to Approval
-            </Button>
-          </div>
-        </div>
+
+            <label className="form-control w-full">
+              <div className="label">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                  Summary Detail
+                </span>
+              </div>
+              <textarea
+                placeholder="Please fill summary detail"
+                name="summaryDetail"
+                value={input.summaryDetail}
+                onChange={handleInputChange}
+                className={`placeholder-gray-500 indent-1 min-h-24 max-h-24 border ${
+                  inputError.summaryDetail ? "border-red-500" : "border-gray-300"
+                } text-gray-500 text-sm sm:text-base md:text-lg lg:text-xl rounded-lg block p-2.5 w-full`}
+              ></textarea>
+              {inputError.summaryDetail && (
+                <small className="text-red-500 font-semibold">
+                  {inputError.summaryDetail}
+                </small>
+              )}
+            </label>
+
+            <label className="form-control w-full">
+              <div className="label">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                  Product video link &#40;optional&#41;
+                </span>
+              </div>
+              <Input
+                placeholder="Product video link"
+                name="productVideo"
+                value={input.productVideo}
+                onChange={handleInputChange}
+                error={inputError.productVideo}
+              />
+            </label>
+
+            <div className="py-4">
+              <Button bg="creator-saturate" color="white" width="full">
+                Save
+              </Button>
+            </div>
+          </form>
+        </motion.div>
       </div>
-    </div>
+    </>
   );
 }

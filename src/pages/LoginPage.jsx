@@ -2,14 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import Modal from "../components/Modal";
-import LoginImage from "../features/authentication/components/LoginImage";
-import SupporterRegisterForm from "../features/authentication/components/SupporterRegisterForm";
 import { useStore } from "../store/useStore";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import validateLogin from "../validators/validate-login";
 import Spinner from "../components/Spinner";
+import { motion } from "framer-motion";
 
 const initialInput = {
   email: "",
@@ -21,15 +19,20 @@ const initialInputError = {
   password: "",
 };
 
+const popupForm = {
+  initial: { opacity: 0, scale: 0 },
+  animate: { opacity: 1, scale: 1 },
+  transition: { type: "spring", duration: 0.6, ease: "easeOut" },
+};
+
 export default function LoginPage() {
-  const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [input, setInput] = useState(initialInput);
   const [inputError, setInputError] = useState(initialInputError);
-  const [loading, setLoading] = useState(false);
   const login = useStore((state) => state.login);
+  const authLoading = useStore((state) => state.authLoading);
   const navigate = useNavigate();
 
-  const handleChangeInput = (e) => {
+  const handleChangInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -41,14 +44,11 @@ export default function LoginPage() {
         setInputError((prev) => ({ ...prev, ...error }));
       } else {
         setInputError((prev) => ({ ...prev, ...initialInputError }));
-        setLoading(true);
-
-        const response = await login(input);
-        if (response === true) {
-          toast.success("Login successfully");
+        const res = await login(input);
+        if (res === true) {
           navigate("/");
         } else {
-          toast.error(response);
+          toast.error(res);
         }
       }
     } catch (err) {
@@ -60,86 +60,63 @@ export default function LoginPage() {
             : "Internet Server Error";
         return toast.error(message);
       }
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <>
-      {loading && <Spinner transparent />}
-      <div className="min-w-screen min-h-screen">
-        <div className="grid grid-cols-2 shadow-lg rounded-lg">
-          <div className="h-screen w-full">
-            <LoginImage />
-          </div>
-          <div className="px-20 bg-slate-100 flex w-full h-full flex-col justify-center">
-            <h1 className="text-3xl font-bold text-center">SIGN IN</h1>
-
-            <form onSubmit={handleSubmitForm}>
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col justify-center gap-2">
-                  <label className="form-control w-full">
-                    <div className="label">
-                      <span className="label-text">Email</span>
-                    </div>
-                    <Input
-                      type="text"
-                      placeholder="Email"
-                      value={input.email}
-                      name="email"
-                      onChange={handleChangeInput}
-                      error={inputError.email}
-                    />
-                  </label>
-                  <label className="form-control w-full">
-                    <div className="label">
-                      <span className="label-text">Password</span>
-                    </div>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      value={input.password}
-                      name="password"
-                      onChange={handleChangeInput}
-                      error={inputError.password}
-                    />
-                  </label>
-                  <div className="py-2">
-                    <Button width={"full"}>LOGIN</Button>
-                  </div>
-                </div>
-              </div>
-            </form>
-
-            <div className="flex justify-center">
+      {authLoading && <Spinner transparent />}
+      <div className="relative min-w-screen min-h-screen flex items-center justify-center bg-gray-100">
+        <img
+          src="https://images.unsplash.com/photo-1492539161849-b2b18e79c85f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <motion.div
+          {...popupForm}
+          className="relative bg-slate-100 bg-opacity-80 backdrop-blur-md rounded-lg p-6 md:p-10 max-w-md w-full mx-4"
+        >
+          <h1 className="text-3xl font-bold text-center mb-4">LOG IN</h1>
+          <form onSubmit={handleSubmitForm} className="space-y-6">
+            <div>
+              <Input
+                name="email"
+                placeholder="Email"
+                onChange={handleChangInput}
+                value={input.email}
+                error={inputError.email}
+              />
+            </div>
+            <div>
+              <Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChangInput}
+                value={input.password}
+                error={inputError.password}
+              />
+            </div>
+            <Button width={"full"}>LOGIN</Button>
+            <div className="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4">
               <button
-                className="rounded-box grid place-items-center font-bold hover:text-creator-saturate transition duration-300"
+                className="font-bold hover:text-creator-saturate transition duration-300"
                 onClick={() => navigate("/creator-register")}
               >
                 Become a Creator
               </button>
-              <div className="divider lg:divider-horizontal">|</div>
+              <div className="hidden md:block">|</div>
+              <hr className="border-1 border-black w-[70%] md:hidden" />
               <button
-                className="rounded-box grid place-items-center font-bold hover:text-yellow-500 transition duration-300"
-                onClick={() => setOpenRegisterModal(true)}
+                className="font-bold hover:text-yellow-500 transition duration-300"
+                onClick={() => navigate("/supporter-register")}
               >
                 Join as a Supporter
               </button>
             </div>
-          </div>
-        </div>
+          </form>
+        </motion.div>
       </div>
-      {openRegisterModal && (
-        <Modal
-          onClose={() => setOpenRegisterModal(false)}
-          title="Supporter Registration"
-          width={60}
-          open={true}
-        >
-          <SupporterRegisterForm onClose={() => setOpenRegisterModal(false)} />
-        </Modal>
-      )}
     </>
   );
 }

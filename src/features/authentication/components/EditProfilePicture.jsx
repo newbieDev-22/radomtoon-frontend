@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import Button from "../../../components/Button";
 import { toast } from "react-toastify";
 import Spinner from "../../../components/Spinner";
+import { useStore } from "../../../store/useStore";
 
 export default function EditProfilePicture({
   profileImage,
@@ -11,31 +12,26 @@ export default function EditProfilePicture({
 }) {
   const fileEl = useRef();
   const [file, setFile] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const authLoading = useStore((state) => state.loading);
   const handleSave = async () => {
     try {
-      setIsLoading(true);
-      if (file) {
-        const formData = new FormData();
-        formData.append("profileImage", file);
-        const res = await handleProfileImageSave(formData);
-        if (res) {
-          toast.success("Profile image updated successfully");
-          onSuccess();
-        } else {
-          toast.error("Failed to update profile image");
-        }
+      if (!file) {
+        return toast.error("Please select a image to upload");
       }
+
+      const formData = new FormData();
+      formData.append("profileImage", file);
+      await handleProfileImageSave(formData);
+      toast.success("Profile image updated successfully");
+      onSuccess();
     } catch (err) {
       console.log(err);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
     <>
-      {isLoading && <Spinner transparent />}
+      {authLoading && <Spinner transparent />}
       <input
         type="file"
         hidden

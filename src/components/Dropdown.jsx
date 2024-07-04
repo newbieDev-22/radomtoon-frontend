@@ -1,13 +1,15 @@
-export default function Dropdown({ data, onChange, title }) {
+const CLASSNAME_DEFAULT = "h-full indent-2 rounded-lg outline-none focus:outline-none border border-gray w-full"
+
+export default function Dropdown({ data, onChange, title, className = CLASSNAME_DEFAULT }) {
   return (
     <select
-      className="p-2 indent-1 rounded-lg outline-none focus:outline-none border border-gray"
+      className={className}
       onChange={(e) => onChange(e.target.value)}
     >
       <option disabled>{title}</option>
-      {data.map((province) => (
-        <option key={province} value={province}>
-          {province}
+      {data.map((el) => (
+        <option key={el} value={el}>
+          {el}
         </option>
       ))}
     </select>
