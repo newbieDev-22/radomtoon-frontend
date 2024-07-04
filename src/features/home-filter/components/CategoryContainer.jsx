@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ImgCard from "../../../components/ImageCard";
+import ImageCard from "../../../components/ImageCard";
 import { useStore } from "../../../store/useStore";
 import dayjs from "dayjs";
 
@@ -16,7 +16,7 @@ export default function CategoryContainer() {
       <div className="flex justify-center mt-10 mb-40">
         <div className="grid grid-cols-3 gap-10 ml-4 ">
           {product.map((el) => (
-            <ImgCard
+            <ImageCard
               key={el.id}
               size="medium"
               imageSrc={el.productImage}
