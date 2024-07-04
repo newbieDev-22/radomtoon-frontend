@@ -39,8 +39,6 @@ export default function CampaignContent() {
   const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData?.creatorId;
   const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
 
-  console.log("filterData", filterData);
-
   const initialInput = {
 
     productName: filterData?.productName,
