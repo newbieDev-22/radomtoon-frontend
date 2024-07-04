@@ -22,30 +22,32 @@ export default function CreatorCreatedProduct() {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="flex flex-col justify-center gap-8 ">
+    <>
+      {/* button */}
+      <div className="max-w-[64rem] m-auto  flex justify-center mb-5
+      lg:justify-center  
+      xl:justify-end ">
         {shouldFilterByApprovalStatus ? (
-          <div className="flex justify-end w-full">
-            {/* <Button
-              width={60}
-              bg="creator-saturate"
-              color="white"
-              onClick={handleClickAddNewProject}
-            >
-              Start new project
-            </Button> */}
-            <Button
-              width={60}
-              bg="creator-saturate"
-              onClick={handleClickAddNewProject}
-              color="white"
-            >
-              Start new project
-            </Button>
-          </div>
+
+          <Button
+            width={60}
+            bg="creator-saturate"
+            onClick={handleClickAddNewProject}
+          >
+            Start new project
+          </Button>
+
         ) : null}
-        <div className="grid grid-cols-3 gap-10">
-          {filterData.map((el) => (
+      </div>
+
+      {/* button end*/}
+      <div className="flex flex-wrap gap-8 justify-center  items-center p-2 max-w-[70rem] m-auto  ">
+
+
+
+
+        {filterData.map((el) => (
+          <div className="flex justify-center gap-8 ">
             <ImgCard
               key={el.id}
               size="medium"
@@ -64,9 +66,14 @@ export default function CreatorCreatedProduct() {
               creatorId={el.creatorId}
               isEdit={true}
             />
-          ))}
-        </div>
+          </div>
+        ))}
+        <div className="w-[20rem] "></div>
+        <div className="w-[20rem] "></div>
+        {/* </div> */}
       </div>
-    </div>
+
+    </>
+
   );
 }
