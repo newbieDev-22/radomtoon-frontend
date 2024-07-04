@@ -1,31 +1,35 @@
 import { Chart as ChartJS } from "chart.js/auto"
-import { Bar, Pie, Doughnut, Line } from "react-chartjs-2"
+import { Doughnut } from "react-chartjs-2"
 
-import sourceData from "./data/sourceData.json"
-export default function DoughnutChart() {
+export default function DoughnutChart({ title, data }) {
     return (
-        <div className="w-full h-80 py-5 rounded-2xl bg-white flex justify-center ">
-            <Doughnut
-                className=" cursor-pointer"
-                data={{
-                    labels: sourceData.map((data) => data.lable),
-                    datasets: [
-                        {
-                            label: "Count",
-                            data: sourceData.map((data) => data.value),
-                            backgroundColor: [
-                                "rgba(42, 63, 229, 0.8)",
-                                "rgba(250, 192, 19, 0.8)",
-                                "rgba(253, 135, 135, 0.8)",
-                                "rgba(42, 263, 229, 0.8)",
-                                "rgba(452, 163, 279, 0.8)",
-                            ],
-                        },
-
-                    ]
-                }}
-            />
+      <div className="w-full py-5 rounded-2xl bg-white flex flex-col justify-center items-center ">
+        <div className="w-full px-10 justify-start text-lg font-semibold text-radomtoon-bright">
+          {title}
         </div>
+        <div className="h-96 w-full flex justify-center">
+        <Doughnut
+                  className=" cursor-pointer"
+                  data={{
+                      labels: data.map((data) => data.label),
+                      datasets: [
+                          {
+                              label: "Count",
+                              data: data.map((data) => data.value),
+                              backgroundColor: [
+                                  "#ffd564",
+                                  "#32e7d3",
+                                  "rgba(253, 135, 135, 0.8)",
+                                  "#6869f4",
+                                  "rgba(452, 163, 279, 0.8)",
+                              ],
+                          },
+
+                      ]
+                  }}
+              />
+      </div>
+    </div>
 
     )
 }

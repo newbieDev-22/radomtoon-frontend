@@ -2,9 +2,18 @@ import React, { useEffect, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Map.css'
+import { getResponsiveValue } from '../../../utils/responsive';
 
 export default function Map() {
   const [geojsonData, setGeojsonData] = useState(null);
+
+  const zoomLevels = {
+    default: 5,
+    sm: 5,
+    xl: 6,
+    '2xl': 6
+  };
+  const setZoomLevel = () => getResponsiveValue(zoomLevels);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,11 +31,15 @@ export default function Map() {
   useEffect(() => {
     if (!geojsonData) return;
 
-    const map = L.map('mapid').setView([13, 101.5], 5);
+    const map = L.map('mapid').setView([13, 101.5], setZoomLevel());
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+
+    window.addEventListener('resize', function() {
+      map.setZoom(setZoomLevel());
+    });
 
     const info = L.control();
 
@@ -36,8 +49,8 @@ export default function Map() {
       return this._div;
     };
 
-    info.update = function (props) {4
-      this._div.innerHTML = '<h4 ">Supporter Density</h4>' + 
+    info.update = function (props) {
+      this._div.innerHTML = '<h4>Supporter Density</h4>' + 
         (props ? `<b>${props.name}</b><br />${props.p} people / km<sup>2</sup>` : 'Hover over a province');
     };
 
@@ -154,5 +167,10 @@ export default function Map() {
     };
   }, [geojsonData]);
 
-  return <div id="mapid" className='h-full w-full rounded-2xl' />;
+  return (
+    <div className='w-full h-full bg-white rounded-2xl'>
+      <h1 className='text-radomtoon-bright text-lg font-semibold pl-10 py-5'>Supporter Heatmap</h1>
+      <div id="mapid" className='h-[90%] w-full rounded-2xl' />
+    </div>
+);
 };

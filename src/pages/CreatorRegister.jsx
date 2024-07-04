@@ -168,6 +168,7 @@ export default function CreatorRegister() {
                   data={PROVINCE_MAP.map((el) => el.name)}
                   onChange={handleProvinceChange}
                   title="Choose your province..."
+                  className='p-2 indent-1 rounded-lg outline-none focus:outline-none border border-gray'
                 />
 
                 {selectedImage ? (
