@@ -1,3 +1,5 @@
+
+
 import { useState, useRef } from "react";
 import Button from "../components/Button";
 import dayjs from "dayjs";
@@ -127,16 +129,16 @@ export default function CampaignSetup() {
         }}
       />
 
-      <div className="flex flex-col justify-center p-10   ">
-        <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold mx-auto text-center mb-3">
+      <div className="flex flex-col justify-center p-4 sm:p-6 lg:p-8 xl:p-10 2xl:p-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mx-auto text-center mb-3">
           CREATE YOUR PROJECT
         </h1>
 
         <motion.div
           {...slidDownForm}
-          className="bg-white flex flex-col md:flex-row justify-center items-center mx-4 md:mx-12 lg:mx-20 my-8 rounded-3xl shadow-[2px_6px_14px_1px_#00000024]"
+          className="bg-white flex flex-col md:flex-row justify-center items-center mx-2 sm:mx-4 md:mx-8 lg:mx-12 xl:mx-16 2xl:mx-20 my-4 sm:my-6 lg:my-8 rounded-3xl shadow-[2px_6px_14px_1px_#00000024]"
         >
-          <div className="w-full md:w-1/2 flex justify-center p-4 ">
+          <div className="w-full md:w-1/2 flex justify-center p-2 sm:p-4">
             {file ? (
               <div onClick={() => fileEl.current.click()} className="w-full">
                 <motion.img
@@ -149,14 +151,14 @@ export default function CampaignSetup() {
             ) : (
               <div
                 role="button"
-                className="w-3/5 flex flex-col justify-center items-center p-10 hover:rounded-xl hover:scale-105 duration-500"
+                className="w-3/5 flex flex-col justify-center items-center p-4 sm:p-6 md:p-10 hover:rounded-xl hover:scale-105 duration-500"
                 onClick={() => fileEl.current.click()}
               >
                 <img
                   src="https://img.freepik.com/premium-vector/upload-file-flat-illustration_120816-71603.jpg?w=996"
-                  alt=""
+                  alt="Upload"
                 />
-                <h3 className="text-xl md:text-2xl lg:text-4xl font-semibold text-center">
+                <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold text-center">
                   Add product image
                 </h3>
               </div>
@@ -165,11 +167,11 @@ export default function CampaignSetup() {
 
           <form
             onSubmit={handleSubmitForm}
-            className="flex flex-col gap-1 bg-[#e7f5fc]  rounded-xl md:rounded-none md:rounded-tr-xl md:rounded-br-xl w-full md:w-1/2 px-4 md:px-8 lg:px-16 py-8"
+            className="flex flex-col gap-2 bg-[#e7f5fc] rounded-xl md:rounded-none md:rounded-tr-xl md:rounded-br-xl w-full md:w-1/2 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 sm:py-6 md:py-8"
           >
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
                   Product name
                 </span>
               </div>
@@ -184,7 +186,7 @@ export default function CampaignSetup() {
 
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
                   Goal (THB)
                 </span>
               </div>
@@ -198,10 +200,10 @@ export default function CampaignSetup() {
               />
             </label>
 
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4">
               <label className="form-control w-full">
                 <div className="label">
-                  <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+                  <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
                     Deadline
                   </span>
                 </div>
@@ -210,9 +212,9 @@ export default function CampaignSetup() {
                   value={dayjs(input.deadline).format("YYYY-MM-DD")}
                   name="deadline"
                   onChange={handleInputChange}
-                  className={`bg-gray-50 border  ${
-                    inputError.deadline ? "border-red-500" : "border-gray"
-                  } text-gray-900 text-sm md:text-base lg:text-lg rounded-lg block p-2.5 w-full`}
+                  className={`bg-gray-50 border ${
+                    inputError.deadline ? "border-red-500" : "border-gray-300"
+                  } text-gray-900 text-sm sm:text-base md:text-lg lg:text-xl rounded-lg block p-2.5 w-full`}
                 />
                 {inputError.deadline && (
                   <small className="text-red-500 font-semibold">
@@ -222,7 +224,7 @@ export default function CampaignSetup() {
               </label>
               <label className="form-control w-full">
                 <div className="label">
-                  <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+                  <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
                     Category
                   </span>
                 </div>
@@ -236,7 +238,7 @@ export default function CampaignSetup() {
 
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
                   Summary Detail
                 </span>
               </div>
@@ -246,8 +248,8 @@ export default function CampaignSetup() {
                 value={input.summaryDetail}
                 onChange={handleInputChange}
                 className={`placeholder-gray-500 indent-1 min-h-24 max-h-24 border ${
-                  inputError.summaryDetail ? "border-red-500" : "border-gray"
-                }  text-gray-500 text-sm md:text-base lg:text-lg rounded-lg block p-2.5 w-full`}
+                  inputError.summaryDetail ? "border-red-500" : "border-gray-300"
+                } text-gray-500 text-sm sm:text-base md:text-lg lg:text-xl rounded-lg block p-2.5 w-full`}
               ></textarea>
               {inputError.summaryDetail && (
                 <small className="text-red-500 font-semibold">
@@ -258,7 +260,7 @@ export default function CampaignSetup() {
 
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
                   Product video link &#40;optional&#41;
                 </span>
               </div>
