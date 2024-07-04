@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "./Button";
+import Button from "../../../components/Button";
 
 export default function AddMilestone({ name }) {
   const [note, setNote] = useState("");
@@ -15,10 +15,11 @@ export default function AddMilestone({ name }) {
   };
 
   return (
-    <div className="w-full p-2">
-      <div className="flex flex-col gap-2 border border-gray-300 rounded-md p-2">
-        <span className="text-2xl text-center">{name}</span>
-        <div>
+      <div className="w-96 h-96 flex flex-col items-center justify-between border border-gray-300 rounded-3xl p-5">
+        <span className="text-2xl font-bold text-center">
+          {name}
+        </span>
+
           {isEditing ? (
             <textarea
               rows="6"
@@ -26,18 +27,17 @@ export default function AddMilestone({ name }) {
               name="content"
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              className="border border-solid-2 rounded-md p-4 max-h-64 w-full"
+              className="focus:outline-none rounded-md my-4 px-6 h-full w-full"
             />
           ) : (
-            <div className="w-full max-h-64 p-4 overflow-auto">
-              <p>{savedNote || "No Milestone available"}</p>
+            <div className="h-full w-full my-4 px-6 overflow-auto  text-[#949494]">
+              <p>{savedNote || "No information provided"}</p>
             </div>
           )}
-        </div>
-        <Button bg="creator-normal" width="full" onClick={handleSubmit}>
-          {isEditing ? "Save" : "Edit"} Milestone
+
+        <Button bg="creator-normal" width="40" onClick={handleSubmit} rounded={1}>
+          {isEditing ? "Save" : "Edit"}
         </Button>
       </div>
-    </div>
   );
 }

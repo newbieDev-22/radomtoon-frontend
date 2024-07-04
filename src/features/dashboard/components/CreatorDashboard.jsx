@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PieChart from "../../../components/chart/pieChart/PieChart"
 import LineChart from "../../../components/chart/lineChart/LineChart";
-import Milestone from "../../../components/Milestone";
+import Milestone from "../../product-milestone/components/Milestone";
 import TablePagination from "../../../components/TablePagination";
 import Button from "../../../components/Button";
 import Modal from "../../../components/Modal";
@@ -16,25 +16,27 @@ const lineChartMockData = [
   { "label": "Jun", "supporter": 103609, "creator": 91208, "project": 83851 },
   { "label": "Jul", "supporter": 90974, "creator": 103609, "project": 69413 },
   { "label": "Aug", "supporter": 82919, "creator": 62407, "project": 54910 },
-  { "label": "Sep", "supporter": 62407, "creator": 47081, "project": 35193, 
-                    "supporterForecast": 62407, "creatorForecast": 47081, "projectForecast": 35193 },
+  {
+    "label": "Sep", "supporter": 62407, "creator": 47081, "project": 35193,
+    "supporterForecast": 62407, "creatorForecast": 47081, "projectForecast": 35193
+  },
   { "label": "Oct", "supporterForecast": 45324, "creatorForecast": 62812, "projectForecast": 41862 },
   { "label": "Nov", "supporterForecast": 47978, "creatorForecast": 20694, "projectForecast": 39591 },
   { "label": "Dec", "supporterForecast": 39175, "creatorForecast": 82465, "projectForecast": 59031 },
 ]
 
 const pieChartMockData = [
-  { "label": "Tier 1", "value":50888 },
-  { "label": "Tier 2", "value":28943 },
-  { "label": "Tier 3", "value":31424 },
+  { "label": "Tier 1", "value": 50888 },
+  { "label": "Tier 2", "value": 28943 },
+  { "label": "Tier 3", "value": 31424 },
 ]
 
 export default function CreatorDashboard({ title }) {
 
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
 
-  const [ lineChartData, setLineChartData ] = useState(lineChartMockData)
-  const [ pieChartData, setPieChartData ] = useState(pieChartMockData)
+  const [lineChartData, setLineChartData] = useState(lineChartMockData)
+  const [pieChartData, setPieChartData] = useState(pieChartMockData)
 
   const milestoneDataColumns = ["Project", "Status", "Evidence"];
   const milestoneData = [
@@ -58,7 +60,7 @@ export default function CreatorDashboard({ title }) {
   return (
     <div className="py-10 px-10 md:px-40 2xl:px-96 bg-[#b6e5e9]">
       <h1 className="text-center text-radomtoon-bright text-4xl font-bold py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
-      {title}
+        {title}
       </h1>
       <div className="grid grid-cols-2 gap-10 p-10 mx-auto rounded-3xl  bg-[#e7f5fc]">
         <span className="sm:col-span-2 col-span-2 md:col-span-1 bg-white rounded-2xl flex justify-center items-center flex-col">
@@ -84,7 +86,7 @@ export default function CreatorDashboard({ title }) {
           </div>
         </span>
         <span className="col-span-2">
-          <LineChart title={'Progress'} data={lineChartData}/>
+          <LineChart title={'Progress'} data={lineChartData} />
         </span>
       </div>
       {openEvidenceModal && (
