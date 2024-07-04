@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../../../components/Button";
+import { USER_ROLE } from "../../../constants";
 
 export default function ProductCommentCard({ el, isUserComment = true, handleClickDelete, handleClickSaveEdit }) {
 
@@ -11,13 +12,22 @@ export default function ProductCommentCard({ el, isUserComment = true, handleCli
     setIsEdit(false)
   }
 
+  const role = el.role
+  const margin = role === USER_ROLE.CREATOR ? "mr-56" : "ml-56"
+  console.log(role)
+
   return (
-    <div className="bg-white p-5 rounded-xl mb-5">
+    <div className={`bg-white p-5 rounded-xl mb-5 ${margin}`}>
       <div className="flex gap-2 items-center justify-between">
         <div className="flex gap-4 items-center">
           <img src={el.avatarImage} className="w-12 h-12 rounded-full" alt="avatar" />
           <h3 className="font-semibold text-xl">{el.userName}</h3>
-
+          {role === USER_ROLE.CREATOR && <h3
+            className="active:brightness-75 p-2
+            font-bold px-4 rounded-md bg-yellow-300"
+          >
+            CREATOR
+          </h3>}
         </div>
 
         {isUserComment && (
@@ -25,7 +35,6 @@ export default function ProductCommentCard({ el, isUserComment = true, handleCli
             {isEdit ? <Button bg="green" onClick={handleClickSave}>Save</Button> :
               <Button bg="yellow" onClick={() => setIsEdit(true)}>Edit</Button>
             }
-
             <Button bg="red" onClick={() => handleClickDelete(el)}>Delete</Button>
           </div>
         )}

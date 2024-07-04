@@ -39,7 +39,7 @@ export default function CampaignPage() {
   const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData.creatorId;
 
   return (
-    <div className="py-10">
+    <div className="pt-10">
       <CampaignContent
         title={project.title}
         img={project.img}
@@ -60,7 +60,7 @@ export default function CampaignPage() {
         <div>
           <Milestone />
 
-          <div className="grid grid-cols-3  w-full">
+          <div className="grid grid-cols-3  w-full ">
             <AddMilestone name="Milestone 1" />
             <AddMilestone name="Milestone 2" />
             <AddMilestone name="Milestone 3" />
@@ -69,6 +69,7 @@ export default function CampaignPage() {
       )}
       {subPage === subPageMap.REWARD && <ProductRewardContainer />}
       {subPage === subPageMap.FORUM && <ProductCommentContainer />}
-    </div>
+
+    </div >
   );
 }

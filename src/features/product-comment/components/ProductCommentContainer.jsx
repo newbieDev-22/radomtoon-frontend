@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../../../components/Button";
 import ProductCommentCard from "./ProductCommentCard";
+import { USER_ROLE } from "../../../constants";
 
 const data = [
   {
@@ -19,6 +20,7 @@ Happy creature collecting!`,
     avatarImage:
       "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
     id: 59249,
+    role: USER_ROLE.CREATOR
   },
   {
     userName: "Grant Mielke",
@@ -36,6 +38,7 @@ Happy creature collecting!`,
     avatarImage:
       "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
     id: 59859,
+    role: USER_ROLE.GUEST
   },
 ];
 
@@ -72,39 +75,39 @@ export default function ProductCommentContainer() {
 
   return (
     <>
-    <div className=" bg-gray-200 m-auto px-20 py-10">
+      <div className="bg-gray-200  m-auto px-20 pt-10 pb-10">
 
-      <form
-        className="flex gap-5 justify-between mb-10 items-center"
-        onSubmit={handleClickSend}
-      >
-        <textarea
-          className="w-full px-8 py-4 min-h-16 max-h-32 outline-none rounded-xl text-lg"
-          value={comment.content}
-          onChange={(e) =>
-            setComment({
-              ...comment,
-              content: e.target.value,
-              id: Math.floor(Math.random() * 88888888888888),
-            })
-          }
-          placeholder="Write your comment here..."
-        ></textarea>
-        <Button bg="green" height={11} width={40}>
-          Send
-        </Button>
-      </form>
+        <form
+          className="flex gap-5 justify-between mb-10 items-center"
+          onSubmit={handleClickSend}
+        >
+          <textarea
+            className="w-full px-8 py-4 min-h-16 max-h-32 outline-none rounded-xl text-lg"
+            value={comment.content}
+            onChange={(e) =>
+              setComment({
+                ...comment,
+                content: e.target.value,
+                id: Math.floor(Math.random() * 88888888888888),
+              })
+            }
+            placeholder="Write your comment here..."
+          ></textarea>
+          <Button bg="green" height={11} width={40}>
+            Send
+          </Button>
+        </form>
 
-      {allComment.toReversed().map((el) => (
-        <ProductCommentCard
-          key={el.id}
-          el={el}
-          isUserComment={isUserComment}
-          handleClickDelete={handleClickDelete}
-          handleClickSaveEdit={handleClickSaveEdit}
-        />
-      ))}
-    </div>
+        {allComment.toReversed().map((el) => (
+          <ProductCommentCard
+            key={el.id}
+            el={el}
+            isUserComment={isUserComment}
+            handleClickDelete={handleClickDelete}
+            handleClickSaveEdit={handleClickSaveEdit}
+          />
+        ))}
+      </div>
     </>
   );
 }
