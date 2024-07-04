@@ -100,18 +100,20 @@ export default function ProductRewardContainer({ isCreator }) {
               Select an option below
             </h3>
           </div>
-          <div className="flex gap-4">
-            {TIER_RANK_NUMBERS.map((el) => (
-              <Button
-                key={el}
-                width="20"
-                onClick={() => handleAddNewTier(el)}
-                disabled={!tierRankAvailable[el - 1].available}
-              >
-                {`Tier ${el}`}
-              </Button>
-            ))}
-          </div>
+          {!isApproved && (
+            <div className="flex gap-4">
+              {TIER_RANK_NUMBERS.map((el) => (
+                <Button
+                  key={el}
+                  width="20"
+                  onClick={() => handleAddNewTier(el)}
+                  disabled={!tierRankAvailable[el - 1].available}
+                >
+                  {`Tier ${el}`}
+                </Button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-4">

@@ -10,4 +10,7 @@ productApi.updateProduct = (productId, formData) =>
 productApi.deleteProduct = (productId) => axios.delete(`/products/${productId}`);
 productApi.updateStory = (productId, data) =>
   axios.patch(`/products/${productId}/update-story`, data);
+productApi.sendProductToApproval = (productId) =>
+  axios.patch(`/products/${productId}/pending-approval`);
+
 export default productApi;

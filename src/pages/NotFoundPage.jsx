@@ -10,8 +10,8 @@ export default function NotFoundPage() {
         <div className="flex flex-col gap-10">
           <span className="text-9xl font-bold text-creator-saturate">Oops . .</span>
           <span className="text-xl font-medium text-radomtoon-bright">
-            It seems the page you're looking for doesn't exist. Please check the URL, or
-            head back to our homepage to find what you need.
+            {`It seems the page you're looking for doesn't exist. Please check the URL, or
+            head back to our homepage to find what you need.`}
           </span>
         </div>
         <div className="ml-10">
