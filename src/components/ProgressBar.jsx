@@ -1,8 +1,25 @@
-export default function ProgressBar({ Numerator, Denominator }) {
+const heightProgressBarMap = {
+  small: "h-1.5",
+  medium: "h-2",
+  large: "h-2.5",
+};
+
+export default function ProgressBar({
+  Numerator,
+  Denominator,
+  height = "medium",
+  rounded = false,
+}) {
   return (
-    <div className="w-full h-2.5 bg-neutral-300 rounded-full">
+    <div
+      className={`w-full ${heightProgressBarMap[height]} bg-neutral-300 ${
+        rounded ? "rounded-full" : ""
+      } `}
+    >
       <div
-        className="bg-supporter-saturate h-2.5 rounded-full"
+        className={`bg-supporter-saturate ${heightProgressBarMap[height]} ${
+          rounded ? "rounded-full" : ""
+        }`}
         style={{
           width: `${
             (Numerator / Denominator) * 100 <= 100 ? (Numerator / Denominator) * 100 : 100

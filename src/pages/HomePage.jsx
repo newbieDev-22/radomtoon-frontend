@@ -1,4 +1,4 @@
-import ImgCard from "../components/ImageCard";
+import ImageCard from "../components/ImageCard";
 import { mockDataStatsBar } from "../constants";
 import { useStore } from "../store/useStore";
 import StatsBanner from "../components/StatsBannerComponent/StatsBanner";
@@ -12,7 +12,7 @@ export default function HomePage() {
       <StatsBanner data={mockDataStatsBar} />
       <div className="flex justify-center gap-10 mt-10 mb-20">
         {approvalProduct.slice(0, 1).map((el) => (
-          <ImgCard
+          <ImageCard
             key={el.id}
             widthSize="large"
             heightSize="large"
@@ -21,6 +21,8 @@ export default function HomePage() {
             imageSrc={el.productImage}
             productName={el.productName}
             creatorName={el.creatorName}
+            goal={el.goal}
+            totalFund={el.totalFund}
             daysLeft={
               dayjs(el.deadline).diff(dayjs(today), "day") >= 0
                 ? dayjs(el.deadline).diff(dayjs(today), "day")
@@ -32,11 +34,12 @@ export default function HomePage() {
             mainCard={true}
             productId={el.id}
             creatorId={el.creatorId}
+            progressHeight="large"
           />
         ))}
         <div className="grid grid-cols-2 gap-4 mb-20">
           {approvalProduct.slice(1, 5).map((el) => (
-            <ImgCard
+            <ImageCard
               key={el.id}
               size="medium"
               imageSrc={el.productImage}
@@ -48,6 +51,8 @@ export default function HomePage() {
                   : 0
               }
               content={el.summaryDetail}
+              goal={el.goal}
+              totalFund={el.totalFund}
               avatarImage={el.profileImage}
               vid={el.productVideo}
               productId={el.id}
