@@ -67,6 +67,7 @@ export const productSlice = (set, get) => ({
       const {
         data: { productDetail },
       } = await productApi.updateProduct(productId, formData);
+
       const { data } = get().product;
       const productIndex = data.findIndex((el) => el.id === productDetail.id);
       if (productIndex !== -1) {

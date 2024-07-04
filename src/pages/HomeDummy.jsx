@@ -1,24 +1,12 @@
-import ImgCard from '../components/ImageCard'
-import { mockImage , mockCreatorName ,mockProjectName, daysLeft , mockAvatar ,mockContent,mockVid } from '../constants';
-
+import AdminDashboard from "../features/dashboard/components/AdminDashboard";
+import CreatorDashboard from "../features/dashboard/components/CreatorDashboard";
 
 
 export default function HommyDummy() {
-
   return (
-    <>
-        <ImgCard
-              size="medium"
-              imageSrc={mockImage}
-              productName={mockProjectName}
-              creatorName={mockCreatorName}
-              daysLeft={daysLeft}
-              content={mockContent}
-              vid={mockVid}
-              avatarImage={mockAvatar}
-              isEdit={true}
-              />
-              </>
+    // <CategoryContainer />
+    // <AdminDashboard />
+    <CreatorDashboard title='Launching Soon! : Crystal Coffee Machine by Sara Shakeel' />
+  );
 
-  )
 }
