@@ -1,8 +1,13 @@
-import { heightMap, progressBar, widthMap } from "../constants";
+import {
+  heightMap,
+  progressBar,
+  widthMap,
+} from "../constants";
 import ReactPlayer from "react-player";
 import { useState } from "react";
 import { DotMenu, TimeIcon } from "../icons";
 import { useNavigate } from "react-router-dom";
+import { STATUS_PRODUCT } from "../constants/";
 
 export default function ImgCard({
   imageSrc,
@@ -24,17 +29,24 @@ export default function ImgCard({
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
   const navigate = useNavigate();
+  const mockStatus = STATUS_PRODUCT.IN_PROGRESS;
 
   const handleClickDotMenu = () => {
     navigate(`/product/${productId}/status`);
   };
 
   const isEditCardMap = {
-    true: `group ${widthMap[widthSize]} ${heightMap[heightSize]
-      }  active:scale-100 transition duration-300 rounded-xl ${mainCard ? "h-auto w-[580px]" : "border border-transparent overflow-hidden"
-      }  `,
-    false: `group ${widthMap[widthSize]} ${heightMap[heightSize]
-      }  active:scale-100 transition duration-300 rounded-xl ${mainCard
+    true: `group ${widthMap[widthSize]} ${
+      heightMap[heightSize]
+    }  active:scale-100 transition duration-300 rounded-xl ${
+      mainCard
+        ? "h-auto w-[580px]"
+        : "border border-transparent overflow-hidden shadow-lg"
+    }  `,
+    false: `group ${widthMap[widthSize]} ${
+      heightMap[heightSize]
+    }  active:scale-100 transition duration-300 rounded-xl ${
+      mainCard
         ? "h-auto w-[580px]"
         : "border border-transparent hover:h-auto hover:absolute z-20 overflow-hidden hover:bg-white hover:border-slate-300 hover:shadow-lg"
       }  `,
@@ -81,21 +93,27 @@ export default function ImgCard({
                 className={`h-2 ${progressBar[progressSize]} bg-supporter-saturate`}
               ></div>
             </div>
+           
 
-            <div className={`flex px-2 gap-2 ${mainCard ? "py-4" : "py-2"} `}>
+            <div className={`flex px-2 gap-2 ${mainCard ? "py-4" : "py-1"} `}>
               <div
                 role="button"
-                className="w-1/6 py-1"
+                className="w-1/6"
                 onClick={() => navigate(`/creator-panel/${creatorId}`)}
               >
                 {avatarImage ? (
-                  <img src={avatarImage} className={`w-full rounded-full`} alt="Avatar" />
+                  <img
+                    src={avatarImage}
+                    className={`w-full rounded-full`}
+                    alt="Avatar"
+                  />
                 ) : (
                   <div className="w-10 h-10 font-semibold text-lg text-white rounded-full bg-gray-500 flex justify-center items-center">
                     {creatorName[0].toUpperCase()}
                   </div>
                 )}
               </div>
+
               <div className="overflow-hidden px-2 group w-5/6">
                 <div
                   role="button"
@@ -105,7 +123,12 @@ export default function ImgCard({
                 >
                   {productName}
                 </div>
-                <span className="text-gray-600 text-xs block">{creatorName}</span>
+                <div className="flex flex-row justify-between">
+                <span className="text-gray-600 text-xs block">
+                  {creatorName}
+                </span>
+            
+              </div>
 
                 <span className="mr-2 text-xs text-gray-500 font-medium">
                   <div className="flex items-center gap-1 py-1">
@@ -128,13 +151,18 @@ export default function ImgCard({
           </div>
         </div>
       </div>
-      {isEdit && (
-        <div className="absolute bottom-2 right-0 hover:scale-125 active:scale-100 transition-all">
-          <div className=" cursor-pointer" onClick={handleClickDotMenu}>
-            <DotMenu />
-          </div>
+      {/* button */}
+        <div className="absolute bottom-2 right-0 hover:brightness-110 active:scale-100 transition-all mr-1">
+        {isEdit && (
+                <button
+                  className={`flex w-fit h-4 rounded-md items-center  text-xs text-semibold font-medium px-2 py-3 ${mockStatus.bg}`}
+                  onClick={handleClickDotMenu}
+                >
+                  {mockStatus.text}
+                </button>
+              )}
         </div>
-      )}
+
     </div>
   );
 }
