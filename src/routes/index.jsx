@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       { path: "/home-dummy", element: <HomeDummy /> },
     ],
   },
-  { path: "*", element: <Navigate to="/" /> },
+  { path: "*", element: <NotFoundPage/> },
   { path: "/login", element: <LoginPage /> },
   { path: "/creator-register", element: <CreatorRegister /> },
   { path: "/supporter-register", element: <SupporterRegister /> },

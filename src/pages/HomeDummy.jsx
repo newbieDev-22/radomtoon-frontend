@@ -1,9 +1,15 @@
-import NotFoundPage from "./NotFoundPage";
+
+
+import NotFoundPage from './NotFoundPage';
+
+
 
 export default function HommyDummy() {
+
   return (
-  <>
-  <NotFoundPage/>
-  </>
-);
+    <>
+<NotFoundPage/>
+              </>
+
+  )
 }
