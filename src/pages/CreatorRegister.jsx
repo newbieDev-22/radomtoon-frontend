@@ -147,14 +147,17 @@ export default function CreatorRegister() {
         }}
       ></input>
       <div className="min-w-screen min-h-screen">
+
         <div className="grid grid-cols-2 shadow-lg rounded-lg bg-cyan-100">
           <div className="px-20  flex w-full h-full flex-col justify-center">
+
             <h1 className="text-4xl text-center mb-2 font-bold text-radomtoon-dark">
               Bring your imagination to life
             </h1>
             <h2 className="text-center text-gray-600 mb-8">
               A hub for visionaries to explore cutting-edge technology early.
             </h2>
+
             <form onSubmit={handleSubmit}>
               <div>
                 <div className="grid grid-col-2 gap-x-4 gap-y-2">
@@ -277,6 +280,7 @@ export default function CreatorRegister() {
               </div>
             </form>
           </div>
+
           <div className="h-screen w-full flex flex-col items-center justify-center ">
             <h3 className="text-4xl text-center font-bold text-radomtoon-dark">
               Identity Image Preview
@@ -285,6 +289,7 @@ export default function CreatorRegister() {
               <div
                 className=" flex items-center justify-center w-full p-16"
                 onClick={() => fileEl.current.click()}
+
               >
                 <motion.img
                   src={URL.createObjectURL(file)}

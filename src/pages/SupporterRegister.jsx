@@ -122,6 +122,7 @@ export default function SupporterRegister() {
             <h2 className="text-base mb-8 text-gray-600">
               Become part of a community driving change and innovation.
             </h2>
+
             <form onSubmit={handleSubmit} action="">
               <div>
                 <div className="grid grid-col-2 gap-x-4 gap-y-2">

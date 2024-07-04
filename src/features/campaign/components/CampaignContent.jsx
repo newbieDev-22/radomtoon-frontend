@@ -1,147 +1,257 @@
-import dayjs from 'dayjs'
-import ReactPlayer from 'react-player/youtube'
-import { progressBar } from "../../../constants";
+import dayjs from "dayjs";
+import ReactPlayer from "react-player/youtube";
+import { APPROVAL_STATUS_ID, MIN_DEADLINE_DAYS, USER_ROLE } from "../../../constants";
 import Button from "../../../components/Button";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { useStore } from "../../../store/useStore";
+import CampaignShowContent from "./CampaignShowContent";
+import CampaignEditContent from "./CampaignEditContent";
+import { toast } from "react-toastify";
+import validateProduct from "../../../validators/validate-create-project";
+import Spinner from "../../../components/Spinner";
+import Modal from "../../../components/Modal";
+import ConfirmModal from "../../../components/ConfirmModal";
 
-const mockSelectTierPath = "/campaign/1/tier";
+const initialInputError = {
+  productName: "",
+  goal: "",
+  deadline: "",
+  categoryId: "",
+  productImage: "",
+  productVideo: "",
+  summaryDetail: "",
+};
 
-export default function CampaignContent({
-  title,
-  img,
-  url = "",
-  amountGet,
-  amountGoal,
-  supporters,
-  remainingDay,
-  isCreator = true,
-}) {
+export default function CampaignContent() {
+  const role = useStore((state) => state.authUser.role);
+  const authUser = useStore((state) => state.authUser.user);
+  const today = useStore((state) => state.product.today);
+  const filterProductByProductId = useStore((state) => state.filterProductByProductId);
+  const productLoading = useStore((state) => state.productLoading);
+  const updateProduct = useStore((state) => state.updateProduct);
+  const deleteProduct = useStore((state) => state.deleteProduct);
+
+  const { productId } = useParams();
+  const filterData = filterProductByProductId(+productId);
+
+  const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData?.creatorId;
+  const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
+
+  console.log("filterData", filterData);
+
+  const initialInput = {
+    productName: filterData?.productName,
+    goal: filterData?.goal,
+    deadline: dayjs(filterData?.deadline).format("YYYY-MM-DD"),
+    categoryId: filterData?.categoryId,
+    productImage: filterData?.productImage,
+    productVideo: filterData?.productVideo,
+    summaryDetail: filterData?.summaryDetail,
+    supportCount: filterData?.supporterCount,
+    totalFund: filterData?.totalFund,
+  };
+
+  const [input, setInput] = useState(initialInput);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [inputError, setInputError] = useState(initialInputError);
+  const [isEdit, setIsEdit] = useState(false);
+  const fileEl = useRef();
+  const [file, setFile] = useState(null);
 
   const navigate = useNavigate();
 
-  const [isEdit, setIsEdit] = useState(false)
-  const [date, setDate] = useState(new Date())
-  const [newImg, setNewImg] = useState(img)
-  const [newUrl, setNewUrl] = useState(url)
-  const [newgold, setNewGold] = useState(amountGoal)
+  const todayFormat = dayjs(today);
+  const deadlineFormat = dayjs(new Date(input.deadline));
+  const remainingDay = deadlineFormat.diff(todayFormat, "day");
 
-  const handleClickSave = () => {
-    setIsEdit(false)
-  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleClickSave = async (e) => {
+    try {
+      e.preventDefault();
+      const dummyInput = { ...input };
+      delete dummyInput.productImage;
+      delete dummyInput.supportCount;
+      delete dummyInput.totalFund;
+      if (remainingDay < MIN_DEADLINE_DAYS) {
+        return setInputError((prev) => ({
+          ...prev,
+          deadline: "Deadline must be at least 15 days from today.",
+        }));
+      }
+      const error = validateProduct(dummyInput);
+      if (error) {
+        return setInputError(error);
+      }
+      setInputError(initialInputError);
+
+      if (file) {
+        const formData = new FormData();
+        formData.append("productImage", file);
+        input.deadline = dayjs(dummyInput.deadline).format("YYYY-MM-DD");
+        for (const [key, value] of Object.entries(dummyInput)) {
+          if (value) {
+            formData.append(key, value);
+          }
+        }
+        await updateProduct(+productId, formData);
+      } else {
+        await updateProduct(+productId, dummyInput);
+      }
+
+      toast.success("Created project successfully");
+      setIsEdit(false);
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
 
   const handleClickEdit = () => {
-    setIsEdit(true)
-  }
+    if (!isApproved) {
+      setIsEdit(true);
+    }
+  };
 
-  const handleClickDelete = () => {
-    alert("Click delete")
-  }
+  const handleDelete = async () => {
+    try {
+      await deleteProduct(+productId);
+      setIsDeleteModalOpen(false);
+      toast.success("Deleted project successfully");
+      navigate(`/creator-panel/${authUser.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleClickSendToApproval = () => {
-    alert("Click Send To Approval")
-  }
+    alert("Click Send To Approval");
+  };
 
+  const handleInputChange = (e) =>
+    setInput({ ...input, [e.target.name]: e.target.value });
 
   return (
-    <div className="flex justify-center gap-8 items-center">
-      <div className="w-[40rem] ">
-        {newUrl ? <ReactPlayer
-          className="w-full h-full object-cover aspect-[16/9] rounded-lg"
-          url={newUrl}
-          playing={true}
-        // controls={true}
-        /> : <img src={img} className="w-full h-full object-cover aspect-[16/9]" alt="" />}
+    <>
+      {productLoading && <Spinner transparent />}
 
-        {isEdit && isCreator ? (
-          <>
-            <div className="my-5">
-              <label
-                role="button"
-                htmlFor="inputImg"
-                className="font-semibold text-xl "
-              >Input products picture link</label>
-              <input
-                id="inputImg"
-                className="border-2 w-full font-semibold px-2 text-gray-500 rounded-lg p-1"
-                value={newImg}
-                onChange={(e) => setNewImg(e.target.value)}
-              />
-            </div>
-            <div className="my-5">
-              <label
-                role="button"
-                htmlFor="inputUrl"
-                className="font-semibold text-xl"
-
-              >Input products video link</label>
-              <input
-                id="inputUrl"
-                className="border-2 w-full font-semibold px-2 text-gray-500 rounded-lg p-1"
-                value={newUrl}
-                onChange={(e) => setNewUrl(e.target.value)}
-              />
-            </div>
-          </>) : null}
-
-      </div>
-      <div className="flex flex-col gap-4 w-[35vw] justify-center px-4">
-        <h1 className="text-4xl font-semibold ">{title}</h1>
-        <div className="h-2 bg-neutral-300">
-          <p className={`h-2 ${progressBar["medium"]} bg-supporter-saturate`}></p>
-        </div>
-        <div>
-          <div className="text-4xl font-bold text-supporter-saturate">
-            THB {amountGet.toLocaleString("en-US")}
-          </div>
-
-          <div className="text-gray-500 font-semibold ">
-            supported of THB{isEdit ? <input
-              className="border-2  font-semibold text-xl px-2 text-gray-500 mx-2 max-w-56 rounded-lg"
-              value={newgold}
-              type='number'
-              onChange={(e) => setNewGold(+e.target.value)}
-            /> : <p className="pl-1 inline-block">{newgold.toLocaleString("en-US")}</p>}  goal
-          </div>
-
-        </div>
-        <div>
-          <p className="text-3xl font-extrabold">
-            {supporters.toLocaleString("en-US")}
-          </p>
-          <p className="text-gray-500 font-semibold">supporters</p>
-        </div>
-        <div>
-          {isEdit ? <>
-            <input
-              type="date"
-              value={dayjs(date).format('YYYY-MM-DD')}
-              onChange={(e) => setDate(dayjs(e.target.value).toISOString())}
-
-              className="bg-gray-50 border w-56 border-gray-300 text-gray-900 text-ls rounded-lg block  p-2.5 "
-            />
-          </> : <div className="text-3xl font-extrabold ">{remainingDay}</div>}
-
-          <p className="text-gray-500 font-semibold ml-1 mt-2">days to go</p>
-        </div>
-        <div>
-
-
-          {isCreator ? <div className="flex gap-4">
-            <Button bg="green" onClick={handleClickSave}>Save</Button>
-            <Button bg="yellow" onClick={handleClickEdit} >Edit</Button>
-            <Button bg="red" onClick={handleClickDelete}>Delete</Button>
-            <div className=" text-sm" >
-              <Button bg="creator-saturate" onClick={handleClickSendToApproval} >Send to Approval</Button>
-            </div>
-          </div> : <Button width="full" onClick={() => navigate(mockSelectTierPath)}>
-            Support this project
-          </Button>
+      <input
+        type="file"
+        placeholder="Poster image"
+        hidden
+        ref={fileEl}
+        onChange={(e) => {
+          if (e.target.files[0]) {
+            setFile(e.target.files[0]);
           }
+        }}
+      />
+      <div className="flex flex-col justify-center gap-8 items-center">
+        <div className="flex flex-col gap-4 justify-center items-center w-full px-48">
+          {!isEdit ? (
+            <>
+              <h1 className="text-4xl font-semibold">{input.productName}</h1>
+              <p className="text-lg text-gray-500">{input.summaryDetail}</p>
+            </>
+          ) : null}
+        </div>
+        <div className="flex justify-center items-center gap-8">
+          <div className="flex justify-center bg-red-300 w-2/5">
+            {isEdit && file ? (
+              <div onClick={() => fileEl.current.click()}>
+                <img
+                  src={URL.createObjectURL(file)}
+                  className="h-full object-cover aspect-[16/9]"
+                  alt=""
+                />
+              </div>
+            ) : isEdit ? (
+              <div onClick={() => fileEl.current.click()}>
+                <img
+                  src={input.productImage}
+                  className="h-full object-cover aspect-[16/9]"
+                  alt=""
+                />
+              </div>
+            ) : null}
 
+            {!isEdit && input.productVideo ? (
+              <ReactPlayer
+                className="h-full object-cover aspect-[16/9] rounded-lg"
+                url={input.productVideo}
+                controls={true}
+              />
+            ) : !isEdit ? (
+              <img
+                src={input.productImage}
+                className="w-full h-full object-cover aspect-[16/9]"
+                alt=""
+              />
+            ) : null}
+          </div>
+          <div className="flex flex-col gap-4 px-4">
+            {isEdit ? (
+              <CampaignEditContent
+                input={input}
+                inputError={inputError}
+                handleInputChange={handleInputChange}
+              />
+            ) : (
+              <CampaignShowContent input={input} remainingDay={remainingDay} />
+            )}
 
+            <div>
+              {isCreator && !isApproved ? (
+                <div className="grid grid-cols-4 gap-2">
+                  <Button width={30} bg="green" onClick={handleClickSave}>
+                    Save
+                  </Button>
+                  <Button width={30} bg="yellow" onClick={handleClickEdit}>
+                    Edit
+                  </Button>
+                  <Button width={30} bg="red" onClick={() => setIsDeleteModalOpen(true)}>
+                    Delete
+                  </Button>
+                  <Button
+                    width={30}
+                    bg="creator-saturate"
+                    onClick={handleClickSendToApproval}
+                  >
+                    Approval
+                  </Button>
+                </div>
+              ) : (
+                <div className="w-full">
+                  <Button
+                    width="full"
+                    onClick={() => navigate(`/campaign/${productId}/tier`)}
+                  >
+                    Support this project
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-    </div >
+
+      <Modal
+        open={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        title={"Confirm Delete Product"}
+        width={40}
+      >
+        <ConfirmModal
+          subTitle={"Are you sure you want to delete this project?"}
+          onCancel={() => setIsDeleteModalOpen(false)}
+          onConfirm={() => {
+            handleDelete();
+          }}
+        />
+      </Modal>
+    </>
   );
 }

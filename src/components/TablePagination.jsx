@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import GridTable from "./GridTable";
 
-export default function TablePagination({ data, columns, itemInOnePage = 10 }) {
+export default function TablePagination({ data, columns, itemInOnePage = 10, closePagination = false }) {
   const pageCount = Math.ceil(data.length / itemInOnePage);
   const allFalseStateList = [];
 
@@ -51,7 +51,7 @@ export default function TablePagination({ data, columns, itemInOnePage = 10 }) {
           <GridTable key={el.page} index={index} data={Object.values(el)} />
         ))}
       </div>
-      <div className="join flex justify-center">
+      {!closePagination &&       <div className="join flex justify-center">
         {selectPage.map((el) => (
           <button
             key={el.page}
@@ -61,7 +61,8 @@ export default function TablePagination({ data, columns, itemInOnePage = 10 }) {
             {el.page + 1}
           </button>
         ))}
-      </div>
+      </div>} 
+
     </div>
   );
 }
