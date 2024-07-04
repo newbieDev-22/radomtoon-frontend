@@ -1,17 +1,17 @@
-import { useState, useRef } from "react";
-import Button from "../components/Button";
-import dayjs from "dayjs";
-import { useStore } from "../store/useStore";
-import { CATEGORIES_TYPE, MIN_DEADLINE_DAYS, USER_ROLE } from "../constants";
-import { Navigate } from "react-router-dom";
-import Dropdown from "../components/Dropdown";
-import Input from "../components/Input";
-import { PictureIcon } from "../icons";
-import { toast } from "react-toastify";
-import validateProduct from "../validators/validate-create-project";
-import Spinner from "../components/Spinner";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+// import { useState, useRef } from "react";
+// import Button from "../components/Button";
+// import dayjs from "dayjs";
+// import { useStore } from "../store/useStore";
+// import { CATEGORIES_TYPE, MIN_DEADLINE_DAYS, USER_ROLE } from "../constants";
+// import { Navigate } from "react-router-dom";
+// import Dropdown from "../components/Dropdown";
+// import Input from "../components/Input";
+// import { PictureIcon } from "../icons";
+// import { toast } from "react-toastify";
+// import validateProduct from "../validators/validate-create-project";
+// import Spinner from "../components/Spinner";
+// import { useNavigate } from "react-router-dom";
+// import { motion } from "framer-motion";
 
 // const initialInput = {
 //   productName: "",
@@ -126,160 +126,177 @@ import { motion } from "framer-motion";
 //           }
 //         }}
 //       />
-//       <div className="flex flex-col justify-center py-8 ">
-//         <h1 className="text-5xl font-bold m-auto text-center">
+
+//       <div className="flex flex-col justify-center p-10 bg-[#b6e5e9] ">
+//         <h1 className="bg-[#e7f5fc] w-full py-5 px-10 rounded-xl text-3xl md:text-4xl lg:text-5xl font-bold m-auto text-center mb-10">
 //           CREATE YOUR PROJECT
 //         </h1>
 //         <motion.div
 //           {...slidDownForm}
-//           className="flex justify-center items-center mx-20 bg-slate-100 my-8 shadow-lg rounded-xl"
+//           className="bg-[#e7f5fc] rounded-xl shadow-lg"
 //         >
-//           <div className="w-1/2 flex justify-center">
-//             {file ? (
-//               <div
-//                 onClick={() => fileEl.current.click()}
-//                 className="w-full p-16"
-//               >
-//                 <motion.img
-//                   {...popupImg}
-//                   src={URL.createObjectURL(file)}
-//                   className=" object-cover aspect-[16/9] rounded-xl bg-red-200"
-//                   alt="product"
-//                 />
-//               </div>
-//             ) : (
-//               <div
-//                 role="button"
-//                 className="w-3/5 flex flex-col justify-center items-center"
-//                 onClick={() => fileEl.current.click()}
-//               >
-//                 <div className="w-full object-cover rounded-lg aspect-[16/9]  opacity-50 ">
-//                   <PictureIcon />
+//           <div className="bg-white flex flex-col md:flex-row justify-center items-center mx-4 md:mx-12 lg:mx-20 my-8 rounded-xl">
+//             <div className="w-full md:w-1/2 flex justify-center p-4 ">
+//               {file ? (
+//                 <div onClick={() => fileEl.current.click()} className="w-full">
+//                   <motion.img
+//                     {...popupImg}
+//                     src={URL.createObjectURL(file)}
+//                     className="object-cover aspect-[16/9] rounded-xl bg-red-200"
+//                     alt="product"
+//                   />
 //                 </div>
-//                 <h3 className="text-4xl font-semibold">Add product image</h3>
-//               </div>
-//             )}
-//           </div>
+//               ) : (
+//                 <div
+//                   role="button"
+//                   className="w-3/5 flex flex-col justify-center items-center p-10 hover:bg-gray-100 hover:rounded-xl hover:scale-105 duration-500"
+//                   onClick={() => fileEl.current.click()}
+//                 >
+//                   <div className="w-full object-cover rounded-lg aspect-[16/9]  opacity-50">
+//                     <PictureIcon />
+//                   </div>
+//                   <h3 className="text-xl md:text-2xl lg:text-4xl font-semibold text-center">
+//                     Add product image
+//                   </h3>
+//                 </div>
+//               )}
+//             </div>
 
-//           <form
-//             onSubmit={handleSubmitForm}
-//             className="flex flex-col gap-1 bg-creator-normal rounded-tr-xl rounded-br-xl w-1/2 px-16 py-8"
-//           >
-//             <label className="form-control w-full">
-//               <div className="label">
-//                 <span className="text-gray-500 font-semibold text-ls">
-//                   Product name
-//                 </span>
-//               </div>
-//               <Input
-//                 placeholder="Product name"
-//                 name="productName"
-//                 value={input.productName}
-//                 onChange={handleInputChange}
-//                 error={inputError.productName}
-//               />
-//             </label>
-
-//             <label className="form-control w-full">
-//               <div className="label">
-//                 <span className="text-gray-500 font-semibold text-ls">
-//                   Goal (THB)
-//                 </span>
-//               </div>
-//               <Input
-//                 placeholder="Goals"
-//                 name="goal"
-//                 type="number"
-//                 value={input.goal}
-//                 onChange={handleInputChange}
-//                 error={inputError.goal}
-//               />
-//             </label>
-
-//             <div className="flex gap-4">
+//             <form
+//               onSubmit={handleSubmitForm}
+//               className="flex flex-col gap-1 bg-white border-l-4 border-gray-300 rounded-xl md:rounded-none md:rounded-tr-xl md:rounded-br-xl w-full md:w-1/2 px-4 md:px-8 lg:px-16 py-8"
+//             >
 //               <label className="form-control w-full">
 //                 <div className="label">
-//                   <span className="text-gray-500 font-semibold text-ls">
-//                     Deadline
+//                   <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+//                     Product name
 //                   </span>
 //                 </div>
-//                 <input
-//                   type="date"
-//                   value={dayjs(input.deadline).format("YYYY-MM-DD")}
-//                   name="deadline"
+//                 <Input
+//                   placeholder="Product name"
+//                   name="productName"
+//                   value={input.productName}
 //                   onChange={handleInputChange}
-//                   className={`bg-gray-50 border  ${
-//                     inputError.deadline ? "border-red-500" : "border-gray"
-//                   } text-gray-900 text-ls rounded-lg block p-2.5 w-full`}
+//                   error={inputError.productName}
 //                 />
-//                 {inputError.deadline && (
+//               </label>
+
+//               <label className="form-control w-full">
+//                 <div className="label">
+//                   <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+//                     Goal (THB)
+//                   </span>
+//                 </div>
+//                 <Input
+//                   placeholder="Goals"
+//                   name="goal"
+//                   type="number"
+//                   value={input.goal}
+//                   onChange={handleInputChange}
+//                   error={inputError.goal}
+//                 />
+//               </label>
+
+//               <div className="flex flex-col md:flex-row gap-4">
+//                 <label className="form-control w-full">
+//                   <div className="label">
+//                     <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+//                       Deadline
+//                     </span>
+//                   </div>
+//                   <input
+//                     type="date"
+//                     value={dayjs(input.deadline).format("YYYY-MM-DD")}
+//                     name="deadline"
+//                     onChange={handleInputChange}
+//                     className={`bg-gray-50 border  ${
+//                       inputError.deadline ? "border-red-500" : "border-gray"
+//                     } text-gray-900 text-sm md:text-base lg:text-lg rounded-lg block p-2.5 w-full`}
+//                   />
+//                   {inputError.deadline && (
+//                     <small className="text-red-500 font-semibold">
+//                       {inputError.deadline}
+//                     </small>
+//                   )}
+//                 </label>
+//                 <label className="form-control w-full">
+//                   <div className="label">
+//                     <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+//                       Category
+//                     </span>
+//                   </div>
+//                   <Dropdown
+//                     data={CATEGORIES_TYPE.map((el) => el.name)}
+//                     onChange={handleCategoryChange}
+//                     title="Choose your category..."
+//                   />
+//                 </label>
+//               </div>
+
+//               <label className="form-control w-full">
+//                 <div className="label">
+//                   <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+//                     Summary Detail
+//                   </span>
+//                 </div>
+//                 <textarea
+//                   placeholder="Please fill summary detail"
+//                   name="summaryDetail"
+//                   value={input.summaryDetail}
+//                   onChange={handleInputChange}
+//                   className={`placeholder-gray-500 indent-1 min-h-24 max-h-24 border ${
+//                     inputError.summaryDetail ? "border-red-500" : "border-gray"
+//                   }  text-gray-500 text-sm md:text-base lg:text-lg rounded-lg block p-2.5 w-full`}
+//                 ></textarea>
+//                 {inputError.summaryDetail && (
 //                   <small className="text-red-500 font-semibold">
-//                     {inputError.deadline}
+//                     {inputError.summaryDetail}
 //                   </small>
 //                 )}
 //               </label>
+
 //               <label className="form-control w-full">
 //                 <div className="label">
-//                   <span className="text-gray-500 font-semibold text-ls">
-//                     Category
+//                   <span className="text-gray-500 font-semibold text-sm md:text-base lg:text-lg">
+//                     Product video link
 //                   </span>
 //                 </div>
-//                 <Dropdown
-//                   data={CATEGORIES_TYPE.map((el) => el.name)}
-//                   onChange={handleCategoryChange}
-//                   title="Choose your category..."
+//                 <Input
+//                   placeholder="Product video link"
+//                   name="productVideo"
+//                   value={input.productVideo}
+//                   onChange={handleInputChange}
+//                   error={inputError.productVideo}
 //                 />
 //               </label>
-//             </div>
 
-//             <label className="form-control w-full">
-//               <div className="label">
-//                 <span className="text-gray-500 font-semibold text-ls">
-//                   Summary Detail
-//                 </span>
+//               <div className="py-4">
+//                 <Button bg="yellow" width="full">
+//                   Save
+//                 </Button>
 //               </div>
-//               <textarea
-//                 placeholder="Please fill summary detail"
-//                 name="summaryDetail"
-//                 value={input.summaryDetail}
-//                 onChange={handleInputChange}
-//                 className={`placeholder-gray-500 indent-1 min-h-24 max-h-24 border ${
-//                   inputError.summaryDetail ? "border-red-500" : "border-gray"
-//                 }  text-gray-500 text-ls rounded-lg block p-2.5 w-full`}
-//               ></textarea>
-//               {inputError.summaryDetail && (
-//                 <small className="text-red-500 font-semibold">
-//                   {inputError.summaryDetail}
-//                 </small>
-//               )}
-//             </label>
-
-//             <label className="form-control w-full">
-//               <div className="label">
-//                 <span className="text-gray-500 font-semibold text-ls">
-//                   Product video link
-//                 </span>
-//               </div>
-//               <Input
-//                 placeholder="Product video link"
-//                 name="productVideo"
-//                 value={input.productVideo}
-//                 onChange={handleInputChange}
-//                 error={inputError.productVideo}
-//               />
-//             </label>
-
-//             <div className="py-4">
-//               <Button bg="yellow" width="full">
-//                 Save
-//               </Button>
-//             </div>
-//           </form>
+//             </form>
+//           </div>
 //         </motion.div>
 //       </div>
 //     </>
 //   );
 // }
+
+import { useState, useRef } from "react";
+import Button from "../components/Button";
+import dayjs from "dayjs";
+import { useStore } from "../store/useStore";
+import { CATEGORIES_TYPE, MIN_DEADLINE_DAYS, USER_ROLE } from "../constants";
+import { Navigate } from "react-router-dom";
+import Dropdown from "../components/Dropdown";
+import Input from "../components/Input";
+import { PictureIcon } from "../icons";
+import { toast } from "react-toastify";
+import validateProduct from "../validators/validate-create-project";
+import Spinner from "../components/Spinner";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const initialInput = {
   productName: "",
@@ -394,15 +411,17 @@ export default function CampaignSetup() {
           }
         }}
       />
-      <div className="flex flex-col justify-center py-8 ">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold m-auto text-center">
+
+      <div className="flex flex-col justify-center p-10   ">
+        <h1 className=" w-[85vw] py-5 px-10 rounded-xl text-3xl md:text-4xl lg:text-5xl font-bold m-auto text-center mb-4">
           CREATE YOUR PROJECT
         </h1>
+
         <motion.div
           {...slidDownForm}
-          className="flex flex-col md:flex-row justify-center items-center mx-4 md:mx-12 lg:mx-20 bg-slate-100 my-8 shadow-lg rounded-xl"
+          className="bg-white flex flex-col md:flex-row justify-center items-center mx-4 md:mx-12 lg:mx-20 my-8 rounded-xl shadow-xl"
         >
-          <div className="w-full md:w-1/2 flex justify-center p-4">
+          <div className="w-full md:w-1/2 flex justify-center p-4 ">
             {file ? (
               <div onClick={() => fileEl.current.click()} className="w-full">
                 <motion.img
@@ -415,12 +434,15 @@ export default function CampaignSetup() {
             ) : (
               <div
                 role="button"
-                className="w-3/5 flex flex-col justify-center items-center"
+                className="w-3/5 flex flex-col justify-center items-center p-10 hover:rounded-xl hover:scale-105 duration-500"
                 onClick={() => fileEl.current.click()}
               >
-                <div className="w-full object-cover rounded-lg aspect-[16/9]  opacity-50">
-                  <PictureIcon />
-                </div>
+                <img
+                  // src="https://img.freepik.com/premium-vector/upload-file-flat-illustration_120816-71603.jpg?w=996"
+                  // src="https://img.freepik.com/free-vector/image-upload-concept-illustration_114360-798.jpg?t=st=1720081887~exp=1720085487~hmac=d275986d684001fcefd5b205c8660bac193b93122d46a3ef9b50976244dff47d&w=996"
+                  src="https://img.freepik.com/free-vector/illustration-uploading-icon_53876-6323.jpg?t=st=1720081801~exp=1720085401~hmac=b5bd26847424294f6c55e417688748fe317957137229c6548a3566413f68e804&w=996"
+                  alt=""
+                />
                 <h3 className="text-xl md:text-2xl lg:text-4xl font-semibold text-center">
                   Add product image
                 </h3>
@@ -430,7 +452,7 @@ export default function CampaignSetup() {
 
           <form
             onSubmit={handleSubmitForm}
-            className="flex flex-col gap-1 bg-creator-normal rounded-xl md:rounded-none md:rounded-tr-xl md:rounded-br-xl w-full md:w-1/2 px-4 md:px-8 lg:px-16 py-8"
+            className="flex flex-col gap-1 bg-[#e7f5fc]  rounded-xl md:rounded-none md:rounded-tr-xl md:rounded-br-xl w-full md:w-1/2 px-4 md:px-8 lg:px-16 py-8"
           >
             <label className="form-control w-full">
               <div className="label">
