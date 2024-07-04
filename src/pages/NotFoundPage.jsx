@@ -1,22 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 
-
 export default function NotFoundPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-center items-center flex-row mt-5 h-[100vh]">
+    <div className="flex justify-center items-center flex-row h-[100vh] ">
       <div className="w-[50vw] px-20 flex flex-col justify-center gap-24 h-full">
         <div className="flex flex-col gap-10">
           <span className="text-9xl font-bold text-creator-saturate">Oops . .</span>
           <span className="text-xl font-medium text-radomtoon-bright">
-            It seems the page you're looking for doesn't exist. Please check the
-            URL, or head back to our homepage to find what you need.
+            It seems the page you're looking for doesn't exist. Please check the URL, or
+            head back to our homepage to find what you need.
           </span>
         </div>
         <div className="ml-10">
-          <Button width="60" color="white" bg="creator-saturate" onClick={() => navigate("/")}>
+          <Button
+            width="60"
+            color="white"
+            bg="creator-saturate"
+            onClick={() => navigate("/")}
+          >
             Back to home page
           </Button>
         </div>

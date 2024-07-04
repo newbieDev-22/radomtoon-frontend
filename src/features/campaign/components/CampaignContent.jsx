@@ -35,12 +35,10 @@ export default function CampaignContent() {
   const { productId } = useParams();
   const filterData = filterProductByProductId(+productId);
 
-
   const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData?.creatorId;
   const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
 
   const initialInput = {
-
     productName: filterData?.productName,
     goal: filterData?.goal,
     deadline: dayjs(filterData?.deadline).format("YYYY-MM-DD"),
@@ -116,7 +114,6 @@ export default function CampaignContent() {
     }
   };
 
-
   const handleDelete = async () => {
     try {
       await deleteProduct(+productId);
@@ -151,11 +148,11 @@ export default function CampaignContent() {
         }}
       />
       <div className="flex flex-col justify-center gap-8 items-center">
-        <div className="flex flex-col gap-4 justify-center items-center w-full px-48">
+        <div className="flex flex-col gap-4 justify-center items-center w-3/4 m-auto ">
           {!isEdit ? (
             <>
-              <h1 className="text-4xl font-semibold">{input.productName}</h1>
-              <p className="text-lg text-gray-500">{input.summaryDetail}</p>
+              <h1 className="text-4xl font-semibold text-center">{input.productName}</h1>
+              <p className="text-lg text-gray-500 text-center">{input.summaryDetail}</p>
             </>
           ) : null}
         </div>
@@ -227,7 +224,6 @@ export default function CampaignContent() {
                 </div>
               ) : (
                 <div className="w-full">
-
                   <Button
                     width="full"
                     onClick={() => navigate(`/campaign/${productId}/tier`)}
@@ -240,7 +236,6 @@ export default function CampaignContent() {
           </div>
         </div>
       </div>
-
 
       <Modal
         open={isDeleteModalOpen}
