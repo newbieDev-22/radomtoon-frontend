@@ -41,6 +41,9 @@ importers:
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
+      radomtoon-frontend-web:
+        specifier: 'link:'
+        version: 'link:'
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -1653,7 +1656,7 @@ packages:
     peerDependencies:
       react: ^15.5.x || ^16.x || ^17.x || ^18.x
       react-dom: ^15.5.x || ^16.x || ^17.x || ^18.x
-      
+
   react-player@2.16.0:
     resolution: {integrity: sha512-mAIPHfioD7yxO0GNYVFD1303QFtI3lyyQZLY229UEAp/a10cSW+hPcakg0Keq8uWJxT2OiT/4Gt+Lc9bD6bJmQ==}
     peerDependencies:
@@ -3618,7 +3621,7 @@ snapshots:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      
+
   react-player@2.16.0(react@18.3.1):
     dependencies:
       deepmerge: 4.3.1
