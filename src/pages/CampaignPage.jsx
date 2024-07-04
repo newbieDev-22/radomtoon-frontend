@@ -26,6 +26,7 @@ export default function CampaignPage() {
   const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData.creatorId;
 
   return (
+
     <div className="py-10">
       <CampaignContent />
       <CampaignSection handleSubPageChange={handleSubPageChange} />
@@ -34,9 +35,11 @@ export default function CampaignPage() {
           <Editor />
         </div>
       )}
+
       {subPage === subPageMap.MILESTONE && <MilestoneContainer />}
       {subPage === subPageMap.REWARD && <ProductRewardContainer isCreator={isCreator} />}
       {subPage === subPageMap.FORUM && <ProductCommentContainer />}
-    </div>
+
+    </div >
   );
 }
