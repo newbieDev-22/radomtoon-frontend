@@ -17,7 +17,7 @@ export default function Input({
       <input
         className={`w-full ${
           heightMapping[height]
-        } indent-2 px-2 border-[1.5px] outline-none rounded-lg focus:border-radomtoon-dark transition duration-300 placeholder-gray-500 ${
+        } indent-2 px-2 border-[1.5px] outline-none rounded-lg focus:border-radomtoon-dark transition duration-300 placeholder-gray-400 ${
           error ? "border-red-500" : "border-gray"
         }`}
         type={type}
@@ -26,7 +26,7 @@ export default function Input({
         name={name}
         onChange={onChange}
       />
-      {error && <small className="text-red-500 font-semibold">{error}</small>}
+      {error && <small className="text-red-500 text-xs font-semibold">{error}</small>}
     </>
   );
 }

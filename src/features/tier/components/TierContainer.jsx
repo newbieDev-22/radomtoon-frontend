@@ -1,17 +1,30 @@
 import { useNavigate } from "react-router-dom";
 import TierCard from "./TierCard";
 
-const mockTierNumber = "1";
-const mockProductName = "Starter Kit";
-const mockDetail = `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
-INCLUDES
-Bria's Mythical Menagerie Hardcover
-Less`;
-const mockDateEstimated = "Dec 2024";
-const mockAmountSupporters = "456";
-const mockImageProduct =
-  "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D";
-
+const data = [
+  {
+    mockTierNumber: "1",
+    mockProductName: "Starter Kit",
+    mockDetail: `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
+INCLUDES,`,
+    mockDateEstimated: "Dec 2024",
+    mockAmountSupporters: "456",
+    mockImageProduct:
+      "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D",
+    mockPrice: 20,
+  },
+  {
+    mockTierNumber: "1",
+    mockProductName: "Starter Kit",
+    mockDetail: `📕By Popular Demand: The Book tier! A 350+ page tome packed with everything you need to add creature-collecting flair to your table. Compatible with D&D5e.
+INCLUDES,`,
+    mockDateEstimated: "Dec 2024",
+    mockAmountSupporters: "456",
+    mockImageProduct:
+      "https://i.kickstarter.com/assets/045/220/970/bcc34c2ec9f7b561146385ddb7fc66b8_original.jpg?origin=ugc&q=80&width=600&sig=%2BkIHOIquAZUDBx9Vuu2zY0aBpGWqvDW2ZJzSabI6D5g%3D",
+    mockPrice: 20,
+  },
+];
 const mockPaymentPath = "/campaign/1/tier/1/payment";
 
 export default function TierContainer() {
@@ -28,33 +41,9 @@ export default function TierContainer() {
         className="flex flex-col gap-4
         "
       >
-        <TierCard
-          tierNumber={mockTierNumber}
-          productName={mockProductName}
-          detail={mockDetail}
-          dateEstimated={mockDateEstimated}
-          amountSupporters={mockAmountSupporters}
-          productImage={mockImageProduct}
-          onClick={() => navigate(mockPaymentPath)}
-        />
-        <TierCard
-          tierNumber={mockTierNumber}
-          productName={mockProductName}
-          detail={mockDetail}
-          dateEstimated={mockDateEstimated}
-          amountSupporters={mockAmountSupporters}
-          productImage={mockImageProduct}
-          onClick={() => navigate(mockPaymentPath)}
-        />
-        <TierCard
-          tierNumber={mockTierNumber}
-          productName={mockProductName}
-          detail={mockDetail}
-          dateEstimated={mockDateEstimated}
-          amountSupporters={mockAmountSupporters}
-          productImage={mockImageProduct}
-          onClick={() => navigate(mockPaymentPath)}
-        />
+        {data.map((el) => (
+          <TierCard key={el.mockTierNumber} el={el} />
+        ))}
       </div>
     </div>
   );
