@@ -54,13 +54,12 @@ export default function TierCard({
   return (
     <>
       <div className="relative hover:scale-[102%] active:scale-100 transition-all">
-        <div
-          role="button"
+        <button
           className="absolute top-2 right-2 hover:scale-[110%] active:scale-100"
           onClick={() => setIsDeleteModalOpen(true)}
         >
           <CloseIcon color="gray" />
-        </div>
+        </button>
         {isEdit && !isApproved && isCreator ? (
           <TierEditContent
             input={input}

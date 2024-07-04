@@ -42,7 +42,7 @@ export default function TierEditContent({
     try {
       e.preventDefault();
       const dummyInput = { ...input };
-      const tierId = input.id;
+      const tierId = dummyInput.id;
       delete dummyInput.id;
       const error = validateTier(dummyInput);
       if (error) {
@@ -66,11 +66,9 @@ export default function TierEditContent({
           }
           const tierResult = await updateTier(tierId, formData);
           handleValueChange("tierImage", tierResult.tierImage);
-          handleValueChange("id", tierResult.id);
           handleDataChange(tierId, tierResult);
         } else {
           const tierResult = await updateTier(tierId, dummyInput);
-          handleValueChange("id", tierResult.id);
           handleDataChange(tierId, tierResult);
         }
         toast.success("Updated tier successfully");
