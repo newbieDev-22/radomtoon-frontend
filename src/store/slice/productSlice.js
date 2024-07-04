@@ -1,19 +1,134 @@
 import productApi from "../../apis/product";
+import { APPROVAL_STATUS_ID } from "../../constants";
 
-export const productSlice = (set) => ({
+export const productSlice = (set, get) => ({
   product: { data: [], loading: false, error: null, today: new Date() },
+  approvalProduct: [],
+  productLoading: false,
   fetchProduct: async () => {
     try {
       set((state) => ({ product: { ...state.product, loading: true, error: null } }));
       const productResponse = await productApi.getProduct();
+      const productList = productResponse.data.productList;
       set((state) => ({
-        product: { ...state.product, data: productResponse.data.productList },
+        product: { ...state.product, data: productList },
       }));
+      const approvalProduct = productList.filter(
+        (el) => el.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS
+      );
+      set(() => ({ approvalProduct: approvalProduct }));
     } catch (err) {
       console.error(err);
       set((state) => ({ product: { ...state.product, error: err.message } }));
     } finally {
       set((state) => ({ product: { ...state.product, loading: false, error: null } }));
+    }
+  },
+  filterProductByCreatorId: (creatorId, isApproved = null) => {
+    if (isApproved) {
+      const approvalProduct = get().approvalProduct;
+      return approvalProduct.filter((el) => el.creatorId === +creatorId);
+    } else {
+      const { data } = get().product;
+      return data.filter((el) => el.creatorId === +creatorId);
+    }
+  },
+  createProduct: async (formData) => {
+    try {
+      set(() => ({ productLoading: true }));
+
+      set((state) => ({ product: { ...state.product, error: null } }));
+      const productResponse = await productApi.createProduct(formData);
+      set((state) => ({
+        product: {
+          ...state.product,
+          data: [productResponse.data.productDetail, ...state.product.data],
+        },
+      }));
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
+  },
+  updateProduct: async (productId, formData) => {
+    try {
+      set(() => ({ productLoading: true }));
+      const productResponse = await productApi.updateProduct(productId, formData);
+      console.log("first", productResponse.data.productDetail);
+      const productDetail = productResponse.data.productDetail;
+
+      const { data } = get().product;
+
+      const productIndex = data.findIndex((el) => el.id === productDetail.id);
+      data[productIndex] = productDetail;
+
+      set((state) => ({
+        product: {
+          ...state.product,
+          data: data,
+        },
+      }));
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
+  },
+  deleteProduct: async (productId) => {
+    try {
+      set(() => ({ productLoading: true }));
+      await productApi.deleteProduct(productId);
+      const { data } = get().product;
+
+      const productFilter = data.filter((el) => el.id !== productId);
+
+      set((state) => ({
+        product: {
+          ...state.product,
+          data: productFilter,
+        },
+      }));
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
+  },
+  filterProductByProductId: (productId) => {
+    const { data } = get().product;
+    const selectedProduct = data.filter((el) => el.id === +productId);
+    if (selectedProduct.length > 0) {
+      return selectedProduct[0];
+    }
+    return null;
+  },
+  updateStory: async (productId, formData) => {
+    try {
+      set(() => ({ productLoading: true }));
+      const productResponse = await productApi.updateStory(productId, formData);
+      console.log("first", productResponse.data.productDetail);
+      const productDetail = productResponse.data.productDetail;
+
+      const { data } = get().product;
+
+      const productIndex = data.findIndex((el) => el.id === productDetail.id);
+      data[productIndex] = productDetail;
+
+      set((state) => ({
+        product: {
+          ...state.product,
+          data: data,
+        },
+      }));
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
     }
   },
 });

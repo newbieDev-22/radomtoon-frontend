@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import './Map.css'
 import { getResponsiveValue } from '../../../utils/responsive';
 
+
 export default function Map() {
   const [geojsonData, setGeojsonData] = useState(null);
 
@@ -18,11 +19,13 @@ export default function Map() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://raw.githubusercontent.com/apisit/thailand.json/master/thailandwithdensity.json");
+        const response = await fetch(
+          "https://raw.githubusercontent.com/apisit/thailand.json/master/thailandwithdensity.json"
+        );
         const data = await response.json();
         setGeojsonData(data);
       } catch (error) {
-        console.error('Error fetching geojson data:', error);
+        console.error("Error fetching geojson data:", error);
       }
     };
     fetchData();
@@ -33,8 +36,9 @@ export default function Map() {
 
     const map = L.map('mapid').setView([13, 101.5], setZoomLevel());
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
     window.addEventListener('resize', function() {
@@ -44,7 +48,7 @@ export default function Map() {
     const info = L.control();
 
     info.onAdd = function () {
-      this._div = L.DomUtil.create('div', 'info');
+      this._div = L.DomUtil.create("div", "info");
       this.update();
       return this._div;
     };
@@ -52,6 +56,7 @@ export default function Map() {
     info.update = function (props) {
       this._div.innerHTML = '<h4>Supporter Density</h4>' + 
         (props ? `<b>${props.name}</b><br />${props.p} people / km<sup>2</sup>` : 'Hover over a province');
+
     };
 
     info.addTo(map);
@@ -79,25 +84,24 @@ export default function Map() {
     }
     // ### CYAN ###
     // function getColor(d) {
-    //   return d > 1000 ? '#164E63' : 
-    //     d > 500 ? '#155E75' : 
-    //     d > 200 ? '#0E7490' : 
-    //     d > 100 ? '#06B6D4' : 
-    //     d > 50 ? '#22D3EE' : 
-    //     d > 20 ? '#A5F3FC' : 
-    //     d > 10 ? '#CFFAFE' : 
-    //     '#ECFEFF'; 
+    //   return d > 1000 ? '#164E63' :
+    //     d > 500 ? '#155E75' :
+    //     d > 200 ? '#0E7490' :
+    //     d > 100 ? '#06B6D4' :
+    //     d > 50 ? '#22D3EE' :
+    //     d > 20 ? '#A5F3FC' :
+    //     d > 10 ? '#CFFAFE' :
+    //     '#ECFEFF';
     // }
-    
 
     function style(feature) {
       return {
         fillColor: getColor(feature.properties.p),
         weight: 1,
         opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
+        color: "white",
+        dashArray: "3",
+        fillOpacity: 0.7,
       };
     }
 
@@ -106,9 +110,9 @@ export default function Map() {
 
       layer.setStyle({
         weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
+        color: "#666",
+        dashArray: "",
+        fillOpacity: 0.7,
       });
 
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -131,19 +135,19 @@ export default function Map() {
       layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: zoomToFeature
+        click: zoomToFeature,
       });
     }
 
     const geojson = L.geoJson(geojsonData, {
       style: style,
-      onEachFeature: onEachFeature
+      onEachFeature: onEachFeature,
     }).addTo(map);
 
-    const legend = L.control({ position: 'bottomright' });
+    const legend = L.control({ position: "bottomright" });
 
     legend.onAdd = function () {
-      const div = L.DomUtil.create('div', 'info legend');
+      const div = L.DomUtil.create("div", "info legend");
       const grades = [0, 10, 20, 50, 100, 200, 500, 1000];
       const labels = [];
       let from, to;
@@ -153,10 +157,13 @@ export default function Map() {
         to = grades[i + 1];
 
         labels.push(
-          `<i style="background:${getColor(from + 1)}"></i> ${from}${to ? '&ndash;' + to : '+'}`);
+          `<i style="background:${getColor(from + 1)}"></i> ${from}${
+            to ? "&ndash;" + to : "+"
+          }`
+        );
       }
 
-      div.innerHTML = labels.join('<br>');
+      div.innerHTML = labels.join("<br>");
       return div;
     };
 
@@ -174,3 +181,4 @@ export default function Map() {
     </div>
 );
 };
+

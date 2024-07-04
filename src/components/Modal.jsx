@@ -28,23 +28,19 @@ export default function Modal({ width = 30, title, children, open, onClose }) {
                   >
                     <div className="relative mb-6">
                       <div className="flex justify-center items-center pt-8 pb-2 relative rounded-t-lg">
-                        <h5 className="text-black text-4xl font-bold ">
-                          {title}
-                        </h5>
+                        <h5 className="text-black text-4xl font-bold">{title}</h5>
                       </div>
                       <div className="relative ">
                         <button
                           className="absolute bottom-0 right-6 transition-all hover:scale-110"
                           onClick={onClose}
                         >
-                          <CloseIcon />
+                          <CloseIcon color={"black"} />
                         </button>
                       </div>
                     </div>
 
-                    <div className="px-12 pb-6 flex justify-center">
-                      {children}
-                    </div>
+                    <div className="px-12 pb-6 flex justify-center">{children}</div>
                   </div>
                 </div>
               </div>

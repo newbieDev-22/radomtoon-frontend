@@ -6,6 +6,7 @@ import { useStore } from "../store/useStore";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import validateLogin from "../validators/validate-login";
+import Spinner from "../components/Spinner";
 
 const initialInput = {
   email: "",
@@ -21,6 +22,7 @@ export default function LoginPage() {
   const [input, setInput] = useState(initialInput);
   const [inputError, setInputError] = useState(initialInputError);
   const login = useStore((state) => state.login);
+  const authLoading = useStore((state) => state.authLoading);
   const navigate = useNavigate();
 
   const handleChangInput = (e) => {
@@ -35,8 +37,12 @@ export default function LoginPage() {
         setInputError((prev) => ({ ...prev, ...error }));
       } else {
         setInputError((prev) => ({ ...prev, ...initialInputError }));
-        login(input);
-        navigate("/");
+        const res = await login(input);
+        if (res === true) {
+          navigate("/");
+        } else {
+          toast.error(res);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -52,20 +58,27 @@ export default function LoginPage() {
 
   return (
     <>
+      {authLoading && <Spinner transparent />}
       <div className="min-w-screen min-h-screen">
         <div className="flex shadow-lg rounded-lg">
           <div className="relative h-screen w-full">
             <img
-              src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+
+              src="https://images.unsplash.com/photo-1492539161849-b2b18e79c85f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
               className="h-full w-full object-cover"
             />
           </div>
           <div className="absolute rounded-xl inset-0 m-auto px-20 w-1/3 bg-slate-100 bg-opacity-90 flex h-1/2 flex-col justify-center">
-            <h1 className="text-3xl font-bold text-center">SIGN IN</h1>
+
+            <h1 className="text-3xl font-bold text-center">
+              Excited to Dive into the Campaign? Log in Here
+            </h1>
 
             <form onSubmit={handleSubmitForm}>
-                <div className="flex flex-col justify-center gap-1 pt-8">
+              <div className="flex flex-col justify-center gap-4 pt-8">
+                <div>
+
                   <Input
                     name="email"
                     placeholder="Email"
@@ -73,6 +86,8 @@ export default function LoginPage() {
                     value={input.email}
                     error={inputError.email}
                   />
+                </div>
+                <div>
                   <Input
                     type="password"
                     name="password"
@@ -81,25 +96,29 @@ export default function LoginPage() {
                     value={input.password}
                     error={inputError.password}
                   />
-                  <br />
-                  <Button width={"full"}>LOGIN</Button>
-                </div>
 
-                <div className="flex justify-center">
-                  <button
-                    className="rounded-box grid place-items-center font-bold hover:text-creator-saturate transition duration-300"
-                    onClick={() => navigate("/creator-register")}
-                  >
-                    Become a Creator
-                  </button>
-                  <div className="divider lg:divider-horizontal">|</div>
-                  <button
-                    className="rounded-box grid place-items-center font-bold hover:text-yellow-500 transition duration-300"
-                    onClick={() => navigate("/supporter-register")}
-                  >
-                    Join as a Supporter
-                  </button>
                 </div>
+              </div>
+              <div className="py-4">
+                <Button width={"full"}>LOGIN</Button>
+              </div>
+
+
+              <div className="flex justify-center">
+                <button
+                  className="rounded-box grid place-items-center font-bold hover:text-creator-saturate transition duration-300"
+                  onClick={() => navigate("/creator-register")}
+                >
+                  Become a Creator
+                </button>
+                <div className="divider lg:divider-horizontal">|</div>
+                <button
+                  className="rounded-box grid place-items-center font-bold hover:text-yellow-500 transition duration-300"
+                  onClick={() => navigate("/supporter-register")}
+                >
+                  Join as a Supporter
+                </button>
+              </div>
             </form>
           </div>
         </div>

@@ -1,17 +1,20 @@
 export const STATUS_PRODUCT = {
-  PENDING: "Waiting for admin approval",
-  IN_PROGRESS: "Project in progress",
-  REJECT: "Reject",
-  FAILED: "Failed",
-  SUCCESS: "Success",
+  PENDING: { text: "Waiting for project approval", bg: "bg-yellow-300", color: "text-yellow-400" },
+  IN_PROGRESS: { text: "Project in progress", bg: "bg-creator-normal", color: "text-creator-saturate" },
+  REJECT: { text: "Rejected", bg: "bg-orange-300", color: "text-orange-500" },
+  FAILED: { text: "Failed", bg: "bg-red-300", color: "text-red-500" },
+  SUCCESS: { text: "Success", bg: "bg-green-300", color: "text-green-400" },
+  DRAFTING: { text: "Drafting project", bg: "bg-gray-300", color: "text-gray-400" },
 };
+
+
+
 
 export const widthMap = {
   small: "w-[300px]",
   medium: "w-80",
   large: "w-96",
 };
-
 
 export const heightMap = {
   small: "h-48",
@@ -110,7 +113,7 @@ export const subPageMap = {
   FORUM: "FORUM",
 };
 
-const geoDataMap = {
+export const geoDataMap = {
   AMNATCHAROEN: "AMNATCHAROEN",
   ANGTHONG: "ANGTHONG",
   BANGKOK: "BANGKOK",
@@ -202,13 +205,13 @@ export const mockContent = `  Lorem Ipsum is simply dummy text of the printing a
                 1500s, when an unknown printer took a galley of type and scrambled it to
                 make a type specimen book.`;
 
- export const mockImgStatsBar =
+export const mockImgStatsBar =
   "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/bmt7dsxiwpfjlnxpcazs";
- export const mockDataStatsBar = [
+export const mockDataStatsBar = [
   { id: 1, amount: 194504, title: "projects supported" },
   { id: 2, amount: 1062035636, title: "towards ideas", currency: "THB" },
   { id: 3, amount: 84372090, title: "contributions" },
-  ];
+];
 
 export const PROVINCE_LIST = [
   "Amnat Charoen",
@@ -449,3 +452,40 @@ export const PROVINCE_MAP = [
   { id: 76, name: "Yala" },
   { id: 77, name: "Yasothon" },
 ];
+
+export const IS_CREATOR_ACCEPT_STATUS = {
+  PENDING: 1,
+  ACCEPTED: 2,
+};
+
+export const APPROVAL_STATUS_ID = {
+  PENDING: 1,
+  FAILED: 2,
+  SUCCESS: 3,
+};
+
+export const PRODUCT_STATUS = {
+  PENDING: "PENDING",
+  FAILED: "FAILED",
+  SUCCESS: "SUCCESS",
+};
+
+export const PRODUCT_STATUS_ID = {
+  PENDING: 1,
+  FAILED: 2,
+  SUCCESS: 3,
+};
+export const CATEGORIES_TYPE = [
+  { id: 1, name: "ART" },
+  { id: 2, name: "COMICS" },
+  { id: 3, name: "CRAFTS" },
+  { id: 4, name: "DANCE" },
+  { id: 5, name: "DESIGN" },
+  { id: 6, name: "FASHION" },
+  { id: 7, name: "FILM" },
+  { id: 8, name: "GAMES" },
+  { id: 9, name: "MUSIC" },
+  { id: 10, name: "TECHNOLOGY" },
+];
+
+export const MIN_DEADLINE_DAYS = 15;

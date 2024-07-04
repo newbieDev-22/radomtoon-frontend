@@ -19,8 +19,8 @@ const registerSchema = Joi.object({
       "string.email": "Email is wrong format",
     })
     .messages({ "string.empty": "Email is required" }),
-  phoneNumber: Joi.string()
-    .pattern(/^[0-9]{10}$/)
+  phone: Joi.string()
+    .pattern(/^\d{10}$/)
     .required()
     .messages({
       "alternatives.match": "Invalid Mobile number",

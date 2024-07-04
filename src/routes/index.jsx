@@ -24,17 +24,14 @@ const router = createBrowserRouter([
     children: [
       { path: "/landing", element: <LandingPage /> },
       { path: "/", element: <HomePage /> },
-
       { path: "/campaign/:productId", element: <CampaignPage /> },
       { path: "/campaign/:productId/tier", element: <SelectTierPage /> },
       { path: "/campaign/:productId/tier/:tierId/payment", element: <PaymentPage /> },
-
       { path: "/supporter-histories", element: <SupporterHistoryPage /> },
-      { path: "/creator-panel", element: <CreatorPanel /> },
+      { path: "/creator-panel/:creatorId", element: <CreatorPanel /> },
       { path: "/creator-campaign-setup", element: <CampaignSetup /> },
       { path: "/product/:productId/status", element: <ProductManagePage /> },
       { path: "/admin-panel", element: <AdminPanel /> },
-
       { path: "/home-dummy", element: <HomeDummy /> },
     ],
   },
