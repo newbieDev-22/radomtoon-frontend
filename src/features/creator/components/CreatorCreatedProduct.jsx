@@ -31,7 +31,7 @@ export default function CreatorCreatedProduct() {
 
           <Button
             width={60}
-            bg="creator-saturate"
+            bg="creator-normal"
             onClick={handleClickAddNewProject}
           >
             Start new project

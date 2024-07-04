@@ -41,6 +41,9 @@ importers:
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
+      radomtoon-frontend-web:
+        specifier: 'link:'
+        version: 'link:'
       react:
         specifier: ^18.2.0
         version: 18.3.1
