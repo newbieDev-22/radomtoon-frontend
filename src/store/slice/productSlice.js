@@ -56,6 +56,7 @@ export const productSlice = (set, get) => ({
     try {
       set(() => ({ productLoading: true }));
       const productResponse = await productApi.updateProduct(productId, formData);
+
       const productDetail = productResponse.data.productDetail;
 
       const { data } = get().product;
@@ -104,5 +105,31 @@ export const productSlice = (set, get) => ({
       return selectedProduct[0];
     }
     return null;
+  },
+
+  updateStory: async (productId, formData) => {
+    try {
+      set(() => ({ productLoading: true }));
+      const productResponse = await productApi.updateStory(productId, formData);
+      console.log("first", productResponse.data.productDetail);
+      const productDetail = productResponse.data.productDetail;
+
+      const { data } = get().product;
+
+      const productIndex = data.findIndex((el) => el.id === productDetail.id);
+      data[productIndex] = productDetail;
+
+      set((state) => ({
+        product: {
+          ...state.product,
+          data: data,
+        },
+      }));
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
   },
 });

@@ -16,47 +16,43 @@
     },
     {
       "label": "Apr",
-      "revenue": 82830,
-      "cost": 64731
+      "revenue": 82830
     },
     {
       "label": "May",
-      "revenue": 91208,
-      "cost": 41893
+      "revenue": 91208
     },
     {
       "label": "Jun",
-      "revenue": 103609,
-      "cost": 83809
+      "revenue": 103609
     },
     {
       "label": "Jul",
-      "revenue": 90974,
-      "cost": 44772
+      "revenue": 90974
     },
     {
       "label": "Aug",
-      "revenue": 82919,
-      "cost": 37590
+      "revenue": 82919
     },
     {
       "label": "Sep",
       "revenue": 62407,
-      "cost": 43349
+      "cost": 62407,
+      "costBetter": 62407
     },
     {
       "label": "Oct",
-      "revenue": 82528,
-      "cost": 45324
+      "cost": 45324,
+      "costBetter": 55324
     },
     {
       "label": "Nov",
-      "revenue": 56979,
-      "cost": 47978
+      "cost": 47978,
+      "costBetter": 57978
     },
     {
       "label": "Dec",
-      "revenue": 87436,
-      "cost": 39175
+      "cost": 39175,
+      "costBetter": 49175
     }
   ]

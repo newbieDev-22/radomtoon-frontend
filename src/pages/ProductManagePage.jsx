@@ -7,7 +7,7 @@ import TablePagination from "../components/TablePagination";
 import { useState } from "react";
 
 const mockProductName = `Bria's Mythical Menagerie: Creature-Collecting & Plush`;
-const mockStatus = STATUS_PRODUCT.PENDING;
+const mockStatus = STATUS_PRODUCT.IN_PROGRESS;
 
 export default function ProductManagePage() {
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
@@ -124,7 +124,7 @@ export default function ProductManagePage() {
   return (
     <div className="m-auto flex flex-col justify-center py-4">
       <h1 className="text-center font-bold text-3xl my-3">{mockProductName}</h1>
-      <h2 className="text-center font-semibold text-2xl py-1 text-gray-500">{`Status : ${mockStatus}`}</h2>
+      <h2 className={`text-center font-semibold text-2xl py-1 ${mockStatus.color}`}>{`Status : ${mockStatus.text}`}</h2>
 
       <div className="pt-4 px-36">
         <h1 className="font-bold text-3xl py-4">Milestone Status</h1>

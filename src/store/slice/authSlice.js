@@ -31,6 +31,7 @@ export const authSlice = (set, get) => ({
 
       return true;
     } catch (err) {
+      console.error(err)
       if (err instanceof AxiosError) {
         const message =
           err.response.status === 400

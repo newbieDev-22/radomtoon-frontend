@@ -175,6 +175,7 @@ export default function CreatorRegister() {
               <form className="" onSubmit={handleSubmit}>
                 <div>
                   <div className="grid grid-col-2 gap-x-2 gap-y-2">
+
                     <div>
                       <Input
                         type="text"
@@ -324,6 +325,7 @@ export default function CreatorRegister() {
                   <div className="opacity-80 text-2xl font-bold text-center">
                     Add your identity card with your image
                   </div>
+
                 </div>
               )}
             </div>
