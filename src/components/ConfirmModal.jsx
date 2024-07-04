@@ -11,6 +11,7 @@ export default function ConfirmModal({ subTitle, onCancel, onConfirm }) {
         <Button bg="green" onClick={onConfirm}>
           Confirm
         </Button>
+
       </div>
     </div>
   );

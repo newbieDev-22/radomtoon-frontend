@@ -56,7 +56,7 @@ export const productSlice = (set, get) => ({
     try {
       set(() => ({ productLoading: true }));
       const productResponse = await productApi.updateProduct(productId, formData);
-      console.log("first", productResponse.data.productDetail);
+
       const productDetail = productResponse.data.productDetail;
 
       const { data } = get().product;
@@ -106,6 +106,7 @@ export const productSlice = (set, get) => ({
     }
     return null;
   },
+
   updateStory: async (productId, formData) => {
     try {
       set(() => ({ productLoading: true }));

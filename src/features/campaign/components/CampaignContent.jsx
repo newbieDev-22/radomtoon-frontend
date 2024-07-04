@@ -35,12 +35,14 @@ export default function CampaignContent() {
   const { productId } = useParams();
   const filterData = filterProductByProductId(+productId);
 
+
   const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData?.creatorId;
   const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
 
   console.log("filterData", filterData);
 
   const initialInput = {
+
     productName: filterData?.productName,
     goal: filterData?.goal,
     deadline: dayjs(filterData?.deadline).format("YYYY-MM-DD"),
@@ -115,6 +117,7 @@ export default function CampaignContent() {
       setIsEdit(true);
     }
   };
+
 
   const handleDelete = async () => {
     try {
@@ -212,6 +215,7 @@ export default function CampaignContent() {
                   <Button width={30} bg="yellow" onClick={handleClickEdit}>
                     Edit
                   </Button>
+
                   <Button width={30} bg="red" onClick={() => setIsDeleteModalOpen(true)}>
                     Delete
                   </Button>
@@ -225,6 +229,7 @@ export default function CampaignContent() {
                 </div>
               ) : (
                 <div className="w-full">
+
                   <Button
                     width="full"
                     onClick={() => navigate(`/campaign/${productId}/tier`)}
@@ -237,6 +242,7 @@ export default function CampaignContent() {
           </div>
         </div>
       </div>
+
 
       <Modal
         open={isDeleteModalOpen}
