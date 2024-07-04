@@ -20,6 +20,7 @@ export default function GridTable({ data, index, isHeader = false }) {
 
   return (
     <div
+      key={index}
       className={
         isHeader
           ? tableColor.isHeader

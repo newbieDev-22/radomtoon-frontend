@@ -22,13 +22,12 @@ export default function ImageCard({
   creatorId,
   isEdit = false,
   progressHeight = "medium",
+  projectStatus = STATUS_PRODUCT.DRAFTING,
 }) {
   const [hover, setHover] = useState(false);
   const handleMouseEnter = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
   const navigate = useNavigate();
-
-  const mockStatus = STATUS_PRODUCT.DRAFTING;
 
   const handleClickDotMenu = () => {
     navigate(`/product/${productId}/status`);
@@ -147,10 +146,10 @@ export default function ImageCard({
           <div className="absolute bottom-2 right-0 hover:brightness-110 active:scale-100 transition-all mr-1">
             {isEdit && (
               <button
-                className={`flex w-32 h-4 justify-center items-center rounded-md text-xs font-semibold px-2 py-3 ${STATUS_PRODUCT_THEME[mockStatus].bg}`}
+                className={`flex w-32 h-4 justify-center items-center rounded-md text-xs font-semibold px-2 py-3 ${STATUS_PRODUCT_THEME[projectStatus].bg}`}
                 onClick={handleClickDotMenu}
               >
-                {STATUS_PRODUCT_THEME[mockStatus].text}
+                {STATUS_PRODUCT_THEME[projectStatus].text}
               </button>
             )}
           </div>

@@ -2,14 +2,20 @@ import { useState } from "react";
 import StatsBar from "../components/StatsBannerComponent/StatsBanner";
 import Approval from "../features/admin/components/Approval";
 import Overview from "../features/admin/components/Overview";
+import { useStore } from "../store/useStore";
 
 const mockImgStatsBar =
   "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/bmt7dsxiwpfjlnxpcazs";
 const mockDataStatsBar = [
-  { id: 1, amount: 194504, title: "projects supported" },
-  { id: 2, amount: 1062035636, title: "towards ideas", currency: "THB" },
-  { id: 3, amount: 84372090, title: "contributions" },
-  { id: 4, amount: 2035636, title: "RADOMTOON's profits", currency: "THB" },
+  { id: 1, amount: 20000, title: "projects supported" },
+  { id: 2, amount: 10000000, title: "towards ideas", currency: "THB" },
+  { id: 3, amount: 400000, title: "contributions" },
+  {
+    id: 4,
+    amount: Math.floor(10000000 * 0.02),
+    title: "RADOMTOON's profits",
+    currency: "THB",
+  },
 ];
 
 const adminMenuStyleMap = {
@@ -25,7 +31,8 @@ const adminMenu = {
 
 export default function AdminPanel() {
   const [selectMenu, setSelectMenu] = useState(adminMenu.Overview);
-
+  const waitingApproval = useStore((state) => state.waitingApproval);
+  console.log("waitingApproval", waitingApproval);
   return (
     <div>
       <StatsBar data={mockDataStatsBar} bg={mockImgStatsBar} />

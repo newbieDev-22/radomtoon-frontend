@@ -167,7 +167,7 @@ export default function CampaignSetup() {
           >
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg">
                   Product name
                 </span>
               </div>
@@ -182,7 +182,7 @@ export default function CampaignSetup() {
 
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg">
                   Goal (THB)
                 </span>
               </div>
@@ -199,7 +199,7 @@ export default function CampaignSetup() {
             <div className="flex flex-col md:flex-row gap-2 md:gap-4">
               <label className="form-control w-full">
                 <div className="label">
-                  <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                  <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg">
                     Deadline
                   </span>
                 </div>
@@ -210,7 +210,7 @@ export default function CampaignSetup() {
                   onChange={handleInputChange}
                   className={`bg-gray-50 border ${
                     inputError.deadline ? "border-red-500" : "border-gray-300"
-                  } text-gray-900 text-sm sm:text-base md:text-lg lg:text-xl rounded-lg block p-2.5 w-full`}
+                  } text-gray-900 text-sm sm:text-base md:text-lg rounded-lg block p-2.5 w-full`}
                 />
                 {inputError.deadline && (
                   <small className="text-red-500 font-semibold">
@@ -220,7 +220,7 @@ export default function CampaignSetup() {
               </label>
               <label className="form-control w-full">
                 <div className="label">
-                  <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                  <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg">
                     Category
                   </span>
                 </div>
@@ -234,7 +234,7 @@ export default function CampaignSetup() {
 
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg">
                   Summary Detail
                 </span>
               </div>
@@ -243,9 +243,9 @@ export default function CampaignSetup() {
                 name="summaryDetail"
                 value={input.summaryDetail}
                 onChange={handleInputChange}
-                className={`placeholder-gray-500 indent-1 min-h-24 max-h-24 border ${
+                className={`placeholder-gray-400 indent-1 min-h-24 max-h-24 border ${
                   inputError.summaryDetail ? "border-red-500" : "border-gray-300"
-                } text-gray-500 text-sm sm:text-base md:text-lg lg:text-xl rounded-lg block p-2.5 w-full`}
+                } text-gray-500 text-sm sm:text-base rounded-lg block p-2.5 w-full`}
               ></textarea>
               {inputError.summaryDetail && (
                 <small className="text-red-500 font-semibold">
@@ -256,7 +256,7 @@ export default function CampaignSetup() {
 
             <label className="form-control w-full">
               <div className="label">
-                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
+                <span className="text-gray-500 font-semibold text-sm sm:text-base md:text-lg">
                   Product video link &#40;optional&#41;
                 </span>
               </div>

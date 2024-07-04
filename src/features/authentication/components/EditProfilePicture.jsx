@@ -42,10 +42,10 @@ export default function EditProfilePicture({
           }
         }}
       />
-      <div className="flex flex-col gap-4  w-full">
+      <div className="flex flex-col gap-4 w-full">
         <div className="flex justify-center">
           <button
-            className="w-56 h-56 rounded-full flex justify-center items-center overflow-hidden bg-white"
+            className="w-56 h-56 rounded-full flex justify-center items-center overflow-hidden bg-white focus:outline-none"
             onClick={() => fileEl.current.click()}
           >
             {file ? (

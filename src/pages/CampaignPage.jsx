@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CampaignSection from "../features/campaign/components/CampaignSection";
-import { USER_ROLE, subPageMap } from "../constants";
+import { APPROVAL_STATUS_ID, USER_ROLE, subPageMap } from "../constants";
 import ProductCommentContainer from "../features/product-comment/components/ProductCommentContainer";
 import ProductRewardContainer from "../features/product-reward/components/ProductRewardContainer";
 import Editor from "../components/EditorComponent/Editor";
@@ -16,14 +16,18 @@ export default function CampaignPage() {
   const { productId } = useParams();
   const filterProductByProductId = useStore((state) => state.filterProductByProductId);
   const filterData = filterProductByProductId(+productId);
-  if (!filterData) {
+
+  const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData.creatorId;
+
+  if (
+    !filterData ||
+    (!isCreator && filterData.approvalStatusId !== APPROVAL_STATUS_ID.SUCCESS)
+  ) {
     return <Navigate to="/" />;
   }
   const handleSubPageChange = (subPage) => {
     setSubPage(subPage);
   };
-
-  const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData.creatorId;
 
   return (
 
