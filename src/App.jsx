@@ -11,18 +11,24 @@ export default function App() {
   const fetchCreatorProduct = useStore((state) => state.fetchCreatorProduct);
   const fetchCreatorUser = useStore((state) => state.fetchCreatorUser);
   const resetCreatorProduct = useStore((state) => state.resetCreatorProduct);
+  const fetchWaitingApproval = useStore((state) => state.fetchWaitingApproval);
+  const WaitingApprovalLoading = useStore((state) => state.waitingApproval.loading);
   const productLoading = useStore((state) => state.product.loading);
   const userLoading = useStore((state) => state.authUser.loading);
   const creatorUserLoading = useStore((state) => state.creatorUser.loading);
-  const creatorProductLoading = useStore(
-    (state) => state.creatorProduct.loading
-  );
+  const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
 
   useEffect(() => {
     fetchProduct();
     fetchUser();
     fetchCreatorUser();
-  }, []);
+  }, [fetchProduct, fetchUser, fetchCreatorUser]);
+
+  useEffect(() => {
+    if (role === USER_ROLE.ADMIN) {
+      fetchWaitingApproval();
+    }
+  }, [fetchWaitingApproval, role]);
 
   useEffect(() => {
     if (role === USER_ROLE.CREATOR) {
@@ -36,7 +42,8 @@ export default function App() {
     userLoading ||
     productLoading ||
     creatorUserLoading ||
-    creatorProductLoading
+    creatorProductLoading ||
+    WaitingApprovalLoading
   ) {
     return <Loading />;
   }

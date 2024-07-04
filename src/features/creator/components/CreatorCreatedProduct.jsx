@@ -3,7 +3,35 @@ import Button from "../../../components/Button";
 import { useStore } from "../../../store/useStore";
 import ImageCard from "../../../components/ImageCard";
 import dayjs from "dayjs";
-import { USER_ROLE } from "../../../constants";
+import { APPROVAL_STATUS_ID, STATUS_PRODUCT, USER_ROLE } from "../../../constants";
+
+const getProductStatus = (product) => {
+  const { approvalStatusId, productStatusId } = product;
+
+  if (approvalStatusId === null) {
+    return STATUS_PRODUCT.DRAFTING;
+  }
+
+  if (approvalStatusId === APPROVAL_STATUS_ID.PENDING) {
+    return STATUS_PRODUCT.PENDING;
+  }
+
+  if (approvalStatusId === APPROVAL_STATUS_ID.FAILED) {
+    return STATUS_PRODUCT.REJECTED;
+  }
+
+  if (productStatusId === APPROVAL_STATUS_ID.PENDING) {
+    return STATUS_PRODUCT.IN_PROGRESS;
+  }
+
+  if (productStatusId === APPROVAL_STATUS_ID.SUCCESS) {
+    return STATUS_PRODUCT.SUCCEEDED;
+  }
+
+  if (productStatusId === APPROVAL_STATUS_ID.FAILED) {
+    return STATUS_PRODUCT.FAILED;
+  }
+};
 
 export default function CreatorCreatedProduct() {
   const { creatorId } = useParams();
@@ -57,6 +85,7 @@ export default function CreatorCreatedProduct() {
               productId={el.id}
               creatorId={el.creatorId}
               isEdit={true}
+              projectStatus={getProductStatus(el)}
             />
           </div>
         ))}

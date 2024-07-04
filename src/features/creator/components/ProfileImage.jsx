@@ -19,11 +19,13 @@ export default function ProfileImage({ selectedCreator }) {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-radomtoon-dark to-radomtoon-bright 
-      flex flex-col items-center justify-center p-10 text-white">
+      <div
+        className="bg-gradient-to-r from-radomtoon-dark to-radomtoon-bright 
+      flex flex-col items-center justify-center p-10 text-white"
+      >
         <div>
           <button
-            className="w-56 h-56 rounded-full flex justify-center items-center overflow-hidden bg-white"
+            className="w-56 h-56 rounded-full flex justify-center items-center overflow-hidden bg-white outline-none"
             onClick={handleModalOpen}
           >
             {profileImage ? (
@@ -33,7 +35,9 @@ export default function ProfileImage({ selectedCreator }) {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="text-8xl">{selectedCreator.firstName[0].toUpperCase()}</div>
+              <div className="text-9xl text-black">
+                {selectedCreator.firstName[0].toUpperCase()}
+              </div>
             )}
           </button>
         </div>

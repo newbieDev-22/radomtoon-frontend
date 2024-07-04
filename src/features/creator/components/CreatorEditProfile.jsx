@@ -15,8 +15,8 @@ export default function CreatorEditProfile() {
   const selectedCreator = useStore((state) => state.selectCreator(creatorId));
   const authLoading = useStore((state) => state.authLoading);
   const initialInput = {
-    biography: selectedCreator.biography || "No content",
-    website: selectedCreator.website || "No content",
+    biography: selectedCreator.biography || "",
+    website: selectedCreator.website || "",
   };
 
   const [aboutInput, setAboutInput] = useState(initialInput);
@@ -42,7 +42,6 @@ export default function CreatorEditProfile() {
       {authLoading && <Spinner transparent />}
       <div className="py-4 md:w-3/5 sm:w-full m-auto my-8">
         <div className="w-full flex flex-col gap-4 px-20">
-
           <div className="flex flex-col gap-4">
             <div className="w-full flex items-start gap-10 mb-2">
               <p className="text-lg font-semibold ">Biography</p>
@@ -56,9 +55,8 @@ export default function CreatorEditProfile() {
                   className="w-full outline-none border border-gray-300 rounded-md py-2 px-4 min-h-48 max-h-48 col-span-6"
                 />
               ) : (
-                <p >{aboutInput.biography}</p>
-              )
-              }
+                <p>{aboutInput.biography}</p>
+              )}
 
               {/* button */}
               {role === USER_ROLE.CREATOR && user.id === +creatorId ? (
@@ -69,10 +67,8 @@ export default function CreatorEditProfile() {
                 )
               ) : null}
               {/*end button */}
-
-
             </div>
-            <div className="border" ></div>
+            <div className="border"></div>
             <div className="w-full grid grid-cols-7 mt-2">
               <span className="text-lg font-semibold text-gray-800 flex items-center">
                 Website

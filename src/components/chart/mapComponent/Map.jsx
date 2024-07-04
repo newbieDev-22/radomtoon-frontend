@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import './Map.css'
-import { getResponsiveValue } from '../../../utils/responsive';
-
+import { useEffect, useState } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import "./Map.css";
+import { getResponsiveValue } from "../../../utils/responsive";
 
 export default function Map() {
   const [geojsonData, setGeojsonData] = useState(null);
@@ -12,7 +11,7 @@ export default function Map() {
     default: 5,
     sm: 5,
     xl: 6,
-    '2xl': 6
+    "2xl": 6,
   };
   const setZoomLevel = () => getResponsiveValue(zoomLevels);
 
@@ -34,14 +33,14 @@ export default function Map() {
   useEffect(() => {
     if (!geojsonData) return;
 
-    const map = L.map('mapid').setView([13, 101.5], setZoomLevel());
+    const map = L.map("mapid").setView([13, 101.5], setZoomLevel());
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    window.addEventListener('resize', function() {
+    window.addEventListener("resize", function () {
       map.setZoom(setZoomLevel());
     });
 
@@ -54,9 +53,11 @@ export default function Map() {
     };
 
     info.update = function (props) {
-      this._div.innerHTML = '<h4>Supporter Density</h4>' + 
-        (props ? `<b>${props.name}</b><br />${props.p} people / km<sup>2</sup>` : 'Hover over a province');
-
+      this._div.innerHTML =
+        "<h4>Supporter Density</h4>" +
+        (props
+          ? `<b>${props.name}</b><br />${props.p} people / km<sup>2</sup>`
+          : "Hover over a province");
     };
 
     info.addTo(map);
@@ -73,14 +74,21 @@ export default function Map() {
     // }
     // ### YELLOW ###
     function getColor(d) {
-      return d > 1000 ? '#78350F' :
-        d > 500 ? '#92400E' :
-        d > 200 ? '#B45309' :
-        d > 100 ? '#F59E0B' :
-        d > 50 ? '#FBBF24' :
-        d > 20 ? '#FDE68A' :
-        d > 10 ? '#FEF3C7' :
-        '#FFFBEB';
+      return d > 1000
+        ? "#78350F"
+        : d > 500
+        ? "#92400E"
+        : d > 200
+        ? "#B45309"
+        : d > 100
+        ? "#F59E0B"
+        : d > 50
+        ? "#FBBF24"
+        : d > 20
+        ? "#FDE68A"
+        : d > 10
+        ? "#FEF3C7"
+        : "#FFFBEB";
     }
     // ### CYAN ###
     // function getColor(d) {
@@ -175,10 +183,11 @@ export default function Map() {
   }, [geojsonData]);
 
   return (
-    <div className='w-full h-full bg-white rounded-2xl'>
-      <h1 className='text-radomtoon-bright text-lg font-semibold pl-10 py-5'>Supporter Heatmap</h1>
-      <div id="mapid" className='h-[90%] w-full rounded-2xl' />
+    <div className="w-full h-full bg-white rounded-2xl">
+      <h1 className="text-radomtoon-bright text-lg font-semibold pl-10 py-5">
+        Supporter Heatmap
+      </h1>
+      <div id="mapid" className="h-[90%] w-full rounded-2xl" />
     </div>
-);
-};
-
+  );
+}

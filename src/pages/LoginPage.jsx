@@ -47,6 +47,7 @@ export default function LoginPage() {
         const res = await login(input);
         if (res === true) {
           navigate("/");
+          toast.success("Login successfully");
         } else {
           toast.error(res);
         }

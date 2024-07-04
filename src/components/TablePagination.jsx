@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import GridTable from "./GridTable";
 
-export default function TablePagination({ data, columns, itemInOnePage = 10, closePagination = false }) {
+export default function TablePagination({
+  data,
+  columns,
+  itemInOnePage = 10,
+  closePagination = false,
+}) {
   const pageCount = Math.ceil(data.length / itemInOnePage);
   const allFalseStateList = [];
 
@@ -46,23 +51,24 @@ export default function TablePagination({ data, columns, itemInOnePage = 10, clo
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col justify-center">
-        <GridTable data={columns} isHeader={true} />
+        <GridTable key={"head"} data={columns} isHeader={true} index={"head"} />
         {filterData.map((el, index) => (
-          <GridTable key={el.page} index={index} data={Object.values(el)} />
+          <GridTable key={index} index={index} data={Object.values(el)} />
         ))}
       </div>
-      {!closePagination &&       <div className="join flex justify-center">
-        {selectPage.map((el) => (
-          <button
-            key={el.page}
-            className={`join-item btn btn-md ${el.selected ? "btn-active " : null}`}
-            onClick={() => handleSelectPage(el.page)}
-          >
-            {el.page + 1}
-          </button>
-        ))}
-      </div>} 
-
+      {!closePagination && (
+        <div className="join flex justify-center">
+          {selectPage.map((el) => (
+            <button
+              key={el.page}
+              className={`join-item btn btn-md ${el.selected ? "btn-active " : null}`}
+              onClick={() => handleSelectPage(el.page)}
+            >
+              {el.page + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
