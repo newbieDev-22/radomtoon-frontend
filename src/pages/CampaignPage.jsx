@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import AddMilestone from "../components/AddMilestone";
-import Milestone from "../components/Milestone";
+import { useState } from "react";
 import CampaignSection from "../features/campaign/components/CampaignSection";
 import { USER_ROLE, subPageMap } from "../constants";
 import ProductCommentContainer from "../features/product-comment/components/ProductCommentContainer";
@@ -9,6 +7,7 @@ import Editor from "../components/EditorComponent/Editor";
 import CampaignContent from "../features/campaign/components/CampaignContent";
 import { useStore } from "../store/useStore";
 import { useParams, Navigate } from "react-router-dom";
+import MilestoneContainer from "../features/milestone/components/MilestoneContainer";
 
 const project = {
   id: 1,
@@ -53,21 +52,11 @@ export default function CampaignPage() {
       <CampaignSection handleSubPageChange={handleSubPageChange} />
       {subPage === subPageMap.STORY && (
         <div className="px-32 py-4">
-          <Editor isCreator={isCreator} />
+          <Editor />
         </div>
       )}
-      {subPage === subPageMap.MILESTONE && (
-        <div>
-          <Milestone />
-
-          <div className="grid grid-cols-3  w-full">
-            <AddMilestone name="Milestone 1" />
-            <AddMilestone name="Milestone 2" />
-            <AddMilestone name="Milestone 3" />
-          </div>
-        </div>
-      )}
-      {subPage === subPageMap.REWARD && <ProductRewardContainer />}
+      {subPage === subPageMap.MILESTONE && <MilestoneContainer />}
+      {subPage === subPageMap.REWARD && <ProductRewardContainer isCreator={isCreator} />}
       {subPage === subPageMap.FORUM && <ProductCommentContainer />}
     </div>
   );

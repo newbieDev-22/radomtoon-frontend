@@ -1,48 +1,56 @@
 import productApi from "../../apis/product";
+import tierApi from "../../apis/tier";
 import { APPROVAL_STATUS_ID } from "../../constants";
 
 export const productSlice = (set, get) => ({
   product: { data: [], loading: false, error: null, today: new Date() },
   approvalProduct: [],
   productLoading: false,
+
+  setLoading: (loading) => set((state) => ({ product: { ...state.product, loading } })),
+  setError: (error) => set((state) => ({ product: { ...state.product, error } })),
+
   fetchProduct: async () => {
     try {
       set((state) => ({ product: { ...state.product, loading: true, error: null } }));
-      const productResponse = await productApi.getProduct();
-      const productList = productResponse.data.productList;
-      set((state) => ({
-        product: { ...state.product, data: productList },
-      }));
+      const {
+        data: { productList },
+      } = await productApi.getProduct();
+
       const approvalProduct = productList.filter(
         (el) => el.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS
       );
-      set(() => ({ approvalProduct: approvalProduct }));
+
+      set((state) => ({
+        product: { ...state.product, data: productList },
+        approvalProduct,
+      }));
     } catch (err) {
       console.error(err);
       set((state) => ({ product: { ...state.product, error: err.message } }));
     } finally {
-      set((state) => ({ product: { ...state.product, loading: false, error: null } }));
+      set((state) => ({ product: { ...state.product, loading: false } }));
     }
   },
+
   filterProductByCreatorId: (creatorId, isApproved = null) => {
-    if (isApproved) {
-      const approvalProduct = get().approvalProduct;
-      return approvalProduct.filter((el) => el.creatorId === +creatorId);
-    } else {
-      const { data } = get().product;
-      return data.filter((el) => el.creatorId === +creatorId);
-    }
+    const { data } = get().product;
+    const products = isApproved ? get().approvalProduct : data;
+    return products.filter((el) => el.creatorId === +creatorId);
   },
+
   createProduct: async (formData) => {
     try {
       set(() => ({ productLoading: true }));
-
       set((state) => ({ product: { ...state.product, error: null } }));
-      const productResponse = await productApi.createProduct(formData);
+      const {
+        data: { productDetail },
+      } = await productApi.createProduct(formData);
+
       set((state) => ({
         product: {
           ...state.product,
-          data: [productResponse.data.productDetail, ...state.product.data],
+          data: [productDetail, ...state.product.data],
         },
       }));
     } catch (err) {
@@ -52,23 +60,20 @@ export const productSlice = (set, get) => ({
       set(() => ({ productLoading: false }));
     }
   },
+
   updateProduct: async (productId, formData) => {
     try {
       set(() => ({ productLoading: true }));
-      const productResponse = await productApi.updateProduct(productId, formData);
-      const productDetail = productResponse.data.productDetail;
+      const {
+        data: { productDetail },
+      } = await productApi.updateProduct(productId, formData);
 
       const { data } = get().product;
-
       const productIndex = data.findIndex((el) => el.id === productDetail.id);
-      data[productIndex] = productDetail;
-
-      set((state) => ({
-        product: {
-          ...state.product,
-          data: data,
-        },
-      }));
+      if (productIndex !== -1) {
+        data[productIndex] = productDetail;
+        set((state) => ({ product: { ...state.product, data } }));
+      }
     } catch (err) {
       console.error(err);
       set((state) => ({ product: { ...state.product, error: err.message } }));
@@ -76,20 +81,15 @@ export const productSlice = (set, get) => ({
       set(() => ({ productLoading: false }));
     }
   },
+
   deleteProduct: async (productId) => {
     try {
       set(() => ({ productLoading: true }));
       await productApi.deleteProduct(productId);
       const { data } = get().product;
+      const updatedData = data.filter((el) => el.id !== productId);
 
-      const productFilter = data.filter((el) => el.id !== productId);
-
-      set((state) => ({
-        product: {
-          ...state.product,
-          data: productFilter,
-        },
-      }));
+      set((state) => ({ product: { ...state.product, data: updatedData } }));
     } catch (err) {
       console.error(err);
       set((state) => ({ product: { ...state.product, error: err.message } }));
@@ -97,12 +97,100 @@ export const productSlice = (set, get) => ({
       set(() => ({ productLoading: false }));
     }
   },
+
   filterProductByProductId: (productId) => {
     const { data } = get().product;
-    const selectedProduct = data.filter((el) => el.id === +productId);
-    if (selectedProduct.length > 0) {
-      return selectedProduct[0];
+    return data.find((el) => el.id === +productId) || null;
+  },
+
+  updateStory: async (productId, formData) => {
+    try {
+      set(() => ({ productLoading: true }));
+      const {
+        data: { productDetail },
+      } = await productApi.updateStory(productId, formData);
+      const { data } = get().product;
+      const productIndex = data.findIndex((el) => el.id === productDetail.id);
+      if (productIndex !== -1) {
+        data[productIndex] = productDetail;
+        set((state) => ({ product: { ...state.product, data } }));
+      }
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
     }
-    return null;
+  },
+
+  createTier: async (productId, formData) => {
+    try {
+      set(() => ({ productLoading: true }));
+      set((state) => ({ product: { ...state.product, error: null } }));
+      const {
+        data: { tier },
+      } = await tierApi.createTier(+productId, formData);
+      const { data } = get().product;
+      const productIndex = data.findIndex((el) => el.id === +productId);
+      if (productIndex !== -1) {
+        data[productIndex].productTiers = [...data[productIndex].productTiers, tier];
+        set((state) => ({ product: { ...state.product, data } }));
+      }
+      delete tier.productId;
+      return tier;
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
+  },
+
+  updateTier: async (tierId, formData) => {
+    try {
+      set(() => ({ productLoading: true }));
+      const {
+        data: { tier },
+      } = await tierApi.updateTier(+tierId, formData);
+      const { data } = get().product;
+      const productIndex = data.findIndex((el) => el.id === tier.productId);
+      if (productIndex !== -1) {
+        const tierIndex = data[productIndex].productTiers.findIndex(
+          (el) => el.id === tier.id
+        );
+        if (tierIndex !== -1) {
+          data[productIndex].productTiers[tierIndex] = tier;
+          set((state) => ({ product: { ...state.product, data } }));
+        }
+      }
+      delete tier.productId;
+      return tier;
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
+  },
+
+  deleteTier: async (productId, tierId) => {
+    try {
+      set(() => ({ productLoading: true }));
+      await tierApi.deleteTier(tierId);
+      const { data } = get().product;
+      const productIndex = data.findIndex((el) => el.id === +productId);
+      if (productIndex !== -1) {
+        const updatedTiers = data[productIndex].productTiers.filter(
+          (el) => el.id !== tierId
+        );
+        data[productIndex].productTiers = updatedTiers;
+        set((state) => ({ product: { ...state.product, data } }));
+      }
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
   },
 });

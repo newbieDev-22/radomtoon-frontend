@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import validateLogin from "../validators/validate-login";
 import Spinner from "../components/Spinner";
+import { motion } from "framer-motion";
 
 const initialInput = {
   email: "",
@@ -16,6 +17,12 @@ const initialInput = {
 const initialInputError = {
   email: "",
   password: "",
+};
+
+const popupForm = {
+  initial: { opacity: 0, scale: 0 },
+  animate: { opacity: 1, scale: 1 },
+  transition: { type: "spring", duration: 0.6, ease: "easeOut" },
 };
 
 export default function LoginPage() {
@@ -63,19 +70,22 @@ export default function LoginPage() {
         <div className="flex shadow-lg rounded-lg">
           <div className="relative h-screen w-full">
             <img
+
               src="https://images.unsplash.com/photo-1492539161849-b2b18e79c85f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="absolute rounded-xl inset-0 m-auto px-20 w-1/3 bg-slate-100 bg-opacity-90 flex h-1/2 flex-col justify-center">
-            <h1 className="text-3xl font-bold text-center">
-              Excited to Dive into the Campaign? Log in Here
-            </h1>
+          <motion.div
+            {...popupForm}
+            className="absolute rounded-xl inset-0 m-auto px-20 w-1/3 bg-slate-100 bg-opacity-70 backdrop-blur-md flex h-1/2 flex-col justify-center"
+          >
+            <h1 className="text-3xl font-bold text-center">LOG IN</h1>
 
             <form onSubmit={handleSubmitForm}>
               <div className="flex flex-col justify-center gap-4 pt-8">
                 <div>
+
                   <Input
                     name="email"
                     placeholder="Email"
@@ -93,11 +103,13 @@ export default function LoginPage() {
                     value={input.password}
                     error={inputError.password}
                   />
+
                 </div>
               </div>
               <div className="py-4">
                 <Button width={"full"}>LOGIN</Button>
               </div>
+
 
               <div className="flex justify-center">
                 <button
@@ -115,7 +127,7 @@ export default function LoginPage() {
                 </button>
               </div>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>

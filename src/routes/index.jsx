@@ -1,5 +1,7 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import NotFoundPage from "../pages/NotFoundPage";
+
 
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -9,7 +11,9 @@ const HomePage = lazy(() => import("../pages/HomePage"));
 const CampaignPage = lazy(() => import("../pages/CampaignPage"));
 const SelectTierPage = lazy(() => import("../pages/SelectTierPage"));
 const PaymentPage = lazy(() => import("../pages/PaymentPage"));
-const SupporterHistoryPage = lazy(() => import("../pages/SupporterHistoryPage"));
+const SupporterHistoryPage = lazy(() =>
+  import("../pages/SupporterHistoryPage")
+);
 const CreatorPanel = lazy(() => import("../pages/CreatorPanel"));
 const AdminPanel = lazy(() => import("../pages/AdminPanel"));
 const ProductManagePage = lazy(() => import("../pages/ProductManagePage"));
@@ -26,7 +30,10 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/campaign/:productId", element: <CampaignPage /> },
       { path: "/campaign/:productId/tier", element: <SelectTierPage /> },
-      { path: "/campaign/:productId/tier/:tierId/payment", element: <PaymentPage /> },
+      {
+        path: "/campaign/:productId/tier/:tierId/payment",
+        element: <PaymentPage />,
+      },
       { path: "/supporter-histories", element: <SupporterHistoryPage /> },
       { path: "/creator-panel/:creatorId", element: <CreatorPanel /> },
       { path: "/creator-campaign-setup", element: <CampaignSetup /> },
@@ -35,7 +42,7 @@ const router = createBrowserRouter([
       { path: "/home-dummy", element: <HomeDummy /> },
     ],
   },
-  { path: "*", element: <Navigate to="/" /> },
+  { path: "*", element: <NotFoundPage/> },
   { path: "/login", element: <LoginPage /> },
   { path: "/creator-register", element: <CreatorRegister /> },
   { path: "/supporter-register", element: <SupporterRegister /> },

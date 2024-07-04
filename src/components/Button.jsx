@@ -22,15 +22,23 @@ export default function Button({
     bgBtnMap[bg]
   } ${borderBtnMap[border]} ${colorBtnMap[color]} ${border && "border-4"}`;
 
+
   const notActiveClasses = `flex justify-center items-center font-bold px-4 rounded-md h-10 md:${
     heightBtnMap[height]
   } ${widthBtnMap[width]} ${bgBtnMap[bg]} ${borderBtnMap[border]} ${colorBtnMap[color]} ${
     border && "border-4"
   }`;
+  const disabledClasses = `flex text-white justify-center items-center font-bold px-4 rounded-md h-10 md:${
+    heightBtnMap[height]
+  } ${widthBtnMap[width]} ${bgBtnMap["radomtoon-dark"]} ${borderBtnMap[border]}  ${
+    border && "border-4"
+  }`;
 
   return (
     <button
-      className={isNotActive ? notActiveClasses : commonClasses}
+      className={
+        disabled ? disabledClasses : isNotActive ? notActiveClasses : commonClasses
+      }
       onClick={onClick}
       disabled={disabled}
     >
