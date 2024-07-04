@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import AddMilestone from "../features/product-milestone/components/AddMilestone";
-import Milestone from "../features/product-milestone/components/Milestone";
+import { useState } from "react";
 import CampaignSection from "../features/campaign/components/CampaignSection";
 import { USER_ROLE, subPageMap } from "../constants";
 import ProductCommentContainer from "../features/product-comment/components/ProductCommentContainer";
@@ -36,9 +34,7 @@ export default function CampaignPage() {
           <Editor />
         </div>
       )}
-      {subPage === subPageMap.MILESTONE && (
-          <MilestoneContainer />
-      )}
+      {subPage === subPageMap.MILESTONE && <MilestoneContainer />}
       {subPage === subPageMap.REWARD && <ProductRewardContainer isCreator={isCreator} />}
       {subPage === subPageMap.FORUM && <ProductCommentContainer />}
     </div>

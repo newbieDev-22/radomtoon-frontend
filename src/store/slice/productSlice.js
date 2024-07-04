@@ -1,3 +1,4 @@
+import milestoneApi from "../../apis/milestone";
 import productApi from "../../apis/product";
 import tierApi from "../../apis/tier";
 import { APPROVAL_STATUS_ID } from "../../constants";
@@ -184,6 +185,52 @@ export const productSlice = (set, get) => ({
           (el) => el.id !== tierId
         );
         data[productIndex].productTiers = updatedTiers;
+        set((state) => ({ product: { ...state.product, data } }));
+      }
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
+  },
+
+  milestoneUpdateInfo: async (milestoneId, milestoneInput) => {
+    try {
+      set(() => ({ productLoading: true }));
+
+      const milestoneResponse = await milestoneApi.updateMilestoneInfo(
+        milestoneId,
+        milestoneInput
+      );
+      const milestoneData = milestoneResponse.data.milestone;
+      const { data } = get().product;
+      const productIndex = data.findIndex((el) => el.id === milestoneData.productId);
+      if (productIndex !== -1) {
+        const milestoneIndex = data[productIndex].productMilestones.findIndex(
+          (el) => el.id === milestoneData.id
+        );
+        if (milestoneIndex !== -1) {
+          data[productIndex].productMilestones[milestoneIndex] = milestoneData;
+          set((state) => ({ product: { ...state.product, data } }));
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set(() => ({ productLoading: false }));
+    }
+  },
+
+  sendProductToApproval: async (productId) => {
+    try {
+      set(() => ({ productLoading: true }));
+      await productApi.sendProductToApproval(+productId);
+      const { data } = get().product;
+      const productIndex = data.findIndex((el) => el.id === +productId);
+      if (productIndex !== -1) {
+        data[productIndex].approvalStatusId = APPROVAL_STATUS_ID.PENDING;
         set((state) => ({ product: { ...state.product, data } }));
       }
     } catch (err) {

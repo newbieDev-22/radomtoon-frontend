@@ -1,18 +1,14 @@
-
-
 import { useState, useRef } from "react";
 import Button from "../components/Button";
 import dayjs from "dayjs";
 import { useStore } from "../store/useStore";
 import { CATEGORIES_TYPE, MIN_DEADLINE_DAYS, USER_ROLE } from "../constants";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import Input from "../components/Input";
-import { PictureIcon } from "../icons";
 import { toast } from "react-toastify";
 import validateProduct from "../validators/validate-create-project";
 import Spinner from "../components/Spinner";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const initialInput = {

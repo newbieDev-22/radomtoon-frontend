@@ -31,12 +31,14 @@ export default function CampaignContent() {
   const productLoading = useStore((state) => state.productLoading);
   const updateProduct = useStore((state) => state.updateProduct);
   const deleteProduct = useStore((state) => state.deleteProduct);
+  const sendProductToApproval = useStore((state) => state.sendProductToApproval);
 
   const { productId } = useParams();
   const filterData = filterProductByProductId(+productId);
 
   const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData?.creatorId;
   const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
+  const isPending = filterData?.approvalStatusId === APPROVAL_STATUS_ID.PENDING;
 
   const initialInput = {
     productName: filterData?.productName,
@@ -125,8 +127,34 @@ export default function CampaignContent() {
     }
   };
 
-  const handleClickSendToApproval = () => {
-    alert("Click Send To Approval");
+  const handleClickSendToApproval = async () => {
+    try {
+      console.log("filterData", filterData);
+      if (filterData.productMilestones.length !== 3) {
+        toast.error("Please add all 3 milestones");
+        return;
+      }
+
+      if (filterData.productTiers.length < 1) {
+        toast.error("Please add at least 1 tier");
+        return;
+      }
+
+      if (filterData.approvalStatusId === APPROVAL_STATUS_ID.PENDING) {
+        toast.error("Pending approval");
+        return;
+      }
+
+      if (filterData.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS) {
+        toast.error("Already approved");
+        return;
+      }
+
+      await sendProductToApproval(+productId);
+      toast.success("Sent to approval successfully");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleInputChange = (e) =>
@@ -204,10 +232,20 @@ export default function CampaignContent() {
             <div>
               {isCreator && !isApproved ? (
                 <div className="grid grid-cols-4 gap-2">
-                  <Button width={30} bg="green" onClick={handleClickSave}>
+                  <Button
+                    width={30}
+                    bg="green"
+                    onClick={handleClickSave}
+                    disabled={isPending}
+                  >
                     Save
                   </Button>
-                  <Button width={30} bg="yellow" onClick={handleClickEdit}>
+                  <Button
+                    width={30}
+                    bg="yellow"
+                    onClick={handleClickEdit}
+                    disabled={isPending}
+                  >
                     Edit
                   </Button>
 
@@ -218,6 +256,7 @@ export default function CampaignContent() {
                     width={30}
                     bg="creator-saturate"
                     onClick={handleClickSendToApproval}
+                    disabled={isPending}
                   >
                     Approval
                   </Button>
