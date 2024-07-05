@@ -152,20 +152,18 @@ export default function CreatorRegister() {
           }
         }}
       ></input>
-      <div className="min-w-screen min-h-screen">
-        <div className="relative h-screen w-full">
-          <img
-            src="https://images.unsplash.com/photo-1483546363825-7ebf25fb7513?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 flex justify-center items-center rounded-lg w-full">
+      <div className="min-w-screen min-h-screen relative">
+        <img
+          src="https://images.unsplash.com/photo-1483546363825-7ebf25fb7513?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+          className="absolute h-screen scale-y-[1.66] sm:scale-y-150 lg:scale-100 w-full object-cover"
+        />
+        <div className="flex justify-center items-center rounded-lg w-full md:inset-0 absolute">
           <motion.div
             {...slideRegisterForm}
-            className="shadow-lg bg-slate-100 bg-opacity-70 backdrop-blur-md px-20 rounded-xl w-[80vw] h-[700px] gap-14 flex justify-between"
+            className="shadow-lg bg-slate-100 bg-opacity-70 backdrop-blur-md px-10 lg:px-20 py-10 sm:py-14 rounded-xl w-[90vw] lg:w-[80vw] h-auto sm:h-[700px] flex flex-col sm:flex-row gap-14 justify-between"
           >
-            <div className="flex flex-col justify-center w-1/2">
+            <div className="flex flex-col justify-center sm:w-1/2 w-full">
               <h1 className="text-4xl text-center mb-2 font-bold text-radomtoon-dark">
                 Bring your imagination to life
               </h1>
@@ -174,9 +172,8 @@ export default function CreatorRegister() {
               </h2>
               <form className="" onSubmit={handleSubmit}>
                 <div>
-                  <div className="grid grid-col-2 gap-x-2 gap-y-2">
-
-                    <div>
+                  <div className="grid grid-col-2 gap-x-4 gap-y-2 ">
+                    <div className="min-w-[160px]">
                       <Input
                         type="text"
                         placeholder="First name"
@@ -186,7 +183,7 @@ export default function CreatorRegister() {
                         error={inputError.firstName}
                       />
                     </div>
-                    <div>
+                    <div className="min-w-[160px]">
                       <Input
                         type="text"
                         placeholder="Last name"
@@ -196,7 +193,7 @@ export default function CreatorRegister() {
                         error={inputError.lastName}
                       />
                     </div>
-                    <div className="col-span-2">
+                    <div className="md:col-span-2">
                       <Input
                         type="text"
                         placeholder="Email"
@@ -206,7 +203,7 @@ export default function CreatorRegister() {
                         error={inputError.email}
                       />
                     </div>
-                    <div className="col-span-2">
+                    <div className="md:col-span-2">
                       <Input
                         type="text"
                         placeholder="Phone number"
@@ -216,7 +213,7 @@ export default function CreatorRegister() {
                         error={inputError.phone}
                       />
                     </div>
-                    <div className="col-span-2 grid grid-cols-2 gap-4">
+                    <div className="col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <Input
                           type="password"
@@ -239,7 +236,7 @@ export default function CreatorRegister() {
                       </div>
                     </div>
 
-                    <div className="col-span-2">
+                    <div className="md:col-span-2">
                       <Input
                         type="text"
                         placeholder="Address"
@@ -249,7 +246,7 @@ export default function CreatorRegister() {
                         error={inputError.address}
                       />
                     </div>
-                    <div className="col-span-2 w-full h-12 ">
+                    <div className="md:col-span-2 w-full h-12 ">
                       <Dropdown
                         data={PROVINCE_MAP.map((el) => el.name)}
                         onChange={handleProvinceChange}
@@ -271,7 +268,7 @@ export default function CreatorRegister() {
                       htmlFor="policy-checkbox"
                       className="text-gray-600 cursor-pointer text-sm"
                     >
-                      I have read, understand and accept the{" "}
+                      I have read, understand and accept{" "}
                       <a
                         onClick={() => setOpenPolicyModal(true)}
                         className="text-blue-500 hover:underline"
@@ -283,20 +280,21 @@ export default function CreatorRegister() {
                   {checkboxError && (
                     <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
                   )}
-
-                  <Button
-                    width={"full"}
-                    height="14"
-                    bg="creator-saturate"
-                    color="white"
-                  >
-                    Request Approve
-                  </Button>
+                  <div className="hidden sm:flex">
+                    <Button
+                      width={"full"}
+                      height="14"
+                      bg="creator-saturate"
+                      color="white"
+                    >
+                      Request Approve
+                    </Button>
+                  </div>
                 </div>
               </form>
             </div>
 
-            <div className="flex flex-col justify-center w-1/2">
+            <div className="flex flex-col justify-center sm:w-1/2 w-full">
               <h3 className="text-4xl text-center font-bold text-radomtoon-dark inline-block">
                 Identity Image Preview
               </h3>
@@ -320,14 +318,23 @@ export default function CreatorRegister() {
                   <img
                     src={previewImage}
                     alt="Selected"
-                    className=" object-cover aspect-square w-1/2 opacity-70"
+                    className="object-cover aspect-square w-1/2 opacity-70"
                   />
                   <div className="opacity-80 text-2xl font-bold text-center">
                     Add your identity card with your image
                   </div>
-
                 </div>
               )}
+            </div>
+            <div className="flex sm:hidden">
+              <Button
+                width={"full"}
+                height="14"
+                bg="creator-saturate"
+                color="white"
+              >
+                Request Approve
+              </Button>
             </div>
           </motion.div>
         </div>

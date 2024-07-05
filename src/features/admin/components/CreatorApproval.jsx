@@ -43,7 +43,7 @@ export default function CreatorApproval() {
     setIsOpenCreatorFormModal(false);
   };
 
-  const creatorApprovalData = creatorWaitingApprovalData.map((data) => {
+  const creatorApprovalData = creatorWaitingApprovalData?.map((data) => {
     return [
       `${data.firstName} ${data.lastName}`,
       <Button
@@ -76,7 +76,7 @@ export default function CreatorApproval() {
       {approvalLoading && <Spinner transparent />}
       <div className="px-28">
         <h1 className="font-bold text-3xl py-4">Creator Approval</h1>
-        {creatorApprovalData.length > 0 ? (
+        {creatorApprovalData?.length > 0 ? (
           <TablePagination data={creatorApprovalData} columns={creatorApprovalColumns} />
         ) : (
           <h3 className="flex justify-center items-center text-xl">
