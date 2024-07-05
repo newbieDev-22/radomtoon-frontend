@@ -5,14 +5,15 @@ import Modal from "../components/Modal";
 import EvidenceModal from "../features/admin/components/EvidenceModalDetail";
 import TablePagination from "../components/TablePagination";
 import { useState } from "react";
+import CreatorDashboard from "../features/dashboard/components/CreatorDashboard";
 
 const mockProductName = `Bria's Mythical Menagerie: Creature-Collecting & Plush`;
 const mockStatus = STATUS_PRODUCT.IN_PROGRESS;
 
 export default function ProductManagePage() {
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
-  const columns = ["Project", "Tier", "Price", "Project Status", "Delivery Status"];
-  const data = [
+  const supporterColumns = ["Project", "Tier", "Price", "Project Status", "Delivery Status"];
+  const supporterData = [
     ["Product A", 1, 100, <div className="text-red-600">Failed</div>, "-"],
     [
       "Product A",
@@ -102,54 +103,13 @@ export default function ProductManagePage() {
     ],
   ];
 
-  const milestoneDataColumns = ["Project", "Milestone status", "Evidence"];
-  const milestoneData = [
-    [
-      "Product A",
-      <div className="text-red-600">Failed</div>,
-      <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>,
-    ],
-    [
-      "Product A",
-      <div className="text-green-600">Pass</div>,
-      <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>,
-    ],
-    [
-      "Product A",
-      <div className="text-gray-600">Pending</div>,
-      <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>,
-    ],
-  ];
 
   return (
-    <div className="m-auto flex flex-col justify-center py-4">
-      <h1 className="text-center font-bold text-3xl my-3">{mockProductName}</h1>
-      <h2 className={`text-center font-semibold text-2xl py-1 ${mockStatus.color}`}>{`Status : ${mockStatus.text}`}</h2>
-
-      <div className="pt-4 px-36">
-        <h1 className="font-bold text-3xl py-4">Milestone Status</h1>
-        <TablePagination
-          data={milestoneData}
-          columns={milestoneDataColumns}
-          itemInOnePage={3}
-        />
-      </div>
-
-      <div className="pb-4 px-36">
-        <h1 className="font-bold text-3xl py-4">Supporter Management</h1>
-        <TablePagination data={data} columns={columns} />
-      </div>
-
-      {openEvidenceModal && (
-        <Modal
-          onClose={() => setOpenEvidenceModal(false)}
-          title="Milestone : 1"
-          width={45}
-          open={true}
-        >
-          <EvidenceModal />
-        </Modal>
-      )}
-    </div>
+    <>
+      <CreatorDashboard 
+        title={mockProductName} status={mockStatus}
+        supporterData={supporterData} supporterColumns={supporterColumns}
+      />
+    </>
   );
 }

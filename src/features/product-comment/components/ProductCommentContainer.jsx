@@ -88,6 +88,7 @@ export default function ProductCommentContainer() {
     <>
       {commentLoading && <Spinner transparent />}
       <div className=" bg-gray-200 m-auto px-20 py-10">
+
         <form
           className="flex gap-5 justify-between mb-10 items-center"
           onSubmit={handleCreateComment}
