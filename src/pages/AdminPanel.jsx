@@ -1,8 +1,9 @@
 import { useState } from "react";
 import StatsBar from "../components/StatsBannerComponent/StatsBanner";
 import Approval from "../features/admin/components/Approval";
-import Overview from "../features/admin/components/Overview";
 import { useStore } from "../store/useStore";
+import AdminDashboard from "../features/dashboard/components/AdminDashboard"
+
 
 const mockImgStatsBar =
   "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/bmt7dsxiwpfjlnxpcazs";
@@ -25,28 +26,18 @@ const adminMenuStyleMap = {
 };
 
 const adminMenu = {
-  Overview: "Overview",
   Approval: "Approval",
+  Dashboard: "Dashboard",
 };
 
 export default function AdminPanel() {
-  const [selectMenu, setSelectMenu] = useState(adminMenu.Overview);
+  const [selectMenu, setSelectMenu] = useState(adminMenu.Approval);
   const waitingApproval = useStore((state) => state.waitingApproval);
   console.log("waitingApproval", waitingApproval);
   return (
     <div>
       <StatsBar data={mockDataStatsBar} bg={mockImgStatsBar} />
       <div className="flex flex-row justify-center w-full border-b-1 shadow-md py-4">
-        <button
-          onClick={() => setSelectMenu(adminMenu.Overview)}
-          className={
-            selectMenu === adminMenu.Overview
-              ? adminMenuStyleMap.isSelected
-              : adminMenuStyleMap.isNotSelected
-          }
-        >
-          Overview
-        </button>
         <button
           onClick={() => setSelectMenu(adminMenu.Approval)}
           className={
@@ -57,17 +48,24 @@ export default function AdminPanel() {
         >
           Approval
         </button>
+        <button
+          onClick={() => setSelectMenu(adminMenu.Dashboard)}
+          className={
+            selectMenu === adminMenu.Dashboard
+              ? adminMenuStyleMap.isSelected
+              : adminMenuStyleMap.isNotSelected
+          }
+        >
+          Dashboard
+        </button>
       </div>
-
-      {selectMenu === adminMenu.Overview && (
-        <div className="px-20">
-          <Overview />
-        </div>
-      )}
       {selectMenu === adminMenu.Approval && (
         <div className="px-20 py-8">
           <Approval />
         </div>
+      )}
+      {selectMenu === adminMenu.Dashboard && (
+          <AdminDashboard />
       )}
     </div>
   );
