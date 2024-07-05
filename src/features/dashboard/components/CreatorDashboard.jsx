@@ -31,7 +31,7 @@ const pieChartMockData = [
   { "label": "Tier 3", "value": 31424 },
 ]
 
-export default function CreatorDashboard({ title }) {
+export default function CreatorDashboard({ title, status, supporterData, supporterColumns }) {
 
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
 
@@ -59,9 +59,15 @@ export default function CreatorDashboard({ title }) {
 
   return (
     <div className="py-10 px-10 md:px-40 2xl:px-96 bg-[#b6e5e9]">
-      <h1 className="text-center text-radomtoon-bright text-4xl font-bold py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
-        {title}
-      </h1>
+      <div className="py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
+        <h1 className="text-center text-radomtoon-bright text-4xl font-bold ">
+          {title}
+        </h1>
+        <h2 className={`text-center font-semibold text-2xl py-1 ${status.color}`}>
+          {`Status : ${status.text}`}
+        </h2>
+      </div>
+
       <div className="grid grid-cols-2 gap-10 p-10 mx-auto rounded-3xl  bg-[#e7f5fc]">
         <span className="sm:col-span-2 col-span-2 md:col-span-1 bg-white rounded-2xl flex justify-center items-center flex-col">
           <h1 className="w-full px-10 justify-start text-lg font-semibold text-radomtoon-bright mt-4 ">
@@ -87,6 +93,12 @@ export default function CreatorDashboard({ title }) {
         </span>
         <span className="col-span-2">
           <LineChart title={'Progress'} data={lineChartData} />
+        </span>
+        <span className="col-span-2 p-5 rounded-2xl bg-white">
+          <div className="w-full px-5 mb-2 justify-start text-xl font-semibold text-radomtoon-bright">
+            {'Supporter Distribution Tracking'}
+          </div>
+          <TablePagination data={supporterData} columns={supporterColumns} />
         </span>
       </div>
       {openEvidenceModal && (
