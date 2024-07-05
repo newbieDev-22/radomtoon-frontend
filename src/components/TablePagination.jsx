@@ -56,12 +56,14 @@ export default function TablePagination({
           <GridTable key={index} index={index} data={Object.values(el)} />
         ))}
       </div>
-      {!closePagination && (
+      {!closePagination && selectPage.lngth <= 1 && (
         <div className="join flex justify-center">
           {selectPage.map((el) => (
             <button
               key={el.page}
-              className={`join-item btn btn-md ${el.selected ? "btn-active " : null}`}
+              className={`join-item btn btn-md ${
+                el.selected ? "btn-active " : null
+              }`}
               onClick={() => handleSelectPage(el.page)}
             >
               {el.page + 1}

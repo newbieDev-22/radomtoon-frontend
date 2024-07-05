@@ -1,9 +1,11 @@
+import Modal from "../components/Modal";
+import MilestoneEvidenceForm from "../features/admin/components/MilestoneEvidenceForm";
 import CreatorDashboard from "../features/dashboard/components/CreatorDashboard";
 
 export default function HommyDummy() {
   return (
-    // <CategoryContainer />
-    // <AdminDashboard />
-    <CreatorDashboard title="Launching Soon! : Crystal Coffee Machine by Sara Shakeel" />
+    <Modal title="Milestone Evidence" width={60} open={true}>
+      <MilestoneEvidenceForm />
+    </Modal>
   );
 }
