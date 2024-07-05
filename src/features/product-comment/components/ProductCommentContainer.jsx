@@ -95,7 +95,7 @@ export default function ProductCommentContainer() {
   return (
     <>
 
-      <div className=" bg-gray-200 m-auto px-20 py-10">
+      <div className=" bg-gray-200 m-auto px-20 py-10 rounded-3xl shadow-lg">
         <form
           className="flex gap-5 justify-between mb-10 items-center"
           onSubmit={handleClickSend}
