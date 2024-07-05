@@ -114,4 +114,40 @@ export const adminApprovalSlice = (set) => ({
       set(() => ({ approvalLoading: false }));
     }
   },
+  milestoneEvidencePass: async (milestoneId) => {
+    try {
+      set(() => ({ approvalLoading: true }));
+      await adminApi.milestonePass(+milestoneId);
+      set((state) => ({
+        waitingApproval: {
+          ...state.waitingApproval,
+          milestone: state.waitingApproval.milestone.filter(
+            (milestone) => milestone.id !== +milestoneId
+          ),
+        },
+      }));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      set(() => ({ approvalLoading: false }));
+    }
+  },
+  milestoneEvidenceFailed: async (milestoneId, comment) => {
+    try {
+      set(() => ({ approvalLoading: true }));
+      await adminApi.milestoneFailed(+milestoneId, comment);
+      set((state) => ({
+        waitingApproval: {
+          ...state.waitingApproval,
+          milestone: state.waitingApproval.milestone.filter(
+            (milestone) => milestone.id !== +milestoneId
+          ),
+        },
+      }));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      set(() => ({ approvalLoading: false }));
+    }
+  },
 });
