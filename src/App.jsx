@@ -17,12 +17,15 @@ export default function App() {
   const userLoading = useStore((state) => state.authUser.loading);
   const creatorUserLoading = useStore((state) => state.creatorUser.loading);
   const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
+  const fetchComment = useStore((state) => state.fetchComment)
+  const commentLoading = useStore((state) => state.comments.loading)
 
   useEffect(() => {
     fetchProduct();
     fetchUser();
     fetchCreatorUser();
-  }, [fetchProduct, fetchUser, fetchCreatorUser]);
+    fetchComment();
+  }, [fetchProduct, fetchUser, fetchCreatorUser, fetchComment]);
 
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {
@@ -43,7 +46,8 @@ export default function App() {
     productLoading ||
     creatorUserLoading ||
     creatorProductLoading ||
-    WaitingApprovalLoading
+    WaitingApprovalLoading ||
+    commentLoading
   ) {
     return <Loading />;
   }
