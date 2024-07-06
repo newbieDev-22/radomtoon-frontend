@@ -22,10 +22,13 @@ export default function CampaignPage() {
 
   if (
     !filterData ||
-    (!isCreator && filterData.approvalStatusId !== APPROVAL_STATUS_ID.SUCCESS)
+    (!isCreator &&
+      filterData.approvalStatusId !== APPROVAL_STATUS_ID.SUCCESS &&
+      role !== USER_ROLE.ADMIN)
   ) {
     return <Navigate to="/" />;
   }
+
   const handleSubPageChange = (subPage) => {
     setSubPage(subPage);
   };

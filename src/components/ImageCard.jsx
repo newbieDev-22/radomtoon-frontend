@@ -97,7 +97,11 @@ export default function ImageCard({
                 onClick={() => navigate(`/creator-panel/${creatorId}`)}
               >
                 {avatarImage ? (
-                  <img src={avatarImage} className="rounded-full" alt="Avatar" />
+                  <img
+                    src={avatarImage}
+                    className="aspect-square rounded-full"
+                    alt="Avatar"
+                  />
                 ) : (
                   <div className="w-full aspect-square font-semibold text-2xl text-white rounded-full bg-gray-500 flex justify-center items-center">
                     {creatorName[0].toUpperCase()}

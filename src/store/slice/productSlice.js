@@ -6,6 +6,7 @@ import { APPROVAL_STATUS_ID } from "../../constants";
 export const productSlice = (set, get) => ({
   product: { data: [], loading: false, error: null, today: new Date() },
   approvalProduct: [],
+  tierPendingPayment: {},
   productLoading: false,
 
   setLoading: (loading) => set((state) => ({ product: { ...state.product, loading } })),
@@ -238,6 +239,15 @@ export const productSlice = (set, get) => ({
       set((state) => ({ product: { ...state.product, error: err.message } }));
     } finally {
       set(() => ({ productLoading: false }));
+    }
+  },
+
+  setTierPending: (productId, tierId) => {
+    const { data } = get().product;
+    const product = data.filter((el) => el.id === +productId)[0];
+    if (product) {
+      const tier = product.productTiers.filter((el) => el.id == +tierId)[0];
+      set(() => ({ tierPendingPayment: tier }));
     }
   },
 });

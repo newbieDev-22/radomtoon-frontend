@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
 import Button from "../../../components/Button";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import supportProductApi from "../../../apis/support-product";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
-  const { productId } = useLocation();
+  const { productId, tierId } = useParams();
+  console.log(productId, tierId);
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -21,18 +23,22 @@ export default function CheckoutForm() {
 
     setIsProcessing(true);
 
-    const { error } = await stripe.confirmPayment({
+    const confirmPromise = stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `http://localhost:5173/`,
+        return_url: `${import.meta.env.VITE_FRONT_URL}`,
       },
     });
+    const createSupportPromise = supportProductApi.createSupport(tierId);
+
+    const [{ error }, _] = await Promise.all([confirmPromise, createSupportPromise]);
+
     setIsProcessing(false);
 
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
     } else {
-      setMessage("An unexpected error occured.");
+      setMessage("An unexpected error occurred.");
     }
   };
 

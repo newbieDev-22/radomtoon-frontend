@@ -138,13 +138,7 @@ export function DotMenu({ color }) {
 
 export function CloseIcon({ className, color = "#DBD9DD" }) {
   return (
-    <svg
-      width="48px"
-      height="48px"
-      viewBox="0 0 32 32"
-      fill="none"
-      className={className}
-    >
+    <svg width="48px" height="48px" viewBox="0 0 32 32" fill="none" className={className}>
       <path
         d="M10.0874 8.34361L15 13.256L19.8871 8.36906C19.9951 8.25417 20.1251 8.16225 20.2695 8.09884C20.4138 8.03542 20.5695 8.0018 20.7271 8C21.0646 8 21.3884 8.13408 21.627 8.37275C21.8657 8.61141 21.9998 8.93511 21.9998 9.27264C22.0028 9.42866 21.9738 9.58365 21.9147 9.72809C21.8556 9.87253 21.7676 10.0034 21.6562 10.1126L16.7054 14.9995L21.6562 19.9501C21.8659 20.1553 21.9889 20.4331 21.9998 20.7264C21.9998 21.0639 21.8657 21.3876 21.627 21.6262C21.3884 21.8649 21.0646 21.999 20.7271 21.999C20.5649 22.0057 20.4031 21.9787 20.2519 21.9195C20.1007 21.8603 19.9635 21.7704 19.8489 21.6554L15 16.743L10.1001 21.6427C9.99261 21.7537 9.86414 21.8424 9.72216 21.9036C9.58017 21.9647 9.42748 21.9972 9.2729 21.999C8.93536 21.999 8.61164 21.8649 8.37297 21.6262C8.13429 21.3876 8.00021 21.0639 8.00021 20.7264C7.99724 20.5703 8.02619 20.4153 8.08528 20.2709C8.14437 20.1265 8.23235 19.9956 8.34383 19.8864L13.2946 14.9995L8.34383 10.0489C8.13407 9.84374 8.01108 9.56587 8.00021 9.27264C8.00021 8.93511 8.13429 8.61141 8.37297 8.37275C8.61164 8.13408 8.93536 8 9.2729 8C9.57834 8.00382 9.87106 8.12726 10.0874 8.34361Z"
         fill={color}
@@ -162,11 +156,7 @@ export function PictureIcon({ className }) {
       className={className}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-      <g
-        id="SVGRepo_tracerCarrier"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      ></g>
+      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
 
       <g id="SVGRepo_iconCarrier">
         <path
@@ -214,16 +204,9 @@ export function Verified() {
   );
 }
 
-
 export function SpinnerIcon({ className = null }) {
   return (
-    <svg
-      width="2rem"
-      height="2rem"
-      viewBox="0 0 24 24"
-      fill="none"
-      className={className}
-    >
+    <svg width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" className={className}>
       <path
         opacity="0.2"
         fillRule="evenodd"
@@ -239,7 +222,6 @@ export function SpinnerIcon({ className = null }) {
   );
 }
 
-
 export function FilterIcon({ className }) {
   return (
     <svg
@@ -247,7 +229,6 @@ export function FilterIcon({ className }) {
       height="full"
       viewBox="0 -960 960 960"
       width="full"
-
       fill="#5f6368"
       className={className}
     >
@@ -278,7 +259,6 @@ export function FilterMonth({ className }) {
       height="full"
       viewBox="0 -960 960 960"
       width="full"
-
       fill="#5f6368"
       className={className}
     >
@@ -287,14 +267,32 @@ export function FilterMonth({ className }) {
   );
 }
 
-export function UploadFile({className}){
-  return(
-    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368" className={className}><path d="M439-82q-76-8-141.5-42.5t-113.5-88Q136-266 108.5-335T81-481q0-155 102.5-268.5T440-880v80q-121 17-200 107.5T161-481q0 121 79 211.5T439-162v80Zm40-198L278-482l57-57 104 104v-245h80v245l103-103 57 58-200 200Zm40 198v-80q43-6 82.5-23t73.5-43l58 58q-47 37-101 59.5T519-82Zm158-652q-35-26-74.5-43T520-800v-80q59 6 113 28.5T733-792l-56 58Zm112 506-56-57q26-34 42-73.5t22-82.5h82q-8 59-30 113.5T789-228Zm8-293q-6-43-22-82.5T733-677l56-57q38 45 61 99.5T879-521h-82Z"/></svg>
-  )
+export function UploadFile({ className }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24px"
+      viewBox="0 -960 960 960"
+      width="24px"
+      fill="#5f6368"
+      className={className}
+    >
+      <path d="M439-82q-76-8-141.5-42.5t-113.5-88Q136-266 108.5-335T81-481q0-155 102.5-268.5T440-880v80q-121 17-200 107.5T161-481q0 121 79 211.5T439-162v80Zm40-198L278-482l57-57 104 104v-245h80v245l103-103 57 58-200 200Zm40 198v-80q43-6 82.5-23t73.5-43l58 58q-47 37-101 59.5T519-82Zm158-652q-35-26-74.5-43T520-800v-80q59 6 113 28.5T733-792l-56 58Zm112 506-56-57q26-34 42-73.5t22-82.5h82q-8 59-30 113.5T789-228Zm8-293q-6-43-22-82.5T733-677l56-57q38 45 61 99.5T879-521h-82Z" />
+    </svg>
+  );
 }
 
-export function CloudUpload({className}){
-  return(
-    <svg xmlns="http://www.w3.org/2000/svg" height="full" viewBox="0 -960 960 960" width="full" fill="#ffffff" className={className}><path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q17-72 85-137t145-65q33 0 56.5 23.5T520-716v242l64-62 56 56-160 160-160-160 56-56 64 62v-242q-76 14-118 73.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h480q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-48-22-89.5T600-680v-93q74 35 117 103.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H260Zm220-358Z"/></svg>
-  )
+export function CloudUpload({ className }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="full"
+      viewBox="0 -960 960 960"
+      width="full"
+      fill="#ffffff"
+      className={className}
+    >
+      <path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q17-72 85-137t145-65q33 0 56.5 23.5T520-716v242l64-62 56 56-160 160-160-160 56-56 64 62v-242q-76 14-118 73.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h480q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-48-22-89.5T600-680v-93q74 35 117 103.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H260Zm220-358Z" />
+    </svg>
+  );
 }

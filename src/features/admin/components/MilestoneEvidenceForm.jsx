@@ -1,8 +1,6 @@
-import { useState } from "react";
 import Button from "../../../components/Button";
-import { useStore } from "../../../store/useStore";
 
-export default function MilestoneEvidenceForm({ data,approve,reject }) {
+export default function MilestoneEvidenceForm({ data, approve, reject }) {
   return (
     <div className="flex justify-center">
       <form onSubmit={(e) => e.preventDefault()} action="">
