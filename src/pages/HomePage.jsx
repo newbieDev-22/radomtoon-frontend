@@ -34,11 +34,11 @@ export default function HomePage() {
   const approvalProduct = useStore((state) => state.approvalProduct);
   const today = useStore((state) => state.product.today);
 
-  const dataRespones = useStore((state) => state.stats.data)
+  const { projectSupport, towardIdea, contribution } = useStore((state) => state.stats.data)
   const dataStatsBar = [
-    { id: 1, amount: dataRespones[0]?.projectSupport, title: "projects supported" },
-    { id: 2, amount: dataRespones[0]?.towardIdea, title: "towards ideas", currency: "THB" },
-    { id: 3, amount: dataRespones[0]?.contribution, title: "contributions" },
+    { id: 1, amount: projectSupport, title: "projects supported" },
+    { id: 2, amount: towardIdea, title: "towards ideas", currency: "THB" },
+    { id: 3, amount: contribution, title: "contributions" },
   ];
 
   return (
