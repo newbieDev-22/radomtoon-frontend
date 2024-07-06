@@ -24,7 +24,7 @@ function PaymentFeature() {
       const { clientSecret } = await result.json();
       setClientSecret(clientSecret);
     });
-  }, []);
+  }, [tierId]);
 
   return (
     <div className="w-full">
