@@ -12,6 +12,7 @@ export default function CheckoutForm() {
   const { productId, tierId } = useParams();
   const location = useLocation();
   const url = window.location.href;
+
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const createSupportProduct = useStore((state) => state.createSupportProduct);
@@ -33,6 +34,7 @@ export default function CheckoutForm() {
         },
       });
       const createSupportPromise = createSupportProduct(tierId);
+
 
       const [{ error }, _] = await Promise.all([confirmPromise, createSupportPromise]);
 
