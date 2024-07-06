@@ -17,8 +17,10 @@ export default function App() {
   const userLoading = useStore((state) => state.authUser.loading);
   const creatorUserLoading = useStore((state) => state.creatorUser.loading);
   const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
-  const fetchComment = useStore((state) => state.fetchComment);
-  const commentLoading = useStore((state) => state.comments.loading);
+  const fetchComment = useStore((state) => state.fetchComment)
+  const commentLoading = useStore((state) => state.comments.loading)
+  const statsLoading = useStore((state) => state.statsLoading)
+  const featchStats = useStore((state) => state.featchStats)
   const user = useStore((state) => state.authUser.user);
   const product = useStore((state) => state.product.data);
 
@@ -27,6 +29,7 @@ export default function App() {
     fetchUser();
     fetchCreatorUser();
     fetchComment();
+    featchStats();
   }, [fetchProduct, fetchUser, fetchCreatorUser, fetchComment]);
 
   useEffect(() => {
@@ -53,7 +56,9 @@ export default function App() {
     creatorUserLoading ||
     creatorProductLoading ||
     WaitingApprovalLoading ||
-    commentLoading
+    commentLoading ||
+    statsLoading
+
   ) {
     return <Loading />;
   }
