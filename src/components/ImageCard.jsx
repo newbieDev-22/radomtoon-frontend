@@ -61,20 +61,17 @@ export default function ImageCard({
               } relative overflow-hidden`}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
+              onClick={() => navigate(`/campaign/${productId}`)}
             >
-              {!hover && (
+              {!hover || !vid ? (
                 <img
                   src={imageSrc}
                   className={`absolute h-full w-full object-cover rounded-t-lg`}
                   alt="product-card"
                 />
-              )}
-              {hover && (
-                <div
-                  role="button"
-                  className="relative w-full h-full"
-                  onClick={() => navigate(`/campaign/${productId}`)}
-                >
+              ) : null}
+              {hover && vid && (
+                <div className="relative w-full h-full">
                   <ReactPlayer
                     url={vid}
                     playing
@@ -100,9 +97,9 @@ export default function ImageCard({
                 onClick={() => navigate(`/creator-panel/${creatorId}`)}
               >
                 {avatarImage ? (
-                  <img src={avatarImage} className={`w-full rounded-full`} alt="Avatar" />
+                  <img src={avatarImage} className="rounded-full" alt="Avatar" />
                 ) : (
-                  <div className="w-10 h-10 font-semibold text-lg text-white rounded-full bg-gray-500 flex justify-center items-center">
+                  <div className="w-full aspect-square font-semibold text-2xl text-white rounded-full bg-gray-500 flex justify-center items-center">
                     {creatorName[0].toUpperCase()}
                   </div>
                 )}

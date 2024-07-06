@@ -31,23 +31,24 @@ export default function CampaignPage() {
   };
 
   return (
-
     <div className="py-10">
       <CampaignContent />
       <CampaignSection handleSubPageChange={handleSubPageChange} />
       <div className="flex w-[100vw]">
         <span className="w-[75vw] px-20 py-4 ">
-          {subPage === subPageMap.STORY && ( <Editor /> )}
+          {subPage === subPageMap.STORY && <Editor />}
           {subPage === subPageMap.MILESTONE && <MilestoneContainer />}
-          {subPage === subPageMap.REWARD && <ProductRewardContainer isCreator={isCreator} />}
+          {subPage === subPageMap.REWARD && (
+            <ProductRewardContainer isCreator={isCreator} />
+          )}
           {subPage === subPageMap.FORUM && <ProductCommentContainer />}
         </span>
         <span className="w-[25vw] mt-20 pr-10 ">
           <div className="sticky top-32">
-            <ProfileCard backers={123456} created={123} />
+            <ProfileCard creatorId={filterData.creatorId} />
           </div>
         </span>
       </div>
-    </div >
+    </div>
   );
 }

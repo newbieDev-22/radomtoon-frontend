@@ -46,7 +46,7 @@ export default function TablePagination({
         selectPageNum.page * itemInOnePage + 10
       )
     );
-  }, [selectPage]);
+  }, [selectPage, itemInOnePage]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -61,9 +61,7 @@ export default function TablePagination({
           {selectPage.map((el) => (
             <button
               key={el.page}
-              className={`join-item btn btn-md ${
-                el.selected ? "btn-active " : null
-              }`}
+              className={`join-item btn btn-md ${el.selected ? "btn-active " : null}`}
               onClick={() => handleSelectPage(el.page)}
             >
               {el.page + 1}

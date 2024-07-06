@@ -2,33 +2,21 @@ import { useState } from "react";
 import Button from "../../../components/Button";
 import Modal from "../../../components/Modal";
 import TablePagination from "../../../components/TablePagination";
-import ApproveMilestoneModalDetail from "../../../tmp/ApproveMilestoneModal";
 import { useStore } from "../../../store/useStore";
 import MilestoneEvidenceForm from "./MilestoneEvidenceForm";
 import { toast } from "react-toastify";
 import RejectApproval from "./RejectApproval";
 
 export default function MilestoneApproval() {
-  const milestoneApprovalColumns = [
-    "Project name",
-    "Milestone Evidence",
-    "Approval",
-  ];
-  const [isOpenApproveEvidenceModal, setIsOpenApproveEvidenceModal] =
-    useState(false);
+  const milestoneApprovalColumns = ["Project name", "Milestone Evidence", "Approval"];
+  const [isOpenApproveEvidenceModal, setIsOpenApproveEvidenceModal] = useState(false);
   const [isOpenRejectModal, setIsOpenRejectModal] = useState(false);
   const [currentEvidence, setCurrentEvidence] = useState(null);
   const [pendingFailId, setPendingFailId] = useState(null);
-  const milestoneApprovalData = useStore(
-    (state) => state.waitingApproval.milestone
-  );
+  const milestoneApprovalData = useStore((state) => state.waitingApproval.milestone);
 
-  const milestoneEvidencePass = useStore(
-    (state) => state.milestoneEvidencePass
-  );
-  const milestoneEvidenceFailed = useStore(
-    (state) => state.milestoneEvidenceFailed
-  );
+  const milestoneEvidencePass = useStore((state) => state.milestoneEvidencePass);
+  const milestoneEvidenceFailed = useStore((state) => state.milestoneEvidenceFailed);
 
   const handleCurrentEvidence = (milestoneApprovalData) => {
     setCurrentEvidence(milestoneApprovalData);
@@ -53,22 +41,12 @@ export default function MilestoneApproval() {
   const milestoneApprovalDataMap = milestoneApprovalData.map((data) => {
     return [
       data.product.productName,
-      <Button onClick={() => handleCurrentEvidence(data)}>
-        See Evidence...
-      </Button>,
+      <Button onClick={() => handleCurrentEvidence(data)}>See Evidence...</Button>,
       <div className="flex gap-4">
-        <Button
-          bg="red"
-          width={20}
-          onClick={() => handlePendingReject(data.id)}
-        >
+        <Button bg="red" width={20} onClick={() => handlePendingReject(data.id)}>
           Reject
         </Button>
-        <Button
-          bg="green"
-          width={20}
-          onClick={() => handleAppoveMilestone(data.id)}
-        >
+        <Button bg="green" width={20} onClick={() => handleAppoveMilestone(data.id)}>
           Approve
         </Button>
       </div>,

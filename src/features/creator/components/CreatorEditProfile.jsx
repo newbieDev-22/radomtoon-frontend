@@ -4,7 +4,6 @@ import { useStore } from "../../../store/useStore";
 import { useParams } from "react-router-dom";
 import { USER_ROLE } from "../../../constants";
 import { toast } from "react-toastify";
-import Spinner from "../../../components/Spinner";
 
 export default function CreatorEditProfile() {
   const { creatorId } = useParams();
@@ -13,7 +12,6 @@ export default function CreatorEditProfile() {
   const updateInfo = useStore((state) => state.updateInfo);
   const updateCreatorUser = useStore((state) => state.updateCreatorUser);
   const selectedCreator = useStore((state) => state.selectCreator(creatorId));
-  const authLoading = useStore((state) => state.authLoading);
   const initialInput = {
     biography: selectedCreator.biography || "",
     website: selectedCreator.website || "",
@@ -39,7 +37,6 @@ export default function CreatorEditProfile() {
 
   return (
     <>
-      {authLoading && <Spinner transparent />}
       <div className="py-4 md:w-3/5 sm:w-full m-auto my-8">
         <div className="w-full flex flex-col gap-4 px-20">
           <div className="flex flex-col gap-4">
