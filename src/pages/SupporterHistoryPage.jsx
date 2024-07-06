@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import Button from "../components/Button";
 import TablePagination from "../components/TablePagination";
 import { PRODUCT_STATUS } from "../constants";
@@ -7,6 +8,7 @@ const columns = [
   "Project",
   "Tier Name",
   "Price",
+  "Date",
   "Project Status",
   "Delivery Status",
   "Cancel support",
@@ -24,9 +26,9 @@ const colorMapping = {
 export default function SupporterHistoryPage() {
   const histories = useStore((state) => state.supporter.history);
 
-  const historyMap = histories.map((el) => {
+  const historyMap = histories?.map((el) => {
     const cancelSupport = el.fundingStatus === PRODUCT_STATUS.PENDING && (
-      <Button onClick={() => handleCancelSupport(el.productId)} bg="red" width="40">
+      <Button bg="red" width="40">
         Cancel support
       </Button>
     );
@@ -35,6 +37,7 @@ export default function SupporterHistoryPage() {
       el.projectName,
       el.tierName,
       el.price,
+      dayjs(el.date).format("DD/MM/YYYY"),
       <div key={el.fundingStatus} className={colorMapping[el.fundingStatus]}>
         {el.fundingStatus}
       </div>,
@@ -48,7 +51,11 @@ export default function SupporterHistoryPage() {
   return (
     <div className="px-28 py-6">
       <h1 className="text-4xl font-semibold py-8">Activity History</h1>
-      <TablePagination data={historyMap} columns={columns} />
+      {historyMap.length > 0 ? (
+        <TablePagination data={historyMap} columns={columns} />
+      ) : (
+        <h3 className="flex justify-center items-center text-xl">No histories data</h3>
+      )}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
 import Button from "../../../components/Button";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import supportProductApi from "../../../apis/support-product";
 
 export default function CheckoutForm() {
@@ -9,36 +9,41 @@ export default function CheckoutForm() {
   const elements = useElements();
   const navigate = useNavigate();
   const { productId, tierId } = useParams();
-  console.log(productId, tierId);
+  const location = useLocation();
+  const url = window.location.href;
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    if (!stripe || !elements) {
-      return;
-    }
+      if (!stripe || !elements) {
+        return;
+      }
 
-    setIsProcessing(true);
+      setIsProcessing(true);
 
-    const confirmPromise = stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${import.meta.env.VITE_FRONT_URL}`,
-      },
-    });
-    const createSupportPromise = supportProductApi.createSupport(tierId);
+      const confirmPromise = stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${url.split(location.pathname)[0]}`,
+        },
+      });
+      const createSupportPromise = supportProductApi.createSupport(tierId);
 
-    const [{ error }, _] = await Promise.all([confirmPromise, createSupportPromise]);
+      const [{ error }, _] = await Promise.all([confirmPromise, createSupportPromise]);
 
-    setIsProcessing(false);
+      setIsProcessing(false);
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
-    } else {
-      setMessage("An unexpected error occurred.");
+      if (error.type === "card_error" || error.type === "validation_error") {
+        setMessage(error.message);
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
