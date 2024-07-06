@@ -47,6 +47,10 @@ export default function App() {
   }, [fetchHistory, role]);
 
   useEffect(() => {
+    fetchStats();
+  }, [historyLoading, fetchStats]);
+
+  useEffect(() => {
     fetchCreatorUser();
   }, [user, product, fetchCreatorUser]);
 
