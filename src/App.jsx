@@ -19,12 +19,15 @@ export default function App() {
   const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
   const fetchComment = useStore((state) => state.fetchComment)
   const commentLoading = useStore((state) => state.comments.loading)
+  const statsLoading = useStore((state) => state.statsLoading)
+  const featchStats = useStore((state) => state.featchStats)
 
   useEffect(() => {
     fetchProduct();
     fetchUser();
     fetchCreatorUser();
     fetchComment();
+    featchStats();
   }, [fetchProduct, fetchUser, fetchCreatorUser, fetchComment]);
 
   useEffect(() => {
@@ -47,7 +50,9 @@ export default function App() {
     creatorUserLoading ||
     creatorProductLoading ||
     WaitingApprovalLoading ||
-    commentLoading
+    commentLoading ||
+    statsLoading
+
   ) {
     return <Loading />;
   }

@@ -222,10 +222,11 @@ export const mockContent = `  Lorem Ipsum is simply dummy text of the printing a
 export const mockImgStatsBar =
   "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/bmt7dsxiwpfjlnxpcazs";
 export const mockDataStatsBar = [
-  { id: 1, amount: 20000, title: "projects supported" },
+  { id: 1, amount: 28888, title: "projects supported" },
   { id: 2, amount: 10000000, title: "towards ideas", currency: "THB" },
   { id: 3, amount: 400000, title: "contributions" },
 ];
+
 
 export const PROVINCE_LIST = [
   "Amnat Charoen",

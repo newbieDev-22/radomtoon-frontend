@@ -1,5 +1,4 @@
 import ImageCard from "../components/ImageCard";
-import { mockDataStatsBar } from "../constants";
 import { useStore } from "../store/useStore";
 import StatsBanner from "../components/StatsBannerComponent/StatsBanner";
 import dayjs from "dayjs";
@@ -34,9 +33,17 @@ const mainCardVariants = {
 export default function HomePage() {
   const approvalProduct = useStore((state) => state.approvalProduct);
   const today = useStore((state) => state.product.today);
+
+  const dataRespones = useStore((state) => state.stats.data)
+  const dataStatsBar = [
+    { id: 1, amount: dataRespones[0]?.projectSupport, title: "projects supported" },
+    { id: 2, amount: dataRespones[0]?.towardIdea, title: "towards ideas", currency: "THB" },
+    { id: 3, amount: dataRespones[0]?.contribution, title: "contributions" },
+  ];
+
   return (
     <div>
-      <StatsBanner data={mockDataStatsBar} />
+      <StatsBanner data={dataStatsBar} />
       <div className="flex justify-center gap-10 mt-10 mb-20">
         {approvalProduct.slice(0, 1).map((el) => (
           <motion.div key={el.id} {...mainCardVariants}>
