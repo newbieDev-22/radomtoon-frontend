@@ -7,6 +7,7 @@ import { creatorUserSlice } from "./slice/creatorUserSlice";
 import { adminApprovalSlice } from "./slice/adminApprovalSlice";
 import { commentSlice } from "./slice/commentSlice";
 import { statSlice } from "./slice/statsSlice";
+import { supporterSlice } from "./slice/supporterSlice";
 
 export const useStore = create(
   devtools((...a) => ({
@@ -17,5 +18,6 @@ export const useStore = create(
     ...adminApprovalSlice(...a),
     ...commentSlice(...a),
     ...statSlice(...a),
+    ...supporterSlice(...a),
   }))
 );

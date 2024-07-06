@@ -132,7 +132,6 @@ export default function CampaignContent() {
 
   const handleClickSendToApproval = async () => {
     try {
-      console.log("filterData", filterData);
       if (filterData.productMilestones.length !== 3) {
         toast.error("Please add all 3 milestones");
         return;

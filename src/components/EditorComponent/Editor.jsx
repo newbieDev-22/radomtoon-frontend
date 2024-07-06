@@ -33,7 +33,6 @@ export default function Editor() {
     try {
       e.preventDefault();
       const updateStoryData = { story: JSON.stringify(content) };
-      console.log(updateStoryData);
       await updateStory(+productId, updateStoryData);
       toast.success("Story updated successfully");
     } catch (err) {

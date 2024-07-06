@@ -4,6 +4,9 @@ import TierShowContent from "./TierShowContent";
 import TierEditContent from "./TierEditContent";
 import Modal from "../../../components/Modal";
 import ConfirmModal from "../../../components/ConfirmModal";
+import { useNavigate } from "react-router-dom";
+import { USER_ROLE } from "../../../constants";
+import { useStore } from "../../../store/useStore";
 
 export default function TierCard({
   id,
@@ -14,6 +17,7 @@ export default function TierCard({
   tierRankId,
   isApproved,
   isCreator,
+  productId,
   handleDeleteNewTier,
   handleDataChange,
 }) {
@@ -27,6 +31,7 @@ export default function TierCard({
     tierImage,
     tierRankId,
   });
+  const role = useStore((state) => state.authUser.role);
 
   const [inputError, setInputError] = useState({
     tierName: "",
@@ -35,6 +40,8 @@ export default function TierCard({
     tierImage: "",
     tierRankId: "",
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (input.tierName === "") {
@@ -51,9 +58,18 @@ export default function TierCard({
     setInput((prev) => ({ ...prev, [key]: value }));
   }, []);
 
+  const handleGoToPayment = () => {
+    if (role === USER_ROLE.SUPPORTER) {
+      navigate(`/campaign/${productId}/tier/${id}/payment`);
+    }
+  };
+
   return (
     <>
-      <div className="relative hover:scale-[102%] active:scale-100 transition-all">
+      <div
+        className="relative hover:scale-[102%] active:scale-100 transition-all"
+        onClick={handleGoToPayment}
+      >
         <button
           className="absolute top-2 right-2 hover:scale-[110%] active:scale-100"
           onClick={() => setIsDeleteModalOpen(true)}

@@ -56,7 +56,7 @@ export default function TablePagination({
           <GridTable key={index} index={index} data={Object.values(el)} />
         ))}
       </div>
-      {!closePagination && selectPage.lngth <= 1 && (
+      {!closePagination && selectPage.length > 1 && (
         <div className="join flex justify-center">
           {selectPage.map((el) => (
             <button
