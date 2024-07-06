@@ -3,6 +3,7 @@ import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js"
 import Button from "../../../components/Button";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import supportProductApi from "../../../apis/support-product";
+import { useStore } from "../../../store/useStore";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -14,6 +15,7 @@ export default function CheckoutForm() {
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const createSupportProduct = useStore((state) => state.createSupportProduct);
 
   const handleSubmit = async (e) => {
     try {
@@ -31,7 +33,8 @@ export default function CheckoutForm() {
           return_url: `${url.split(location.pathname)[0]}`,
         },
       });
-      const createSupportPromise = supportProductApi.createSupport(tierId);
+      const createSupportPromise = createSupportProduct(tierId);
+
 
       const [{ error }, _] = await Promise.all([confirmPromise, createSupportPromise]);
 
