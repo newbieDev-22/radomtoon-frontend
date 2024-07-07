@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CategoryContainer from "../features/home-filter/components/CategoryContainer";
+
 
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
@@ -18,6 +18,7 @@ const ProductManagePage = lazy(() => import("../pages/ProductManagePage"));
 const CampaignSetup = lazy(() => import("../pages/CampaignSetup"));
 const HomeDummy = lazy(() => import("../pages/HomeDummy"));
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
+const CategoryContainer = lazy(() => import("../features/home-filter/components/CategoryContainer"));
 
 const router = createBrowserRouter([
   {

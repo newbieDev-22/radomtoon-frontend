@@ -30,7 +30,7 @@ export default function App() {
     fetchCreatorUser();
     fetchComment();
     featchStats();
-  }, [fetchProduct, fetchUser, fetchCreatorUser, fetchComment]);
+  }, [fetchProduct, fetchUser, fetchCreatorUser, fetchComment, featchStats]);
 
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {

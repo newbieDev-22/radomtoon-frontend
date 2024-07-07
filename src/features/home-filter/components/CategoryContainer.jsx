@@ -18,6 +18,14 @@ export default function CategoryContainer() {
   const filterProductsByCategory = useStore((state) => state.filterProductByCategory)
   const productByCategory = useStore((state) => state.productByCategory.data)
 
+  const word = useStore((state) => state.word)
+  const keyFilter = ["productName", "creatorName"]
+  const productFilter = productByCategory.filter((item) => {
+    return keyFilter.some((filter) => {
+      return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1
+    })
+  })
+
   useEffect(() => {
     filterProductsByCategory(categotyProductId)
   }, [])
@@ -32,7 +40,7 @@ export default function CategoryContainer() {
       <h1 className="flex justify-center text-5xl mt-10 font-bold">{category}</h1>
       <div className="flex justify-center mt-10 mb-40">
         <div className="grid grid-cols-3 gap-10 ml-4 ">
-          {productByCategory.map((el) => (
+          {productFilter.map((el) => (
             <motion.div key={el.id} variants={itemVariants}>
               <ImageCard
                 key={el.id}

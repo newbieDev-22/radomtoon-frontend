@@ -8,7 +8,9 @@ export const productSlice = (set, get) => ({
   productByCategory: { data: [], loading: false },
   approvalProduct: [],
   productLoading: false,
+  word: "",
 
+  setWord: (value) => set(() => ({ word: value })),
   setLoading: (loading) => set((state) => ({ product: { ...state.product, loading } })),
   setError: (error) => set((state) => ({ product: { ...state.product, error } })),
 
@@ -254,5 +256,6 @@ export const productSlice = (set, get) => ({
     } finally {
       set(() => ({ productLoading: false }))
     }
-  }
+  },
+
 });

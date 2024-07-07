@@ -35,77 +35,123 @@ export default function HomePage() {
   const today = useStore((state) => state.product.today);
 
   const { projectSupport, towardIdea, contribution } = useStore((state) => state.stats.data)
+
   const dataStatsBar = [
     { id: 1, amount: projectSupport, title: "projects supported" },
     { id: 2, amount: towardIdea, title: "towards ideas", currency: "THB" },
     { id: 3, amount: contribution, title: "contributions" },
   ];
 
-
+  const word = useStore((state) => state.word)
+  const keyFilter = ["productName", "creatorName"]
+  const productFilter = approvalProduct.filter((item) => {
+    return keyFilter.some((filter) => {
+      return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1
+    })
+  })
 
   return (
-    <div>
+    <>
       <StatsBanner data={dataStatsBar} />
-      <div className="flex justify-center gap-10 mt-10 mb-20">
-        {approvalProduct.slice(0, 1).map((el) => (
-          <motion.div key={el.id} {...mainCardVariants}>
-            <ImageCard
-              widthSize="large"
-              heightSize="large"
-              progressSize="large"
-              imageSize="large"
-              imageSrc={el.productImage}
-              productName={el.productName}
-              creatorName={el.creatorName}
-              goal={el.goal}
-              totalFund={el.totalFund}
-              daysLeft={
-                dayjs(el.deadline).diff(dayjs(today), "day") >= 0
-                  ? dayjs(el.deadline).diff(dayjs(today), "day")
-                  : 0
-              }
-              content={el.summaryDetail}
-              avatarImage={el.profileImage}
-              vid={el.productVideo}
-              mainCard={true}
-              productId={el.id}
-              creatorId={el.creatorId}
-              progressHeight="large"
-            />
-          </motion.div>
-        ))}
-
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          className="grid grid-cols-2 gap-4 mb-20"
-        >
-          {approvalProduct.slice(1, 5).map((el) => (
-            <motion.div key={el.id} variants={itemVariants}>
+      {!word ? (<div>
+        <div className="flex justify-center gap-10 mt-10 mb-20">
+          {approvalProduct.slice(0, 1).map((el) => (
+            <motion.div key={el.id} {...mainCardVariants}>
               <ImageCard
-                key={el.id}
-                size="medium"
+                widthSize="large"
+                heightSize="large"
+                progressSize="large"
+                imageSize="large"
                 imageSrc={el.productImage}
                 productName={el.productName}
                 creatorName={el.creatorName}
+                goal={el.goal}
+                totalFund={el.totalFund}
                 daysLeft={
                   dayjs(el.deadline).diff(dayjs(today), "day") >= 0
                     ? dayjs(el.deadline).diff(dayjs(today), "day")
                     : 0
                 }
                 content={el.summaryDetail}
-                goal={el.goal}
-                totalFund={el.totalFund}
                 avatarImage={el.profileImage}
                 vid={el.productVideo}
+                mainCard={true}
                 productId={el.id}
                 creatorId={el.creatorId}
+                progressHeight="large"
               />
             </motion.div>
           ))}
-        </motion.div>
-      </div>
-    </div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-2 gap-4 mb-20"
+          >
+            {approvalProduct.slice(1, 5).map((el) => (
+              <motion.div key={el.id} variants={itemVariants}>
+                <ImageCard
+                  key={el.id}
+                  size="medium"
+                  imageSrc={el.productImage}
+                  productName={el.productName}
+                  creatorName={el.creatorName}
+                  daysLeft={
+                    dayjs(el.deadline).diff(dayjs(today), "day") >= 0
+                      ? dayjs(el.deadline).diff(dayjs(today), "day")
+                      : 0
+                  }
+                  content={el.summaryDetail}
+                  goal={el.goal}
+                  totalFund={el.totalFund}
+                  avatarImage={el.profileImage}
+                  vid={el.productVideo}
+                  productId={el.id}
+                  creatorId={el.creatorId}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>)
+        :
+        (<div>
+          <div className="flex justify-center gap-10 mt-10 mb-20">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-3 gap-4 mb-20"
+            >
+              {productFilter.map((el) => (
+                <motion.div key={el.id} variants={itemVariants}>
+                  <ImageCard
+                    key={el.id}
+                    size="medium"
+                    imageSrc={el.productImage}
+                    productName={el.productName}
+                    creatorName={el.creatorName}
+                    daysLeft={
+                      dayjs(el.deadline).diff(dayjs(today), "day") >= 0
+                        ? dayjs(el.deadline).diff(dayjs(today), "day")
+                        : 0
+                    }
+                    content={el.summaryDetail}
+                    goal={el.goal}
+                    totalFund={el.totalFund}
+                    avatarImage={el.profileImage}
+                    vid={el.productVideo}
+                    productId={el.id}
+                    creatorId={el.creatorId}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>)
+
+      }
+    </>
   );
 }
