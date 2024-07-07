@@ -5,6 +5,7 @@ import { APPROVAL_STATUS_ID } from "../../constants";
 
 export const productSlice = (set, get) => ({
   product: { data: [], loading: false, error: null, today: new Date() },
+  productByCategory: { data: [], loading: false },
   approvalProduct: [],
   productLoading: false,
 
@@ -240,4 +241,18 @@ export const productSlice = (set, get) => ({
       set(() => ({ productLoading: false }));
     }
   },
+
+  filterProductByCategory: async (categoryProductId) => {
+    try {
+      set(() => ({ productLoading: true }))
+      const { data } = get().product;
+      const cloneData = [...data]
+      const filterByCategory = cloneData.filter((el) => el.categoryId === +categoryProductId)
+      set((state) => ({ productByCategory: { ...state.productByCategory, data: filterByCategory } }))
+    } catch (error) {
+      console.log(error)
+    } finally {
+      set(() => ({ productLoading: false }))
+    }
+  }
 });

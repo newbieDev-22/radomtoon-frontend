@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import CategoryContainer from "../features/home-filter/components/CategoryContainer";
 
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: "/creator-panel/:creatorId", element: <CreatorPanel /> },
       { path: "/creator-campaign-setup", element: <CampaignSetup /> },
       { path: "/product/:productId/status", element: <ProductManagePage /> },
+      { path: "/product/:categotyProductId/", element: <CategoryContainer /> },
       { path: "/admin-panel", element: <AdminPanel /> },
       { path: "/home-dummy", element: <HomeDummy /> },
     ],

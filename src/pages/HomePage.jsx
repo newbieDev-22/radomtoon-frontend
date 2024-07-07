@@ -41,6 +41,8 @@ export default function HomePage() {
     { id: 3, amount: contribution, title: "contributions" },
   ];
 
+
+
   return (
     <div>
       <StatsBanner data={dataStatsBar} />
