@@ -17,20 +17,9 @@ export default function ProductCommentContainer() {
   const [allComment, setAllComment] = useState(filterComment);
   const [input, setInput] = useState({ comment: "" });
   const [inputError, setInputError] = useState({ comment: "" });
-  const [isUserComment, setIsUserComment] = useState(true);
 
   const handleClickDeleteFunction = (id) => {
     const newAllComment = allComment.filter((el) => el.id !== id);
-    setAllComment(newAllComment);
-  };
-
-  const handleClickSaveEdit = (id, data) => {
-    const newAllComment = allComment;
-    const commentIndex = allComment.findIndex((el) => el.id === id);
-    newAllComment[commentIndex] = {
-      ...newAllComment[commentIndex],
-      content: data,
-    };
     setAllComment(newAllComment);
   };
 
@@ -98,9 +87,7 @@ export default function ProductCommentContainer() {
             <motion.div key={el.id} variants={showComment}>
               <ProductCommentCard
                 el={el}
-                isUserComment={isUserComment}
                 handleClickDeleteFunction={handleClickDeleteFunction}
-                handleClickSaveEdit={handleClickSaveEdit}
               />
             </motion.div>
           ))}
