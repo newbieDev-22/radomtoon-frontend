@@ -15,8 +15,9 @@ const CreatorPanel = lazy(() => import("../pages/CreatorPanel"));
 const AdminPanel = lazy(() => import("../pages/AdminPanel"));
 const ProductManagePage = lazy(() => import("../pages/ProductManagePage"));
 const CampaignSetup = lazy(() => import("../pages/CampaignSetup"));
-const HomeDummy = lazy(() => import("../pages/HomeDummy"));
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
+
+const HomeDummy = lazy(() => import("../pages/HomeDummy"));
 
 const router = createBrowserRouter([
   {

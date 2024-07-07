@@ -43,7 +43,7 @@ export default function TablePagination({
     setFilterData(
       data.slice(
         selectPageNum.page * itemInOnePage,
-        selectPageNum.page * itemInOnePage + 10
+        selectPageNum.page * itemInOnePage + itemInOnePage
       )
     );
   }, [selectPage, itemInOnePage]);

@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
 import Button from "../../../components/Button";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
-import supportProductApi from "../../../apis/support-product";
+import { useNavigate, useParams } from "react-router-dom";
 import { useStore } from "../../../store/useStore";
+import { toast } from "react-toastify";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
   const { productId, tierId } = useParams();
-  const location = useLocation();
-  const url = window.location.href;
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -27,20 +25,22 @@ export default function CheckoutForm() {
 
       setIsProcessing(true);
 
-      const confirmPromise = stripe.confirmPayment({
+      const { paymentIntent, error } = await stripe.confirmPayment({
         elements,
-        confirmParams: {
-          return_url: `${url.split(location.pathname)[0]}`,
-        },
+        redirect: "if_required",
       });
-      const createSupportPromise = createSupportProduct(tierId);
 
-
-      const [{ error }, _] = await Promise.all([confirmPromise, createSupportPromise]);
+      if (paymentIntent) {
+        if (paymentIntent.status === "succeeded") {
+          await createSupportProduct(tierId);
+          toast.success("Payment successfully!");
+          navigate("/");
+        }
+      }
 
       setIsProcessing(false);
 
-      if (error.type === "card_error" || error.type === "validation_error") {
+      if (error?.type === "card_error" || error?.type === "validation_error") {
         setMessage(error.message);
       } else {
         setMessage("An unexpected error occurred.");
