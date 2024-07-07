@@ -31,7 +31,8 @@ const mainCardVariants = {
 };
 
 export default function HomePage() {
-  const approvalProduct = useStore((state) => state.approvalProduct);
+  const fiveProduct = useStore((state) => state.fiveProduct);
+  console.log(fiveProduct);
   const today = useStore((state) => state.product.today);
 
   const { projectSupport, towardIdea, contribution } = useStore(
@@ -48,7 +49,7 @@ export default function HomePage() {
     <div>
       <StatsBanner data={dataStatsBar} />
       <div className="flex justify-center gap-10 mt-10 mb-20">
-        {approvalProduct.slice(0, 1).map((el) => (
+        {fiveProduct?.slice(0, 1)?.map((el) => (
           <motion.div key={el.id} {...mainCardVariants}>
             <ImageCard
               widthSize="large"
@@ -82,7 +83,7 @@ export default function HomePage() {
           animate="show"
           className="grid grid-cols-2 gap-4 mb-20"
         >
-          {approvalProduct.slice(1, 5).map((el) => (
+          {fiveProduct?.slice(1, 5)?.map((el) => (
             <motion.div key={el.id} variants={itemVariants}>
               <ImageCard
                 key={el.id}

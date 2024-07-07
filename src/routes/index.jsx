@@ -13,8 +13,9 @@ const PaymentPage = lazy(() => import("../pages/PaymentPage"));
 const SupporterHistoryPage = lazy(() => import("../pages/SupporterHistoryPage"));
 const CreatorPanel = lazy(() => import("../pages/CreatorPanel"));
 const AdminPanel = lazy(() => import("../pages/AdminPanel"));
-const ProductManagePage = lazy(() => import("../pages/ProductManagePage"));
+const CreatorManagePage = lazy(() => import("../pages/CreatorManagePage"));
 const CampaignSetup = lazy(() => import("../pages/CampaignSetup"));
+
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
 
 const HomeDummy = lazy(() => import("../pages/HomeDummy"));
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       { path: "/supporter-histories", element: <SupporterHistoryPage /> },
       { path: "/creator-panel/:creatorId", element: <CreatorPanel /> },
       { path: "/creator-campaign-setup", element: <CampaignSetup /> },
-      { path: "/product/:productId/status", element: <ProductManagePage /> },
+      { path: "/product/:productId/status", element: <CreatorManagePage /> },
       { path: "/admin-panel", element: <AdminPanel /> },
       { path: "/home-dummy", element: <HomeDummy /> },
     ],
