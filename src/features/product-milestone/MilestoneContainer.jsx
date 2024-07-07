@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useStore } from "../../store/useStore";
 import { useState } from "react";
 import { APPROVAL_STATUS_ID, USER_ROLE } from "../../constants";
+import NewAddMilestone from "../../tmp/NewAddMilestone";
 
 export default function MilestoneContainer() {
   const { productId } = useParams();
@@ -24,19 +25,19 @@ export default function MilestoneContainer() {
     <div>
       <Milestone />
       <div className="flex items-center flex-col gap-10">
-        <AddMilestone
+        <NewAddMilestone
           name="Planning"
           milestoneData={handleSelectMilestone(1)}
           isCreator={isCreator}
           isApproved={isApproved}
         />
-        <AddMilestone
+        <NewAddMilestone
           name="Prototype"
           milestoneData={handleSelectMilestone(2)}
           isCreator={isCreator}
           isApproved={isApproved}
         />
-        <AddMilestone
+        <NewAddMilestone
           name="Production"
           milestoneData={handleSelectMilestone(3)}
           isCreator={isCreator}
