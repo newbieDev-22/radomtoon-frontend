@@ -7,14 +7,14 @@ export const productSlice = (set, get) => ({
   product: { data: [], loading: false, error: null, today: new Date() },
   searchProduct: [],
   fiveProduct: [],
-  approvalProduct: [],
+  s: [],
   tierPendingPayment: {},
   productLoading: false,
   word: "",
   categoryFilter: null,
 
   setWord: (value) => set(() => ({ word: value })),
-  setcategoryFilter: (value) => set(() => ({ categoryFilter: value })),
+  setCategoryFilter: (value) => set(() => ({ categoryFilter: value })),
   setLoading: (loading) => set((state) => ({ product: { ...state.product, loading } })),
   setError: (error) => set((state) => ({ product: { ...state.product, error } })),
 
@@ -261,37 +261,37 @@ export const productSlice = (set, get) => ({
   },
 
   filterProduct: () => {
-    const { data } = get().product;
+    const approvalProduct = get().approvalProduct;
     const word = get().word;
-    const categoryFilter = get().categoryFilter
-    const cloneData = [...data]
-    const keyFilter = ["productName", "creatorName"]
-    const filterByCategory = cloneData.filter((el) => el.categoryId === categoryFilter)
+    const categoryFilter = get().categoryFilter;
+    const cloneData = [...approvalProduct];
+    const keyFilter = ["productName", "creatorName"];
+    const filterByCategory = cloneData.filter((el) => el.categoryId === categoryFilter);
     if (filterByCategory.length) {
       if (word) {
         const filterByWord = filterByCategory.filter((item) => {
           return keyFilter.some((filter) => {
-            return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1
-          })
-        })
-        set(() => ({ searchProduct: filterByWord }))
+            return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1;
+          });
+        });
+        set(() => ({ searchProduct: filterByWord }));
       } else {
-        set(() => ({ searchProduct: filterByCategory }))
+        set(() => ({ searchProduct: filterByCategory }));
       }
     } else {
       if (word) {
         const filterByWord = cloneData.filter((item) => {
           return keyFilter.some((filter) => {
-            return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1
-          })
-        })
-        set(() => ({ searchProduct: filterByWord }))
+            return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1;
+          });
+        });
+        set(() => ({ searchProduct: filterByWord }));
       }
     }
   },
 
   resetSearch: () => {
-    set(() => ({ searchProduct: [] }))
+    set(() => ({ searchProduct: [] }));
   },
 
   setTierPending: (productId, tierId) => {

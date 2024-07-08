@@ -1,6 +1,6 @@
 import { APPROVAL_STATUS_ID, STATUS_PRODUCT } from "../constants";
 
-export default function getProductStatus (product) {
+export default function getProductStatus(product) {
   const { approvalStatusId, productStatusId } = product;
   if (
     productStatusId === APPROVAL_STATUS_ID.PENDING &&
@@ -34,4 +34,4 @@ export default function getProductStatus (product) {
   if (approvalStatusId === null) {
     return STATUS_PRODUCT.DRAFTING;
   }
-};
+}
