@@ -20,7 +20,7 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
     }
   };
 
-  console.log(el);
+
 
   const [isEdit, setIsEdit] = useState(false);
   const [input, setInput] = useState({ comment: el.comment });

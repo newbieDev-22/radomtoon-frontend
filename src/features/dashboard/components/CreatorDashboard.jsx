@@ -8,7 +8,8 @@ import EvidenceModalDetail from "../../creator/components/EvidenceModalDetail";
 import Button from "../../../components/Button";
 import { useStore } from "../../../store/useStore";
 import { useParams } from "react-router-dom";
-import { APPROVAL_STATUS_ID } from "../../../constants";
+import { APPROVAL_STATUS_ID, STATUS_PRODUCT_THEME } from "../../../constants";
+import getProductStatus from "../../../utils/get-product-status";
 
 const lineChartMockData = [
   { label: "Jan", supporter: 64854, creator: 50561, project: 35901 },
@@ -54,7 +55,7 @@ const pieChartMockData = [
   { label: "Tier 3", value: 31424 },
 ];
 
-export default function CreatorDashboard({ title, status }) {
+export default function CreatorDashboard() {
   const { productId } = useParams();
   const [currentMilestone, setCurrentMilestone] = useState(null);
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
@@ -63,23 +64,27 @@ export default function CreatorDashboard({ title, status }) {
   const [pieChartData, setPieChartData] = useState(pieChartMockData);
 
   const creatorProductData = useStore((state) => state.creatorProduct.data);
+  const selectedProduct =  creatorProductData
+  .filter((el) => el.id === +productId)
 
-  const milestoneDataList = creatorProductData
-    .filter((el) => el.id === +productId)
-    .map((el) => el.productMilestones)[0];
+  const status = getProductStatus(selectedProduct[0])
+  const title = selectedProduct[0]?.productName
+
+  const milestoneDataList = selectedProduct.map((el) => el.productMilestones)[0];
 
   const approvalStatusObj = {};
   milestoneDataList.forEach((element) => {
     approvalStatusObj[element.milestoneRankId] = element.approvalStatusId;
   });
-  console.log(approvalStatusObj);
+
+
 
   return (
     <div className="py-10 px-10 md:px-40 2xl:px-80 bg-[#b6e5e9]">
       <div className="py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
         <h1 className="text-center text-radomtoon-bright text-4xl font-bold ">{title}</h1>
-        <h2 className={`text-center font-semibold text-2xl py-1 ${status.color}`}>
-          {`Status : ${status.text}`}
+        <h2 className={`text-center font-semibold text-2xl py-1 ${STATUS_PRODUCT_THEME[status].color}`}>
+          {`Status : ${status}`}
         </h2>
       </div>
 
@@ -163,7 +168,7 @@ export default function CreatorDashboard({ title, status }) {
           <div className="w-full px-5 mb-5 justify-start text-xl font-semibold text-radomtoon-bright">
             Supporter Distribution Tracking
           </div>
-          <CreatorDelivery data={["a", "b"]} />
+          <CreatorDelivery />
         </div>
       </div>
       {openEvidenceModal && (

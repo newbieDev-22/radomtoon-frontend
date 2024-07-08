@@ -1,5 +1,4 @@
 export default function MilestoneForm({ milestoneRankId, milestoneDetail }) {
-  console.log(milestoneRankId, milestoneDetail);
   return (
     <div className="flex justify-center">
       <form onSubmit={(e) => e.preventDefault()} action="">

@@ -39,7 +39,7 @@ export const supporterSlice = (set, get) => ({
       set((state) => ({ supporter: { ...state.supporter, loading: true } }));
       await supportProductApi.cancelSupport(productIdId);
       const { history } = get().supporter;
-      console.log("arererrerer");
+
       const deleteIndex = history.findIndex((item) => item.productId === productIdId);
       if (deleteIndex !== -1) {
         const dummyHistory = [...history];

@@ -14,7 +14,7 @@ export default function Milestone() {
   milestoneDataList?.forEach((element) => {
     approvalStatusObj[element.milestoneRankId] = element.approvalStatusId;
   });
-  console.log(approvalStatusObj)
+
 
   return (
     <div className="flex justify-center w-full sticky top-20 bg-white rounded-2xl">

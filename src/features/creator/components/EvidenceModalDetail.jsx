@@ -18,7 +18,7 @@ export default function EvidenceModalDetail({ milestoneRankId }) {
     (state) => state.milestoneEvidenceLoading
   );
 
-  // console.log(creatorProductData);
+
   const productData = creatorProductData
     .filter((el) => el.id === +productId)
     .map((el) => el.productMilestones)[0];
@@ -26,7 +26,7 @@ export default function EvidenceModalDetail({ milestoneRankId }) {
   const milestoneData = productData.filter(
     (el) => el.milestoneRankId === +milestoneRankId
   )[0];
-  // console.log(milestoneData.milestoneDetail)
+
 
   const [input, setInput] = useState({
     evidenceTextDetail: milestoneData.evidenceTextDetail || "",
@@ -44,7 +44,7 @@ export default function EvidenceModalDetail({ milestoneRankId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // console.log("Sent");
+
       const error = validateEvidenceMilestone(input);
       if (error) {
         return setInputError(error);
