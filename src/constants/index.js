@@ -437,19 +437,6 @@ export const CATEGORIES_TYPE_MAP_NAME = {
 
 export const MIN_DEADLINE_DAYS = 15;
 
-export const CATEGORIES_TYPE_MAP_NAME = {
-  1: "ART",
-  2: "COMICS",
-  3: "CRAFTS",
-  4: "DANCE",
-  5: "DESIGN",
-  6: "FASHION",
-  7: "FILM",
-  8: "GAMES",
-  9: "MUSIC",
-  10: "TECHNOLOGY",
-};
-
 export const MILESTONE_STATUS = {
   1 : "Planning",
   2 : "Prototype",
