@@ -20,15 +20,13 @@ export default function CategoryContainer() {
 
   const word = useStore((state) => state.word)
   const keyFilter = ["productName", "creatorName"]
+
+
   const productFilter = productByCategory.filter((item) => {
     return keyFilter.some((filter) => {
       return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1
     })
   })
-
-  useEffect(() => {
-    filterProductsByCategory(categotyProductId)
-  }, [])
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },

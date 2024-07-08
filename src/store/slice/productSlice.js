@@ -251,11 +251,16 @@ export const productSlice = (set, get) => ({
       const cloneData = [...data]
       const filterByCategory = cloneData.filter((el) => el.categoryId === +categoryProductId)
       set((state) => ({ productByCategory: { ...state.productByCategory, data: filterByCategory } }))
+      // console.log("filterByCategory = ", filterByCategory[0] !== "")
     } catch (error) {
       console.log(error)
     } finally {
       set(() => ({ productLoading: false }))
     }
   },
+
+  resetSearch: () => {
+    set((state) => ({ productByCategory: { ...state.productByCategory, data: [] } }))
+  }
 
 });
