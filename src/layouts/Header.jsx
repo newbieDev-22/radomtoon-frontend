@@ -12,30 +12,32 @@ export default function Header() {
   const location = useLocation();
   const inLanding = location.pathname == "/landing";
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const resetSearch = useStore((state) => state.resetSearch)
-  const setcategoryFilter = useStore((state) => state.setcategoryFilter)
-  const setWord = useStore((state) => state.setWord)
+  const resetSearch = useStore((state) => state.resetSearch);
+  const setCategoryFilter = useStore((state) => state.setCategoryFilter);
+  const setWord = useStore((state) => state.setWord);
 
   const handleToHomePage = () => {
-    resetSearch()
-    setcategoryFilter(null)
-    setWord("")
-    navigate("/")
-  }
+    resetSearch();
+    setCategoryFilter(null);
+    setWord("");
+    navigate("/");
+  };
 
   return (
     <>
       <header
         className={`2xl:px-48 md:mt-0 items-start md:items-center grid z-20 h-[12vh] bg-transparent
-          grid-cols-1 md:flex grid-rows-2 md:justify-between  ${inLanding && "absolute w-full"
+          grid-cols-1 md:flex grid-rows-2 md:justify-between  ${
+            inLanding && "absolute w-full"
           } `}
       >
         <div className="flex justify-self-start ">
           <div
             onClick={handleToHomePage}
-            className="w-52 md:w-72 text-supporter-saturate">
+            className="w-52 md:w-72 text-supporter-saturate"
+          >
             <RadomtoonIcon />
           </div>
           <div className="flex md:hidden text-sm mr-5">
@@ -43,8 +45,7 @@ export default function Header() {
           </div>
         </div>
         {location.pathname !== LANDING_PATH ? (
-          <div
-            className="flex justify-center px-6 md:px-0 w-full md:w-[32vw]">
+          <div className="flex justify-center px-6 md:px-0 w-full md:w-[32vw]">
             <SearchBar />
           </div>
         ) : (

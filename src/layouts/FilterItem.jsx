@@ -1,22 +1,23 @@
+import { useNavigate } from "react-router-dom";
 import { useStore } from "../store/useStore";
 
 export default function FilterItem({ page, categoryId }) {
+  const navigate = useNavigate();
+  const filterProduct = useStore((state) => state.filterProduct);
+  const setWord = useStore((state) => state.setWord);
+  const setCategoryFilter = useStore((state) => state.setCategoryFilter);
 
-  const filterProduct = useStore((state) => state.filterProduct)
-  const setWord = useStore((state) => state.setWord)
-  const setcategoryFilter = useStore((state) => state.setcategoryFilter)
-
-
-  const handleClickCategory = (categotyId) => {
-    setWord("")
-    setcategoryFilter(categotyId)
-    filterProduct(categoryId)
-  }
+  const handleClickCategory = () => {
+    setWord("");
+    setCategoryFilter(categoryId);
+    filterProduct(categoryId);
+    navigate("/");
+  };
 
   return (
     <button
       className="font-medium hover:scale-[110%] active:scale-100"
-      onClick={() => handleClickCategory(categoryId)}
+      onClick={handleClickCategory}
     >
       {page}
     </button>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
@@ -12,8 +12,6 @@ export default function Map({ geojsonData }) {
     "2xl": 6,
   };
   const setZoomLevel = () => getResponsiveValue(zoomLevels);
-
-
 
   useEffect(() => {
     if (!geojsonData) return;
@@ -59,19 +57,19 @@ export default function Map({ geojsonData }) {
     // }
     // ### YELLOW ###
     function getColor(d) {
-      return d > 50
+      return d > 10
         ? "#78350F"
-        : d > 40
+        : d > 8
         ? "#92400E"
-        : d > 30
+        : d > 6
         ? "#B45309"
-        : d > 20
+        : d > 4
         ? "#F59E0B"
-        : d > 15
+        : d > 3
         ? "#FBBF24"
-        : d > 10
+        : d > 2
         ? "#FDE68A"
-        : d > 5
+        : d > 1
         ? "#FEF3C7"
         : "#FFFBEB";
     }
@@ -141,7 +139,7 @@ export default function Map({ geojsonData }) {
 
     legend.onAdd = function () {
       const div = L.DomUtil.create("div", "info legend");
-      const grades = [0, 5, 10, 15, 20, 30, 40, 50];
+      const grades = [0, 1, 2, 3, 4, 6, 8, 10];
       const labels = [];
       let from, to;
 

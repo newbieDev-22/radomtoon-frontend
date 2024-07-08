@@ -1,20 +1,23 @@
 import { useState } from "react";
 import { SearchIcon } from "../icons";
 import { useStore } from "../store/useStore";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
-  const setWord = useStore((state) => state.setWord)
-  const filterProduct = useStore((state) => state.filterProduct)
-  const word = useStore((state) => state.word)
-  const categoryFilter = useStore((state) => state.categoryFilter)
+  const setWord = useStore((state) => state.setWord);
+  const filterProduct = useStore((state) => state.filterProduct);
+  const word = useStore((state) => state.word);
+  const categoryFilter = useStore((state) => state.categoryFilter);
+  const navigate = useNavigate();
 
-  const [input, setInput] = useState("")
+  const [input, setInput] = useState("");
 
   const handleClickSearch = () => {
-    setWord(input)
-    filterProduct(word, categoryFilter)
-    setInput("")
-  }
+    setInput("");
+    setWord(input);
+    filterProduct(word, categoryFilter);
+    navigate("/");
+  };
 
   return (
     <div className="w-full flex">
@@ -31,7 +34,8 @@ export default function SearchBar() {
       <button
         onClick={handleClickSearch}
         className="w-10 md:w-16 sm:w-10 bg-creator-normal 
-        transition rounded-r-lg flex justify-center items-center hover:bg-creator-saturate active:bg-creator-normal">
+        transition rounded-r-lg flex justify-center items-center hover:bg-creator-saturate active:bg-creator-normal"
+      >
         <SearchIcon />
       </button>
     </div>
