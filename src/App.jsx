@@ -13,11 +13,13 @@ export default function App() {
   const fetchCreatorUser = useStore((state) => state.fetchCreatorUser);
   const resetCreatorProduct = useStore((state) => state.resetCreatorProduct);
   const fetchWaitingApproval = useStore((state) => state.fetchWaitingApproval);
-  const WaitingApprovalLoading = useStore((state) => state.waitingApproval.loading);
+  const waitingApprovalLoading = useStore((state) => state.waitingApproval.loading);
   const productLoading = useStore((state) => state.product.loading);
   const userLoading = useStore((state) => state.authUser.loading);
   const creatorUserLoading = useStore((state) => state.creatorUser.loading);
   const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
+  const fetchDashboardData = useStore(state => state.fetchDashboardData);
+  const dashboardDataLoading = useStore(state => state.dashboardData.loading);
   const fetchComment = useStore((state) => state.fetchComment);
   const commentLoading = useStore((state) => state.comments.loading);
   const statsLoading = useStore((state) => state.stats.loading);
@@ -47,6 +49,7 @@ export default function App() {
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {
       fetchWaitingApproval();
+      fetchDashboardData()
     }
   }, [fetchWaitingApproval, role]);
 
@@ -78,10 +81,12 @@ export default function App() {
     productLoading ||
     creatorUserLoading ||
     creatorProductLoading ||
-    WaitingApprovalLoading ||
+    waitingApprovalLoading || 
+    dashboardDataLoading ||
     commentLoading ||
     statsLoading ||
     historyLoading
+
   ) {
     return <Loading />;
   }

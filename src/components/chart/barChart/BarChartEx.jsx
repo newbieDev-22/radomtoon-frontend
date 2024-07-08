@@ -8,7 +8,7 @@ const months = [
   "July", "August", "September", "October", "November", "December"
 ];
 
-export default function BarChart({ title, data, onClick, toggleData }) {
+export default function BarChart({ title, data, onClick, toggleBarChartData }) {
   const [month, setMonth] = useState(new Date());
 
   const handleMonthChange = (selectedMonth) => {
@@ -48,7 +48,7 @@ export default function BarChart({ title, data, onClick, toggleData }) {
                           labels: data.map((data) => data.label),
                           datasets: [
                               {
-                                  label: toggleData ? 'Funds' : 'Supporters',
+                                  label: toggleBarChartData ? 'Funds' : 'Supporters',
                                   data: data.map((data) => data.value),
                                   backgroundColor: "rgba(250, 192, 19, 0.8)",
                                   barThickness: 20,

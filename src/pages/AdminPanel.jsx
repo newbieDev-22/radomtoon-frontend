@@ -29,11 +29,13 @@ const adminMenu = {
 };
 
 export default function AdminPanel() {
+  const adminStatsData = useStore(state => state.dashboardData.adminStatsData)
+
   const [selectMenu, setSelectMenu] = useState(adminMenu.Approval);
 
   return (
     <div>
-      <StatsBar data={mockDataStatsBar} bg={mockImgStatsBar} />
+      <StatsBar data={adminStatsData} bg={mockImgStatsBar} />
       <div className="flex flex-row justify-center w-full border-b-1 shadow-md py-4">
         <button
           onClick={() => setSelectMenu(adminMenu.Approval)}

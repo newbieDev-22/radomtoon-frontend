@@ -4,13 +4,15 @@ import BarChart from "../../../components/chart/barChart/BarChartEx";
 import LineChart from "../../../components/chart/lineChart/LineChart";
 import Map from "../../../components/chart/mapComponent/Map";
 import TextBlock from "../../../components/chart/textBlock/TextBlock";
+import { useStore } from "../../../store/useStore";
 
 const textBlockMockData = [
-  { title: "Active Creator", value: 5144, previous: 2691 },
-  { title: "Active Supporter", value: 20185, previous: 24801 },
-  { title: "RADOMTOON profits", value: 28106815, previous: 27006815 },
-  { title: "Success Project", value: 472, total: 564 },
-];
+  { title: 'Active Creator', value: 5144, prev: 2691 },
+  { title: 'Active Supporter', value: 20185, prev: 24801 },
+  { title: 'Average Funding', value: 2810681  },
+  { title: 'Success Project', value: 472, total: 564 },
+]
+
 
 const lineChartMockData = [
   { label: "Jan", supporter: 64854, creator: 50561, project: 35901 },
@@ -50,12 +52,6 @@ const lineChartMockData = [
   },
 ];
 
-const doughnutChartMockData = [
-  { label: "Success", value: 258 },
-  { label: "Active", value: 190 },
-  { label: "Failed", value: 87 },
-];
-
 const barChartMockSupporters = [
   { label: "Game", value: 5892 },
   { label: "Technology", value: 4178 },
@@ -72,49 +68,42 @@ const barChartMockFunds = [
 ];
 
 export default function AdminDashboard() {
-  const [toggleData, setToggleData] = useState(false);
-  const [textBlockData, setTextBlockData] = useState(textBlockMockData);
-  const [lineChartData, setLineChartData] = useState(lineChartMockData);
-  const [barChartData, setBarChartData] = useState(barChartMockSupporters);
-  const [doughnutChartData, setDoughnutChartData] = useState(doughnutChartMockData);
+  const textBlockData = useStore(state => state.dashboardData.textBlockData)
+  const lineChartData = useStore(state=> state.dashboardData.lineChartData)
+  const doughnutChartData = useStore(state => state.dashboardData.doughnutChartData)
+  const mapData = useStore(state => state.dashboardData.geoJsonData)
+
+  const [ toggleBarChartData, setToggleBarChartData ] = useState(false)
+  // const [ lineChartData, setLineChartData ] = useState(lineChartMockData)
+  const [ barChartData, setBarChartData ] = useState(barChartMockSupporters)
 
   const handleToggleData = () => {
-    setToggleData(!toggleData);
-    toggleData
-      ? setBarChartData(barChartMockSupporters)
-      : setBarChartData(barChartMockFunds);
-  };
+    setToggleBarChartData(!toggleBarChartData)
+    toggleBarChartData ? setBarChartData(barChartMockSupporters) : setBarChartData(barChartMockFunds)
+  }
+
+
 
   return (
     <div className="py-10 px-10 md:px-40 2xl:px-96 bg-[#b6e5e9]">
       <span className="grid grid-cols-2 gap-10 p-10 mx-auto rounded-3xl  bg-[#e7f5fc]">
         <span className="grid sm:grid-cols-2 md:grid-cols-4 gap-10 col-span-2">
-          {textBlockData.map((data) => (
-            <TextBlock
-              title={data.title}
-              value={data.value}
-              previous={data.previous}
-              total={data.total}
-            />
-          ))}
+          {textBlockData.map(data => <TextBlock key={data.title} title={data.title} value={data.value} prev={data.prev} total={data.total} />)}
+
         </span>
         <span className="col-span-2">
           <LineChart title={"Funds and Forecast"} data={lineChartData} />
         </span>
         <span className="row-span-2 col-span-2 sm:col-span-2 md:col-span-1 h-96 md:h-full">
-          <Map />
+          <Map geojsonData={mapData} />
         </span>
         <span className="sm:col-span-2 col-span-2 md:col-span-1">
           <DoughnutChart title="Project Status Overview" data={doughnutChartData} />
           {/* <PieChart /> */}
         </span>
         <span className="sm:col-span-2 col-span-2 md:col-span-1">
-          <BarChart
-            title="Top 5 Categories"
-            data={barChartData}
-            onClick={handleToggleData}
-            toggleData={toggleData}
-          />
+          <BarChart title="Top 5 Categories" data={barChartData} onClick={handleToggleData} toggleBarChartData={toggleBarChartData} />
+
         </span>
       </span>
     </div>
