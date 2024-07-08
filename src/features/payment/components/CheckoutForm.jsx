@@ -54,13 +54,13 @@ export default function CheckoutForm() {
     <form
       id="payment-form"
       onSubmit={handleSubmit}
-      className=" w-5/12  min-h-[20rem] min-w-[30rem]  p-5 rounded-lg shadow-2xl flex flex-col gap-2"
+      className=" w-5/12  min-h-[20rem] min-w-[30rem]  p-5  flex flex-col gap-2"
     >
       <PaymentElement
         options={{ paymentMethodOrder: ["apple_pay", "google_pay", "card"] }}
       />
       <div className=" flex justify-between h-16 mt-2 items-center">
-        <Button onClick={() => navigate(`/campaign/${productId}/tiers`)}>Back</Button>
+        <Button onClick={() => navigate(`/campaign/${productId}/tier`)}>Back</Button>
         <Button disabled={isProcessing || !stripe || !elements} id="submit">
           <span id="button-text">{isProcessing ? "Processing ... " : "Pay now"}</span>
         </Button>

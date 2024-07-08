@@ -13,7 +13,7 @@ export default function TierSummaryCard() {
   const tierPendingPayment = useStore((state) => state.tierPendingPayment);
 
   return (
-    <div className="card bg-base-100 w-96 border p-5 border-slate-900 rounded-lg ">
+    <div className="card bg-base-100 w-96 p-5 ">
       <figure className="p-2 border-2 h-80 border-none pb-4">
         <img
           src={tierPendingPayment.tierImage}
@@ -23,10 +23,11 @@ export default function TierSummaryCard() {
       </figure>
       <div className="card-body items-center text-center px-2">
         <div className="flex flex-col justify-between mb-3">
-          <p className="font-semibold text-xl max-w-64 text-left">
+          <p className="font-semibold text-lg max-w-64 text-left border-b-2">
             {tierPendingPayment.tierName}
           </p>
-          <p className="font-semibold text-xl">{`${tierPendingPayment.price} ฿`}</p>
+          <span className="flex justify-end font-extrabold text-sm mt-2">Total :</span>
+          <span className="flex justify-end font-semibold text-xl">{`${tierPendingPayment.price} ฿`}</span>
         </div>
       </div>
     </div>
