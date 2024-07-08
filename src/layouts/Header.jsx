@@ -16,10 +16,12 @@ export default function Header() {
 
   const resetSearch = useStore((state) => state.resetSearch)
   const setcategoryFilter = useStore((state) => state.setcategoryFilter)
+  const setWord = useStore((state) => state.setWord)
 
   const handleToHomePage = () => {
     resetSearch()
     setcategoryFilter(null)
+    setWord("")
     navigate("/")
   }
 

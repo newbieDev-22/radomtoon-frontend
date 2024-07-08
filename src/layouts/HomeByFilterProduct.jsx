@@ -27,11 +27,15 @@ export default function HomeByFilterProduct() {
     const categoryFilter = useStore((state) => state.categoryFilter)
     const word = useStore((state) => state.word)
 
+    if (!searchProduct.length && word) {
+        return <h1 className="text-center text-4xl font-bold m-10 text-red-500">Not found</h1>
+    }
+
     return (
         <div>
             {categoryFilter && word ?
-                <h1 className="text-center text-4xl font-bold m-10">Filter by : {CATEGORIES_TYPE_MAP_NAME[categoryFilter]} and word: {word} </h1>
-                : categoryFilter ? <h1 className="text-center text-4xl font-bold m-10">Filter by : {CATEGORIES_TYPE_MAP_NAME[categoryFilter]}</h1>
+                <h1 className="text-center text-4xl font-bold m-10">Filter by : {CATEGORIES_TYPE_MAP_NAME[categoryFilter]} category and word: {word} </h1>
+                : categoryFilter ? <h1 className="text-center text-4xl font-bold m-10">Filter by : {CATEGORIES_TYPE_MAP_NAME[categoryFilter]} category</h1>
                     : <h1 className="text-center text-4xl font-bold m-10" >Filter by : {word}</h1>
             }
 
