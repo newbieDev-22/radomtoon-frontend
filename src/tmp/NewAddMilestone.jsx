@@ -40,13 +40,13 @@ export default function NewAddMilestone({
   return (
     <>
       {productLoading && <Spinner transparent />}
-      <div className="w-[500px] h-80 flex flex-col items-center justify-between rounded-3xl shadow-lg">
-        <span className="text-2xl font-bold text-center text-white bg-creator-saturate w-full p-2 rounded-tr-3xl rounded-tl-3xl">
+      <div className="w-3/4 h-80 flex flex-col items-center justify-between rounded-2xl shadow-lg mt-2">
+        <span className={`text-2xl font-bold text-center ${!isApproved ? "bg-gray-300":"text-white bg-[#00d7c0]"} w-full p-4 rounded-tr-2xl rounded-tl-2xl`}>
           {name}
         </span>
 
         {isEditing ? (
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full p-4">
             <textarea
               rows="6"
               placeholder="Write your Milestone detail"
@@ -62,7 +62,7 @@ export default function NewAddMilestone({
             )}
           </div>
         ) : (
-          <div className="h-full w-full my-4 px-6 overflow-auto text-[#949494]">
+          <div className="h-full w-full my-4 px-10 p-5 overflow-auto text-[#949494]">
             <p>{input.milestoneDetail}</p>
           </div>
         )}

@@ -24,7 +24,7 @@ export default function MilestoneContainer() {
   return (
     <div>
       <Milestone />
-      <div className="flex items-center flex-col gap-10">
+      <div className="flex items-center flex-col gap-10 mt-10">
         <NewAddMilestone
           name="Planning"
           milestoneData={handleSelectMilestone(1)}
