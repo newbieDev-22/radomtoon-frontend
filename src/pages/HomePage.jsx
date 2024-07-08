@@ -8,6 +8,7 @@ export default function HomePage() {
     (state) => state.stats.data
   );
   const searchProduct = useStore((state) => state.searchProduct);
+  const word = useStore((state) => state.word)
 
   const dataStatsBar = [
     { id: 1, amount: projectSupport, title: "projects supported" },
@@ -15,7 +16,7 @@ export default function HomePage() {
     { id: 3, amount: contribution, title: "contributions" },
   ];
 
-  if (searchProduct.length) {
+  if (searchProduct.length || word) {
     return <HomeByFilterProduct />;
   } else {
     return (

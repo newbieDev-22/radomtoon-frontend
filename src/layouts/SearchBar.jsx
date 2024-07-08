@@ -13,6 +13,7 @@ export default function SearchBar() {
   const handleClickSearch = () => {
     setWord(input)
     filterProduct(word, categoryFilter)
+    setInput("")
   }
 
   return (
@@ -31,7 +32,6 @@ export default function SearchBar() {
         onClick={handleClickSearch}
         className="w-10 md:w-16 sm:w-10 bg-creator-normal 
         transition rounded-r-lg flex justify-center items-center hover:bg-creator-saturate active:bg-creator-normal">
-
         <SearchIcon />
       </button>
     </div>
