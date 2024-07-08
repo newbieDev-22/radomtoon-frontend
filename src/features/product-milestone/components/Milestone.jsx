@@ -11,15 +11,15 @@ export default function Milestone() {
     .map((el) => el.productMilestones)[0];
 
   const approvalStatusObj = {};
-  milestoneDataList.forEach((element) => {
+  milestoneDataList?.forEach((element) => {
     approvalStatusObj[element.milestoneRankId] = element.approvalStatusId;
   });
-  console.log(approvalStatusObj)
+
 
   return (
-    <div className="flex justify-center w-full sticky top-20 bg-white">
+    <div className="flex justify-center w-full sticky top-20 bg-white rounded-2xl">
       <ul className="steps w-[1200px] ">
-        <li className={`step ${approvalStatusObj[1] === APPROVAL_STATUS_ID.SUCCESS? "step-accent":""}`}>Planning</li>
+        <li className={`step ${approvalStatusObj[1] === APPROVAL_STATUS_ID.SUCCESS ? "step-accent":""}`}>Planning</li>
         <li className={`step ${approvalStatusObj[2] === APPROVAL_STATUS_ID.SUCCESS ? "step-accent":""}`}>Prototype</li>
         <li className={`step ${approvalStatusObj[3] === APPROVAL_STATUS_ID.SUCCESS ? "step-accent":""}`}>Production</li>
       </ul>

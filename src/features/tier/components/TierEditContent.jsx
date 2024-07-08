@@ -67,11 +67,11 @@ export default function TierEditContent({
           const tierResult = await updateTier(tierId, formData);
           handleValueChange("tierImage", tierResult.tierImage);
           handleDataChange(tierResult.tierRankId, tierResult);
-          console.log("first", tierResult.tierRankId, input);
+   
         } else {
           const tierResult = await updateTier(tierId, dummyInput);
           handleDataChange(tierResult.tierRankId, tierResult);
-          console.log("first", tierResult.tierRankId, input);
+
         }
         toast.success("Updated tier successfully");
         setIsEditing(false);
