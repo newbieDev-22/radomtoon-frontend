@@ -72,17 +72,13 @@ export default function CreatorDashboard({ title, status }) {
   milestoneDataList.forEach((element) => {
     approvalStatusObj[element.milestoneRankId] = element.approvalStatusId;
   });
-  console.log(approvalStatusObj)
+  console.log(approvalStatusObj);
 
   return (
     <div className="py-10 px-10 md:px-40 2xl:px-96 bg-[#b6e5e9]">
       <div className="py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
-        <h1 className="text-center text-radomtoon-bright text-4xl font-bold ">
-          {title}
-        </h1>
-        <h2
-          className={`text-center font-semibold text-2xl py-1 ${status.color}`}
-        >
+        <h1 className="text-center text-radomtoon-bright text-4xl font-bold ">{title}</h1>
+        <h2 className={`text-center font-semibold text-2xl py-1 ${status.color}`}>
           {`Status : ${status.text}`}
         </h2>
       </div>
@@ -97,60 +93,78 @@ export default function CreatorDashboard({ title, status }) {
         <span className="row-span-2 col-span-2 sm:col-span-2 md:col-span-1 h-96 md:h-full bg-white rounded-2xl">
           <PieChart title="Tiers Percentage" data={pieChartData} />
         </span>
-        <span className="sm:col-span-2 col-span-2 md:col-span-1 bg-white rounded-2xl">
+        <div className="sm:col-span-2 col-span-2 md:col-span-1 bg-white rounded-2xl">
           <h1 className="w-full px-10 justify-start text-lg font-semibold text-radomtoon-bright mt-4 mb-2">
             Milestone Status
           </h1>
           <div className="px-5 pb-5">
-
             <div className="flex flex-col">
               <div className="flex justify-between items-center p-3 border-b-2">
                 <h1>Planning</h1>
-                <Button onClick={() => setOpenEvidenceModal(true)} bg="creator-saturate" color="white">Send Evidence</Button>
-
-            <div className="flex flex-col  gap-4">
-
-              <div className="flex justify-between items-center p-3 border-b-2">
-                <h1>Planning</h1>
                 <Button
-                  onClick={() => {
-                    setOpenEvidenceModal(true);
-                    setCurrentMilestone(1);
-                  }}
-                  disabled={approvalStatusObj[1]===APPROVAL_STATUS_ID.SUCCESS || approvalStatusObj[1]===APPROVAL_STATUS_ID.PENDING}
+                  onClick={() => setOpenEvidenceModal(true)}
+                  bg="creator-saturate"
+                  color="white"
                 >
                   Send Evidence
                 </Button>
-              </div>
-              <div className="flex justify-between items-center p-3 border-b-2">
-                <h1>Prototype</h1>
-                {<Button
-                  onClick={() => {
-                    setOpenEvidenceModal(true);
-                    setCurrentMilestone(2);
-                  }}
-                  disabled={approvalStatusObj[1]!==APPROVAL_STATUS_ID.SUCCESS || approvalStatusObj[2]===APPROVAL_STATUS_ID.SUCCESS || approvalStatusObj[2]===APPROVAL_STATUS_ID.PENDING}
-                  
-                  
-                >
-                  Send Evidence
-                </Button>}
-              </div>
-              <div className="flex justify-between items-center p-3 border-b-2">
-                <h1>Production</h1>
-                <Button
-                  onClick={() => {
-                    setOpenEvidenceModal(true);
-                    setCurrentMilestone(3);
-                  }}
-                  disabled={approvalStatusObj[1]!==APPROVAL_STATUS_ID.SUCCESS ||approvalStatusObj[2]!==APPROVAL_STATUS_ID.SUCCESS || approvalStatusObj[3]===APPROVAL_STATUS_ID.SUCCESS || approvalStatusObj[3]===APPROVAL_STATUS_ID.PENDING}
-                >
-                  Send Evidence
-                </Button>
+
+                <div className="flex flex-col  gap-4">
+                  <div className="flex justify-between items-center p-3 border-b-2">
+                    <h1>Planning</h1>
+                    <Button
+                      onClick={() => {
+                        setOpenEvidenceModal(true);
+                        setCurrentMilestone(1);
+                      }}
+                      disabled={
+                        approvalStatusObj[1] === APPROVAL_STATUS_ID.SUCCESS ||
+                        approvalStatusObj[1] === APPROVAL_STATUS_ID.PENDING
+                      }
+                    >
+                      Send Evidence
+                    </Button>
+                  </div>
+                  <div className="flex justify-between items-center p-3 border-b-2">
+                    <h1>Prototype</h1>
+                    {
+                      <Button
+                        onClick={() => {
+                          setOpenEvidenceModal(true);
+                          setCurrentMilestone(2);
+                        }}
+                        disabled={
+                          approvalStatusObj[1] !== APPROVAL_STATUS_ID.SUCCESS ||
+                          approvalStatusObj[2] === APPROVAL_STATUS_ID.SUCCESS ||
+                          approvalStatusObj[2] === APPROVAL_STATUS_ID.PENDING
+                        }
+                      >
+                        Send Evidence
+                      </Button>
+                    }
+                  </div>
+                  <div className="flex justify-between items-center p-3 border-b-2">
+                    <h1>Production</h1>
+                    <Button
+                      onClick={() => {
+                        setOpenEvidenceModal(true);
+                        setCurrentMilestone(3);
+                      }}
+                      disabled={
+                        approvalStatusObj[1] !== APPROVAL_STATUS_ID.SUCCESS ||
+                        approvalStatusObj[2] !== APPROVAL_STATUS_ID.SUCCESS ||
+                        approvalStatusObj[3] === APPROVAL_STATUS_ID.SUCCESS ||
+                        approvalStatusObj[3] === APPROVAL_STATUS_ID.PENDING
+                      }
+                    >
+                      Send Evidence
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </span>
+        </div>
         <span className="col-span-2">
           <LineChart title={"Progress"} data={lineChartData} />
         </span>
