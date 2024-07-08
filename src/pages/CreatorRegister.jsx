@@ -119,6 +119,7 @@ export default function CreatorRegister() {
       });
       navigate("/login");
     } catch (err) {
+      console.error(err)
       if (err instanceof AxiosError) {
         const errorField = err.response.data.field;
         const errorMessage = {
