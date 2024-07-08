@@ -436,3 +436,9 @@ export const CATEGORIES_TYPE_MAP_NAME = {
 };
 
 export const MIN_DEADLINE_DAYS = 15;
+
+export const MILESTONE_STATUS = {
+  1 : "Planning",
+  2 : "Prototype",
+  3 : "Production",
+};

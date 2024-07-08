@@ -11,7 +11,7 @@ export default function CreatorApproval() {
     <div>
       {approvalLoading && <Spinner transparent />}
       <div className="px-28">
-        <h1 className="font-bold text-3xl py-4">Creator Approval</h1>
+        <h1 className="flex flex-col font-bold text-3xl py-4">Creator Approval</h1>
         {creatorWaitingApprovalData.length > 0 ? (
           <PaginationItem
             itemsPerPage={9}

@@ -5,11 +5,16 @@ import { APPROVAL_STATUS_ID } from "../../constants";
 
 export const productSlice = (set, get) => ({
   product: { data: [], loading: false, error: null, today: new Date() },
+  searchProduct: [],
   fiveProduct: [],
   approvalProduct: [],
   tierPendingPayment: {},
   productLoading: false,
+  word: "",
+  categoryFilter: null,
 
+  setWord: (value) => set(() => ({ word: value })),
+  setcategoryFilter: (value) => set(() => ({ categoryFilter: value })),
   setLoading: (loading) => set((state) => ({ product: { ...state.product, loading } })),
   setError: (error) => set((state) => ({ product: { ...state.product, error } })),
 
@@ -253,6 +258,40 @@ export const productSlice = (set, get) => ({
     } finally {
       set(() => ({ productLoading: false }));
     }
+  },
+
+  filterProduct: () => {
+    const { data } = get().product;
+    const word = get().word;
+    const categoryFilter = get().categoryFilter
+    const cloneData = [...data]
+    const keyFilter = ["productName", "creatorName"]
+    const filterByCategory = cloneData.filter((el) => el.categoryId === categoryFilter)
+    if (filterByCategory.length) {
+      if (word) {
+        const filterByWord = filterByCategory.filter((item) => {
+          return keyFilter.some((filter) => {
+            return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1
+          })
+        })
+        set(() => ({ searchProduct: filterByWord }))
+      } else {
+        set(() => ({ searchProduct: filterByCategory }))
+      }
+    } else {
+      if (word) {
+        const filterByWord = cloneData.filter((item) => {
+          return keyFilter.some((filter) => {
+            return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1
+          })
+        })
+        set(() => ({ searchProduct: filterByWord }))
+      }
+    }
+  },
+
+  resetSearch: () => {
+    set(() => ({ searchProduct: [] }))
   },
 
   setTierPending: (productId, tierId) => {
