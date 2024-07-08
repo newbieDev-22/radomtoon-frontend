@@ -152,10 +152,6 @@ export default function CampaignSetup() {
                   <CloudUpload />
                 </div>
 
-                {/* <img
-                  src="https://img.freepik.com/premium-vector/upload-file-flat-illustration_120816-71603.jpg?w=996"
-                  alt="Upload"
-                /> */}
                 <h3 className="text-white text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold text-center">
                   Add product image
                 </h3>

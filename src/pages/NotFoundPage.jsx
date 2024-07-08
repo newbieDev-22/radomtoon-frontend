@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import notFoundPage from "../assets/images/404error.jpg"
 import Button from "../components/Button";
 
 export default function NotFoundPage() {
@@ -27,7 +28,7 @@ export default function NotFoundPage() {
       </div>
       <div className="h-full w-[50vw] flex justify-center overflow-hidden">
         <img
-          src="https://img.freepik.com/free-vector/404-error-with-cute-animal-concept-illustration_114360-1880.jpg?t=st=1720077309~exp=1720080909~hmac=029d13fbbb1d42cd662038779c205d69396c5845a0a6cd4780fbeeec836f9d09&w=740"
+          src={notFoundPage}
           alt="404notfound"
           className="object-cover"
         />
