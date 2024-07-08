@@ -4,12 +4,10 @@ import InitialHome from "../layouts/InitialHome";
 import HomeByFilterProduct from "../layouts/HomeByFilterProduct";
 
 export default function HomePage() {
-
-  const { projectSupport, towardIdea, contribution } = useStore((state) => state.stats.data)
-  const searchProduct = useStore((state) => state.searchProduct)
-  const fiveProduct = useStore((state) => state.fiveProduct);
-  const today = useStore((state) => state.product.today);
-
+  const { projectSupport, towardIdea, contribution } = useStore(
+    (state) => state.stats.data
+  );
+  const searchProduct = useStore((state) => state.searchProduct);
 
   const dataStatsBar = [
     { id: 1, amount: projectSupport, title: "projects supported" },
@@ -18,11 +16,13 @@ export default function HomePage() {
   ];
 
   if (searchProduct.length) {
-    return <HomeByFilterProduct />
+    return <HomeByFilterProduct />;
   } else {
-    return <>
-      <StatsBanner data={dataStatsBar} />
-      <InitialHome />
-    </>
+    return (
+      <>
+        <StatsBanner data={dataStatsBar} />
+        <InitialHome />
+      </>
+    );
   }
 }
