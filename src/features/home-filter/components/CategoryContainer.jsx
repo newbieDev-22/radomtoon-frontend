@@ -1,27 +1,19 @@
 import ImageCard from "../../../components/ImageCard";
 import { useStore } from "../../../store/useStore";
 import dayjs from "dayjs";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 
 export default function CategoryContainer() {
 
-  const { categotyProductId } = useParams()
   const [seatchParams] = useSearchParams()
-
   const category = seatchParams.get("category")
 
   const today = useStore((state) => state.product.today);
-
-  const filterProductsByCategory = useStore((state) => state.filterProductByCategory)
   const productByCategory = useStore((state) => state.productByCategory.data)
 
   const word = useStore((state) => state.word)
   const keyFilter = ["productName", "creatorName"]
-
-
   const productFilter = productByCategory.filter((item) => {
     return keyFilter.some((filter) => {
       return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1

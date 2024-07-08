@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { RadomtoonIcon } from "../icons";
 import SearchBar from "./SearchBar";
 import Menu from "./Menu";
@@ -15,11 +15,12 @@ export default function Header() {
   const navigate = useNavigate()
 
   const resetSearch = useStore((state) => state.resetSearch)
+  const setcategoryFilter = useStore((state) => state.setcategoryFilter)
 
   const handleToHomePage = () => {
     resetSearch()
+    setcategoryFilter(null)
     navigate("/")
-
   }
 
   return (

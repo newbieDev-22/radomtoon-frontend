@@ -1,15 +1,16 @@
-import { useNavigate } from "react-router-dom";
 import { useStore } from "../store/useStore";
 
-
 export default function FilterItem({ page, categoryId }) {
-  const navigate = useNavigate()
-  const filterProductsByCategory = useStore((state) => state.filterProductByCategory)
+
+  const filterProduct = useStore((state) => state.filterProduct)
+  const setWord = useStore((state) => state.setWord)
+  const setcategoryFilter = useStore((state) => state.setcategoryFilter)
+
 
   const handleClickCategory = (categotyId) => {
-    // navigate(`/product/${categotyId}/?category=${page}`)
-    filterProductsByCategory(categoryId)
-
+    setWord("")
+    setcategoryFilter(categotyId)
+    filterProduct(categoryId)
   }
 
   return (

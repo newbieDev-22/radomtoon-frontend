@@ -2,6 +2,8 @@ import dayjs from "dayjs";
 import ImageCard from "../components/ImageCard";
 import { useStore } from "../store/useStore";
 import { motion } from "framer-motion";
+import { CATEGORIES_TYPE_MAP_NAME } from "../constants";
+
 
 const containerVariants = {
     hidden: { opacity: 1 },
@@ -21,17 +23,18 @@ const itemVariants = {
 export default function HomeByFilterProduct() {
 
     const today = useStore((state) => state.product.today);
-    const approvalProduct = useStore((state) => state.approvalProduct);
-
+    const searchProduct = useStore((state) => state.searchProduct);
+    const categoryFilter = useStore((state) => state.categoryFilter)
     const word = useStore((state) => state.word)
-    const keyFilter = ["productName", "creatorName"]
-    const productFilter = approvalProduct.filter((item) => {
-        return keyFilter.some((filter) => {
-            return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1
-        })
-    })
+
     return (
         <div>
+            {categoryFilter && word ?
+                <h1 className="text-center text-4xl font-bold m-10">Filter by : {CATEGORIES_TYPE_MAP_NAME[categoryFilter]} and word: {word} </h1>
+                : categoryFilter ? <h1 className="text-center text-4xl font-bold m-10">Filter by : {CATEGORIES_TYPE_MAP_NAME[categoryFilter]}</h1>
+                    : <h1 className="text-center text-4xl font-bold m-10" >Filter by : {word}</h1>
+            }
+
             <div className="flex justify-center gap-10 mt-10 mb-20">
                 <motion.div
                     variants={containerVariants}
@@ -39,7 +42,7 @@ export default function HomeByFilterProduct() {
                     animate="show"
                     className="grid grid-cols-3 gap-4 mb-20"
                 >
-                    {productFilter.map((el) => (
+                    {searchProduct.map((el) => (
                         <motion.div key={el.id} variants={itemVariants}>
                             <ImageCard
                                 key={el.id}
@@ -64,6 +67,6 @@ export default function HomeByFilterProduct() {
                     ))}
                 </motion.div>
             </div>
-        </div>
+        </div >
     )
 }
