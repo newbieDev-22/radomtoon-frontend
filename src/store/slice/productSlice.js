@@ -292,7 +292,7 @@ export const productSlice = (set, get) => ({
 
   resetSearch: () => {
     set(() => ({ searchProduct: [] }))
-  }
+  },
 
   setTierPending: (productId, tierId) => {
     const { data } = get().product;
