@@ -81,7 +81,7 @@ export default function CreatorDashboard({ title, status }) {
             Milestone Status
           </h1>
           <div className="px-5 pb-5">
-            <div className="flex flex-col">
+            <div className="flex flex-col  gap-4">
               <div className="flex justify-between p-2 bg-gray-300">
                 <h1>Milestone 1</h1>
                 <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>

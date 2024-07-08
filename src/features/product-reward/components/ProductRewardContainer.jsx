@@ -41,8 +41,10 @@ export default function ProductRewardContainer({ isCreator }) {
     );
   }, [tierData]);
 
-  const handleDataChange = useCallback((id, data) => {
-    setTierData((prev) => prev.map((el) => (el.id === id ? { ...el, ...data } : el)));
+  const handleDataChange = useCallback((tierRankId, data) => {
+    setTierData((prev) =>
+      prev.map((el) => (el.tierRankId === tierRankId ? { ...el, ...data } : el))
+    );
   }, []);
 
   const handleAddNewTier = useCallback(
