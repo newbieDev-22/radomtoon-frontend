@@ -25,56 +25,71 @@ export const adminDashboardSlice = (set) => ({
       }));
 
       const [
-        adminStatsResponse,
-        activeCreatorResponse,
-        activeSupporterResponse,
-        averageFundsResponse,
-        successProjectsResponse,
-        fundsByMonthResponse,
-        projectOverviewResponse,
-        initialMapResponse,
-        postMapResponse,
+        adminStats,
+
+        activeCreator,
+        activeSupporter,
+        averageFunds,
+        successProjects,
+
+        fundsByMonth,
+
+        projectOverview,
+
+        geoJsonResponse,
+        geoJsonPostResponse,
       ] = await Promise.all([
         adminApi.adminStats(),
+
         adminApi.activeCreator(),
         adminApi.activeSupporter(),
         adminApi.averageFunds(),
         adminApi.countProject(),
+
         adminApi.fundsByMonth(),
+
         adminApi.projectOverview(),
+
         adminApi.initialMap(),
         adminApi.postMap(),
       ]);
 
-      const provinceCount = postMapResponse.data.provinceCount;
-      const updatedGeoJson = initialMapResponse.data.features.map((feature) => {
-        const updatedProperties = { ...feature.properties };
-        const provinceName = PROVINCE_MAP_MAPPING[updatedProperties.name];
-        if (provinceName && provinceCount[provinceName]) {
-          updatedProperties.p = provinceCount[provinceName];
-        } else {
-          updatedProperties.p = 0;
+      const mappedIncomingData = {};
+      Object.keys(geoJsonPostResponse.data.provinceCount).forEach((key) => {
+        const provinceName = PROVINCE_MAP_MAPPING[key];
+        if (provinceName) {
+          mappedIncomingData[provinceName] = geoJsonPostResponse.data.provinceCount[key];
         }
-        return { ...feature, properties: updatedProperties };
+      });
+
+      const updatedGeoJson = geoJsonResponse.data.features.map((el) => {
+        const data = { ...el };
+        data.properties = { ...data.properties };
+        if (mappedIncomingData.hasOwnProperty(data.properties.name)) {
+          data.properties.p = mappedIncomingData[data.properties.name];
+        } else {
+          data.properties.p = 0;
+        }
+        return data;
       });
 
       set((state) => ({
         dashboardData: {
           ...state.dashboardData,
-          adminStatsData: adminStatsResponse.data,
+          adminStatsData: adminStats.data,
           textBlockData: [
-            activeCreatorResponse.data,
-            activeSupporterResponse.data,
-            averageFundsResponse.data,
-            successProjectsResponse.data,
+            activeCreator.data,
+            activeSupporter.data,
+            averageFunds.data,
+            successProjects.data,
           ],
-          lineChartData: fundsByMonthResponse.data.cumulativeFundAllMonth,
-          doughnutChartData: projectOverviewResponse.data,
+          lineChartData: fundsByMonth.data.cumulativeFundAllMonth,
+          doughnutChartData: projectOverview.data,
           geoJsonData: updatedGeoJson,
         },
       }));
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
     } finally {
       set((state) => ({
         dashboardData: {
