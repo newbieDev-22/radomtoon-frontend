@@ -55,8 +55,8 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
 
   return (
     <div className={`bg-white p-5 rounded-xl mb-5 ${margin} `}>
-      <div className="flex gap-2 items-center justify-between">
-        <div className="flex gap-4 items-center">
+      <div className="flex gap-2 items-center justify-between ">
+        <div className="flex gap-4 items-center ">
           {el.creatorProfileImage || el.supporterProfileImage ? (
             <img
               src={
@@ -68,7 +68,7 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
               alt="avatar"
             />
           ) : (
-            <div className="w-12 h-12 rounded-full bg-gray-400 flex justify-center items-center text-white ">
+            <div className="w-12 h-12 rounded-full bg-gray-400 flex justify-center items-center text-white">
               {role === USER_ROLE.CREATOR
                 ? el.creatorFirstName[0]
                 : el.supporterFirstName[0]}
