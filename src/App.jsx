@@ -82,7 +82,7 @@ export default function App() {
     creatorUserLoading ||
     creatorProductLoading ||
     waitingApprovalLoading || 
-    dashboardDataLoading
+    dashboardDataLoading ||
     commentLoading ||
     statsLoading ||
     historyLoading
