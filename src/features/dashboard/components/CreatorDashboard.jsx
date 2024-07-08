@@ -4,8 +4,11 @@ import PieChart from "../../../components/chart/pieChart/PieChart";
 import LineChart from "../../../components/chart/lineChart/LineChart";
 import Modal from "../../../components/Modal";
 import CreatorDelivery from "../../creator/components/CreatorDelivery";
-import EvidenceModalDetail from "../../admin/components/EvidenceModalDetail";
+import EvidenceModalDetail from "../../creator/components/EvidenceModalDetail";
 import Button from "../../../components/Button";
+import { useStore } from "../../../store/useStore";
+import { useParams } from "react-router-dom";
+import { APPROVAL_STATUS_ID } from "../../../constants";
 
 const lineChartMockData = [
   { label: "Jan", supporter: 64854, creator: 50561, project: 35901 },
@@ -52,16 +55,34 @@ const pieChartMockData = [
 ];
 
 export default function CreatorDashboard({ title, status }) {
+  const { productId } = useParams();
+  const [currentMilestone, setCurrentMilestone] = useState(null);
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
 
   const [lineChartData, setLineChartData] = useState(lineChartMockData);
   const [pieChartData, setPieChartData] = useState(pieChartMockData);
 
+  const creatorProductData = useStore((state) => state.creatorProduct.data);
+
+  const milestoneDataList = creatorProductData
+    .filter((el) => el.id === +productId)
+    .map((el) => el.productMilestones)[0];
+
+  const approvalStatusObj = {};
+  milestoneDataList.forEach((element) => {
+    approvalStatusObj[element.milestoneRankId] = element.approvalStatusId;
+  });
+  console.log(approvalStatusObj)
+
   return (
     <div className="py-10 px-10 md:px-40 2xl:px-96 bg-[#b6e5e9]">
       <div className="py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
-        <h1 className="text-center text-radomtoon-bright text-4xl font-bold ">{title}</h1>
-        <h2 className={`text-center font-semibold text-2xl py-1 ${status.color}`}>
+        <h1 className="text-center text-radomtoon-bright text-4xl font-bold ">
+          {title}
+        </h1>
+        <h2
+          className={`text-center font-semibold text-2xl py-1 ${status.color}`}
+        >
           {`Status : ${status.text}`}
         </h2>
       </div>
@@ -84,15 +105,41 @@ export default function CreatorDashboard({ title, status }) {
             <div className="flex flex-col  gap-4">
               <div className="flex justify-between p-2 bg-gray-300">
                 <h1>Milestone 1</h1>
-                <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>
+                <Button
+                  onClick={() => {
+                    setOpenEvidenceModal(true);
+                    setCurrentMilestone(1);
+                  }}
+                  disabled={approvalStatusObj[1]===APPROVAL_STATUS_ID.SUCCESS || approvalStatusObj[1]===APPROVAL_STATUS_ID.PENDING}
+                >
+                  Send Evidence
+                </Button>
               </div>
               <div className="flex justify-between p-2 bg-gray-300">
-                <h1>Milestone 1</h1>
-                <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>
+                <h1>Milestone 2</h1>
+                {<Button
+                  onClick={() => {
+                    setOpenEvidenceModal(true);
+                    setCurrentMilestone(2);
+                  }}
+                  disabled={approvalStatusObj[1]!==APPROVAL_STATUS_ID.SUCCESS || approvalStatusObj[2]===APPROVAL_STATUS_ID.SUCCESS || approvalStatusObj[2]===APPROVAL_STATUS_ID.PENDING}
+                  
+                  
+                >
+                  Send Evidence
+                </Button>}
               </div>
               <div className="flex justify-between p-2 bg-gray-300">
-                <h1>Milestone 1</h1>
-                <Button onClick={() => setOpenEvidenceModal(true)}>Send Evidence</Button>
+                <h1>Milestone 3</h1>
+                <Button
+                  onClick={() => {
+                    setOpenEvidenceModal(true);
+                    setCurrentMilestone(3);
+                  }}
+                  disabled={approvalStatusObj[1]!==APPROVAL_STATUS_ID.SUCCESS ||approvalStatusObj[2]!==APPROVAL_STATUS_ID.SUCCESS || approvalStatusObj[3]===APPROVAL_STATUS_ID.SUCCESS || approvalStatusObj[3]===APPROVAL_STATUS_ID.PENDING}
+                >
+                  Send Evidence
+                </Button>
               </div>
             </div>
           </div>
@@ -114,7 +161,7 @@ export default function CreatorDashboard({ title, status }) {
           width={45}
           open={true}
         >
-          <EvidenceModalDetail />
+          <EvidenceModalDetail milestoneRankId={currentMilestone} />
         </Modal>
       )}
     </div>
