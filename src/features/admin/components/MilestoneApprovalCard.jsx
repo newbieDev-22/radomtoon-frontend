@@ -7,6 +7,7 @@ import MilestoneForm from "./MilestoneForm";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useStore } from "../../../store/useStore";
+import {MILESTONE_STATUS} from "../../../constants"
 
 export default function MilestoneApprovalCard({
   id,
@@ -41,9 +42,9 @@ export default function MilestoneApprovalCard({
 
   return (
     <>
-      <div className="bg-gray-200 flex gap-4 justify-between items-center p-4 rounded-lg font-bold transition">
+      <div className="flex gap-4 justify-between items-center p-4 font-bold transition border-b-2">
         <div>
-          {productName} : Milestone {milestoneRankId}
+          {productName} : {MILESTONE_STATUS[milestoneRankId]}
         </div>
         <div className="grid grid-cols-3 gap-4">
           <div>
