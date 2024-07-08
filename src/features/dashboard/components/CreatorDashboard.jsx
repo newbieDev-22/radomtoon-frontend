@@ -75,7 +75,7 @@ export default function CreatorDashboard({ title, status }) {
   console.log(approvalStatusObj);
 
   return (
-    <div className="py-10 px-10 md:px-40 2xl:px-96 bg-[#b6e5e9]">
+    <div className="py-10 px-10 md:px-40 2xl:px-80 bg-[#b6e5e9]">
       <div className="py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
         <h1 className="text-center text-radomtoon-bright text-4xl font-bold ">{title}</h1>
         <h2 className={`text-center font-semibold text-2xl py-1 ${status.color}`}>
@@ -83,7 +83,7 @@ export default function CreatorDashboard({ title, status }) {
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 gap-10 p-10 mx-auto rounded-3xl  bg-[#e7f5fc]">
+      <div className="grid grid-cols-2 gap-10 p-10 mx-auto rounded-3xl md:w-full  bg-[#e7f5fc]">
         <span className="sm:col-span-2 col-span-2 md:col-span-1 bg-white rounded-2xl flex justify-center items-center flex-col">
           <h1 className="w-full px-10 justify-start text-lg font-semibold text-radomtoon-bright mt-4 ">
             Milestone Progress
