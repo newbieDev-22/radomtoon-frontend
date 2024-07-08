@@ -30,7 +30,7 @@ export default function PaginationItem({ itemsPerPage, items, ItemComponent }) {
         pageClassName={
           "bg-gray-300 p-2 w-8 flex items-center justify-center rounded-lg font-bold hover:scale-[102%] active:scale-100 transition"
         }
-        activeClassName={"bg-gray-500"}
+        activeClassName={"bg-gray-100"}
       />
     </>
   );
