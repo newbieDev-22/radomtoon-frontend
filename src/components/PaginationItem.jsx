@@ -18,19 +18,19 @@ export default function PaginationItem({ itemsPerPage, items, ItemComponent }) {
       <ItemComponent currentItems={currentItems} />
       <ReactPaginate
         breakLabel="..."
-        nextLabel="next"
-        nextClassName={"bg-yellow-300 p-2 rounded-lg font-bold"}
+        nextLabel=">"
+        nextClassName={"p-2 rounded-lg font-bold hover:bg-gray-200"}
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        previousLabel="previous"
-        previousClassName={"bg-yellow-300 p-2 rounded-lg font-bold"}
+        previousLabel="<"
+        previousClassName={"p-2 rounded-lg font-bold hover:bg-gray-200"}
         renderOnZeroPageCount={null}
         className={"flex justify-center items-center gap-4"}
         pageClassName={
-          "bg-gray-300 p-2 w-8 flex items-center justify-center rounded-lg font-bold hover:scale-[102%] active:scale-100 transition"
+          " p-2 w-8 flex items-center justify-center font-bold hover:scale-[102%] active:scale-100 transition"
         }
-        activeClassName={"bg-gray-500"}
+        activeClassName={"bg-creator-normal rounded-lg"}
       />
     </>
   );

@@ -103,8 +103,8 @@ export default function CreatorDashboard({ title, status }) {
           </h1>
           <div className="px-5 pb-5">
             <div className="flex flex-col  gap-4">
-              <div className="flex justify-between p-2 bg-gray-300">
-                <h1>Milestone 1</h1>
+              <div className="flex justify-between items-center p-3 border-b-2">
+                <h1>Planning</h1>
                 <Button
                   onClick={() => {
                     setOpenEvidenceModal(true);
@@ -115,8 +115,8 @@ export default function CreatorDashboard({ title, status }) {
                   Send Evidence
                 </Button>
               </div>
-              <div className="flex justify-between p-2 bg-gray-300">
-                <h1>Milestone 2</h1>
+              <div className="flex justify-between items-center p-3 border-b-2">
+                <h1>Prototype</h1>
                 {<Button
                   onClick={() => {
                     setOpenEvidenceModal(true);
@@ -129,8 +129,8 @@ export default function CreatorDashboard({ title, status }) {
                   Send Evidence
                 </Button>}
               </div>
-              <div className="flex justify-between p-2 bg-gray-300">
-                <h1>Milestone 3</h1>
+              <div className="flex justify-between items-center p-3 border-b-2">
+                <h1>Production</h1>
                 <Button
                   onClick={() => {
                     setOpenEvidenceModal(true);
@@ -148,7 +148,7 @@ export default function CreatorDashboard({ title, status }) {
           <LineChart title={"Progress"} data={lineChartData} />
         </span>
         <div className="col-span-2 p-5 rounded-2xl bg-white">
-          <div className="w-full px-5 mb-2 justify-start text-xl font-semibold text-radomtoon-bright">
+          <div className="w-full px-5 mb-5 justify-start text-xl font-semibold text-radomtoon-bright">
             Supporter Distribution Tracking
           </div>
           <CreatorDelivery data={["a", "b"]} />

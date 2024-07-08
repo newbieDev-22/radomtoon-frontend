@@ -3,7 +3,7 @@ import CreatorDeliveryAllCard from "./CreatorDeliveryAllCard";
 
 export default function CreatorDelivery({ data }) {
   return (
-    <div className="px-28 py-4">
+    <div className="px-full">
       {data.length > 0 ? (
         <PaginationItem
           itemsPerPage={6}
