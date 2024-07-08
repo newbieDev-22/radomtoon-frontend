@@ -1,38 +1,52 @@
 import { useState } from "react";
 import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
 import Button from "../../../components/Button";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useStore } from "../../../store/useStore";
+import { toast } from "react-toastify";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
-  const { productId } = useLocation();
+  const { productId, tierId } = useParams();
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const createSupportProduct = useStore((state) => state.createSupportProduct);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    if (!stripe || !elements) {
-      return;
-    }
+      if (!stripe || !elements) {
+        return;
+      }
 
-    setIsProcessing(true);
+      setIsProcessing(true);
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `http://localhost:5173/`,
-      },
-    });
-    setIsProcessing(false);
+      const { paymentIntent, error } = await stripe.confirmPayment({
+        elements,
+        redirect: "if_required",
+      });
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
-    } else {
-      setMessage("An unexpected error occured.");
+      if (paymentIntent) {
+        if (paymentIntent.status === "succeeded") {
+          await createSupportProduct(tierId);
+          toast.success("Payment successfully!");
+          navigate("/");
+        }
+      }
+
+      setIsProcessing(false);
+
+      if (error?.type === "card_error" || error?.type === "validation_error") {
+        setMessage(error.message);
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

@@ -6,7 +6,9 @@ import { APPROVAL_STATUS_ID } from "../../constants";
 export const productSlice = (set, get) => ({
   product: { data: [], loading: false, error: null, today: new Date() },
   searchProduct: [],
+  fiveProduct: [],
   approvalProduct: [],
+  tierPendingPayment: {},
   productLoading: false,
   word: "",
   categoryFilter: null,
@@ -34,6 +36,18 @@ export const productSlice = (set, get) => ({
     } catch (err) {
       console.error(err);
       set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set((state) => ({ product: { ...state.product, loading: false } }));
+    }
+  },
+
+  fetchFiveProduct: async () => {
+    try {
+      set((state) => ({ product: { ...state.product, loading: true, error: null } }));
+      const productResponse = await productApi.getFiveProduct();
+      set(() => ({ fiveProduct: productResponse.data.fiveProduct }));
+    } catch (err) {
+      console.error(err);
     } finally {
       set((state) => ({ product: { ...state.product, loading: false } }));
     }
@@ -280,4 +294,12 @@ export const productSlice = (set, get) => ({
     set(() => ({ searchProduct: [] }))
   }
 
+  setTierPending: (productId, tierId) => {
+    const { data } = get().product;
+    const product = data.filter((el) => el.id === +productId)[0];
+    if (product) {
+      const tier = product.productTiers.filter((el) => el.id == +tierId)[0];
+      set(() => ({ tierPendingPayment: tier }));
+    }
+  },
 });

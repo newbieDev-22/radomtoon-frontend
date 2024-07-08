@@ -1,9 +1,7 @@
 import { useState } from "react";
 import StatsBar from "../components/StatsBannerComponent/StatsBanner";
 import Approval from "../features/admin/components/Approval";
-import { useStore } from "../store/useStore";
-import AdminDashboard from "../features/dashboard/components/AdminDashboard"
-
+import AdminDashboard from "../features/dashboard/components/AdminDashboard";
 
 const mockImgStatsBar =
   "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/bmt7dsxiwpfjlnxpcazs";
@@ -32,8 +30,7 @@ const adminMenu = {
 
 export default function AdminPanel() {
   const [selectMenu, setSelectMenu] = useState(adminMenu.Approval);
-  const waitingApproval = useStore((state) => state.waitingApproval);
-  console.log("waitingApproval", waitingApproval);
+
   return (
     <div>
       <StatsBar data={mockDataStatsBar} bg={mockImgStatsBar} />
@@ -64,9 +61,7 @@ export default function AdminPanel() {
           <Approval />
         </div>
       )}
-      {selectMenu === adminMenu.Dashboard && (
-          <AdminDashboard />
-      )}
+      {selectMenu === adminMenu.Dashboard && <AdminDashboard />}
     </div>
   );
 }

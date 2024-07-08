@@ -4,6 +4,7 @@ import Router from "./routes";
 import { Suspense, useEffect } from "react";
 import { useStore } from "./store/useStore";
 import { USER_ROLE } from "./constants";
+
 export default function App() {
   const fetchProduct = useStore((state) => state.fetchProduct);
   const role = useStore((state) => state.authUser.role);
@@ -17,26 +18,48 @@ export default function App() {
   const userLoading = useStore((state) => state.authUser.loading);
   const creatorUserLoading = useStore((state) => state.creatorUser.loading);
   const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
-  const fetchComment = useStore((state) => state.fetchComment)
-  const commentLoading = useStore((state) => state.comments.loading)
-  const statsLoading = useStore((state) => state.statsLoading)
-  const featchStats = useStore((state) => state.featchStats)
+  const fetchComment = useStore((state) => state.fetchComment);
+  const commentLoading = useStore((state) => state.comments.loading);
+  const statsLoading = useStore((state) => state.stats.loading);
+  const fetchStats = useStore((state) => state.fetchStats);
+  const fetchHistory = useStore((state) => state.fetchHistory);
+  const historyLoading = useStore((state) => state.supporter.loading);
   const user = useStore((state) => state.authUser.user);
   const product = useStore((state) => state.product.data);
+  const fetchFiveProduct = useStore((state) => state.fetchFiveProduct);
 
   useEffect(() => {
     fetchProduct();
     fetchUser();
     fetchCreatorUser();
     fetchComment();
-    featchStats();
-  }, [fetchProduct, fetchUser, fetchCreatorUser, fetchComment, featchStats]);
+    fetchStats();
+    fetchFiveProduct();
+  }, [
+    fetchProduct,
+    fetchUser,
+    fetchCreatorUser,
+    fetchComment,
+    fetchStats,
+    fetchFiveProduct,
+  ]);
 
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {
       fetchWaitingApproval();
     }
   }, [fetchWaitingApproval, role]);
+
+  useEffect(() => {
+    if (role === USER_ROLE.SUPPORTER) {
+      fetchHistory();
+    }
+  }, [fetchHistory, role]);
+
+  useEffect(() => {
+    fetchStats();
+    fetchFiveProduct();
+  }, [historyLoading, fetchStats, fetchFiveProduct]);
 
   useEffect(() => {
     fetchCreatorUser();
@@ -57,8 +80,8 @@ export default function App() {
     creatorProductLoading ||
     WaitingApprovalLoading ||
     commentLoading ||
-    statsLoading
-
+    statsLoading ||
+    historyLoading
   ) {
     return <Loading />;
   }

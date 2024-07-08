@@ -9,7 +9,7 @@ export default function ProfileCard({ creatorId }) {
         <div className="w-14 h-14">
           <img
             src={selectedCreator.profileImage}
-            className={`w-full rounded-full`}
+            className={`w-full aspect-square rounded-full`}
             alt="Avatar"
           />
         </div>

@@ -7,6 +7,10 @@ export default function HomePage() {
 
   const { projectSupport, towardIdea, contribution } = useStore((state) => state.stats.data)
   const searchProduct = useStore((state) => state.searchProduct)
+  const fiveProduct = useStore((state) => state.fiveProduct);
+  const today = useStore((state) => state.product.today);
+
+
   const dataStatsBar = [
     { id: 1, amount: projectSupport, title: "projects supported" },
     { id: 2, amount: towardIdea, title: "towards ideas", currency: "THB" },

@@ -227,7 +227,6 @@ export const mockDataStatsBar = [
   { id: 3, amount: 400000, title: "contributions" },
 ];
 
-
 export const PROVINCE_LIST = [
   "Amnat Charoen",
   "Ang Thong",
@@ -423,6 +422,19 @@ export const CATEGORIES_TYPE = [
   { id: 10, name: "TECHNOLOGY" },
 ];
 
+export const CATEGORIES_TYPE_MAP_NAME = {
+  1: "ART",
+  2: "COMICS",
+  3: "CRAFTS",
+  4: "DANCE",
+  5: "DESIGN",
+  6: "FASHION",
+  7: "FILM",
+  8: "GAMES",
+  9: "MUSIC",
+  10: "TECHNOLOGY",
+};
+
 export const MIN_DEADLINE_DAYS = 15;
 
 export const CATEGORIES_TYPE_MAP_NAME = {
@@ -436,4 +448,10 @@ export const CATEGORIES_TYPE_MAP_NAME = {
   8: "GAMES",
   9: "MUSIC",
   10: "TECHNOLOGY",
+};
+
+export const MILESTONE_STATUS = {
+  1 : "Planning",
+  2 : "Prototype",
+  3 : "Production",
 };
