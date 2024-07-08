@@ -17,6 +17,8 @@ export default function App() {
   const userLoading = useStore((state) => state.authUser.loading);
   const creatorUserLoading = useStore((state) => state.creatorUser.loading);
   const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
+  const fetchDashboardData = useStore(state => state.fetchDashboardData);
+  const dashboardDataLoading = useStore(state => state.dashboardData.loading);
 
   useEffect(() => {
     fetchProduct();
@@ -27,6 +29,7 @@ export default function App() {
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {
       fetchWaitingApproval();
+      fetchDashboardData()
     }
   }, [fetchWaitingApproval, role]);
 
@@ -43,7 +46,8 @@ export default function App() {
     productLoading ||
     creatorUserLoading ||
     creatorProductLoading ||
-    WaitingApprovalLoading
+    WaitingApprovalLoading || 
+    dashboardDataLoading
   ) {
     return <Loading />;
   }

@@ -4,9 +4,7 @@ import "leaflet/dist/leaflet.css";
 import "./Map.css";
 import { getResponsiveValue } from "../../../utils/responsive";
 
-export default function Map() {
-  const [geojsonData, setGeojsonData] = useState(null);
-
+export default function Map({ geojsonData }) {
   const zoomLevels = {
     default: 5,
     sm: 5,
@@ -15,20 +13,7 @@ export default function Map() {
   };
   const setZoomLevel = () => getResponsiveValue(zoomLevels);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://raw.githubusercontent.com/apisit/thailand.json/master/thailandwithdensity.json"
-        );
-        const data = await response.json();
-        setGeojsonData(data);
-      } catch (error) {
-        console.error("Error fetching geojson data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+
 
   useEffect(() => {
     if (!geojsonData) return;
@@ -74,19 +59,19 @@ export default function Map() {
     // }
     // ### YELLOW ###
     function getColor(d) {
-      return d > 1000
+      return d > 50
         ? "#78350F"
-        : d > 500
+        : d > 40
         ? "#92400E"
-        : d > 200
+        : d > 30
         ? "#B45309"
-        : d > 100
-        ? "#F59E0B"
-        : d > 50
-        ? "#FBBF24"
         : d > 20
-        ? "#FDE68A"
+        ? "#F59E0B"
+        : d > 15
+        ? "#FBBF24"
         : d > 10
+        ? "#FDE68A"
+        : d > 5
         ? "#FEF3C7"
         : "#FFFBEB";
     }
@@ -156,7 +141,7 @@ export default function Map() {
 
     legend.onAdd = function () {
       const div = L.DomUtil.create("div", "info legend");
-      const grades = [0, 10, 20, 50, 100, 200, 500, 1000];
+      const grades = [0, 5, 10, 15, 20, 30, 40, 50];
       const labels = [];
       let from, to;
 
