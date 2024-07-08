@@ -42,7 +42,7 @@ export default function EvidenceModalDetail() {
         </div>
       ) : (
         <label htmlFor="file-upload" className="cursor-pointer ">
-          <span className="flex justify-center items-center w-[500px] h-[175px] block border-[1.5px] border-gray rounded-lg p-8">
+          <span className="flex justify-center items-center w-[500px] h-[175px] border-[1.5px] border-gray rounded-lg p-8">
             + Add your image Evidence
           </span>
 

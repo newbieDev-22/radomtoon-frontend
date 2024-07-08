@@ -60,9 +60,22 @@ export default function AddMilestone({ name, milestoneData, isCreator, isApprove
           </div>
         )}
         {isCreator && !isApproved && (
-          <Button bg="creator-normal" width="40" onClick={handleSubmit} rounded={1}>
-            {isEditing ? "Save" : "Edit"}
-          </Button>
+          <div className="flex gap-2">
+            {isEditing ? (
+              <Button bg="creator-normal" width="40" onClick={handleSubmit} rounded={1}>
+                Save
+              </Button>
+            ) : (
+              <Button
+                bg="creator-normal"
+                width="40"
+                onClick={() => setIsEditing(true)}
+                rounded={1}
+              >
+                Edit
+              </Button>
+            )}
+          </div>
         )}
       </div>
     </>
