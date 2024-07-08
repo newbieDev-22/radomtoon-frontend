@@ -2,14 +2,12 @@ import Milestone from "./components/Milestone";
 import AddMilestone from "./components/AddMilestone";
 import { useParams } from "react-router-dom";
 import { useStore } from "../../store/useStore";
-import { useState } from "react";
 import { APPROVAL_STATUS_ID, USER_ROLE } from "../../constants";
 
 export default function MilestoneContainer() {
   const { productId } = useParams();
   const filterProductByProductId = useStore((state) => state.filterProductByProductId);
   const filterData = filterProductByProductId(+productId);
-  const [milestoneData, setMilestoneData] = useState(filterData.productMilestones);
   const role = useStore((state) => state.authUser.role);
   const authUser = useStore((state) => state.authUser.user);
 
@@ -17,7 +15,11 @@ export default function MilestoneContainer() {
   const isApproved = filterData.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
 
   const handleSelectMilestone = (milestoneRankId) => {
-    return milestoneData.find((el) => el.milestoneRankId === +milestoneRankId) || null;
+    return (
+      filterData.productMilestones.find(
+        (el) => el.milestoneRankId === +milestoneRankId
+      ) || null
+    );
   };
 
   return (

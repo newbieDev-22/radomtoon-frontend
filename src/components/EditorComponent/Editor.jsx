@@ -111,13 +111,13 @@ export default function Editor() {
         <ReactQuill
           ref={quillRef}
           theme={isCreator && !isApproved ? "snow" : "bubble"}
-          placeholder="Start writing..."
+          placeholder={!isApproved ? "Start writing..." : null}
           modules={isCreator && !isApproved ? modules : readOnlyModules}
           formats={formats}
           value={content}
           onChange={handleChange}
           style={{ width: "100%" }}
-          readOnly={!isCreator}
+          readOnly={!isCreator || isApproved}
         />
       </div>
     </>

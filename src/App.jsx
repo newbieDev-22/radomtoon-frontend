@@ -4,6 +4,7 @@ import Router from "./routes";
 import { Suspense, useEffect } from "react";
 import { useStore } from "./store/useStore";
 import { USER_ROLE } from "./constants";
+
 export default function App() {
   const fetchProduct = useStore((state) => state.fetchProduct);
   const role = useStore((state) => state.authUser.role);
@@ -25,6 +26,7 @@ export default function App() {
   const historyLoading = useStore((state) => state.supporter.loading);
   const user = useStore((state) => state.authUser.user);
   const product = useStore((state) => state.product.data);
+  const fetchFiveProduct = useStore((state) => state.fetchFiveProduct);
 
   useEffect(() => {
     fetchProduct();
@@ -32,7 +34,15 @@ export default function App() {
     fetchCreatorUser();
     fetchComment();
     fetchStats();
-  }, [fetchProduct, fetchUser, fetchCreatorUser, fetchComment, fetchStats]);
+    fetchFiveProduct();
+  }, [
+    fetchProduct,
+    fetchUser,
+    fetchCreatorUser,
+    fetchComment,
+    fetchStats,
+    fetchFiveProduct,
+  ]);
 
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {
@@ -48,7 +58,8 @@ export default function App() {
 
   useEffect(() => {
     fetchStats();
-  }, [historyLoading, fetchStats]);
+    fetchFiveProduct();
+  }, [historyLoading, fetchStats, fetchFiveProduct]);
 
   useEffect(() => {
     fetchCreatorUser();
