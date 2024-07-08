@@ -28,13 +28,13 @@ export default function MilestoneContainer() {
       <div className="flex items-center flex-col gap-10">
         <AddMilestone
           name="Planning"
-          milestoneData={() => handleSelectMilestone(1)}
+          milestoneData={handleSelectMilestone(1)}
           isCreator={isCreator}
           isApproved={isApproved}
         />
         <AddMilestone
           name="Prototype"
-          milestoneData={() => handleSelectMilestone(2)}
+          milestoneData={handleSelectMilestone(2)}
           isCreator={isCreator}
           isApproved={isApproved}
         />
