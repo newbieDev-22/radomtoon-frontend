@@ -34,36 +34,48 @@ export default function SupporterHistoryCard({
   };
 
   return (
-    <div className="flex gap-4 h-40 border justify-evenly items-center border-gray-300 rounded-lg px-8 py-4 my-4">
-      <div className="h-full flex justify-center items-center">
-        <img src={projectImage} alt="product" className="h-full aspect-auto rounded-xl" />
+    <div className="flex gap-4 h-40 justify-between border items-center border-gray-300 rounded-lg px-8 py-4 my-4">
+      {/* left */}
+      <div className="h-full flex items-center min-w-[16rem]">
+        <img
+          src={projectImage}
+          alt="product"
+          className="h-full aspect-auto rounded-xl"
+        />
       </div>
-      <div className="flex flex-col justify-evenly px-2">
-        <div className="flex gap-2 items-center py-2">
+      {/* middle */}
+      <div className="flex px-2 w-full justify-between ">
+        <div>
           <div className="font-bold text-xl">{projectName}</div>
-          <div className="bg-supporter-normal rounded-lg w-fit p-2 font-bold">
-            {projectCategory}
-          </div>
-        </div>
-
-        <div className="flex justify-between items-center">
-          <div>
+          <div >
             <div>{tierName}</div>
             <div>Support Date : {dayjs(date).format("DD/MM/YYYY")}</div>
           </div>
-          <div className="text-2xl font-bold">{price} THB</div>
         </div>
-      </div>
-      <div className="flex flex-col justify-between gap-2">
-        <div className="flex gap-2 items-center">
-          <span className="font-bold">Project Status :</span>
-          <span span className={`${colorMapping[fundingStatus]} p-2 rounded-lg`}>
+        
+          
+          <div>
+            <div className="bg-supporter-normal rounded-lg w-24 text-center p-2 font-bold">
+              {projectCategory}
+            </div>
+            <div className="text-xl font-bold w-32 mt-2">{price} THB</div>
+          </div>
+        </div>
+
+      {/* right */}
+      <div className="flex flex-col justify-between gap-2 min-w-[18rem]">
+        <div className="flex items-center">
+          <span className="font-bold w-full">Project Status :</span>
+          <span
+            span
+            className={`${colorMapping[fundingStatus]} p-2 w-full text-center rounded-lg`}
+          >
             {fundingStatus}
           </span>
         </div>
-        <div className="flex gap-2 items-center">
-          <span className="font-bold">Delivery Status :</span>
-          <span className={`${colorMapping[deliveryStatus]} p-2 rounded-lg`}>
+        <div className="flex items-center">
+          <span className="font-bold w-full">Delivery Status :</span>
+          <span className={`${colorMapping[deliveryStatus]} p-2 w-full text-center rounded-lg`}>
             {deliveryStatus}
           </span>
         </div>
