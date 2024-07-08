@@ -15,7 +15,7 @@ const CREATOR_MENU = {
 };
 
 export default function CreatorMenu() {
-  const [selectMenu, setSelectMenu] = useState(CREATOR_MENU.ABOUT);
+  const [selectMenu, setSelectMenu] = useState(CREATOR_MENU.CREATED);
 
   return (
     <div>

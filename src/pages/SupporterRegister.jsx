@@ -115,20 +115,20 @@ export default function SupporterRegister() {
         </div>
         <motion.div
           {...slideRegisterForm}
-          className="absolute mt-16 w-[50vw] h-[85vh]"
+          className="absolute mt-16 w-[90vw] lg:w-[70vw] 2xl:w-[50vw] h-[85vh]"
         >
-          <div className="px-20 bg-white bg-opacity-70 backdrop-blur-md flex w-full h-full flex-col justify-center rounded-lg shadow-lg">
-            <h1 className="text-5xl mb-2 font-semibold text-radomtoon-dark">
+          <div className="px-8 sm:px-16 lg:px-20 bg-white bg-opacity-70 backdrop-blur-md flex w-full h-full flex-col justify-center rounded-lg shadow-lg">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl mb-2 font-semibold text-radomtoon-dark">
               Join the movement.
             </h1>
-            <h2 className="text-base mb-8 text-gray-600">
+            <h2 className="text-sm sm:text-base lg:text-lg mb-8 text-gray-600">
               Become part of a community driving change and innovation.
             </h2>
 
             <form onSubmit={handleSubmit} action="">
               <div>
-                <div className="grid grid-col-2 gap-x-4 gap-y-2">
-                  <div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+                  <div className="sm:col-span-1">
                     <Input
                       type="text"
                       placeholder="First name"
@@ -138,7 +138,7 @@ export default function SupporterRegister() {
                       error={inputError.firstName}
                     />
                   </div>
-                  <div>
+                  <div className="sm:col-span-1">
                     <Input
                       type="text"
                       placeholder="Last name"
@@ -148,7 +148,7 @@ export default function SupporterRegister() {
                       error={inputError.lastName}
                     />
                   </div>
-                  <div className="col-span-2">
+                  <div className="col-span-1 sm:col-span-2">
                     <Input
                       type="text"
                       placeholder="Email"
@@ -158,7 +158,7 @@ export default function SupporterRegister() {
                       error={inputError.email}
                     />
                   </div>
-                  <div className="col-span-2">
+                  <div className="col-span-1 sm:col-span-2">
                     <Input
                       type="text"
                       placeholder="Phone number"
@@ -168,7 +168,7 @@ export default function SupporterRegister() {
                       error={inputError.phone}
                     />
                   </div>
-                  <div className="col-span-2 grid grid-cols-2 gap-4">
+                  <div className="col-span-1 sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <Input
                         type="password"
@@ -191,7 +191,7 @@ export default function SupporterRegister() {
                     </div>
                   </div>
 
-                  <div className="col-span-2">
+                  <div className="col-span-1 sm:col-span-2">
                     <Input
                       type="text"
                       placeholder="Address"
@@ -201,7 +201,7 @@ export default function SupporterRegister() {
                       error={inputError.address}
                     />
                   </div>
-                  <div className="col-span-2 w-full h-12">
+                  <div className="col-span-1 sm:col-span-2 w-full h-12">
                     <Dropdown
                       data={PROVINCE_MAP.map((el) => el.name)}
                       onChange={handleProvinceChange}
@@ -259,22 +259,4 @@ export default function SupporterRegister() {
       </Modal>
     </>
   );
-}
-
-{
-  /* <div className="relative h-screen w-full group">
-            <img
-              src="https://images.unsplash.com/photo-1496024840928-4c417adf211d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-700 ease-in-out delay-300">
-              <button
-                onClick={() => navigate("/creator-register")}
-                className="text-white font-bold text-3xl opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out delay-500"
-              >
-                Register as Creator
-              </button>
-            </div>
-          </div> */
 }

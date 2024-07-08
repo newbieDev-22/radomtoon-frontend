@@ -6,7 +6,6 @@ import { useStore } from "../store/useStore";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import validateLogin from "../validators/validate-login";
-import Spinner from "../components/Spinner";
 import { motion } from "framer-motion";
 
 const initialInput = {
@@ -29,7 +28,6 @@ export default function LoginPage() {
   const [input, setInput] = useState(initialInput);
   const [inputError, setInputError] = useState(initialInputError);
   const login = useStore((state) => state.login);
-  const authLoading = useStore((state) => state.authLoading);
   const navigate = useNavigate();
 
   const handleChangInput = (e) => {
@@ -66,7 +64,6 @@ export default function LoginPage() {
 
   return (
     <>
-      {authLoading && <Spinner transparent />}
       <div className="relative min-w-screen min-h-screen flex items-center justify-center bg-gray-100">
         <img
           src="https://images.unsplash.com/photo-1492539161849-b2b18e79c85f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

@@ -1,79 +1,25 @@
 import { useState } from "react";
 import Button from "../../../components/Button";
 import ProductCommentCard from "./ProductCommentCard";
-import { USER_ROLE } from "../../../constants";
 import { motion } from "framer-motion";
-
-const data = [
-  {
-    userName: "Grant Mielke",
-    content: `Hey there everyone! Thank you so much for checking out Bria's Mythical Menagerie! Few things!
-
--We'd love to invite you to join our Discord! https://discord.gg/MythCraft
-
-we have a wonderful Discord community, and a dedicated Bria's channel where you can chat, ask questions, hang out, and even earn XP for helping us spread the word, which unlocks a Sparkly Astral Kitty pin included in your pledge!
-
--Please check out the FAQs! I will do my best to keep those updated. If you feel something is missing don't hesitate to ask here!
-
--Help us spread the word and hit those stretch goals! Share, Comment, tell your friends... you know the drill!
-
-Happy creature collecting!`,
-    avatarImage:
-      "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
-    id: 59249,
-    role: USER_ROLE.CREATOR
-  },
-  {
-    userName: "Grant Mielke",
-    content: `Hey there everyone! Thank you so much for checking out Bria's Mythical Menagerie! Few things!
-
--We'd love to invite you to join our Discord! https://discord.gg/MythCraft
-
-we have a wonderful Discord community, and a dedicated Bria's channel where you can chat, ask questions, hang out, and even earn XP for helping us spread the word, which unlocks a Sparkly Astral Kitty pin included in your pledge!
-
--Please check out the FAQs! I will do my best to keep those updated. If you feel something is missing don't hesitate to ask here!
-
--Help us spread the word and hit those stretch goals! Share, Comment, tell your friends... you know the drill!
-
-Happy creature collecting!`,
-    avatarImage:
-      "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
-    id: 59859,
-    role: USER_ROLE.GUEST
-  },
-];
-
-const commentInit = {
-  userName: "Grant Mielke",
-  content: ``,
-  avatarImage:
-    "https://i.kickstarter.com/assets/045/301/004/1692456516cb00cd981f84c4928bb134_original.png?anim=false&fit=cover&height=200&origin=ugc&q=92&width=200&sig=YdERXxAvZQBmRhkcK41DUs9O1jtYF%2BfPo0ibe4ZB0JI%3D",
-  id: "",
-};
+import { useParams } from "react-router-dom";
+import { useStore } from "../../../store/useStore";
+import validateComment from "../../../validators/validate-create-comment";
+import Spinner from "../../../components/Spinner";
+import { toast } from "react-toastify";
 
 export default function ProductCommentContainer() {
-  const [allComment, setAllComment] = useState(data);
-  const [comment, setComment] = useState(commentInit);
-  const [isUserComment, setIsUserComment] = useState(true);
+  const { productId } = useParams();
+  const createComment = useStore((state) => state.createComment);
+  const commentLoading = useStore((state) => state.commentLoading);
+  const filterCommentByProductId = useStore((state) => state.commentFilterByProductId);
+  const filterComment = filterCommentByProductId(+productId);
+  const [allComment, setAllComment] = useState(filterComment);
+  const [input, setInput] = useState({ comment: "" });
+  const [inputError, setInputError] = useState({ comment: "" });
 
-  const handleClickSend = (e) => {
-    e.preventDefault();
-    setAllComment([...allComment, comment]);
-    setComment(commentInit);
-  };
-
-  const handleClickDelete = (e) => {
-    const newAllComment = allComment.filter((el) => el.id !== e.id);
-    setAllComment(newAllComment);
-  };
-
-  const handleClickSaveEdit = (id, data) => {
-    const newAllComment = allComment;
-    const commentIndex = allComment.findIndex((el) => el.id === id);
-    newAllComment[commentIndex] = {
-      ...newAllComment[commentIndex],
-      content: data,
-    };
+  const handleClickDeleteFunction = (id) => {
+    const newAllComment = allComment.filter((el) => el.id !== id);
     setAllComment(newAllComment);
   };
 
@@ -92,39 +38,56 @@ export default function ProductCommentContainer() {
     show: { opacity: 1, y: 0 },
   };
 
+  const handleCreateComment = async (e) => {
+    try {
+      e.preventDefault();
+      const dummyInput = { comment: input.comment };
+      const error = validateComment(dummyInput);
+      if (error) {
+        return setInputError(error);
+      }
+      setInputError({ comment: "" });
+      const result = await createComment(productId, dummyInput);
+      setAllComment((prev) => [result, ...prev]);
+      toast.success("Comment created successfully");
+      setInput((prev) => ({ ...prev, comment: "" }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-
-      <div className=" bg-gray-200 m-auto px-20 py-10 rounded-3xl shadow-lg">
+      {commentLoading && <Spinner transparent />}
+      <div className=" bg-gray-200 m-auto px-20 py-10 rounded-3xl">
         <form
           className="flex gap-5 justify-between mb-10 items-center"
-          onSubmit={handleClickSend}
+          onSubmit={handleCreateComment}
         >
-          <textarea
-            className="w-full px-8 py-4 min-h-16 max-h-32 outline-none rounded-xl text-lg"
-            value={comment.content}
-            onChange={(e) =>
-              setComment({
-                ...comment,
-                content: e.target.value,
-                id: Math.floor(Math.random() * 88888888888888),
-              })
-            }
-            placeholder="Write your comment here..."
-          ></textarea>
+          <div className="w-full">
+            <textarea
+              className={`w-full px-8 py-4 min-h-16 max-h-32 outline-none rounded-xl text-lg
+            ${inputError.comment ? " border-red-500" : "border-gray-300"}`}
+              value={input.comment}
+              placeholder="Write your comment here..."
+              onChange={(e) => setInput({ comment: e.target.value })}
+            ></textarea>
+            {inputError.comment && (
+              <small className="text-red-500 font-semibold">{inputError.comment}</small>
+            )}
+          </div>
+
           <Button bg="green" height={11} width={40}>
             Send
           </Button>
         </form>
 
         <motion.div variants={commentContainer} initial="hidden" animate="show">
-          {allComment.toReversed().map((el) => (
+          {allComment.map((el) => (
             <motion.div key={el.id} variants={showComment}>
               <ProductCommentCard
                 el={el}
-                isUserComment={isUserComment}
-                handleClickDelete={handleClickDelete}
-                handleClickSaveEdit={handleClickSaveEdit}
+                handleClickDeleteFunction={handleClickDeleteFunction}
               />
             </motion.div>
           ))}

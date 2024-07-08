@@ -1,5 +1,4 @@
-import { Chart as ChartJS } from "chart.js/auto"
-import { Doughnut } from "react-chartjs-2"
+import { Doughnut } from "react-chartjs-2";
 
 export default function DoughnutChart({ title, data }) {
   const totalValue = data.reduce((acc, cur) => acc + cur.value, 0);
@@ -32,6 +31,5 @@ export default function DoughnutChart({ title, data }) {
               />
       </div>
     </div>
-
-    )
+  );
 }

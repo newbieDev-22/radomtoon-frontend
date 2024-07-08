@@ -18,36 +18,40 @@ export default function CampaignPage() {
   const filterProductByProductId = useStore((state) => state.filterProductByProductId);
   const filterData = filterProductByProductId(+productId);
 
-  const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData.creatorId;
+  const isCreator = role === USER_ROLE.CREATOR && authUser?.id === filterData?.creatorId;
 
   if (
     !filterData ||
-    (!isCreator && filterData.approvalStatusId !== APPROVAL_STATUS_ID.SUCCESS)
+    (!isCreator &&
+      filterData.approvalStatusId !== APPROVAL_STATUS_ID.SUCCESS &&
+      role !== USER_ROLE.ADMIN)
   ) {
     return <Navigate to="/" />;
   }
+
   const handleSubPageChange = (subPage) => {
     setSubPage(subPage);
   };
 
   return (
-
     <div className="py-10">
       <CampaignContent />
       <CampaignSection handleSubPageChange={handleSubPageChange} />
       <div className="flex w-[100vw]">
         <span className="w-[75vw] px-20 py-4 ">
-          {subPage === subPageMap.STORY && ( <Editor /> )}
+          {subPage === subPageMap.STORY && <Editor />}
           {subPage === subPageMap.MILESTONE && <MilestoneContainer />}
-          {subPage === subPageMap.REWARD && <ProductRewardContainer isCreator={isCreator} />}
+          {subPage === subPageMap.REWARD && (
+            <ProductRewardContainer isCreator={isCreator} />
+          )}
           {subPage === subPageMap.FORUM && <ProductCommentContainer />}
         </span>
         <span className="w-[25vw] mt-20 pr-10 ">
           <div className="sticky top-32">
-            <ProfileCard backers={123456} created={123} />
+            <ProfileCard creatorId={filterData.creatorId} />
           </div>
         </span>
       </div>
-    </div >
+    </div>
   );
 }

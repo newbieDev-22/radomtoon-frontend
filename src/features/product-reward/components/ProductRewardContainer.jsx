@@ -18,8 +18,6 @@ const initialTierData = {
 
 const TIER_RANK_NUMBERS = [1, 2, 3];
 
-const sortRank = (tier1, tier2) => tier1.tierRankId - tier2.tierRankId;
-
 export default function ProductRewardContainer({ isCreator }) {
   const { productId } = useParams();
   const deleteTier = useStore((state) => state.deleteTier);
@@ -43,8 +41,10 @@ export default function ProductRewardContainer({ isCreator }) {
     );
   }, [tierData]);
 
-  const handleDataChange = useCallback((id, data) => {
-    setTierData((prev) => prev.map((el) => (el.id === id ? { ...el, ...data } : el)));
+  const handleDataChange = useCallback((tierRankId, data) => {
+    setTierData((prev) =>
+      prev.map((el) => (el.tierRankId === tierRankId ? { ...el, ...data } : el))
+    );
   }, []);
 
   const handleAddNewTier = useCallback(
@@ -117,16 +117,18 @@ export default function ProductRewardContainer({ isCreator }) {
         </div>
 
         <div className="flex flex-col gap-4">
-          {tierData.sort(sortRank).map((el) => (
-            <TierCard
-              key={el.tierRankId}
-              {...el}
-              handleDeleteNewTier={() => handleDeleteNewTier(productId, el.tierRankId)}
-              handleDataChange={handleDataChange}
-              isApproved={isApproved}
-              isCreator={isCreator}
-            />
-          ))}
+          {tierData
+            .sort((tier1, tier2) => tier1.tierRankId - tier2.tierRankId)
+            .map((el) => (
+              <TierCard
+                key={el.tierRankId}
+                {...el}
+                handleDeleteNewTier={() => handleDeleteNewTier(productId, el.tierRankId)}
+                handleDataChange={handleDataChange}
+                isApproved={isApproved}
+                isCreator={isCreator}
+              />
+            ))}
         </div>
       </div>
     </>

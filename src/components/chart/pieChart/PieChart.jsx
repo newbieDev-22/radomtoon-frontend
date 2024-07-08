@@ -1,4 +1,5 @@
 import { Pie } from "react-chartjs-2"
+import { Chart as ChartJS } from "chart.js/auto"
 import { getResponsiveValue } from "../../../utils/responsive"
 
 export default function PieChart({ title, data }) {

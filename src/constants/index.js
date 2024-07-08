@@ -222,7 +222,7 @@ export const mockContent = `  Lorem Ipsum is simply dummy text of the printing a
 export const mockImgStatsBar =
   "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/bmt7dsxiwpfjlnxpcazs";
 export const mockDataStatsBar = [
-  { id: 1, amount: 20000, title: "projects supported" },
+  { id: 1, amount: 28888, title: "projects supported" },
   { id: 2, amount: 10000000, title: "towards ideas", currency: "THB" },
   { id: 3, amount: 400000, title: "contributions" },
 ];
@@ -503,4 +503,23 @@ export const CATEGORIES_TYPE = [
   { id: 10, name: "TECHNOLOGY" },
 ];
 
+export const CATEGORIES_TYPE_MAP_NAME = {
+  1: "ART",
+  2: "COMICS",
+  3: "CRAFTS",
+  4: "DANCE",
+  5: "DESIGN",
+  6: "FASHION",
+  7: "FILM",
+  8: "GAMES",
+  9: "MUSIC",
+  10: "TECHNOLOGY",
+};
+
 export const MIN_DEADLINE_DAYS = 15;
+
+export const MILESTONE_STATUS = {
+  1 : "Planning",
+  2 : "Prototype",
+  3 : "Production",
+};

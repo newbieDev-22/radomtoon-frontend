@@ -3,35 +3,9 @@ import Button from "../../../components/Button";
 import { useStore } from "../../../store/useStore";
 import ImageCard from "../../../components/ImageCard";
 import dayjs from "dayjs";
-import { APPROVAL_STATUS_ID, STATUS_PRODUCT, USER_ROLE } from "../../../constants";
+import { USER_ROLE } from "../../../constants";
+import getProductStatus from "../../../utils/get-product-status";
 
-const getProductStatus = (product) => {
-  const { approvalStatusId, productStatusId } = product;
-
-  if (approvalStatusId === null) {
-    return STATUS_PRODUCT.DRAFTING;
-  }
-
-  if (approvalStatusId === APPROVAL_STATUS_ID.PENDING) {
-    return STATUS_PRODUCT.PENDING;
-  }
-
-  if (approvalStatusId === APPROVAL_STATUS_ID.FAILED) {
-    return STATUS_PRODUCT.REJECTED;
-  }
-
-  if (productStatusId === APPROVAL_STATUS_ID.PENDING) {
-    return STATUS_PRODUCT.IN_PROGRESS;
-  }
-
-  if (productStatusId === APPROVAL_STATUS_ID.SUCCESS) {
-    return STATUS_PRODUCT.SUCCEEDED;
-  }
-
-  if (productStatusId === APPROVAL_STATUS_ID.FAILED) {
-    return STATUS_PRODUCT.FAILED;
-  }
-};
 
 export default function CreatorCreatedProduct() {
   const { creatorId } = useParams();
@@ -51,7 +25,6 @@ export default function CreatorCreatedProduct() {
 
   return (
     <>
-      {/* button */}
       <div
         className="max-w-[64rem] m-auto  flex justify-center mb-5
       lg:justify-center  

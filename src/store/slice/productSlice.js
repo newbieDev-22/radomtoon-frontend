@@ -5,9 +5,16 @@ import { APPROVAL_STATUS_ID } from "../../constants";
 
 export const productSlice = (set, get) => ({
   product: { data: [], loading: false, error: null, today: new Date() },
+  searchProduct: [],
+  fiveProduct: [],
   approvalProduct: [],
+  tierPendingPayment: {},
   productLoading: false,
+  word: "",
+  categoryFilter: null,
 
+  setWord: (value) => set(() => ({ word: value })),
+  setcategoryFilter: (value) => set(() => ({ categoryFilter: value })),
   setLoading: (loading) => set((state) => ({ product: { ...state.product, loading } })),
   setError: (error) => set((state) => ({ product: { ...state.product, error } })),
 
@@ -29,6 +36,18 @@ export const productSlice = (set, get) => ({
     } catch (err) {
       console.error(err);
       set((state) => ({ product: { ...state.product, error: err.message } }));
+    } finally {
+      set((state) => ({ product: { ...state.product, loading: false } }));
+    }
+  },
+
+  fetchFiveProduct: async () => {
+    try {
+      set((state) => ({ product: { ...state.product, loading: true, error: null } }));
+      const productResponse = await productApi.getFiveProduct();
+      set(() => ({ fiveProduct: productResponse.data.fiveProduct }));
+    } catch (err) {
+      console.error(err);
     } finally {
       set((state) => ({ product: { ...state.product, loading: false } }));
     }
@@ -238,6 +257,49 @@ export const productSlice = (set, get) => ({
       set((state) => ({ product: { ...state.product, error: err.message } }));
     } finally {
       set(() => ({ productLoading: false }));
+    }
+  },
+
+  filterProduct: () => {
+    const { data } = get().product;
+    const word = get().word;
+    const categoryFilter = get().categoryFilter
+    const cloneData = [...data]
+    const keyFilter = ["productName", "creatorName"]
+    const filterByCategory = cloneData.filter((el) => el.categoryId === categoryFilter)
+    if (filterByCategory.length) {
+      if (word) {
+        const filterByWord = filterByCategory.filter((item) => {
+          return keyFilter.some((filter) => {
+            return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1
+          })
+        })
+        set(() => ({ searchProduct: filterByWord }))
+      } else {
+        set(() => ({ searchProduct: filterByCategory }))
+      }
+    } else {
+      if (word) {
+        const filterByWord = cloneData.filter((item) => {
+          return keyFilter.some((filter) => {
+            return item[filter].toLowerCase().indexOf(word.toLowerCase()) > -1
+          })
+        })
+        set(() => ({ searchProduct: filterByWord }))
+      }
+    }
+  },
+
+  resetSearch: () => {
+    set(() => ({ searchProduct: [] }))
+  },
+
+  setTierPending: (productId, tierId) => {
+    const { data } = get().product;
+    const product = data.filter((el) => el.id === +productId)[0];
+    if (product) {
+      const tier = product.productTiers.filter((el) => el.id == +tierId)[0];
+      set(() => ({ tierPendingPayment: tier }));
     }
   },
 });

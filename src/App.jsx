@@ -4,6 +4,7 @@ import Router from "./routes";
 import { Suspense, useEffect } from "react";
 import { useStore } from "./store/useStore";
 import { USER_ROLE } from "./constants";
+
 export default function App() {
   const fetchProduct = useStore((state) => state.fetchProduct);
   const role = useStore((state) => state.authUser.role);
@@ -12,19 +13,38 @@ export default function App() {
   const fetchCreatorUser = useStore((state) => state.fetchCreatorUser);
   const resetCreatorProduct = useStore((state) => state.resetCreatorProduct);
   const fetchWaitingApproval = useStore((state) => state.fetchWaitingApproval);
-  const WaitingApprovalLoading = useStore((state) => state.waitingApproval.loading);
+  const waitingApprovalLoading = useStore((state) => state.waitingApproval.loading);
   const productLoading = useStore((state) => state.product.loading);
   const userLoading = useStore((state) => state.authUser.loading);
   const creatorUserLoading = useStore((state) => state.creatorUser.loading);
   const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
   const fetchDashboardData = useStore(state => state.fetchDashboardData);
   const dashboardDataLoading = useStore(state => state.dashboardData.loading);
+  const fetchComment = useStore((state) => state.fetchComment);
+  const commentLoading = useStore((state) => state.comments.loading);
+  const statsLoading = useStore((state) => state.stats.loading);
+  const fetchStats = useStore((state) => state.fetchStats);
+  const fetchHistory = useStore((state) => state.fetchHistory);
+  const historyLoading = useStore((state) => state.supporter.loading);
+  const user = useStore((state) => state.authUser.user);
+  const product = useStore((state) => state.product.data);
+  const fetchFiveProduct = useStore((state) => state.fetchFiveProduct);
 
   useEffect(() => {
     fetchProduct();
     fetchUser();
     fetchCreatorUser();
-  }, [fetchProduct, fetchUser, fetchCreatorUser]);
+    fetchComment();
+    fetchStats();
+    fetchFiveProduct();
+  }, [
+    fetchProduct,
+    fetchUser,
+    fetchCreatorUser,
+    fetchComment,
+    fetchStats,
+    fetchFiveProduct,
+  ]);
 
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {
@@ -32,6 +52,21 @@ export default function App() {
       fetchDashboardData()
     }
   }, [fetchWaitingApproval, role]);
+
+  useEffect(() => {
+    if (role === USER_ROLE.SUPPORTER) {
+      fetchHistory();
+    }
+  }, [fetchHistory, role]);
+
+  useEffect(() => {
+    fetchStats();
+    fetchFiveProduct();
+  }, [historyLoading, fetchStats, fetchFiveProduct]);
+
+  useEffect(() => {
+    fetchCreatorUser();
+  }, [user, product, fetchCreatorUser]);
 
   useEffect(() => {
     if (role === USER_ROLE.CREATOR) {
@@ -46,8 +81,12 @@ export default function App() {
     productLoading ||
     creatorUserLoading ||
     creatorProductLoading ||
-    WaitingApprovalLoading || 
+    waitingApprovalLoading || 
     dashboardDataLoading
+    commentLoading ||
+    statsLoading ||
+    historyLoading
+
   ) {
     return <Loading />;
   }

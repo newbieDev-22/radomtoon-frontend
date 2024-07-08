@@ -12,6 +12,7 @@ import validateProduct from "../../../validators/validate-create-project";
 import Spinner from "../../../components/Spinner";
 import Modal from "../../../components/Modal";
 import ConfirmModal from "../../../components/ConfirmModal";
+import RejectApproval from "../../admin/components/RejectApproval";
 
 const initialInputError = {
   productName: "",
@@ -35,10 +36,17 @@ export default function CampaignContent() {
 
   const { productId } = useParams();
   const filterData = filterProductByProductId(+productId);
+  const productPass = useStore((state) => state.productPass);
+  const productFailed = useStore((state) => state.productFailed);
+  const approvalLoading = useStore((state) => state.approvalLoading);
 
   const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData?.creatorId;
   const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
   const isPending = filterData?.approvalStatusId === APPROVAL_STATUS_ID.PENDING;
+  const isFinish =
+    filterData?.productStatusId === APPROVAL_STATUS_ID.SUCCESS ||
+    filterData?.productStatusId === APPROVAL_STATUS_ID.FAILED;
+  const isAdmin = role === USER_ROLE.ADMIN;
 
   const initialInput = {
     productName: filterData?.productName,
@@ -58,6 +66,7 @@ export default function CampaignContent() {
   const [isEdit, setIsEdit] = useState(false);
   const fileEl = useRef();
   const [file, setFile] = useState(null);
+  const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -68,6 +77,16 @@ export default function CampaignContent() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handlePassApproval = async () => {
+    await productPass(productId);
+    toast.success("Product approved successfully");
+    setIsOpenConfirmModal(false);
+  };
+
+  const handlePendingFailed = () => {
+    setIsOpenConfirmModal(true);
+  };
 
   const handleClickSave = async (e) => {
     try {
@@ -129,7 +148,6 @@ export default function CampaignContent() {
 
   const handleClickSendToApproval = async () => {
     try {
-      console.log("filterData", filterData);
       if (filterData.productMilestones.length !== 3) {
         toast.error("Please add all 3 milestones");
         return;
@@ -162,7 +180,7 @@ export default function CampaignContent() {
 
   return (
     <>
-      {productLoading && <Spinner transparent />}
+      {(productLoading || approvalLoading) && <Spinner transparent />}
 
       <input
         type="file"
@@ -185,7 +203,7 @@ export default function CampaignContent() {
           ) : null}
         </div>
         <div className="flex justify-center items-center gap-8">
-          <div className="flex justify-center bg-red-300 w-2/5">
+          <div className="flex justify-center w-2/5">
             {isEdit && file ? (
               <div onClick={() => fileEl.current.click()}>
                 <img
@@ -230,7 +248,22 @@ export default function CampaignContent() {
             )}
 
             <div>
-              {isCreator && !isApproved ? (
+              {!isApproved && !isFinish && isAdmin && isPending ? (
+                <div className="grid grid-cols-2 gap-4">
+                  <Button
+                    bg="red"
+                    width={"full"}
+                    onClick={() => {
+                      handlePendingFailed();
+                    }}
+                  >
+                    Reject
+                  </Button>
+                  <Button bg="green" width={"full"} onClick={() => handlePassApproval()}>
+                    Approve
+                  </Button>
+                </div>
+              ) : !isFinish && isCreator && !isApproved ? (
                 <div className="grid grid-cols-4 gap-2">
                   <Button
                     width={30}
@@ -261,7 +294,7 @@ export default function CampaignContent() {
                     Approval
                   </Button>
                 </div>
-              ) : (
+              ) : !isFinish && isApproved ? (
                 <div className="w-full">
                   <Button
                     width="full"
@@ -270,7 +303,7 @@ export default function CampaignContent() {
                     Support this project
                   </Button>
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
         </div>
@@ -288,6 +321,18 @@ export default function CampaignContent() {
           onConfirm={() => {
             handleDelete();
           }}
+        />
+      </Modal>
+      <Modal
+        open={isOpenConfirmModal}
+        onClose={() => setIsOpenConfirmModal(false)}
+        title={"Confirm Reject Register"}
+        width={40}
+      >
+        <RejectApproval
+          productFailed={productFailed}
+          onClose={() => setIsOpenConfirmModal(false)}
+          pendingFailedId={+productId}
         />
       </Modal>
     </>

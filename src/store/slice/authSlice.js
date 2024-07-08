@@ -11,10 +11,9 @@ import creatorApi from "../../apis/creator";
 export const authSlice = (set, get) => ({
   authUser: { user: null, loading: false, error: null, role: USER_ROLE.GUEST },
   // Function to handle user login
-  authLoading: false,
   login: async (credentials) => {
     try {
-      set(() => ({ authLoading: true }));
+      set((state) => ({ authUser: { ...state.authUser, loading: true } }));
 
       const loginResponse = await authApi.login(credentials);
       setAccessToken(loginResponse.data.accessToken);
@@ -31,7 +30,7 @@ export const authSlice = (set, get) => ({
 
       return true;
     } catch (err) {
-      console.error(err)
+      console.error(err);
       if (err instanceof AxiosError) {
         const message =
           err.response.status === 400
@@ -43,7 +42,7 @@ export const authSlice = (set, get) => ({
         return "An unexpected error occurred";
       }
     } finally {
-      set(() => ({ authLoading: false }));
+      set((state) => ({ authUser: { ...state.authUser, loading: false } }));
     }
   },
 
@@ -85,7 +84,7 @@ export const authSlice = (set, get) => ({
   // Function to update profile image based on user role
   updateProfileImage: async (formData) => {
     try {
-      set(() => ({ authLoading: true }));
+      set((state) => ({ authUser: { ...state.authUser, loading: true } }));
       const { role } = get().authUser;
 
       let result;
@@ -113,13 +112,13 @@ export const authSlice = (set, get) => ({
       }));
       return false;
     } finally {
-      set(() => ({ authLoading: false }));
+      set((state) => ({ authUser: { ...state.authUser, loading: false } }));
     }
   },
 
   updateInfo: async (data) => {
     try {
-      set(() => ({ authLoading: true }));
+      set((state) => ({ authUser: { ...state.authUser, loading: true } }));
 
       const getResponse = await creatorApi.updateInfoCreator(data);
 
@@ -135,7 +134,7 @@ export const authSlice = (set, get) => ({
         authUser: { ...state.authUser, error: "Failed to update info" },
       }));
     } finally {
-      set(() => ({ authLoading: false }));
+      set((state) => ({ authUser: { ...state.authUser, loading: false } }));
     }
   },
 });

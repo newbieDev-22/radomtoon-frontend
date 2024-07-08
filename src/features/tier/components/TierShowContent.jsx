@@ -16,14 +16,14 @@ export default function TierShowContent({
           <h3 className="font-semibold text-xl">Detail</h3>
           <p className="text-justify">{tierDetail}</p>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 py-2">
           {!isApproved && isCreator && (
             <Button width="full" onClick={() => setIsEdit(true)}>
               Edit
             </Button>
           )}
           <div
-            className={`w-full flex justify-center items-center font-bold px-4 rounded-md h-full text-center ${
+            className={`w-full h-10 flex justify-center items-center font-bold px-4 rounded-md text-center ${
               !isApproved && isCreator ? "" : "col-span-2"
             } bg-supporter-saturate`}
           >

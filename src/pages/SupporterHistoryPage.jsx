@@ -1,118 +1,30 @@
-import Button from "../components/Button";
-import TablePagination from "../components/TablePagination";
+import { useStore } from "../store/useStore";
+import SupporterHistoryCard from "../features/history/components/SupporterHistoryCard";
+import PaginationItem from "../components/PaginationItem";
 
-const columns = [
-  "Project",
-  "Tier",
-  "Price",
-  "Project Status",
-  "Delivery Status",
-  "Cancel support",
-];
-const data = [
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-red-600">Failed</div>,
-    <div>-</div>,
-    <Button>Cancel support</Button>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-green-600">Success</div>,
-    <div className="text-green-600">Delivered</div>,
-    <Button>Cancel support</Button>,
-  ],
-  [
-    "Product A",
-    1,
-    100,
-    <div>Pending</div>,
-    <div>Waiting product...</div>,
-    <Button>Cancel support</Button>,
-  ],
-  ["Product A", 1, 100, <div className="text-red-600">Failed</div>, <div>-</div>],
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-green-600">Success</div>,
-    <div className="text-green-600">Delivered</div>,
-  ],
-  ["Product A", 1, 100, <div>Pending</div>, <div>Waiting product...</div>],
-  ["Product A", 1, 100, <div className="text-red-600">Failed</div>, <div>-</div>],
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-green-600">Success</div>,
-    <div className="text-green-600">Delivered</div>,
-  ],
-  ["Product A", 1, 100, <div>Pending</div>, <div>Waiting product...</div>],
-  ["Product A", 1, 100, <div className="text-red-600">Failed</div>, <div>-</div>],
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-green-600">Success</div>,
-    <div className="text-green-600">Delivered</div>,
-  ],
-  ["Product A", 1, 100, <div>Pending</div>, <div>Waiting product...</div>],
-  ["Product A", 1, 100, <div className="text-red-600">Failed</div>, <div>-</div>],
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-green-600">Success</div>,
-    <div className="text-green-600">Delivered</div>,
-  ],
-  ["Product A", 1, 100, <div>Pending</div>, <div>Waiting product...</div>],
-  ["Product A", 1, 100, <div className="text-red-600">Failed</div>, <div>-</div>],
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-green-600">Success</div>,
-    <div className="text-green-600">Delivered</div>,
-  ],
-  ["Product A", 1, 100, <div>Pending</div>, <div>Waiting product...</div>],
-  ["Product A", 1, 100, <div className="text-red-600">Failed</div>, <div>-</div>],
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-green-600">Success</div>,
-    <div className="text-green-600">Delivered</div>,
-  ],
-  ["Product A", 1, 100, <div>Pending</div>, <div>Waiting product...</div>],
-  ["Product A", 1, 100, <div className="text-red-600">Failed</div>, <div>-</div>],
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-green-600">Success</div>,
-    <div className="text-green-600">Delivered</div>,
-  ],
-  ["Product A", 1, 100, <div>Pending</div>, <div>Waiting product...</div>],
-  ["Product A", 1, 100, <div className="text-red-600">Failed</div>, <div>-</div>],
-  [
-    "Product A",
-    1,
-    100,
-    <div className="text-green-600">Success</div>,
-    <div className="text-green-600">Delivered</div>,
-  ],
-  ["Product A", 1, 100, <div>Pending</div>, <div>Waiting product...</div>],
-];
+function SupporterHistoryAllCard({ currentItems }) {
+  return (
+    <>
+      {currentItems.map((item) => (
+        <SupporterHistoryCard key={item.id} {...item} />
+      ))}
+    </>
+  );
+}
 
 export default function SupporterHistoryPage() {
+  const histories = useStore((state) => state.supporter.history);
+
   return (
     <div className="px-28 py-6">
-      <h1 className="text-4xl font-semibold py-8">Activity History</h1>
-      <TablePagination data={data} columns={columns} />
+      <h1 className="text-4xl font-semibold py-8 flex flex-col">Activity History</h1>
+      <div>
+        <PaginationItem
+          itemsPerPage={5}
+          items={histories}
+          ItemComponent={SupporterHistoryAllCard}
+        />
+      </div>
     </div>
   );
 }

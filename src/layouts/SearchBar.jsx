@@ -1,6 +1,21 @@
+import { useState } from "react";
 import { SearchIcon } from "../icons";
+import { useStore } from "../store/useStore";
 
 export default function SearchBar() {
+  const setWord = useStore((state) => state.setWord)
+  const filterProduct = useStore((state) => state.filterProduct)
+  const word = useStore((state) => state.word)
+  const categoryFilter = useStore((state) => state.categoryFilter)
+
+  const [input, setInput] = useState("")
+
+  const handleClickSearch = () => {
+    setWord(input)
+    filterProduct(word, categoryFilter)
+    setInput("")
+  }
+
   return (
     <div className="w-full flex">
       <input
@@ -10,8 +25,13 @@ export default function SearchBar() {
         transition duration-300 md:h-14 py-2 bg-opacity-50 focus:outline-none
          focus:text-black bg-gray-200 placeholder:text-gray-600 focus:placeholder:text-gray-700
           text-gray-600 focus:bg-gray-200"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
       />
-      <button className="w-10 md:w-16 sm:w-10 bg-creator-normal transition rounded-r-lg flex justify-center items-center hover:bg-creator-saturate active:bg-creator-normal">
+      <button
+        onClick={handleClickSearch}
+        className="w-10 md:w-16 sm:w-10 bg-creator-normal 
+        transition rounded-r-lg flex justify-center items-center hover:bg-creator-saturate active:bg-creator-normal">
         <SearchIcon />
       </button>
     </div>

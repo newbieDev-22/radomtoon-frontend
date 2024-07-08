@@ -3,6 +3,8 @@ import axios from "../config/axios";
 const productApi = {};
 
 productApi.getProduct = () => axios.get("/products");
+productApi.getFiveProduct = () => axios.get("/products/five-product");
+
 productApi.getCreatorProduct = () => axios.get(`/products/creator`);
 productApi.createProduct = (formData) => axios.post("/products", formData);
 productApi.updateProduct = (productId, formData) =>
