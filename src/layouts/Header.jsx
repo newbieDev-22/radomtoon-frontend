@@ -34,6 +34,7 @@ export default function Header() {
       >
         <div className="flex justify-self-start ">
           <div
+            role="button"
             onClick={handleToHomePage}
             className="w-52 md:w-72 text-supporter-saturate">
             <RadomtoonIcon />
