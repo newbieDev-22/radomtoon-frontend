@@ -99,17 +99,8 @@ export default function CreatorDashboard({ title, status }) {
           </h1>
           <div className="px-5 pb-5">
             <div className="flex flex-col">
-              <div className="flex justify-between items-center p-3 border-b-2">
-                <h1>Planning</h1>
-                <Button
-                  onClick={() => setOpenEvidenceModal(true)}
-                  bg="creator-saturate"
-                  color="white"
-                >
-                  Send Evidence
-                </Button>
-
-                <div className="flex flex-col  gap-4">
+              <div className="flex justify-center items-center p-3 ">
+                <div className="flex flex-col  gap-4 w-full">
                   <div className="flex justify-between items-center p-3 border-b-2">
                     <h1>Planning</h1>
                     <Button
