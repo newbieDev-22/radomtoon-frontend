@@ -78,7 +78,7 @@ export default function TierCard({
         </button>
         {isEdit && !isApproved && isCreator ? (
           <TierEditContent
-            input={input}
+            input={{ ...input }}
             inputError={inputError}
             setInputError={setInputError}
             handleInputChange={handleInputChange}
@@ -90,7 +90,7 @@ export default function TierCard({
         ) : (
           <TierShowContent
             isEdit={isEdit}
-            input={input}
+            input={{ ...input }}
             setIsEdit={setIsEdit}
             isApproved={isApproved}
             isCreator={isCreator}
