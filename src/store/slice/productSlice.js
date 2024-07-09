@@ -5,13 +5,11 @@ import { APPROVAL_STATUS_ID } from "../../constants";
 
 export const productSlice = (set, get) => ({
   product: { data: [], loading: false, error: null, today: new Date() },
+  approvalProduct: [],
   searchProduct: [],
   fiveProduct: [],
-  s: [],
   tierPendingPayment: {},
   productLoading: false,
-  word: "",
-  categoryFilter: null,
 
   setWord: (value) => set(() => ({ word: value })),
   setCategoryFilter: (value) => set(() => ({ categoryFilter: value })),
@@ -264,13 +262,11 @@ export const productSlice = (set, get) => ({
     }
   },
 
-  filterProduct: () => {
+  filterProduct: (categoryId = 0, word = null) => {
     const approvalProduct = get().approvalProduct;
-    const word = get().word;
-    const categoryFilter = get().categoryFilter;
     const cloneData = [...approvalProduct];
     const keyFilter = ["productName", "creatorName"];
-    const filterByCategory = cloneData.filter((el) => el.categoryId === categoryFilter);
+    const filterByCategory = cloneData.filter((el) => el.categoryId === +categoryId);
     if (filterByCategory.length) {
       if (word) {
         const filterByWord = filterByCategory.filter((item) => {
