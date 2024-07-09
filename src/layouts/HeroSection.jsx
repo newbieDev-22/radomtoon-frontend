@@ -1,9 +1,8 @@
 import { useStore } from "../store/useStore";
 import StatsBanner from "../components/StatsBannerComponent/StatsBanner";
-import InitialHome from "../layouts/InitialHome";
 import HomeByFilterProduct from "../layouts/HomeByFilterProduct";
 
-export default function HomePage() {
+export default function HomeDummy() {
   const { projectSupport, towardIdea, contribution } = useStore(
     (state) => state.stats.data
   );
@@ -24,10 +23,9 @@ export default function HomePage() {
     return <HomeByFilterProduct />;
   } else {
     return (
-      <>
+
         <StatsBanner data={dataStatsBar} bg={HeroSection.img} />
-        <InitialHome />
-      </>
+
     );
   }
 }
