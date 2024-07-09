@@ -3,6 +3,7 @@ import { FilterIcon, FilterMonth } from "../../../icons";
 import { useState } from "react";
 import Dropdown from "../../Dropdown";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 
 const months = [
   "January",
@@ -21,7 +22,6 @@ const months = [
 
 export default function BarChart({ title, data, onClick, toggleBarChartData }) {
   const [month, setMonth] = useState(new Date());
-
   const today = new Date();
   const todayMonth = dayjs(today).format("MMMM");
   const filterData = data.filter((el) => el.month === todayMonth)[0];
@@ -35,6 +35,12 @@ export default function BarChart({ title, data, onClick, toggleBarChartData }) {
     const filterData = data.filter((el) => el.month === currentMonth)[0];
     setCurrentData(filterData.data);
   };
+
+  useEffect(() => {
+    const currentMonth = dayjs(month).format("MMMM");
+    const filterData = data.filter((el) => el.month === currentMonth)[0];
+    setCurrentData(filterData.data);
+  }, [data]);
 
   return (
     <div className="w-full py-4 px-10 flex justify-center rounded-xl bg-white ">
