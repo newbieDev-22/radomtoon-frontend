@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import DoughnutChart from "../../../components/chart/doughnutChart/DoughnutChart";
 import BarChart from "../../../components/chart/barChart/BarChartEx";
 import LineChart from "../../../components/chart/lineChart/LineChart";
@@ -7,36 +6,34 @@ import Map from "../../../components/chart/mapComponent/Map";
 import TextBlock from "../../../components/chart/textBlock/TextBlock";
 import { useStore } from "../../../store/useStore";
 
-const barChartMockSupporters = [
-  { label: "Game", value: 5892 },
-  { label: "Technology", value: 4178 },
-  { label: "Film", value: 3941 },
-  { label: "Design", value: 1482 },
-  { label: "Music", value: 548 },
-];
-const barChartMockFunds = [
-  { label: "Game", value: 157282 },
-  { label: "Technology", value: 77516 },
-  { label: "Film", value: 74201 },
-  { label: "Design", value: 47501 },
-  { label: "Music", value: 9501 },
-];
-
 export default function AdminDashboard() {
   const textBlockData = useStore((state) => state.dashboardData.textBlockData);
   const lineChartData = useStore((state) => state.dashboardData.lineChartData);
   const doughnutChartData = useStore((state) => state.dashboardData.doughnutChartData);
   const mapData = useStore((state) => state.dashboardData.geoJsonData);
+  const barChartDataAll = useStore((state) => state.dashboardData.barChartData);
 
   const [toggleBarChartData, setToggleBarChartData] = useState(false);
   // const [ lineChartData, setLineChartData ] = useState(lineChartMockData)
-  const [barChartData, setBarChartData] = useState(barChartMockSupporters);
+  const barChartSupporters = barChartDataAll.map((el) => ({
+    month: el.month,
+    data: el.topFiveByTotalSupporter,
+  }));
+  const [barChartData, setBarChartData] = useState(barChartSupporters);
 
   const handleToggleData = () => {
+    const barChartSupporters = barChartDataAll.map((el) => ({
+      month: el.month,
+      data: el.topFiveByTotalSupporter,
+    }));
+    const barChartFund = barChartDataAll.map((el) => ({
+      month: el.month,
+      data: el.topFiveByTotalFund,
+    }));
     setToggleBarChartData(!toggleBarChartData);
     toggleBarChartData
-      ? setBarChartData(barChartMockSupporters)
-      : setBarChartData(barChartMockFunds);
+      ? setBarChartData(barChartSupporters)
+      : setBarChartData(barChartFund);
   };
 
   return (
