@@ -39,9 +39,7 @@ export const creatorUserSlice = (set, get) => ({
   updateCreatorUser: (creatorId, input) => {
     const { data } = get().creatorUser;
     const dummyCreatorUser = [...data];
-    const foundedIndex = dummyCreatorUser.findIndex(
-      (el) => el.id === +creatorId
-    );
+    const foundedIndex = dummyCreatorUser.findIndex((el) => el.id === +creatorId);
     if (foundedIndex !== -1) {
       dummyCreatorUser[foundedIndex] = {
         ...dummyCreatorUser[foundedIndex],
@@ -85,19 +83,16 @@ export const creatorUserSlice = (set, get) => ({
       const { data } = get().delivery;
       const dummyData = [...data];
 
-      const supporterIndex = dummyData.findIndex(
-        (el) => el.supporterId === +supporterId
-      );
+      const supporterIndex = dummyData.findIndex((el) => el.supporterId === +supporterId);
 
-      if(supporterIndex !== -1){
-
-        dummyData[supporterIndex]["deliveryStatus"]=DELIVERY_STATUS.DELIVERED
+      if (supporterIndex !== -1) {
+        dummyData[supporterIndex]["deliveryStatus"] = DELIVERY_STATUS.DELIVERED;
       }
 
       set((state) => ({
         delivery: {
           ...state.delivery,
-          data: dummyData
+          data: dummyData,
         },
       }));
     } catch (err) {

@@ -7,7 +7,7 @@ import { USER_ROLE } from "../../../constants";
 export default function ProfileImage({ selectedCreator }) {
   const user = useStore((state) => state.authUser.user);
   const role = useStore((state) => state.authUser.role);
-  const profileImage = user.profileImage || selectedCreator.profileImage || null;
+  const profileImage = user?.profileImage || selectedCreator.profileImage || null;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const profileUpload = useStore((state) => state.updateProfileImage);
 
