@@ -7,6 +7,7 @@ import ConfirmModal from "../../../components/ConfirmModal";
 import { useNavigate } from "react-router-dom";
 import { USER_ROLE } from "../../../constants";
 import { useStore } from "../../../store/useStore";
+import { toast } from "react-toastify";
 
 export default function TierCard({
   id,
@@ -61,6 +62,9 @@ export default function TierCard({
   const handleGoToPayment = () => {
     if (role === USER_ROLE.SUPPORTER) {
       navigate(`/campaign/${productId}/tier/${id}/payment`);
+    }
+    else if(role === USER_ROLE.GUEST){
+      navigate('/supporter-register')
     }
   };
 

@@ -8,8 +8,9 @@ import EvidenceModalDetail from "../../creator/components/EvidenceModalDetail";
 import Button from "../../../components/Button";
 import { useStore } from "../../../store/useStore";
 import { useParams } from "react-router-dom";
-import { APPROVAL_STATUS_ID, STATUS_PRODUCT_THEME } from "../../../constants";
+import { APPROVAL_STATUS_ID, STATUS_PRODUCT_THEME, USER_ROLE } from "../../../constants";
 import getProductStatus from "../../../utils/get-product-status";
+import { Navigate } from "react-router-dom";
 
 const lineChartMockData = [
   { label: "Jan", supporter: 64854, creator: 50561, project: 35901 },
