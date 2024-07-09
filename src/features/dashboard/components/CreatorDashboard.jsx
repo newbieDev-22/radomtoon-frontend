@@ -14,31 +14,20 @@ import {
   STATUS_PRODUCT_THEME,
 } from "../../../constants";
 import getProductStatus from "../../../utils/get-product-status";
-import { Navigate } from "react-router-dom";
-
-const lineChartData = [
-  { label: "Jan", fund: 64854 },
-  { label: "Feb", fund: 54628 },
-  { label: "Mar", fund: 117238 },
-  { label: "Apr", fund: 82830 },
-  { label: "May", fund: 91208 },
-  { label: "Jun", fund: 103609 },
-  { label: "Jul", fund: 90974 },
-  { label: "Aug", fund: 82919 },
-];
 
 export default function CreatorDashboard() {
   const { productId } = useParams();
-  const fetchCreatorDashboardData = useStore(state => state.fetchCreatorDashboardData);
-  const pieChartData = useStore( state => state.creatorDashboardData.pieChartData)
-  
+  const fetchCreatorDashboardData = useStore((state) => state.fetchCreatorDashboardData);
+  const pieChartData = useStore((state) => state.creatorDashboardData.pieChartData);
+  const lineChartData = useStore((state) => state.creatorDashboardData.lineChartData);
+
   useEffect(() => {
     if (productId) {
       fetchCreatorDashboardData(productId);
-      }
+    }
   }, [productId, fetchCreatorDashboardData]);
-      
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   const [currentMilestone, setCurrentMilestone] = useState(null);
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
