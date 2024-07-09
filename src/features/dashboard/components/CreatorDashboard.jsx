@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Milestone from "../../product-milestone/components/Milestone";
 import PieChart from "../../../components/chart/pieChart/PieChart";
 import LineChart from "../../../components/chart/lineChart/LineChart";
@@ -16,57 +16,32 @@ import {
 import getProductStatus from "../../../utils/get-product-status";
 import { Navigate } from "react-router-dom";
 
-const lineChartMockData = [
-  { label: "Jan", supporter: 64854, creator: 50561, project: 35901 },
-  { label: "Feb", supporter: 54628, creator: 34628, project: 46863 },
-  { label: "Mar", supporter: 117238, creator: 147238, project: 79104 },
-  { label: "Apr", supporter: 82830, creator: 72830, project: 46815 },
-  { label: "May", supporter: 91208, creator: 82919, project: 70285 },
-  { label: "Jun", supporter: 103609, creator: 91208, project: 83851 },
-  { label: "Jul", supporter: 90974, creator: 103609, project: 69413 },
-  { label: "Aug", supporter: 82919, creator: 62407, project: 54910 },
-  {
-    label: "Sep",
-    supporter: 62407,
-    creator: 47081,
-    project: 35193,
-    supporterForecast: 62407,
-    creatorForecast: 47081,
-    projectForecast: 35193,
-  },
-  {
-    label: "Oct",
-    supporterForecast: 45324,
-    creatorForecast: 62812,
-    projectForecast: 41862,
-  },
-  {
-    label: "Nov",
-    supporterForecast: 47978,
-    creatorForecast: 20694,
-    projectForecast: 39591,
-  },
-  {
-    label: "Dec",
-    supporterForecast: 39175,
-    creatorForecast: 82465,
-    projectForecast: 59031,
-  },
-];
-
-const pieChartMockData = [
-  { label: "Tier 1", value: 50888 },
-  { label: "Tier 2", value: 28943 },
-  { label: "Tier 3", value: 31424 },
+const lineChartData = [
+  { label: "Jan", fund: 64854 },
+  { label: "Feb", fund: 54628 },
+  { label: "Mar", fund: 117238 },
+  { label: "Apr", fund: 82830 },
+  { label: "May", fund: 91208 },
+  { label: "Jun", fund: 103609 },
+  { label: "Jul", fund: 90974 },
+  { label: "Aug", fund: 82919 },
 ];
 
 export default function CreatorDashboard() {
   const { productId } = useParams();
+  const fetchCreatorDashboardData = useStore(state => state.fetchCreatorDashboardData);
+  const pieChartData = useStore( state => state.creatorDashboardData.pieChartData)
+  
+  useEffect(() => {
+    if (productId) {
+      fetchCreatorDashboardData(productId);
+      }
+  }, [productId, fetchCreatorDashboardData]);
+      
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
   const [currentMilestone, setCurrentMilestone] = useState(null);
   const [openEvidenceModal, setOpenEvidenceModal] = useState(false);
-
-  const [lineChartData, setLineChartData] = useState(lineChartMockData);
-  const [pieChartData, setPieChartData] = useState(pieChartMockData);
 
   const creatorProductData = useStore((state) => state.creatorProduct.data);
   const selectedProduct = creatorProductData.filter((el) => el.id === +productId)[0];
