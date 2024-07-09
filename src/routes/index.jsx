@@ -1,5 +1,7 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProtectRouteCreator from "../features/authentication/components/ProtectRouteCreator";
+import ProtectRouteSupporter from "../features/authentication/components/ProtectRouteSupporter";
 
 
 const LandingPage = lazy(() => import("../pages/LandingPage"));
@@ -11,14 +13,16 @@ const HomePage = lazy(() => import("../pages/HomePage"));
 const CampaignPage = lazy(() => import("../pages/CampaignPage"));
 const SelectTierPage = lazy(() => import("../pages/SelectTierPage"));
 const PaymentPage = lazy(() => import("../pages/PaymentPage"));
-const SupporterHistoryPage = lazy(() => import("../pages/SupporterHistoryPage"));
+const SupporterHistoryPage = lazy(() =>
+  import("../pages/SupporterHistoryPage")
+);
 const CreatorPanel = lazy(() => import("../pages/CreatorPanel"));
 const AdminPanel = lazy(() => import("../pages/AdminPanel"));
 const CreatorManagePage = lazy(() => import("../pages/CreatorManagePage"));
 const CampaignSetup = lazy(() => import("../pages/CampaignSetup"));
+const HomeByFilterProduct = lazy(() => import("../layouts/HomeByFilterProduct"));
 
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
-const CategoryContainer = lazy(() => import("../features/home-filter/components/CategoryContainer"));
 
 const HomeDummy = lazy(() => import("../pages/HomeDummy"));
 
@@ -33,13 +37,38 @@ const router = createBrowserRouter([
       { path: "/campaign/:productId/tier", element: <SelectTierPage /> },
       {
         path: "/campaign/:productId/tier/:tierId/payment",
-        element: <PaymentPage />,
+        element: (
+          <ProtectRouteSupporter>
+            <PaymentPage />
+          </ProtectRouteSupporter>
+        ),
       },
-      { path: "/supporter-histories", element: <SupporterHistoryPage /> },
+      {
+        path: "/supporter-histories",
+        element: (
+          <ProtectRouteSupporter>
+            <SupporterHistoryPage />
+          </ProtectRouteSupporter>
+        ),
+      },
       { path: "/creator-panel/:creatorId", element: <CreatorPanel /> },
-      { path: "/creator-campaign-setup", element: <CampaignSetup /> },
-      { path: "/product/:categotyProductId/", element: <CategoryContainer /> },
-      { path: "/product/:productId/status", element: <CreatorManagePage /> },
+
+      {
+        path: "/creator-campaign-setup",
+        element: (
+          <ProtectRouteCreator>
+            <CampaignSetup />
+          </ProtectRouteCreator>
+        ),
+      },
+      {
+        path: "/product/:productId/status",
+        element: (
+          <ProtectRouteCreator>
+            <CreatorManagePage />
+          </ProtectRouteCreator>
+        ),
+      },
       { path: "/admin-panel", element: <AdminPanel /> },
       { path: "/home-dummy", element: <HomeDummy /> },
     ],

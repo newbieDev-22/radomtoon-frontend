@@ -6,16 +6,19 @@ import dayjs from "dayjs";
 import { USER_ROLE } from "../../../constants";
 import getProductStatus from "../../../utils/get-product-status";
 
-
 export default function CreatorCreatedProduct() {
   const { creatorId } = useParams();
   const user = useStore((state) => state.authUser.user);
   const role = useStore((state) => state.authUser.role);
-  const filterProductByCreatorId = useStore((state) => state.filterProductByCreatorId);
+  const filterProductByCreatorId = useStore((state) => state.filterProductByCreatorId); 
   const shouldFilterByApprovalStatus =
     role === USER_ROLE.CREATOR && user.id === +creatorId;
   const filterData = filterProductByCreatorId(creatorId, !shouldFilterByApprovalStatus);
+
+  
   const today = useStore((state) => state.product.today);
+  const isCorrectCreator = user?.id === +creatorId && role === USER_ROLE.CREATOR
+  const profileImage = isCorrectCreator ? user?.profileImage : filterData[0]?.profileImage || null;
 
   const navigate = useNavigate();
 
@@ -53,12 +56,13 @@ export default function CreatorCreatedProduct() {
                   : 0
               }
               content={el.summaryDetail}
-              avatarImage={el.profileImage}
+              avatarImage={isCorrectCreator ? profileImage : el.profileImage}
               vid={el.productVideo}
               productId={el.id}
               creatorId={el.creatorId}
               isEdit={true}
               projectStatus={getProductStatus(el)}
+              isCorrectCreator={isCorrectCreator}
             />
           </div>
         ))}

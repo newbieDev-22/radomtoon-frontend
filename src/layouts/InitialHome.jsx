@@ -32,11 +32,10 @@ const mainCardVariants = {
 export default function InitialHome() {
   const today = useStore((state) => state.product.today);
   const fiveProduct = useStore((state) => state.fiveProduct);
-
   return (
     <div>
       <div className="flex justify-center gap-10 mt-10 mb-20">
-        {fiveProduct.slice(0, 1).map((el) => (
+        {fiveProduct?.slice(0, 1).map((el) => (
           <motion.div key={el.id} {...mainCardVariants}>
             <ImageCard
               widthSize="large"
@@ -70,7 +69,7 @@ export default function InitialHome() {
           animate="show"
           className="grid grid-cols-2 gap-4 mb-20"
         >
-          {fiveProduct.slice(1, 5).map((el) => (
+          {fiveProduct?.slice(1, 5).map((el) => (
             <motion.div key={el.id} variants={itemVariants}>
               <ImageCard
                 key={el.id}

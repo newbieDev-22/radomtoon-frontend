@@ -23,6 +23,7 @@ export default function ImageCard({
   isEdit = false,
   progressHeight = "medium",
   projectStatus = STATUS_PRODUCT.DRAFTING,
+  isCorrectCreator=false
 }) {
   const [hover, setHover] = useState(false);
   const handleMouseEnter = () => setHover(true);
@@ -149,6 +150,7 @@ export default function ImageCard({
               <button
                 className={`flex w-32 h-4 justify-center items-center rounded-md text-xs font-semibold px-2 py-3 ${STATUS_PRODUCT_THEME[projectStatus].bg}`}
                 onClick={handleClickDotMenu}
+                disabled={!isCorrectCreator}
               >
                 {STATUS_PRODUCT_THEME[projectStatus].text}
               </button>

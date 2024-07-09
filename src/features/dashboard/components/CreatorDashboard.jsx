@@ -8,8 +8,13 @@ import EvidenceModalDetail from "../../creator/components/EvidenceModalDetail";
 import Button from "../../../components/Button";
 import { useStore } from "../../../store/useStore";
 import { useParams } from "react-router-dom";
-import { APPROVAL_STATUS_ID, STATUS_PRODUCT_THEME } from "../../../constants";
+import {
+  APPROVAL_STATUS_ID,
+  PRODUCT_STATUS_ID,
+  STATUS_PRODUCT_THEME,
+} from "../../../constants";
 import getProductStatus from "../../../utils/get-product-status";
+import { Navigate } from "react-router-dom";
 
 const lineChartMockData = [
   { label: "Jan", supporter: 64854, creator: 50561, project: 35901 },
@@ -64,26 +69,29 @@ export default function CreatorDashboard() {
   const [pieChartData, setPieChartData] = useState(pieChartMockData);
 
   const creatorProductData = useStore((state) => state.creatorProduct.data);
-  const selectedProduct =  creatorProductData
-  .filter((el) => el.id === +productId)
+  const selectedProduct = creatorProductData.filter((el) => el.id === +productId)[0];
 
-  const status = getProductStatus(selectedProduct[0])
-  const title = selectedProduct[0]?.productName
+  const status = getProductStatus(selectedProduct);
+  const title = selectedProduct?.productName;
 
-  const milestoneDataList = selectedProduct.map((el) => el.productMilestones)[0];
+  const milestoneDataList = selectedProduct.productMilestones;
 
   const approvalStatusObj = {};
   milestoneDataList.forEach((element) => {
     approvalStatusObj[element.milestoneRankId] = element.approvalStatusId;
   });
-
-
-
+  console.log(
+    "selectedProduct.productStatusId !== PRODUCT_STATUS_ID.SUCCESS",
+    selectedProduct.productStatusId,
+    PRODUCT_STATUS_ID.SUCCESS
+  );
   return (
     <div className="py-10 px-10 md:px-40 2xl:px-80 bg-[#b6e5e9]">
       <div className="py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
         <h1 className="text-center text-radomtoon-bright text-4xl font-bold ">{title}</h1>
-        <h2 className={`text-center font-semibold text-2xl py-1 ${STATUS_PRODUCT_THEME[status].color}`}>
+        <h2
+          className={`text-center font-semibold text-2xl py-1 ${STATUS_PRODUCT_THEME[status].color}`}
+        >
           {`Status : ${status}`}
         </h2>
       </div>
@@ -115,7 +123,8 @@ export default function CreatorDashboard() {
                       }}
                       disabled={
                         approvalStatusObj[1] === APPROVAL_STATUS_ID.SUCCESS ||
-                        approvalStatusObj[1] === APPROVAL_STATUS_ID.PENDING
+                        approvalStatusObj[1] === APPROVAL_STATUS_ID.PENDING ||
+                        selectedProduct.productStatusId !== PRODUCT_STATUS_ID.SUCCESS
                       }
                     >
                       Send Evidence
