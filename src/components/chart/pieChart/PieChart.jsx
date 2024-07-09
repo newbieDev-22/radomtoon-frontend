@@ -2,7 +2,9 @@ import { Pie } from "react-chartjs-2"
 import { Chart as ChartJS } from "chart.js/auto"
 import { getResponsiveValue } from "../../../utils/responsive"
 
-export default function PieChart({ title, data }) {
+export default function PieChart({ title, data=[] }) {
+
+  const totalValue = data.reduce((acc, cur) => acc + (cur?.value ?? 0), 0);
   const zoomLevels = {
     sm: 'right',
     '2xl': 'bottom'
@@ -22,11 +24,11 @@ export default function PieChart({ title, data }) {
                 datasets: [
                   {
                     label: "Count",
-                    data: data.map((data) => data.value),
+                    data: data.map((data) => data?.value),
                     backgroundColor: [
-                      "#4290C0",
+                      "#7BCFF6",
                       "#54E6ED",
-                      "#91C4D9",
+                      "#5A91F2",
                     ],
                   },
                 ],
@@ -40,15 +42,20 @@ export default function PieChart({ title, data }) {
               }}
             />
       </div>
-      <div className="grid gap-4 grid-cols-3 w-full text-center">
-        <span className="font-extrabold text-2xl xl:text-4xl text-[#4290C0]">{(data[0].value/(data.reduce( (acc, cur) => acc + cur.value, 0))*100).toFixed(0)}%</span>
-        <span className="font-extrabold text-2xl xl:text-4xl text-[#54E6ED]">{(data[1].value/(data.reduce( (acc, cur) => acc + cur.value, 0))*100).toFixed(0)}%</span>
-        <span className="font-extrabold text-2xl xl:text-4xl text-[#91C4D9]">{(data[2].value/(data.reduce( (acc, cur) => acc + cur.value, 0))*100).toFixed(0)}%</span>
+        {totalValue>0 
+          ? 
+          <div className="grid gap-4 grid-cols-3 w-full text-center">
+            <span className="font-extrabold text-2xl xl:text-4xl text-[#7BCFF6]">{(data[0]?.value/(data.reduce( (acc, cur) => acc + cur.value, 0))*100).toFixed(0)}%</span>
+            <span className="font-extrabold text-2xl xl:text-4xl text-[#54E6ED]">{(data[1]?.value/(data.reduce( (acc, cur) => acc + cur.value, 0))*100).toFixed(0)}%</span>
+            <span className="font-extrabold text-2xl xl:text-4xl text-[#5A91F2]">{(data[2]?.value/(data.reduce( (acc, cur) => acc + cur.value, 0))*100).toFixed(0)}%</span>
 
-        <span className="font-semibold text-base xl:text-xl text-radomtoon-bright">THB {data[0].value.toLocaleString()}</span>
-        <span className="font-semibold text-base xl:text-xl text-radomtoon-bright">THB {data[1].value.toLocaleString()}</span>
-        <span className="font-semibold text-base xl:text-xl text-radomtoon-bright">THB {data[2].value.toLocaleString()}</span>
-      </div>
+            <span className="font-semibold text-base xl:text-xl text-radomtoon-bright">THB {data[0]?.value.toLocaleString()}</span>
+            <span className="font-semibold text-base xl:text-xl text-radomtoon-bright">THB {data[1]?.value.toLocaleString()}</span>
+            <span className="font-semibold text-base xl:text-xl text-radomtoon-bright">THB {data[2]?.value.toLocaleString()}</span>
+          </div>
+        :
+        'No tier data available'
+        }
     </div>
     )
 }
