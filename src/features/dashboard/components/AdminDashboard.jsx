@@ -27,7 +27,6 @@ export default function AdminDashboard() {
   const lineChartData = useStore((state) => state.dashboardData.lineChartData);
   const doughnutChartData = useStore((state) => state.dashboardData.doughnutChartData);
   const mapData = useStore((state) => state.dashboardData.geoJsonData);
-  console.log(mapData);
 
   const [toggleBarChartData, setToggleBarChartData] = useState(false);
   // const [ lineChartData, setLineChartData ] = useState(lineChartMockData)
