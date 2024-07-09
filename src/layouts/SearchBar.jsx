@@ -2,21 +2,19 @@ import { useState } from "react";
 import { SearchIcon } from "../icons";
 import { useStore } from "../store/useStore";
 import { useNavigate } from "react-router-dom";
+import { CATEGORIES_TYPE_MAP_NAME } from "../constants";
 
 export default function SearchBar() {
   const setWord = useStore((state) => state.setWord);
-  const filterProduct = useStore((state) => state.filterProduct);
-  const word = useStore((state) => state.word);
   const categoryFilter = useStore((state) => state.categoryFilter);
   const navigate = useNavigate();
 
   const [input, setInput] = useState("");
 
   const handleClickSearch = () => {
-    setInput("");
     setWord(input);
-    filterProduct(word, categoryFilter);
-    navigate("/");
+    navigate(`/product/${categoryFilter}/?category=${CATEGORIES_TYPE_MAP_NAME[categoryFilter]}&word=${input}`);
+    setInput("");
   };
 
   return (

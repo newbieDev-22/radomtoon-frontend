@@ -3,6 +3,9 @@ import ImageCard from "../components/ImageCard";
 import { useStore } from "../store/useStore";
 import { motion } from "framer-motion";
 import { CATEGORIES_TYPE_MAP_NAME } from "../constants";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const containerVariants = {
   hidden: { opacity: 1 },
@@ -20,11 +23,21 @@ const itemVariants = {
 };
 
 export default function HomeByFilterProduct() {
+
+  const { categoryId } = useParams()
+  const [seatchParams] = useSearchParams()
+
+  const word = seatchParams.get("word")
+
   const today = useStore((state) => state.product.today);
   const searchProduct = useStore((state) => state.searchProduct);
   const categoryFilter = useStore((state) => state.categoryFilter);
-  const word = useStore((state) => state.word);
   const setCategoryFilter = useStore((state) => state.setCategoryFilter);
+  const filterProduct = useStore((state) => state.filterProduct)
+
+  useEffect(() => {
+    filterProduct(word, categoryId)
+  }, [seatchParams])
 
   if (!searchProduct.length && word) {
     setCategoryFilter(null);
@@ -37,11 +50,11 @@ export default function HomeByFilterProduct() {
     <div>
       {categoryFilter && word ? (
         <h1 className="text-center text-4xl font-bold m-10">
-          Filter by : {CATEGORIES_TYPE_MAP_NAME[categoryFilter]} category and word: {word}{" "}
+          Filter by : {categoryId} category and word: {word}{" "}
         </h1>
       ) : categoryFilter ? (
         <h1 className="text-center text-4xl font-bold m-10">
-          Filter by : {CATEGORIES_TYPE_MAP_NAME[categoryFilter]} category
+          Filter by : {categoryId} category
         </h1>
       ) : (
         <h1 className="text-center text-4xl font-bold m-10">Filter by : {word}</h1>
