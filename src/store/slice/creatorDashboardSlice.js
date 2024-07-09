@@ -1,45 +1,43 @@
 import statsApi from "../../apis/stats";
 
-export const creatorDashboardSlice = set => ({
+export const creatorDashboardSlice = (set) => ({
   creatorDashboardData: {
     pieChartData: [],
-
+    lineChartData: [],
     loading: false,
     error: null,
   },
-  creatorDashboardLoading : false,
-  fetchCreatorDashboardData: async (id) => {
+  creatorDashboardLoading: false,
+  fetchCreatorDashboardData: async (productId) => {
     try {
-      set( state => ({
+      set((state) => ({
         creatorDashboardData: {
           ...state.creatorDashboardData,
-          loading: true
+          loading: true,
         },
       }));
 
-      const [
-        tiersPercentage,
-      ] = await Promise.all([
-        statsApi.tiersPercentage(id),
-      ])
+      const [tiersPercentage, totalFundData] = await Promise.all([
+        statsApi.tiersPercentage(productId),
+        statsApi.totalFund(productId),
+      ]);
 
-      set( state  => ({
+      set((state) => ({
         creatorDashboardData: {
           ...state.creatorDashboardData,
-          pieChartData: tiersPercentage.data.combineTier
-        }
-      }))
-
+          pieChartData: tiersPercentage.data.combineTier,
+          lineChartData: totalFundData.data.cumulativeFundAllMonth,
+        },
+      }));
     } catch (err) {
-      console.error(err)
+      console.error(err);
     } finally {
-      set( state => ({
+      set((state) => ({
         creatorDashboardData: {
           ...state.creatorDashboardData,
-          loading:false
-        }
-      }))
+          loading: false,
+        },
+      }));
     }
   },
-
-})
+});
