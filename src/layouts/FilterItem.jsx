@@ -11,7 +11,7 @@ export default function FilterItem({ page, categoryId }) {
     setWord("");
     setCategoryFilter(categoryId);
     filterProduct(categoryId);
-    navigate("/");
+    navigate(`/product/${categoryId}/?category=${page}`);
   };
 
   return (

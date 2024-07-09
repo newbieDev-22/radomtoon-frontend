@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectRouteCreator from "../features/authentication/components/ProtectRouteCreator";
 import ProtectRouteSupporter from "../features/authentication/components/ProtectRouteSupporter";
 
+
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -19,11 +20,9 @@ const CreatorPanel = lazy(() => import("../pages/CreatorPanel"));
 const AdminPanel = lazy(() => import("../pages/AdminPanel"));
 const CreatorManagePage = lazy(() => import("../pages/CreatorManagePage"));
 const CampaignSetup = lazy(() => import("../pages/CampaignSetup"));
+const HomeByFilterProduct = lazy(() => import("../layouts/HomeByFilterProduct"));
 
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
-const CategoryContainer = lazy(() =>
-  import("../features/home-filter/components/CategoryContainer")
-);
 
 const HomeDummy = lazy(() => import("../pages/HomeDummy"));
 
@@ -53,6 +52,7 @@ const router = createBrowserRouter([
         ),
       },
       { path: "/creator-panel/:creatorId", element: <CreatorPanel /> },
+
       {
         path: "/creator-campaign-setup",
         element: (
@@ -61,7 +61,6 @@ const router = createBrowserRouter([
           </ProtectRouteCreator>
         ),
       },
-      { path: "/product/:categoryProductId/", element: <CategoryContainer /> },
       {
         path: "/product/:productId/status",
         element: (
