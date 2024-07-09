@@ -2,6 +2,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
 export default function LineChart({ title, data }) {
+  console.log("data", data);
   return (
     <div className="w-full py-5 rounded-2xl bg-white flex flex-col justify-center items-center ">
       <div className="w-full px-10 justify-start text-xl font-semibold text-radomtoon-bright">
@@ -17,6 +18,12 @@ export default function LineChart({ title, data }) {
                 data: data.map((data) => data.fund),
                 backgroundColor: "#32e7d3",
                 borderColor: "#32e7d3",
+              },
+              {
+                label: "Forecast",
+                data: data.map((data) => data.forecast),
+                backgroundColor: "#ffd564",
+                borderColor: "#ffd564",
               },
               // {
               //     label: "Supporters",

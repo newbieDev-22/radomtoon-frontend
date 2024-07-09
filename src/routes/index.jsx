@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import ProtectRouteAdmin from "../features/authentication/components/ProtectRouteAdmin";
 
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
@@ -18,7 +18,9 @@ const CreatorManagePage = lazy(() => import("../pages/CreatorManagePage"));
 const CampaignSetup = lazy(() => import("../pages/CampaignSetup"));
 
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
-const CategoryContainer = lazy(() => import("../features/home-filter/components/CategoryContainer"));
+const CategoryContainer = lazy(() =>
+  import("../features/home-filter/components/CategoryContainer")
+);
 
 const HomeDummy = lazy(() => import("../pages/HomeDummy"));
 
@@ -38,9 +40,16 @@ const router = createBrowserRouter([
       { path: "/supporter-histories", element: <SupporterHistoryPage /> },
       { path: "/creator-panel/:creatorId", element: <CreatorPanel /> },
       { path: "/creator-campaign-setup", element: <CampaignSetup /> },
-      { path: "/product/:categotyProductId/", element: <CategoryContainer /> },
+      { path: "/product/:categoryProductId/", element: <CategoryContainer /> },
       { path: "/product/:productId/status", element: <CreatorManagePage /> },
-      { path: "/admin-panel", element: <AdminPanel /> },
+      {
+        path: "/admin-panel",
+        element: (
+          <ProtectRouteAdmin>
+            <AdminPanel />
+          </ProtectRouteAdmin>
+        ),
+      },
       { path: "/home-dummy", element: <HomeDummy /> },
     ],
   },
