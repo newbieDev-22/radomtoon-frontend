@@ -22,11 +22,11 @@ export default function TierSummaryCard() {
         />
       </figure>
       <div className="card-body items-center text-center px-2">
-        <div className="flex flex-col justify-between mb-3">
-          <p className="font-semibold text-lg max-w-64 text-left border-b-2">
+        <div className="flex flex-col justify-between mb-3 w-full">
+          <p className="font-semibold text-lg max-w-64 text-left">
             {tierPendingPayment.tierName}
           </p>
-          <span className="flex justify-end font-extrabold text-sm mt-2">Total :</span>
+          <span className="flex justify-end font-extrabold text-sm mt-2  border-t-2">Total :</span>
           <span className="flex justify-end font-semibold text-xl">{`${tierPendingPayment.price} ฿`}</span>
         </div>
       </div>
