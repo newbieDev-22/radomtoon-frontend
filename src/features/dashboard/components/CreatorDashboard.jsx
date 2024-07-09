@@ -14,6 +14,7 @@ import {
   STATUS_PRODUCT_THEME,
 } from "../../../constants";
 import getProductStatus from "../../../utils/get-product-status";
+import { Navigate } from "react-router-dom";
 
 const lineChartMockData = [
   { label: "Jan", supporter: 64854, creator: 50561, project: 35901 },
