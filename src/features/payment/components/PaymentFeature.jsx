@@ -30,7 +30,7 @@ function PaymentFeature() {
 
   return (
     <div className="w-full">
-      <h1 className="text-4xl font-bold pb-5">Payment Methods</h1>
+      <h1 className="text-4xl font-bold pb-5 text-center">Payment Methods</h1>
       {clientSecret && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <CheckoutForm />
