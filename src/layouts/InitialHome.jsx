@@ -32,7 +32,6 @@ const mainCardVariants = {
 export default function InitialHome() {
   const today = useStore((state) => state.product.today);
   const fiveProduct = useStore((state) => state.fiveProduct);
-  console.log(fiveProduct);
   return (
     <div>
       <div className="flex justify-center gap-10 mt-10 mb-20">
