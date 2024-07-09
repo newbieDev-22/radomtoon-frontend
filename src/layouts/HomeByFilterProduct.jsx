@@ -3,6 +3,7 @@ import ImageCard from "../components/ImageCard";
 import { useStore } from "../store/useStore";
 import { motion } from "framer-motion";
 import { CATEGORIES_TYPE_MAP_NAME } from "../constants";
+import FilterNotFound from "../components/FilterNotFound";
 
 const containerVariants = {
   hidden: { opacity: 1 },
@@ -29,7 +30,7 @@ export default function HomeByFilterProduct() {
   if (!searchProduct.length && word) {
     setCategoryFilter(null);
     return (
-      <h1 className="text-center text-4xl font-bold m-10 text-red-500">Not found</h1>
+      <FilterNotFound />
     );
   }
 
