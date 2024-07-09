@@ -52,7 +52,9 @@ export default function CreatorEditProfile() {
                   className="w-full outline-none border border-gray-300 rounded-md py-2 px-4 min-h-48 max-h-48 col-span-6"
                 />
               ) : (
+                <div className="w-full h-auto">
                 <p>{aboutInput.biography}</p>
+                </div>
               )}
 
               {/* button */}
