@@ -20,17 +20,16 @@ adminApi.milestonePass = (milestoneId) =>
 adminApi.milestoneFailed = (milestoneId, body) =>
   axios.patch(`/admin/milestone/${milestoneId}/failed-approval`, body);
 
-adminApi.adminStats = () => axios.get(`/admin/stat/admin-stat`)
+adminApi.adminStats = () => axios.get(`/admin/stat/admin-stat`);
 
-adminApi.activeCreator = () => axios.get(`/admin/stat/creator-active`)
-adminApi.activeSupporter = () => axios.get('/admin/stat/supporter-active')
-adminApi.averageFunds = () => axios.get('/admin/stat/average-fund')
-adminApi.countProject = () => axios.get('/admin/stat/count-project')
-
-adminApi.fundsByMonth = () => axios.get('/admin/stat/total-fund-trend')
-
-adminApi.projectOverview = () => axios.get('/admin/stat/project-overview')
-adminApi.initialMap = () => axios.get('/admin/stat/geo-json')
-adminApi.postMap = () => axios.get('/admin/stat/map-density')
+adminApi.activeCreator = () => axios.get(`/admin/stat/creator-active`);
+adminApi.activeSupporter = () => axios.get("/admin/stat/supporter-active");
+adminApi.averageFunds = () => axios.get("/admin/stat/average-fund");
+adminApi.countProject = () => axios.get("/admin/stat/count-project");
+adminApi.fundsByMonth = () => axios.get("/admin/stat/total-fund-trend");
+adminApi.projectOverview = () => axios.get("/admin/stat/project-overview");
+adminApi.initialMap = () => axios.get("/admin/stat/geo-json");
+adminApi.postMap = () => axios.get("/admin/stat/map-density");
+adminApi.topFiveCategory = () => axios.get("/admin/stat/top-five");
 
 export default adminApi;

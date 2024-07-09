@@ -4,13 +4,11 @@ import { PROVINCE_MAP_MAPPING } from "../../constants";
 export const adminDashboardSlice = (set) => ({
   dashboardData: {
     adminStatsData: [],
-
     textBlockData: [],
     lineChartData: {},
     doughnutChartData: [],
-
+    barChartData: [],
     geoJsonData: null,
-
     loading: false,
     error: null,
   },
@@ -26,32 +24,26 @@ export const adminDashboardSlice = (set) => ({
 
       const [
         adminStats,
-
         activeCreator,
         activeSupporter,
         averageFunds,
         successProjects,
-
         fundsByMonth,
-
         projectOverview,
-
         geoJsonResponse,
         geoJsonPostResponse,
+        topFiveCategory,
       ] = await Promise.all([
         adminApi.adminStats(),
-
         adminApi.activeCreator(),
         adminApi.activeSupporter(),
         adminApi.averageFunds(),
         adminApi.countProject(),
-
         adminApi.fundsByMonth(),
-
         adminApi.projectOverview(),
-
         adminApi.initialMap(),
         adminApi.postMap(),
+        adminApi.topFiveCategory(),
       ]);
 
       const mappedIncomingData = {};
@@ -86,6 +78,7 @@ export const adminDashboardSlice = (set) => ({
           lineChartData: fundsByMonth.data.cumulativeFundAllMonth,
           doughnutChartData: projectOverview.data,
           geoJsonData: updatedGeoJson,
+          barChartData: topFiveCategory.data.productDataAllMonth,
         },
       }));
     } catch (err) {
