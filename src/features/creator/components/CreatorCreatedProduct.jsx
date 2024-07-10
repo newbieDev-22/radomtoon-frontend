@@ -5,22 +5,25 @@ import ImageCard from "../../../components/ImageCard";
 import dayjs from "dayjs";
 import { USER_ROLE } from "../../../constants";
 import getProductStatus from "../../../utils/get-product-status";
+import Loading from "../../../components/Loading/Loading";
 
 export default function CreatorCreatedProduct() {
   const { creatorId } = useParams();
-  const user = useStore((state) => state.authUser.user);
-  const role = useStore((state) => state.authUser.role);
-  const filterProductByCreatorId = useStore((state) => state.filterProductByCreatorId); 
+  const { user, role, today } = useStore((state) => state.authUser);
+  const filterProductByCreatorId = useStore((state) => state.filterProductByCreatorId);
   const shouldFilterByApprovalStatus =
     role === USER_ROLE.CREATOR && user.id === +creatorId;
   const filterData = filterProductByCreatorId(creatorId, !shouldFilterByApprovalStatus);
-
-  
-  const today = useStore((state) => state.product.today);
-  const isCorrectCreator = user?.id === +creatorId && role === USER_ROLE.CREATOR
-  const profileImage = isCorrectCreator ? user?.profileImage : filterData[0]?.profileImage || null;
-
   const navigate = useNavigate();
+
+  if (!filterData.length) {
+    return <Loading />;
+  }
+
+  const isCorrectCreator = user?.id === +creatorId && role === USER_ROLE.CREATOR;
+  const profileImage = isCorrectCreator
+    ? user?.profileImage
+    : filterData[0]?.profileImage || null;
 
   const handleClickAddNewProject = () => {
     navigate("/creator-campaign-setup");

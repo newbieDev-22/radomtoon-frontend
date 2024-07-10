@@ -14,20 +14,18 @@ export default function CreatorDelivery() {
   }, []);
 
   return (
-    <>
-      <div className="px-full">
-        {deliveryData.length > 0 ? (
-          <PaginationItem
-            itemsPerPage={6}
-            items={deliveryData}
-            ItemComponent={CreatorDeliveryAllCard}
-          />
-        ) : (
-          <h3 className="flex justify-center items-center text-xl">
-            No product pending approval
-          </h3>
-        )}
-      </div>
-    </>
+    <div className="px-full">
+      {deliveryData.length > 0 ? (
+        <PaginationItem
+          itemsPerPage={6}
+          items={deliveryData}
+          ItemComponent={CreatorDeliveryAllCard}
+        />
+      ) : (
+        <h3 className="flex justify-center items-center text-xl">
+          No product pending approval
+        </h3>
+      )}
+    </div>
   );
 }
