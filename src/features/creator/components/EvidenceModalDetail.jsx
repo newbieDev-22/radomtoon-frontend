@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "../../../components/Button";
 import validateEvidenceMilestone from "../../../validators/validate-evidence-milestone";
 import { toast } from "react-toastify";
@@ -11,13 +10,7 @@ export default function EvidenceModalDetail({ milestoneRankId }) {
   const fileEl = useRef();
   const [file, setFile] = useState(null);
   const creatorProductData = useStore((state) => state.creatorProduct.data);
-  const sendMilestoneEvidence = useStore(
-    (state) => state.sendMilestoneEvidence
-  );
-  const milestoneEvidenceLoading = useStore(
-    (state) => state.milestoneEvidenceLoading
-  );
-
+  const sendMilestoneEvidence = useStore((state) => state.sendMilestoneEvidence);
 
   const productData = creatorProductData
     .filter((el) => el.id === +productId)
@@ -26,7 +19,6 @@ export default function EvidenceModalDetail({ milestoneRankId }) {
   const milestoneData = productData.filter(
     (el) => el.milestoneRankId === +milestoneRankId
   )[0];
-
 
   const [input, setInput] = useState({
     evidenceTextDetail: milestoneData.evidenceTextDetail || "",
@@ -44,30 +36,24 @@ export default function EvidenceModalDetail({ milestoneRankId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-
       const error = validateEvidenceMilestone(input);
       if (error) {
         return setInputError(error);
       }
       setInputError({ evidenceTextDetail: "" });
-      if (!file ) {
+      if (!file) {
         toast.error("Evidence image is required");
         return;
       }
-        const formData = new FormData();
-        formData.append("evidenceImage", file);
-        for (const [key, value] of Object.entries(input)) {
-          if (value) {
-            formData.append(key, value);
-          }
+      const formData = new FormData();
+      formData.append("evidenceImage", file);
+      for (const [key, value] of Object.entries(input)) {
+        if (value) {
+          formData.append(key, value);
         }
-        await sendMilestoneEvidence(
-          milestoneData.id,
-          formData,
-          productId,
-          milestoneRankId
-        );
-      
+      }
+      await sendMilestoneEvidence(milestoneData.id, formData, productId, milestoneRankId);
+
       toast.success("Milestone evidence sent");
     } catch (error) {
       console.log(error);

@@ -7,7 +7,6 @@ import ConfirmModal from "../../../components/ConfirmModal";
 import { useNavigate } from "react-router-dom";
 import { USER_ROLE } from "../../../constants";
 import { useStore } from "../../../store/useStore";
-import { toast } from "react-toastify";
 
 export default function TierCard({
   id,
@@ -33,6 +32,10 @@ export default function TierCard({
     tierRankId,
   });
   const role = useStore((state) => state.authUser.role);
+
+  const histories = useStore((state) => state.supporter.history);
+  const filterHistory = histories?.filter((el) => el.productId === +productId);
+  const isSupported = role === USER_ROLE.SUPPORTER && filterHistory.length > 0;
 
   const [inputError, setInputError] = useState({
     tierName: "",
@@ -60,11 +63,10 @@ export default function TierCard({
   }, []);
 
   const handleGoToPayment = () => {
-    if (role === USER_ROLE.SUPPORTER) {
+    if (role === USER_ROLE.SUPPORTER && !isSupported) {
       navigate(`/campaign/${productId}/tier/${id}/payment`);
-    }
-    else if(role === USER_ROLE.GUEST){
-      navigate('/supporter-register')
+    } else if (role === USER_ROLE.GUEST) {
+      navigate("/supporter-register");
     }
   };
 

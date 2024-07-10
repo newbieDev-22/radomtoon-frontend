@@ -17,7 +17,7 @@ const CreatorPanel = lazy(() => import("../pages/CreatorPanel"));
 const AdminPanel = lazy(() => import("../pages/AdminPanel"));
 const CreatorManagePage = lazy(() => import("../pages/CreatorManagePage"));
 const CampaignSetup = lazy(() => import("../pages/CampaignSetup"));
-const HomeByFilterProduct = lazy(() => import("../layouts/HomeByFilterProduct"));
+const HomeByFilterProduct = lazy(() => import("../pages/HomeByFilterPage"));
 
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
 

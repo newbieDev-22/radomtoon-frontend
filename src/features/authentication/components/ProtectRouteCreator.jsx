@@ -1,4 +1,3 @@
-import React from "react";
 import { USER_ROLE } from "../../../constants";
 import { Navigate } from "react-router-dom";
 import Spinner from "../../../components/Spinner";

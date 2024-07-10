@@ -118,10 +118,10 @@ export default function SupporterRegister() {
           className="absolute mt-16 w-[90vw] lg:w-[70vw] 2xl:w-[50vw] h-[85vh]"
         >
           <div className="px-8 sm:px-16 lg:px-20 bg-white bg-opacity-70 backdrop-blur-md flex w-full h-full flex-col justify-center rounded-lg shadow-lg">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl mb-2 font-semibold text-radomtoon-dark">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl mb-2 font-semibold text-radomtoon-dark text-center">
               Join the movement.
             </h1>
-            <h2 className="text-sm sm:text-base lg:text-lg mb-8 text-gray-600">
+            <h2 className="text-sm sm:text-base lg:text-lg mb-8 text-gray-600 text-center">
               Become part of a community driving change and innovation.
             </h2>
 
@@ -236,12 +236,7 @@ export default function SupporterRegister() {
                   <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
                 )}
 
-                <Button
-                  width={"full"}
-                  height="14"
-                  bg="creator-saturate"
-                  color="white"
-                >
+                <Button width={"full"} height="14" bg="creator-saturate" color="white">
                   Request Approve
                 </Button>
               </div>
