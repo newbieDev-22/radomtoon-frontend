@@ -12,7 +12,7 @@ export default function FilterItem({ page, categoryId }) {
 
   return (
     <button
-      className="font-medium hover:scale-[110%] active:scale-100"
+      className="font-medium transition transform hover:scale-[115%]"
       onClick={handleClickCategory}
     >
       {page}
