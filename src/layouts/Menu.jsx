@@ -7,14 +7,14 @@ import { useStore } from "../store/useStore";
 export default function Menu() {
   const role = useStore((state) => state.authUser.role);
   const location = useLocation();
-  const inLanding = location.pathname == "/landing";
+  const inHomePage = location.pathname == "/";
 
   return (
     <div>
       {role === USER_ROLE.GUEST ? (
-        <GuestNavMenu inLanding={inLanding} />
+        <GuestNavMenu inHomePage={inHomePage} />
       ) : (
-        <UserNavMenu inLanding={inLanding} currentUser={role} />
+        <UserNavMenu inHomePage={inHomePage} currentUser={role} />
       )}
     </div>
   );

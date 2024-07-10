@@ -3,7 +3,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectRouteCreator from "../features/authentication/components/ProtectRouteCreator";
 import ProtectRouteSupporter from "../features/authentication/components/ProtectRouteSupporter";
 
-const LandingPage = lazy(() => import("../pages/LandingPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const CreatorRegister = lazy(() => import("../pages/CreatorRegister"));
@@ -26,7 +25,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainContainer />,
     children: [
-      { path: "/landing", element: <LandingPage /> },
       { path: "/", element: <HomePage /> },
       { path: "/campaign/:productId", element: <CampaignPage /> },
       { path: "/campaign/:productId/tier", element: <SelectTierPage /> },
