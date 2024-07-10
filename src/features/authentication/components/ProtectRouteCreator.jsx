@@ -1,16 +1,13 @@
 import { USER_ROLE } from "../../../constants";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams, useLocation } from "react-router-dom";
 import Spinner from "../../../components/Spinner";
 import { useStore } from "../../../store/useStore";
-import { useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
 export default function ProtectRouteCreator({ children }) {
   const { productId } = useParams();
   const location = useLocation();
-  const role = useStore((state) => state.authUser?.role);
-  const isLoading = useStore((state) => state.authUser.loading);
-  const authUserId = useStore((state) => state.authUser.user?.id);
+  const { role, loading, user } = useStore((state) => state.authUser);
+  const userId = user?.id;
   const product = useStore((state) => state.product.data);
 
   if (role !== USER_ROLE.CREATOR) {
@@ -18,7 +15,7 @@ export default function ProtectRouteCreator({ children }) {
   }
   if (location.pathname !== "/creator-campaign-setup") {
     const foundedCreator = product?.findIndex(
-      (el) => el.id === +productId && el.creatorId === authUserId
+      (el) => el.id === +productId && el.creatorId === userId
     );
 
     if (role !== USER_ROLE.CREATOR || foundedCreator === -1) {
@@ -28,7 +25,7 @@ export default function ProtectRouteCreator({ children }) {
 
   return (
     <>
-      {isLoading && <Spinner transparent />}
+      {loading && <Spinner transparent />}
       {children}
     </>
   );

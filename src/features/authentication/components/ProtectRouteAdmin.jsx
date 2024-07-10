@@ -4,8 +4,7 @@ import { USER_ROLE } from "../../../constants";
 import { useStore } from "../../../store/useStore";
 
 export default function ProtectRouteAdmin({ children }) {
-  const role = useStore((state) => state.authUser.role);
-  const isLoading = useStore((state) => state.authUser.loading);
+  const { role, loading } = useStore((state) => state.authUser);
 
   if (role !== USER_ROLE.ADMIN) {
     return <Navigate to="/" />;
@@ -13,7 +12,7 @@ export default function ProtectRouteAdmin({ children }) {
 
   return (
     <>
-      {isLoading && <Spinner transparent />}
+      {loading && <Spinner transparent />}
       {children}
     </>
   );

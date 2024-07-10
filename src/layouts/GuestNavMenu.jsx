@@ -6,7 +6,7 @@ export default function GuestNavMenu({ inLanding }) {
   return (
     <div className="grid grid-cols-2">
       <Button
-        onClick={() => "Creator Register Modal"}
+        onClick={() => navigate("/creator-register")}
         bg="creator-normal"
         width="40"
         height="14"

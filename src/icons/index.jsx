@@ -226,9 +226,7 @@ export function FilterIcon({ className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="full"
       viewBox="0 -960 960 960"
-      width="full"
       fill="#5f6368"
       className={className}
     >
@@ -256,9 +254,7 @@ export function FilterMonth({ className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="full"
       viewBox="0 -960 960 960"
-      width="full"
       fill="#5f6368"
       className={className}
     >
