@@ -10,7 +10,7 @@ const colorMapping = {
   SUCCESS: "bg-green-500 text-white",
   CANCELED: "bg-red-600 text-white",
   "NOT AVAILABLE": "bg-gray-300",
-  "DEVERIED": "bg-green-500 text-white"
+  DEVERIED: "bg-green-500 text-white",
 };
 
 export default function SupporterHistoryCard({
@@ -38,37 +38,31 @@ export default function SupporterHistoryCard({
     <div className="flex gap-4 h-40 justify-between border items-center border-gray-300 rounded-lg px-8 py-4 my-4">
       {/* left */}
       <div className="h-full flex items-center min-w-[16rem]">
-        <img
-          src={projectImage}
-          alt="product"
-          className="h-full aspect-auto rounded-xl"
-        />
+        <img src={projectImage} alt="product" className="h-full aspect-auto rounded-xl" />
       </div>
       {/* middle */}
       <div className="flex px-2 w-full justify-between ">
         <div>
           <div className="font-bold text-xl">{projectName}</div>
-          <div >
+          <div>
             <div>{tierName}</div>
             <div>Support Date : {dayjs(date).format("DD/MM/YYYY")}</div>
           </div>
         </div>
-        
-          
-          <div>
-            <div className="bg-supporter-normal rounded-lg w-24 text-center p-1 font-bold">
-              {projectCategory}
-            </div>
-            <div className="text-xl font-bold w-32 mt-2">{price} THB</div>
+
+        <div>
+          <div className="bg-supporter-normal rounded-lg w-24 text-center p-1 font-bold">
+            {projectCategory}
           </div>
+          <div className="text-xl font-bold w-32 mt-2">{price} THB</div>
         </div>
+      </div>
 
       {/* right */}
       <div className="flex flex-col justify-between gap-2 min-w-[18rem]">
         <div className="flex items-center">
           <span className="font-bold w-full">Project Status :</span>
           <span
-            span
             className={`${colorMapping[fundingStatus]} p-2 w-full text-center rounded-lg`}
           >
             {fundingStatus}
@@ -76,12 +70,19 @@ export default function SupporterHistoryCard({
         </div>
         <div className="flex items-center">
           <span className="font-bold w-full">Delivery Status :</span>
-          <span className={`${colorMapping[deliveryStatus]} p-2 w-full text-center rounded-lg`}>
+          <span
+            className={`${colorMapping[deliveryStatus]} p-2 w-full text-center rounded-lg`}
+          >
             {deliveryStatus}
           </span>
         </div>
         {fundingStatus === PRODUCT_STATUS.PENDING && (
-          <Button bg="creator-saturate" color="white" width={"full"} onClick={() => handleCancelSupport(productId)}>
+          <Button
+            bg="creator-saturate"
+            color="white"
+            width={"full"}
+            onClick={() => handleCancelSupport(productId)}
+          >
             Cancel support
           </Button>
         )}
