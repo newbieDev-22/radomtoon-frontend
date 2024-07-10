@@ -22,7 +22,7 @@ export default function ProductCommentContainer() {
   const [input, setInput] = useState({ comment: "" });
   const [inputError, setInputError] = useState({ comment: "" });
   const filterData = filterProductByProductId(+productId);
-  const isCreator = role === USER_ROLE.CREATOR && user.id === filterData?.creatorId;
+  const isCreator = role === USER_ROLE.CREATOR && user?.id === filterData?.creatorId;
 
   const handleClickDeleteFunction = (id) => {
     const newAllComment = allComment.filter((el) => el.id !== id);
@@ -47,6 +47,11 @@ export default function ProductCommentContainer() {
   const handleCreateComment = async (e) => {
     try {
       e.preventDefault();
+
+      if (role === USER_ROLE.GUEST ) {
+        toast.error("Please login before comment");
+        return;
+      }
       if (filterData.approvalStatusId !== APPROVAL_STATUS_ID.SUCCESS ) {
         toast.error("Comments cannot be provided until the project receives approval");
         return;

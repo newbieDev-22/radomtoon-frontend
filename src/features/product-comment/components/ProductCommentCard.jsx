@@ -14,9 +14,9 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
 
   const isCorrectUser = (el) => {
     if (el.userId) {
-      return el.userId === user.id;
+      return el.userId === user?.id;
     } else if (userRole === USER_ROLE.CREATOR) {
-      return el.creatorId === user.id;
+      return el.creatorId === user?.id;
     }
   };
 
