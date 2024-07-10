@@ -67,7 +67,6 @@ const router = createBrowserRouter([
         ),
       },
       { path: "/admin-panel", element: <AdminPanel /> },
-      { path: "/home-dummy", element: <HomeDummy /> },
     ],
   },
   { path: "*", element: <NotFoundPage /> },
