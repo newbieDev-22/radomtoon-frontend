@@ -3,13 +3,11 @@ import PaginationItem from "../../../components/PaginationItem";
 import CreatorDeliveryAllCard from "./CreatorDeliveryAllCard";
 import { useStore } from "../../../store/useStore";
 import { useParams } from "react-router-dom";
-import Spinner from "../../../components/Spinner";
 
 export default function CreatorDelivery() {
   const { productId } = useParams();
   const fetchDeliveryUser = useStore((state) => state.fetchDeliveryUser);
   const deliveryData = useStore((state) => state.delivery.data);
-  const deliveryLoading = useStore((state) => state.delivery.loading);
 
   useEffect(() => {
     fetchDeliveryUser(productId);
@@ -17,7 +15,6 @@ export default function CreatorDelivery() {
 
   return (
     <>
-      {deliveryLoading && <Spinner transparent />}
       <div className="px-full">
         {deliveryData.length > 0 ? (
           <PaginationItem

@@ -1,9 +1,17 @@
-import { STATUS_PRODUCT } from "../constants";
+import { useEffect } from "react";
 import CreatorDashboard from "../features/dashboard/components/CreatorDashboard";
-
-const mockProductName = `Bria's Mythical Menagerie: Creature-Collecting & Plush`;
-const mockStatus = STATUS_PRODUCT.IN_PROGRESS;
+import { useParams } from "react-router-dom";
+import { useStore } from "../store/useStore";
 
 export default function CreatorManagePage() {
-  return <CreatorDashboard title={mockProductName} status={mockStatus} />;
+  const { productId } = useParams();
+  const fetchCreatorDashboardData = useStore((state) => state.fetchCreatorDashboardData);
+
+  useEffect(() => {
+    if (productId) {
+      fetchCreatorDashboardData(productId);
+    }
+  }, [productId, fetchCreatorDashboardData]);
+
+  return <CreatorDashboard />;
 }
