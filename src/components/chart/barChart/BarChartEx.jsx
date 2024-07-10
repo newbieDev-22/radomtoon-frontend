@@ -50,7 +50,7 @@ export default function BarChart({ title, data, onClick, toggleBarChartData }) {
           <span className="flex items-center text-xs gap-2">
             <div className="flex rounded-sm border">
               <span className="h-4 w-4">
-                <FilterMonth />
+                <FilterMonth className={"w-full h-full"} />
               </span>
               <Dropdown
                 data={months}
@@ -65,7 +65,7 @@ export default function BarChart({ title, data, onClick, toggleBarChartData }) {
               className="flex items-center gap-1 border px-1 rounded-sm cursor-pointer active:scale-95"
             >
               <span className="h-4 w-4">
-                <FilterIcon />
+                <FilterIcon className={"w-full h-full"} />
               </span>
               <button>Switch Data</button>
             </div>

@@ -8,10 +8,9 @@ export default function MilestoneContainer() {
   const { productId } = useParams();
   const filterProductByProductId = useStore((state) => state.filterProductByProductId);
   const filterData = filterProductByProductId(+productId);
-  const role = useStore((state) => state.authUser.role);
-  const authUser = useStore((state) => state.authUser.user);
+  const { user, role } = useStore((state) => state.authUser);
 
-  const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData.creatorId;
+  const isCreator = role === USER_ROLE.CREATOR && user.id === filterData.creatorId;
   const isApproved = filterData.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
 
   const handleSelectMilestone = (milestoneRankId) => {

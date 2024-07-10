@@ -91,7 +91,7 @@ export default function ImageCard({
               height={progressHeight}
             />
 
-            <div className={`flex px-2 gap-2 ${mainCard ? "py-4" : "py-1"} `}>
+            <div className={`flex px-2 gap-2 ${mainCard ? "py-4" : "py-2"} `}>
               <div
                 role="button"
                 className="w-1/6"

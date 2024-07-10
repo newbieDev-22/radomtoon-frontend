@@ -7,16 +7,22 @@ import { useStore } from "../../../store/useStore";
 import validateComment from "../../../validators/validate-create-comment";
 import Spinner from "../../../components/Spinner";
 import { toast } from "react-toastify";
+import { APPROVAL_STATUS_ID } from "../../../constants";
 
 export default function ProductCommentContainer() {
   const { productId } = useParams();
   const createComment = useStore((state) => state.createComment);
   const commentLoading = useStore((state) => state.commentLoading);
   const filterCommentByProductId = useStore((state) => state.commentFilterByProductId);
+  const filterProductByProductId = useStore((state) => state.filterProductByProductId);
+
   const filterComment = filterCommentByProductId(+productId);
   const [allComment, setAllComment] = useState(filterComment);
   const [input, setInput] = useState({ comment: "" });
   const [inputError, setInputError] = useState({ comment: "" });
+  const filterData = filterProductByProductId(+productId);
+
+  console.log("----------",filterData)
 
   const handleClickDeleteFunction = (id) => {
     const newAllComment = allComment.filter((el) => el.id !== id);
@@ -41,6 +47,10 @@ export default function ProductCommentContainer() {
   const handleCreateComment = async (e) => {
     try {
       e.preventDefault();
+      if(filterProductByProductId.approvalStatusId !== APPROVAL_STATUS_ID.SUCCESS){
+        toast.error("Comments cannot be provided until the project receives approval")
+        return
+      }
       const dummyInput = { comment: input.comment };
       const error = validateComment(dummyInput);
       if (error) {

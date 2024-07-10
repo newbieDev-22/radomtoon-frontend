@@ -2,11 +2,9 @@ import dayjs from "dayjs";
 import ImageCard from "../components/ImageCard";
 import { useStore } from "../store/useStore";
 import { motion } from "framer-motion";
-import FilterNotFound from "../components/FilterNotFound";
-import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { CATEGORIES_TYPE_MAP_NAME } from "../constants";
+import { useEffect } from "react";
 
 const containerVariants = {
   hidden: { opacity: 1 },
@@ -23,7 +21,7 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 1 } },
 };
 
-export default function HomeByFilterProduct() {
+export default function HomeByFilterPage() {
   const [searchParams] = useSearchParams();
   const word = searchParams.get("word");
   const categoryId = searchParams.get("categoryId");
@@ -33,28 +31,24 @@ export default function HomeByFilterProduct() {
   const filterProduct = useStore((state) => state.filterProduct);
 
   useEffect(() => {
-    if (word) {
-      filterProduct(+categoryId, word);
-    } else {
-      filterProduct(+categoryId);
+    if (!categoryId && !word) {
+      filterProduct();
     }
-  }, []);
-
-  if (!searchProduct.length) {
-    return <FilterNotFound />;
-  }
+  }, [categoryId, word]);
 
   return (
     <div>
-      {categoryId && word ? (
+      {categoryId && word && (
         <h1 className="text-center text-4xl font-bold m-10">
           Filter by : {CATEGORIES_TYPE_MAP_NAME[categoryId]} and word: {word}
         </h1>
-      ) : categoryId ? (
+      )}
+      {categoryId && !word && (
         <h1 className="text-center text-4xl font-bold m-10">
           Filter by : {CATEGORIES_TYPE_MAP_NAME[categoryId]}
         </h1>
-      ) : (
+      )}
+      {!categoryId && word && (
         <h1 className="text-center text-4xl font-bold m-10">Filter by : {word}</h1>
       )}
 

@@ -7,7 +7,6 @@ import ConfirmModal from "../../../components/ConfirmModal";
 import { useNavigate } from "react-router-dom";
 import { USER_ROLE } from "../../../constants";
 import { useStore } from "../../../store/useStore";
-import { toast } from "react-toastify";
 
 export default function TierCard({
   id,
@@ -21,6 +20,7 @@ export default function TierCard({
   productId,
   handleDeleteNewTier,
   handleDataChange,
+  index
 }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -33,6 +33,10 @@ export default function TierCard({
     tierRankId,
   });
   const role = useStore((state) => state.authUser.role);
+
+  const histories = useStore((state) => state.supporter.history);
+  const filterHistory = histories?.filter((el) => el.productId === +productId);
+  const isSupported = role === USER_ROLE.SUPPORTER && filterHistory.length > 0;
 
   const [inputError, setInputError] = useState({
     tierName: "",
@@ -60,26 +64,32 @@ export default function TierCard({
   }, []);
 
   const handleGoToPayment = () => {
-    if (role === USER_ROLE.SUPPORTER) {
+    if (role === USER_ROLE.SUPPORTER && !isSupported) {
       navigate(`/campaign/${productId}/tier/${id}/payment`);
-    }
-    else if(role === USER_ROLE.GUEST){
-      navigate('/supporter-register')
+    } else if (role === USER_ROLE.GUEST) {
+      navigate("/supporter-register");
     }
   };
 
   return (
     <>
       <div
-        className="relative hover:scale-[102%] active:scale-100 transition-all"
+        className=" relative hover:scale-[102%] active:scale-100 transition-all w-[60vw]"
         onClick={handleGoToPayment}
       >
-        <button
-          className="absolute top-2 right-2 hover:scale-[110%] active:scale-100"
-          onClick={() => setIsDeleteModalOpen(true)}
-        >
-          <CloseIcon color="gray" />
-        </button>
+        {role === USER_ROLE.SUPPORTER || role === USER_ROLE.GUEST
+          ?
+            ''
+          :
+            <button
+              className="absolute top-2 right-2 hover:scale-[110%] active:scale-100"
+              onClick={() => setIsDeleteModalOpen(true)}
+            >
+              <CloseIcon color="gray" />
+            </button>
+        }
+        
+          
         {isEdit && !isApproved && isCreator ? (
           <TierEditContent
             input={{ ...input }}
@@ -98,6 +108,7 @@ export default function TierCard({
             setIsEdit={setIsEdit}
             isApproved={isApproved}
             isCreator={isCreator}
+            index={index}
           />
         )}
       </div>

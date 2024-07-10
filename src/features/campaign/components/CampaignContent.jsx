@@ -25,28 +25,32 @@ const initialInputError = {
 };
 
 export default function CampaignContent() {
-  const role = useStore((state) => state.authUser.role);
-  const authUser = useStore((state) => state.authUser.user);
+  const { user, role } = useStore((state) => state.authUser);
   const today = useStore((state) => state.product.today);
   const filterProductByProductId = useStore((state) => state.filterProductByProductId);
   const productLoading = useStore((state) => state.productLoading);
   const updateProduct = useStore((state) => state.updateProduct);
   const deleteProduct = useStore((state) => state.deleteProduct);
   const sendProductToApproval = useStore((state) => state.sendProductToApproval);
-
-  const { productId } = useParams();
-  const filterData = filterProductByProductId(+productId);
+  const histories = useStore((state) => state.supporter.history);
   const productPass = useStore((state) => state.productPass);
   const productFailed = useStore((state) => state.productFailed);
   const approvalLoading = useStore((state) => state.approvalLoading);
 
-  const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData?.creatorId;
+  const { productId } = useParams();
+  const filterData = filterProductByProductId(+productId);
+
+  const isCreator = role === USER_ROLE.CREATOR && user.id === filterData?.creatorId;
   const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
   const isPending = filterData?.approvalStatusId === APPROVAL_STATUS_ID.PENDING;
+
   const isFinish =
     filterData?.productStatusId === APPROVAL_STATUS_ID.SUCCESS ||
     filterData?.productStatusId === APPROVAL_STATUS_ID.FAILED;
   const isAdmin = role === USER_ROLE.ADMIN;
+
+  const filterHistory = histories?.filter((el) => el.productId === +productId);
+  const isSupported = role === USER_ROLE.SUPPORTER && filterHistory.length > 0;
 
   const initialInput = {
     productName: filterData?.productName,
@@ -140,7 +144,7 @@ export default function CampaignContent() {
       await deleteProduct(+productId);
       setIsDeleteModalOpen(false);
       toast.success("Deleted project successfully");
-      navigate(`/creator-panel/${authUser.id}`);
+      navigate(`/creator-panel/${user.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -248,7 +252,7 @@ export default function CampaignContent() {
             )}
 
             <div>
-              {!isApproved && !isFinish && isAdmin && isPending ? (
+              {isSupported ? null : !isApproved && !isFinish && isAdmin && isPending ? (
                 <div className="grid grid-cols-2 gap-4">
                   <Button
                     bg="red"

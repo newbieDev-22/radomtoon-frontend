@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Milestone from "../../product-milestone/components/Milestone";
 import PieChart from "../../../components/chart/pieChart/PieChart";
 import LineChart from "../../../components/chart/lineChart/LineChart";
@@ -17,15 +17,8 @@ import getProductStatus from "../../../utils/get-product-status";
 
 export default function CreatorDashboard() {
   const { productId } = useParams();
-  const fetchCreatorDashboardData = useStore((state) => state.fetchCreatorDashboardData);
   const pieChartData = useStore((state) => state.creatorDashboardData.pieChartData);
   const lineChartData = useStore((state) => state.creatorDashboardData.lineChartData);
-
-  useEffect(() => {
-    if (productId) {
-      fetchCreatorDashboardData(productId);
-    }
-  }, [productId, fetchCreatorDashboardData]);
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -44,11 +37,7 @@ export default function CreatorDashboard() {
   milestoneDataList.forEach((element) => {
     approvalStatusObj[element.milestoneRankId] = element.approvalStatusId;
   });
-  console.log(
-    "selectedProduct.productStatusId !== PRODUCT_STATUS_ID.SUCCESS",
-    selectedProduct.productStatusId,
-    PRODUCT_STATUS_ID.SUCCESS
-  );
+
   return (
     <div className="py-10 px-10 md:px-40 2xl:px-80 bg-[#b6e5e9]">
       <div className="py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
@@ -56,7 +45,7 @@ export default function CreatorDashboard() {
         <h2
           className={`text-center font-semibold text-2xl py-1 ${STATUS_PRODUCT_THEME[status].color}`}
         >
-          {`Status : ${status}`}
+          {`Status : ${STATUS_PRODUCT_THEME[status].text}`}
         </h2>
       </div>
 

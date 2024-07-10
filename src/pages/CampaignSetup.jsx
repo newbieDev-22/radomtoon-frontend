@@ -43,8 +43,7 @@ const slidDownForm = {
 };
 
 export default function CampaignSetup() {
-  const role = useStore((state) => state.authUser.role);
-  const user = useStore((state) => state.authUser.user);
+  const { user, role } = useStore((state) => state.authUser);
   const today = useStore((state) => state.product.today);
   const createProduct = useStore((state) => state.createProduct);
   const fileEl = useRef();
@@ -133,7 +132,10 @@ export default function CampaignSetup() {
         >
           <div className="w-full md:w-5/12 flex justify-center p-2 sm:p-4 h-full bg-radomtoon-bright rounded-l-lg round ">
             {file ? (
-              <div onClick={() => fileEl.current.click()} className="w-full flex justify-center items-center">
+              <div
+                onClick={() => fileEl.current.click()}
+                className="w-full flex justify-center items-center"
+              >
                 <motion.img
                   {...popupImg}
                   src={URL.createObjectURL(file)}
@@ -147,7 +149,6 @@ export default function CampaignSetup() {
                 className="w-3/5 flex flex-col justify-center items-center p-4 sm:p-6 md:p-10 hover:rounded-xl hover:scale-105 duration-500"
                 onClick={() => fileEl.current.click()}
               >
-                
                 <div className="w-full scale-75">
                   <CloudUpload />
                 </div>
@@ -246,9 +247,7 @@ export default function CampaignSetup() {
                   value={input.summaryDetail}
                   onChange={handleInputChange}
                   className={`placeholder-gray-400 indent-1 h-full border ${
-                    inputError.summaryDetail
-                      ? "border-red-500"
-                      : "border-gray-300"
+                    inputError.summaryDetail ? "border-red-500" : "border-gray-300"
                   } text-gray-500 text-sm sm:text-base rounded-lg block p-2.5 w-full`}
                 ></textarea>
                 {inputError.summaryDetail && (
