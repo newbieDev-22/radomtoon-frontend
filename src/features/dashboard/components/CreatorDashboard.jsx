@@ -56,7 +56,7 @@ export default function CreatorDashboard() {
         <h2
           className={`text-center font-semibold text-2xl py-1 ${STATUS_PRODUCT_THEME[status].color}`}
         >
-          {`Status : ${status}`}
+          {`Status : ${STATUS_PRODUCT_THEME[status].text}`}
         </h2>
       </div>
 
