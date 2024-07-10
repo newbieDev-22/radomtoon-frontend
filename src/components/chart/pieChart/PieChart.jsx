@@ -23,7 +23,7 @@ export default function PieChart({ title, data=[] }) {
                 labels: data.map((data) => data.label),
                 datasets: [
                   {
-                    label: "Count",
+                    label: "THB",
                     data: data.map((data) => data?.value),
                     backgroundColor: [
                       "#7BCFF6",

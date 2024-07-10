@@ -21,6 +21,7 @@ export default function TierCard({
   productId,
   handleDeleteNewTier,
   handleDataChange,
+  index
 }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -71,15 +72,22 @@ export default function TierCard({
   return (
     <>
       <div
-        className="relative hover:scale-[102%] active:scale-100 transition-all"
+        className=" relative hover:scale-[102%] active:scale-100 transition-all w-[60vw]"
         onClick={handleGoToPayment}
       >
-        <button
-          className="absolute top-2 right-2 hover:scale-[110%] active:scale-100"
-          onClick={() => setIsDeleteModalOpen(true)}
-        >
-          <CloseIcon color="gray" />
-        </button>
+        {role === USER_ROLE.SUPPORTER || role === USER_ROLE.GUEST
+          ?
+            ''
+          :
+            <button
+              className="absolute top-2 right-2 hover:scale-[110%] active:scale-100"
+              onClick={() => setIsDeleteModalOpen(true)}
+            >
+              <CloseIcon color="gray" />
+            </button>
+        }
+        
+          
         {isEdit && !isApproved && isCreator ? (
           <TierEditContent
             input={{ ...input }}
@@ -98,6 +106,7 @@ export default function TierCard({
             setIsEdit={setIsEdit}
             isApproved={isApproved}
             isCreator={isCreator}
+            index={index}
           />
         )}
       </div>
