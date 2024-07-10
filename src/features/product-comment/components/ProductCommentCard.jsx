@@ -68,7 +68,7 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
               alt="avatar"
             />
           ) : (
-            <div className="w-12 h-12 rounded-full bg-gray-400 flex justify-center items-center text-white">
+            <div className="w-12 h-12 rounded-full font-semibold text-white bg-gray-400 flex justify-center items-center">
               {role === USER_ROLE.CREATOR
                 ? el.creatorFirstName[0]
                 : el.supporterFirstName[0]}

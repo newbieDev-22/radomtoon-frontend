@@ -14,7 +14,7 @@ export default function ProfileCard({ creatorId }) {
           />
         </div>
       ) : (
-        <div className="w-14 h-14 font-semibold text-xl text-white rounded-full bg-gray-500 flex justify-center items-center">
+        <div className="w-14 h-14 font-semibold text-xl rounded-full text-white bg-gray-400 flex justify-center items-center">
           {selectedCreator.firstName[0].toUpperCase()}
         </div>
       )}

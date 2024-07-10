@@ -104,7 +104,7 @@ export default function ImageCard({
                     alt="Avatar"
                   />
                 ) : (
-                  <div className="w-full aspect-square font-semibold text-2xl text-white rounded-full bg-gray-500 flex justify-center items-center">
+                  <div className="w-full aspect-square font-semibold text-xl text-white rounded-full bg-gray-400 flex justify-center items-center">
                     {creatorName[0].toUpperCase()}
                   </div>
                 )}
