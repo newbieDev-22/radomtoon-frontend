@@ -22,8 +22,6 @@ export default function ProductCommentContainer() {
   const [inputError, setInputError] = useState({ comment: "" });
   const filterData = filterProductByProductId(+productId);
 
-  console.log("----------",filterData)
-
   const handleClickDeleteFunction = (id) => {
     const newAllComment = allComment.filter((el) => el.id !== id);
     setAllComment(newAllComment);
@@ -47,9 +45,9 @@ export default function ProductCommentContainer() {
   const handleCreateComment = async (e) => {
     try {
       e.preventDefault();
-      if(filterProductByProductId.approvalStatusId !== APPROVAL_STATUS_ID.SUCCESS){
-        toast.error("Comments cannot be provided until the project receives approval")
-        return
+      if (filterData.approvalStatusId !== APPROVAL_STATUS_ID.SUCCESS) {
+        toast.error("Comments cannot be provided until the project receives approval");
+        return;
       }
       const dummyInput = { comment: input.comment };
       const error = validateComment(dummyInput);
