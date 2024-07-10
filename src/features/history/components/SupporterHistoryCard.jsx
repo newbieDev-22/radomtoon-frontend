@@ -55,7 +55,7 @@ export default function SupporterHistoryCard({
         
           
           <div>
-            <div className="bg-supporter-normal rounded-lg w-24 text-center p-2 font-bold">
+            <div className="bg-supporter-normal rounded-lg w-auto text-center p-2 font-bold text-sm ">
               {projectCategory}
             </div>
             <div className="text-xl font-bold w-32 mt-2">{price} THB</div>
