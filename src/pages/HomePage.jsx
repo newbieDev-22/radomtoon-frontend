@@ -8,11 +8,10 @@ export default function HomePage() {
   );
 
   const dataStatsBar = [
-    { id: 1, amount: projectSupport, title: "projects supported" },
+    { id: 1, amount: projectSupport, title: "active projects" },
     { id: 2, amount: towardIdea, title: "towards ideas", currency: "THB" },
     { id: 3, amount: contribution, title: "contributions" },
   ];
-
 
   return (
     <>
@@ -20,5 +19,4 @@ export default function HomePage() {
       <InitialHome />
     </>
   );
-
 }
