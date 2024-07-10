@@ -267,7 +267,7 @@ export const productSlice = (set, get) => ({
     const cloneData = [...approvalProduct];
     const keyFilter = ["productName", "creatorName"];
     const filterByCategory = cloneData.filter((el) => el.categoryId === +categoryId);
-    if (filterByCategory.length) {
+    if (categoryId) {
       if (word) {
         const filterByWord = filterByCategory.filter((item) => {
           return keyFilter.some((filter) => {
@@ -290,8 +290,8 @@ export const productSlice = (set, get) => ({
         set(() => ({ searchProduct: filterByWord }));
         return filterByWord;
       } else {
-        set(() => ({ searchProduct: [] }));
-        return [];
+        set(() => ({ searchProduct: approvalProduct }));
+        return approvalProduct;
       }
     }
   },
