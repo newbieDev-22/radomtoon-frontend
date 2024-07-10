@@ -55,7 +55,7 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
     <div className={`bg-white p-5 rounded-xl mb-5 ${margin} `}>
       <div className="flex gap-2 items-center justify-between ">
         <div className="flex gap-4 items-center ">
-          {el.creatorProfileImage || el.supporterProfileImage ? (
+          {(el.supporterProfileImage && el.creatorProfileImage) ? (
             <img
               src={
                 role === USER_ROLE.CREATOR
