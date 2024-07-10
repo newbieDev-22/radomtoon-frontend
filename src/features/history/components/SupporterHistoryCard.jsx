@@ -5,11 +5,12 @@ import { toast } from "react-toastify";
 import { useStore } from "../../../store/useStore";
 
 const colorMapping = {
-  PENDING: "bg-yellow-500",
-  FAILED: "bg-orange-500",
-  SUCCESS: "bg-green-500",
-  CANCELED: "bg-red-500",
-  "NOT AVAILABLE": "bg-gray-500",
+  PENDING: "bg-green-500 text-white",
+  FAILED: "bg-orange-500 text-white",
+  SUCCESS: "bg-green-500 text-white",
+  CANCELED: "bg-red-600 text-white",
+  "NOT AVAILABLE": "bg-gray-300",
+  "DEVERIED": "bg-green-500 text-white"
 };
 
 export default function SupporterHistoryCard({
@@ -55,7 +56,7 @@ export default function SupporterHistoryCard({
         
           
           <div>
-            <div className="bg-supporter-normal rounded-lg w-24 text-center p-2 font-bold">
+            <div className="bg-supporter-normal rounded-lg w-24 text-center p-1 font-bold">
               {projectCategory}
             </div>
             <div className="text-xl font-bold w-32 mt-2">{price} THB</div>
@@ -80,7 +81,7 @@ export default function SupporterHistoryCard({
           </span>
         </div>
         {fundingStatus === PRODUCT_STATUS.PENDING && (
-          <Button width={"full"} onClick={() => handleCancelSupport(productId)}>
+          <Button bg="creator-saturate" color="white" width={"full"} onClick={() => handleCancelSupport(productId)}>
             Cancel support
           </Button>
         )}
