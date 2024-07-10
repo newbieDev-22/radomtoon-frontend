@@ -179,7 +179,7 @@ export default function TierEditContent({
             <img
               src={previewImage}
               alt="tierImage"
-              className="object-cover rounded-xl aspect-square w-1/2 opacity-50"
+              className="object-cover rounded-xl aspect-square w-1/2 opacity-50 cursor-pointer hover:scale-105 transition"
             />
           )}
         </div>

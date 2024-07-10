@@ -10,7 +10,7 @@ export default function TierContainer({ data, isApproved }) {
         Select an option below
       </h3>
       <div
-        className="flex flex-col gap-4
+        className="flex flex-col gap-4 items-center
         "
       >
         {data

@@ -116,10 +116,10 @@ export default function ProductRewardContainer({ isCreator }) {
           )}
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 items-center">
           {tierData
             .sort((tier1, tier2) => tier1.tierRankId - tier2.tierRankId)
-            .map((el) => (
+            .map((el, i) => (
               <TierCard
                 key={el.tierRankId}
                 {...el}
@@ -127,6 +127,7 @@ export default function ProductRewardContainer({ isCreator }) {
                 handleDataChange={handleDataChange}
                 isApproved={isApproved}
                 isCreator={isCreator}
+                index={i+1}
               />
             ))}
         </div>
