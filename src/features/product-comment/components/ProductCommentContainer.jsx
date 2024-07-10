@@ -51,7 +51,7 @@ export default function ProductCommentContainer() {
         toast.error("Comments cannot be provided until the project receives approval");
         return;
       }
-      if (!isCreator || role === USER_ROLE.SUPPORTER ) {
+      if (!isCreator && role !== USER_ROLE.SUPPORTER ) {
         toast.error("Only the project owner is permitted to comment");
         return;
       }
