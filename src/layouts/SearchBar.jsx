@@ -27,6 +27,12 @@ export default function SearchBar() {
     setInput("");
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="w-full flex">
       <input
@@ -38,6 +44,7 @@ export default function SearchBar() {
           text-gray-600 focus:bg-gray-200"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        onKeyDown={handleKeyPress}
       />
       <button
         onClick={handleSearch}

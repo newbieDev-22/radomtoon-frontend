@@ -29,7 +29,7 @@ export default function ProfileImage({ selectedCreator }) {
       >
         <div>
           <button
-            className="w-56 h-56 rounded-full flex justify-center items-center overflow-hidden bg-white outline-none"
+            className="w-56 h-56 rounded-full flex justify-center items-center overflow-hidden bg-gray-400 outline-none"
             onClick={handleModalOpen}
           >
             {profileImage ? (
@@ -39,7 +39,7 @@ export default function ProfileImage({ selectedCreator }) {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="text-9xl text-black">
+              <div className="text-9xl font-semibold text-white">
                 {selectedCreator.firstName[0].toUpperCase()}
               </div>
             )}

@@ -14,9 +14,9 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
 
   const isCorrectUser = (el) => {
     if (el.userId) {
-      return el.userId === user.id;
+      return el.userId === user?.id;
     } else if (userRole === USER_ROLE.CREATOR) {
-      return el.creatorId === user.id;
+      return el.creatorId === user?.id;
     }
   };
 
@@ -55,18 +55,20 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
     <div className={`bg-white p-5 rounded-xl mb-5 ${margin} `}>
       <div className="flex gap-2 items-center justify-between ">
         <div className="flex gap-4 items-center ">
-          {(el.supporterProfileImage && el.creatorProfileImage) ? (
+          {el.creatorProfileImage && role === USER_ROLE.CREATOR ? (
             <img
-              src={
-                role === USER_ROLE.CREATOR
-                  ? el.creatorProfileImage
-                  : el.supporterProfileImage
-              }
+              src={el.creatorProfileImage}
+              className="w-12 h-12 rounded-full"
+              alt="avatar"
+            />
+          ) : el.supporterProfileImage && role === USER_ROLE.SUPPORTER ? (
+            <img
+              src={el.supporterProfileImage}
               className="w-12 h-12 rounded-full"
               alt="avatar"
             />
           ) : (
-            <div className="w-12 h-12 rounded-full bg-gray-400 flex justify-center items-center text-white">
+            <div className="w-12 h-12 rounded-full font-semibold text-white bg-gray-400 flex justify-center items-center">
               {role === USER_ROLE.CREATOR
                 ? el.creatorFirstName[0]
                 : el.supporterFirstName[0]}
@@ -74,7 +76,9 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
           )}
 
           <h3 className="font-semibold text-xl">
-            {el.userId ? `${el.supporterFirstName} ${el.supporterLastName}` : ""}
+            {el.userId
+              ? `${el.supporterFirstName} ${el.supporterLastName}`
+              : ""}
           </h3>
           {role === USER_ROLE.CREATOR && (
             <>
@@ -117,7 +121,9 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
             onChange={(e) => setInput({ comment: e.target.value })}
           ></textarea>
           {inputError.comment && (
-            <small className="text-red-500 font-semibold">{inputError.comment}</small>
+            <small className="text-red-500 font-semibold">
+              {inputError.comment}
+            </small>
           )}
         </div>
       ) : (
