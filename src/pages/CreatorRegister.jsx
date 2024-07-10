@@ -13,6 +13,8 @@ import { toast } from "react-toastify";
 import authApi from "../apis/auth";
 import Spinner from "../components/Spinner";
 import { motion } from "framer-motion";
+import FileInput from "../assets/images/file-input.json";
+import Lottie from "lottie-react";
 
 const initialInput = {
   firstName: "",
@@ -119,7 +121,7 @@ export default function CreatorRegister() {
       });
       navigate("/login");
     } catch (err) {
-      console.error(err)
+      console.error(err);
       if (err instanceof AxiosError) {
         const errorField = err.response.data.field;
         const errorMessage = {
@@ -316,11 +318,7 @@ export default function CreatorRegister() {
                   className="cursor-pointer flex flex-col items-center justify-center m-8 bg-white p-8 rounded-xl shadow-lg"
                   onClick={() => fileEl.current.click()}
                 >
-                  <img
-                    src={previewImage}
-                    alt="Selected"
-                    className="object-cover aspect-square w-1/2 opacity-70"
-                  />
+                  <Lottie animationData={FileInput} />
                   <div className="opacity-80 text-2xl font-bold text-center">
                     Add your identity card with your image
                   </div>
@@ -328,12 +326,7 @@ export default function CreatorRegister() {
               )}
             </div>
             <div className="flex sm:hidden">
-              <Button
-                width={"full"}
-                height="14"
-                bg="creator-saturate"
-                color="white"
-              >
+              <Button width={"full"} height="14" bg="creator-saturate" color="white">
                 Request Approve
               </Button>
             </div>

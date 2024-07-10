@@ -24,7 +24,7 @@ export default function HomeProduct() {
             <div className="flex justify-center items-center w-full">
               <Carousal
                 autoSlide={true}
-                autoSlideInterval={8000}
+                autoSlideInterval={6000}
                 isShowBottom={false}
                 isShowArrow={false}
               >

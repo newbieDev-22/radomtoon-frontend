@@ -21,6 +21,7 @@
     "framer-motion": "^11.2.11",
     "joi": "^17.13.3",
     "leaflet": "^1.9.4",
+    "lottie-react": "^2.4.0",
     "radomtoon-frontend-web": "link:",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
