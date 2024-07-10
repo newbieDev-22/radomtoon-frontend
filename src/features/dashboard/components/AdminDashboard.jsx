@@ -14,7 +14,6 @@ export default function AdminDashboard() {
   const barChartDataAll = useStore((state) => state.dashboardData.barChartData);
 
   const [toggleBarChartData, setToggleBarChartData] = useState(false);
-  // const [ lineChartData, setLineChartData ] = useState(lineChartMockData)
   const barChartSupporters = barChartDataAll.map((el) => ({
     month: el.month,
     data: el.topFiveByTotalSupporter,
@@ -58,7 +57,6 @@ export default function AdminDashboard() {
         </span>
         <span className="sm:col-span-2 col-span-2 md:col-span-1">
           <DoughnutChart title="Project Status Overview" data={doughnutChartData} />
-          {/* <PieChart /> */}
         </span>
         <span className="sm:col-span-2 col-span-2 md:col-span-1">
           <BarChart

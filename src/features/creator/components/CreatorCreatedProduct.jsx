@@ -9,7 +9,8 @@ import Loading from "../../../components/Loading/Loading";
 
 export default function CreatorCreatedProduct() {
   const { creatorId } = useParams();
-  const { user, role, today } = useStore((state) => state.authUser);
+  const { user, role } = useStore((state) => state.authUser);
+  const today = useStore((state) => state.product.today);
   const filterProductByCreatorId = useStore((state) => state.filterProductByCreatorId);
   const shouldFilterByApprovalStatus =
     role === USER_ROLE.CREATOR && user.id === +creatorId;

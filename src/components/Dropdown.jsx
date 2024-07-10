@@ -9,10 +9,14 @@ export default function Dropdown({
   selectValue,
 }) {
   return (
-    <select className={className} onChange={(e) => onChange(e.target.value)}>
+    <select
+      className={className}
+      onChange={(e) => onChange(e.target.value)}
+      defaultValue={selectValue}
+    >
       <option disabled>{title}</option>
       {data.map((el) => (
-        <option key={el} value={el} selected={el === selectValue}>
+        <option key={el} value={el}>
           {el}
         </option>
       ))}

@@ -65,17 +65,13 @@ export default function App() {
   }, [historyLoading, fetchStats, fetchFiveProduct]);
 
   useEffect(() => {
-    fetchCreatorUser();
-    fetchCreatorProduct();
-  }, [user, product, fetchCreatorUser, fetchCreatorProduct]);
-
-  useEffect(() => {
     if (role === USER_ROLE.CREATOR) {
+      fetchCreatorUser();
       fetchCreatorProduct();
     } else {
       resetCreatorProduct();
     }
-  }, [fetchCreatorProduct, resetCreatorProduct, role]);
+  }, [user, product, fetchCreatorProduct, fetchCreatorUser, resetCreatorProduct, role]);
 
   if (
     userLoading ||

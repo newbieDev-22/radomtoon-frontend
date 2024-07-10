@@ -6,14 +6,14 @@ import { USER_ROLE } from "../../../constants";
 import { useParams } from "react-router-dom";
 
 export default function ProfileImage({ selectedCreator }) {
-  const user = useStore((state) => state.authUser.user);
-  const role = useStore((state) => state.authUser.role);
+  const { user, role } = useStore((state) => state.authUser);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const profileUpload = useStore((state) => state.updateProfileImage);
-  const {creatorId}=useParams()
-  const isCorrectCreator = user?.id === +creatorId && role === USER_ROLE.CREATOR
-  const profileImage = isCorrectCreator ? user?.profileImage : selectedCreator.profileImage || null;
-  
+  const { creatorId } = useParams();
+  const isCorrectCreator = user?.id === +creatorId && role === USER_ROLE.CREATOR;
+  const profileImage = isCorrectCreator
+    ? user?.profileImage
+    : selectedCreator.profileImage || null;
 
   const handleModalOpen = () => {
     if (role === USER_ROLE.CREATOR && user?.id === selectedCreator.id) {

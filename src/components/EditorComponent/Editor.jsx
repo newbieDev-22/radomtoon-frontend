@@ -17,8 +17,7 @@ Quill.register("modules/resize", ResizeModule);
 
 export default function Editor() {
   const quillRef = useRef(null);
-  const role = useStore((state) => state.authUser.role);
-  const authUser = useStore((state) => state.authUser.user);
+  const { user, role } = useStore((state) => state.authUser);
   const { productId } = useParams();
   const filterProductByProductId = useStore((state) => state.filterProductByProductId);
   const filterData = filterProductByProductId(+productId);
@@ -26,7 +25,7 @@ export default function Editor() {
   const productLoading = useStore((state) => state.productLoading);
   const updateStory = useStore((state) => state.updateStory);
 
-  const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData?.creatorId;
+  const isCreator = role === USER_ROLE.CREATOR && user.id === filterData?.creatorId;
   const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
 
   const handleSubmit = async (e) => {

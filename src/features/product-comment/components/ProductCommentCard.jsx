@@ -20,8 +20,6 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
     }
   };
 
-
-
   const [isEdit, setIsEdit] = useState(false);
   const [input, setInput] = useState({ comment: el.comment });
   const [inputError, setInputError] = useState({ comment: "" });
@@ -74,15 +72,15 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
                 : el.supporterFirstName[0]}
             </div>
           )}
-          
+
           <h3 className="font-semibold text-xl">
-            {el.userId
-              ? `${el.supporterFirstName} ${el.supporterLastName}`
-              : ""}
+            {el.userId ? `${el.supporterFirstName} ${el.supporterLastName}` : ""}
           </h3>
           {role === USER_ROLE.CREATOR && (
             <>
-              <h3 className="font-semibold text-xl">{el.creatorFirstName} {el.creatorLastName}</h3>
+              <h3 className="font-semibold text-xl">
+                {el.creatorFirstName} {el.creatorLastName}
+              </h3>
               <h3
                 className="active:brightness-75 p-2
             font-bold px-4 rounded-md bg-yellow-300"
@@ -119,9 +117,7 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
             onChange={(e) => setInput({ comment: e.target.value })}
           ></textarea>
           {inputError.comment && (
-            <small className="text-red-500 font-semibold">
-              {inputError.comment}
-            </small>
+            <small className="text-red-500 font-semibold">{inputError.comment}</small>
           )}
         </div>
       ) : (

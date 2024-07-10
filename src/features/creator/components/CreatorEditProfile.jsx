@@ -7,8 +7,7 @@ import { toast } from "react-toastify";
 
 export default function CreatorEditProfile() {
   const { creatorId } = useParams();
-  const user = useStore((state) => state.authUser.user);
-  const role = useStore((state) => state.authUser.role);
+  const { user, role } = useStore((state) => state.authUser);
   const updateInfo = useStore((state) => state.updateInfo);
   const updateCreatorUser = useStore((state) => state.updateCreatorUser);
   const selectedCreator = useStore((state) => state.selectCreator(creatorId));
@@ -53,7 +52,7 @@ export default function CreatorEditProfile() {
                 />
               ) : (
                 <div className="w-full h-auto">
-                <p>{aboutInput.biography}</p>
+                  <p>{aboutInput.biography}</p>
                 </div>
               )}
 
