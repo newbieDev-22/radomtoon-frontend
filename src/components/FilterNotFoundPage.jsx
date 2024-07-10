@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import Notfound from "../assets/images/404error.jpg";
 import Button from "./Button";
 
 export default function FilterNotFoundPage() {
+  const navigate = useNavigate();
   return (
     <div className="flex justify-center items-center flex-row h-[100vh] ">
       <div className="w-[50vw] px-20 flex flex-col justify-center gap-24 h-full">

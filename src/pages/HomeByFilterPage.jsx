@@ -3,9 +3,7 @@ import ImageCard from "../components/ImageCard";
 import { useStore } from "../store/useStore";
 import { motion } from "framer-motion";
 import FilterNotFound from "../components/FilterNotFound";
-import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { CATEGORIES_TYPE_MAP_NAME } from "../constants";
 
 const containerVariants = {
@@ -23,22 +21,13 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 1 } },
 };
 
-export default function HomeByFilterProduct() {
+export default function HomeByFilterPage() {
   const [searchParams] = useSearchParams();
   const word = searchParams.get("word");
   const categoryId = searchParams.get("categoryId");
 
   const today = useStore((state) => state.product.today);
   const searchProduct = useStore((state) => state.searchProduct);
-  const filterProduct = useStore((state) => state.filterProduct);
-
-  useEffect(() => {
-    if (word) {
-      filterProduct(+categoryId, word);
-    } else {
-      filterProduct(+categoryId);
-    }
-  }, []);
 
   if (!searchProduct.length) {
     return <FilterNotFound />;

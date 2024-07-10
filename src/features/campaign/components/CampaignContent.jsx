@@ -43,10 +43,15 @@ export default function CampaignContent() {
   const isCreator = role === USER_ROLE.CREATOR && authUser.id === filterData?.creatorId;
   const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
   const isPending = filterData?.approvalStatusId === APPROVAL_STATUS_ID.PENDING;
+
   const isFinish =
     filterData?.productStatusId === APPROVAL_STATUS_ID.SUCCESS ||
     filterData?.productStatusId === APPROVAL_STATUS_ID.FAILED;
   const isAdmin = role === USER_ROLE.ADMIN;
+
+  const histories = useStore((state) => state.supporter.history);
+  const filterHistory = histories?.filter((el) => el.productId === +productId);
+  const isSupported = role === USER_ROLE.SUPPORTER && filterHistory.length > 0;
 
   const initialInput = {
     productName: filterData?.productName,
@@ -248,7 +253,7 @@ export default function CampaignContent() {
             )}
 
             <div>
-              {!isApproved && !isFinish && isAdmin && isPending ? (
+              {isSupported ? null : !isApproved && !isFinish && isAdmin && isPending ? (
                 <div className="grid grid-cols-2 gap-4">
                   <Button
                     bg="red"

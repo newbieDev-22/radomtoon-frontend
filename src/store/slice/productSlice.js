@@ -275,8 +275,10 @@ export const productSlice = (set, get) => ({
           });
         });
         set(() => ({ searchProduct: filterByWord }));
+        return filterByWord;
       } else {
         set(() => ({ searchProduct: filterByCategory }));
+        return filterByCategory;
       }
     } else {
       if (word) {
@@ -286,6 +288,10 @@ export const productSlice = (set, get) => ({
           });
         });
         set(() => ({ searchProduct: filterByWord }));
+        return filterByWord;
+      } else {
+        set(() => ({ searchProduct: [] }));
+        return [];
       }
     }
   },

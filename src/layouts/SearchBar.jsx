@@ -11,13 +11,18 @@ export default function SearchBar() {
 
   const filterProduct = useStore((state) => state.filterProduct);
 
-  const handleClickSearch = () => {
+  const handleSearch = () => {
     if (categoryId) {
-      navigate(`/search/?categoryId=${categoryId}&word=${input}`);
-      filterProduct(categoryId, input);
+      const searchResult = filterProduct(categoryId, input);
+      if (searchResult.length) {
+        navigate(`/search/?categoryId=${categoryId}&word=${input}`);
+      } else {
+        filterProduct(0, input);
+        navigate(`/search/?word=${input}`);
+      }
     } else {
-      navigate(`/search/?word=${input}`);
       filterProduct(0, input);
+      navigate(`/search/?word=${input}`);
     }
     setInput("");
   };
@@ -35,7 +40,7 @@ export default function SearchBar() {
         onChange={(e) => setInput(e.target.value)}
       />
       <button
-        onClick={handleClickSearch}
+        onClick={handleSearch}
         className="w-10 md:w-16 sm:w-10 bg-creator-normal 
         transition rounded-r-lg flex justify-center items-center hover:bg-creator-saturate active:bg-creator-normal"
       >
