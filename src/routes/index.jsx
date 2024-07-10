@@ -21,8 +21,6 @@ const HomeByFilterProduct = lazy(() => import("../layouts/HomeByFilterProduct"))
 
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
 
-const HomeDummy = lazy(() => import("../pages/HomeDummy"));
-
 const router = createBrowserRouter([
   {
     path: "/",
