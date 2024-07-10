@@ -39,7 +39,7 @@ export default function HomeGetStart() {
             {"Discover and support creative projects from passionate creators worldwide"}
           </div>
         </motion.h1>
-        <div className="absolute bottom-[24vh] flex flex-row gap-8">
+        <div className="absolute bottom-[16vh] flex flex-row gap-8 py-4">
           <div className="flex gap-20 my-auto h-12">
             <Button
               onClick={() => navigate("/search")}

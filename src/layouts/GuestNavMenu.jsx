@@ -1,7 +1,7 @@
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
-export default function GuestNavMenu({ inLanding }) {
+export default function GuestNavMenu({ inHomePage }) {
   const navigate = useNavigate();
   return (
     <div className="grid grid-cols-2">
@@ -16,7 +16,7 @@ export default function GuestNavMenu({ inLanding }) {
       <button
         onClick={() => navigate("/login")}
         className={`hover:text-creator-saturate transition duration-300  ${
-          inLanding ? "text-white" : "text-black"
+          inHomePage ? "text-white" : "text-black"
         }`}
       >
         Log In

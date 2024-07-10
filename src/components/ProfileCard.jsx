@@ -1,10 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import { useStore } from "../store/useStore";
 
 export default function ProfileCard({ creatorId }) {
   const selectedCreator = useStore((state) => state.selectCreator(creatorId));
-
+  const navigate = useNavigate();
   return (
-    <div className="flex w-72 flex-col items-center bg-white rounded-lg drop-shadow-md py-5 gap-5 ">
+    <div
+      className="flex w-72 flex-col items-center bg-white rounded-lg drop-shadow-md py-5 gap-5"
+      onClick={() => navigate(`/creator-panel/${creatorId}`)}
+    >
       {selectedCreator.profileImage ? (
         <div className="w-14 h-14">
           <img

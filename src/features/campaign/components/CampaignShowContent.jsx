@@ -29,7 +29,9 @@ export default function CampaignShowContent({ input, remainingDay }) {
       </div>
 
       <div>
-        <div className="text-3xl font-extrabold ">{remainingDay}</div>
+        <div className="text-3xl font-extrabold ">
+          {remainingDay >= 0 ? remainingDay : 0}
+        </div>
         <p className="text-gray-500 font-semibold ml-1 mt-2">days to go</p>
       </div>
     </div>

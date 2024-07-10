@@ -22,10 +22,10 @@ export default function StatsItemHome({ amount, title, currency }) {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <h1 className="text-6xl font-semibold md:w-auto text-white whitespace-nowrap">
+      <h1 className="text-5xl font-semibold md:w-auto text-white whitespace-nowrap">
         {`${currency || ""} ${value.toLocaleString()}`}
       </h1>
-      <p className="text-3xl text-white whitespace-nowrap">{title}</p>
+      <p className="text-2xl text-white whitespace-nowrap">{title}</p>
     </div>
   );
 }
