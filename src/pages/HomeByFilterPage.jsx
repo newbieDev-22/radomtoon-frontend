@@ -22,7 +22,7 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeInOut" } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeInOut" } },
 };
 
 export default function HomeByFilterPage() {
@@ -72,7 +72,7 @@ export default function HomeByFilterPage() {
           src={
             "https://steamuserimages-a.akamaihd.net/ugc/1635359997296706183/0B06CA0A2E1052B440A0EE8794986729BB58540F/"
           }
-          className={`absolute w-full h-full ${CATEGORIES_HUE_MAP[categoryId]} -z-10 object-cover bg-creator-normal`}
+          className={`absolute w-full h-full ${CATEGORIES_HUE_MAP[categoryId]} -z-10 object-cover`}
           alt=""
         />
       </div>
@@ -85,7 +85,7 @@ export default function HomeByFilterPage() {
             variants={containerVariants}
             initial="hidden"
             animate="show"
-            className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-4 mb-20"
+            className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-4 pb-20 2xl:pb-20"
           >
             {searchProduct.map((el) => (
               <motion.div key={el.id} variants={itemVariants}>
