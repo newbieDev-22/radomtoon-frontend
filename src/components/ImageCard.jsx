@@ -98,6 +98,7 @@ export default function ImageCard({
                   productId={productId}
                   content={content}
                   hover={hover}
+                  isEdit={isEdit}
                 />
               </div>
             </div>
