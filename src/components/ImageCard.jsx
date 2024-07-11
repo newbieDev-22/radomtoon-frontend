@@ -52,9 +52,9 @@ export default function ImageCard({
   };
 
   return (
-    <div className={`relative h-full`}>
-      <div className="flex gap-4">
-        <div className="relative">
+    <div className={`relative h-full  `}>
+      <div className="flex gap-4 ">
+        <div className="relative ">
           <div className={isEditCardMap[isEdit]}>
             <div
               className={`${
@@ -91,7 +91,7 @@ export default function ImageCard({
               height={progressHeight}
             />
 
-            <div className={`flex px-2 gap-2 ${mainCard ? "py-4" : "py-2"} `}>
+            <div className={`flex px-2 bg-white  gap-2 ${mainCard ? "py-4" : "py-2"} `}>
               <div
                 role="button"
                 className="w-1/6"
