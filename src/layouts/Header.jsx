@@ -29,15 +29,18 @@ export default function Header() {
       <header
         className={`2xl:px-48 md:mt-0 items-start md:items-center grid z-20 h-[12vh] bg-transparent
           grid-cols-1 md:flex grid-rows-2 md:justify-between  ${
-            inHomePage && "absolute w-full"
+            (inHomePage || location.pathname.includes('/search')) && "absolute w-full"
+
           } `}
       >
         <div className="flex justify-self-start ">
-          <div
-            onClick={handleToHomePage}
-            className="w-52 md:w-72 text-supporter-saturate"
-          >
-            <RadomtoonIcon />
+          <div className="w-64 overflow-hidden">
+            <div
+              onClick={handleToHomePage}
+              className="w-52 md:w-72 text-supporter-saturate overflow-hidden"
+            >
+              <RadomtoonIcon />
+            </div>
           </div>
           <div className="flex md:hidden text-sm mr-5">
             <Menu />
@@ -50,7 +53,7 @@ export default function Header() {
         ) : (
           <div></div>
         )}
-        <div className=" hidden md:flex pl-10 justify-self-end  ">
+        <div className=" hidden md:flex justify-self-end  ">
           <Menu />
         </div>
       </header>

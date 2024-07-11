@@ -40,9 +40,9 @@ export default function ImageCard({
   };
 
   return (
-    <div className={`relative h-full`}>
-      <div className="flex gap-4">
-        <div className="relative">
+    <div className={`relative h-full  `}>
+      <div className="flex gap-4 ">
+        <div className="relative ">
           <div className={isEditCardMap[isEdit]}>
             <div
               className="h-40 relative overflow-hidden"
@@ -77,7 +77,8 @@ export default function ImageCard({
               height={progressHeight}
             />
 
-            <div className="flex px-2 gap-2 py-2">
+
+            <div className="flex bg-white px-2 gap-2 py-2">
               <div
                 role="button"
                 className="w-1/6"

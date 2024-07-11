@@ -342,6 +342,30 @@ export const CATEGORIES_TYPE_MAP_NAME = {
   9: "MUSIC",
   10: "TECHNOLOGY",
 };
+export const CATEGORIES_HUE_MAP = {
+  1: "hue-rotate-0",
+  2: "hue-rotate-30",
+  3: "hue-rotate-60",
+  4: "hue-rotate-90",
+  5: "-hue-rotate-30",
+  6: "-hue-rotate-60",
+  7: "-hue-rotate-90",
+  8: "-hue-rotate-15",
+  9: "hue-rotate-15",
+  10: "hue-rotate-180",
+};
+export const CATEGORIES_HUE_RESET = {
+  1: "hue-rotate-0",
+  2: "-hue-rotate-30",
+  3: "-hue-rotate-60",
+  4: "-hue-rotate-90",
+  5: "hue-rotate-30",
+  6: "hue-rotate-60",
+  7: "hue-rotate-90",
+  8: "hue-rotate-15",
+  9: "-hue-rotate-15",
+  10: "-hue-rotate-180",
+};
 
 export const MIN_DEADLINE_DAYS = 15;
 

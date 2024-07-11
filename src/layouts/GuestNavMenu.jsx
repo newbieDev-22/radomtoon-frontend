@@ -7,7 +7,7 @@ export default function GuestNavMenu({ inHomePage }) {
     <div className="grid grid-cols-2">
       <Button
         onClick={() => navigate("/creator-register")}
-        bg="creator-normal"
+        bg="supporter-normal"
         width="40"
         height="14"
       >

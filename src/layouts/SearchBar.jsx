@@ -27,11 +27,8 @@ export default function SearchBar() {
     setInput("");
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
+  const handleEnterKey = e => { if (e.key === 'Enter') handleSearch() }
+
 
   return (
     <div className="w-full flex">
@@ -44,12 +41,13 @@ export default function SearchBar() {
           text-gray-600 focus:bg-gray-200"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        onKeyDown={handleKeyPress}
+        onKeyDown={handleEnterKey}
+
       />
       <button
         onClick={handleSearch}
-        className="w-10 md:w-16 sm:w-10 bg-creator-normal 
-        transition rounded-r-lg flex justify-center items-center hover:bg-creator-saturate active:bg-creator-normal"
+        className="w-10 md:w-16 sm:w-10 bg-supporter-normal 
+        transition rounded-r-lg flex justify-center items-center hover:bg-supporter-saturate active:bg-creator-normal"
       >
         <SearchIcon />
       </button>
