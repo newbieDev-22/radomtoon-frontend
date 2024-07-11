@@ -32,7 +32,7 @@ export default function HomeProduct() {
                   return (
                     <div key={item.id} className="min-w-full relative h-full">
                       <div className="flex h-full">
-                        <div className="w-1/2 bg-black opacity-90 flex flex-col justify-center px-16 gap-4 rounded-tl-3xl">
+                        <div className="w-1/2 bg-black/50 opacity-90 flex flex-col justify-center px-16 gap-4 rounded-tl-3xl">
                           <div className="flex flex-col gap-6 text-white py-4">
                             <div className="flex gap-4">
                               <div className="bg-supporter-normal text-black rounded-lg text-center p-2 font-bold text-lg flex items-center w-fit">
@@ -82,7 +82,7 @@ export default function HomeProduct() {
                           </div>
                         </div>
                         <div className="relative w-1/2 h-full opacity-90">
-                          <div className="h-full bg-gradient-to-r from-black from-0% via-[#030303] via-10% to-transparent w-3/5 absolute z-30"></div>
+                          <div className="h-full bg-gradient-to-r from-black/50 from-0% via-[#030303]/50 via-10% to-transparent w-3/5 absolute z-30"></div>
                           <img
                             src={item.productImage}
                             alt="landing"
@@ -90,7 +90,7 @@ export default function HomeProduct() {
                           />
                         </div>
                       </div>
-                      <div className="w-full h-3">
+                      <div className="w-full h-2.5">
                         <ProgressBar
                           Numerator={item.totalFund}
                           Denominator={item.goal}
