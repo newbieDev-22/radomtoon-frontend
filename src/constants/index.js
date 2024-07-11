@@ -374,3 +374,18 @@ export const MILESTONE_STATUS = {
   2: "Prototype",
   3: "Production",
 };
+
+export const MONTH_NAME_MAP = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
