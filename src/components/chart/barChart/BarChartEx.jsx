@@ -4,40 +4,26 @@ import { useState } from "react";
 import Dropdown from "../../Dropdown";
 import dayjs from "dayjs";
 import { useEffect } from "react";
-
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+import { MONTH_NAME_MAP } from "../../../constants";
 
 export default function BarChart({ title, data, onClick, toggleBarChartData }) {
   const [month, setMonth] = useState(new Date());
   const today = new Date();
-  const todayMonth = dayjs(today).format("MMMM");
+  const todayMonth = dayjs(today).format("MMM");
   const filterData = data.filter((el) => el.month === todayMonth)[0];
-  const [currentData, setCurrentData] = useState(filterData.data);
 
+  const [currentData, setCurrentData] = useState(filterData.data);
   const handleMonthChange = (selectedMonth) => {
-    const monthIndex = months.indexOf(selectedMonth);
+    const monthIndex = MONTH_NAME_MAP.indexOf(selectedMonth);
     const newMonth = new Date(today.getFullYear(), monthIndex, 1);
     setMonth(newMonth);
-    const currentMonth = dayjs(newMonth).format("MMMM");
+    const currentMonth = dayjs(newMonth).format("MMM");
     const filterData = data.filter((el) => el.month === currentMonth)[0];
     setCurrentData(filterData.data);
   };
 
   useEffect(() => {
-    const currentMonth = dayjs(month).format("MMMM");
+    const currentMonth = dayjs(month).format("MMM");
     const filterData = data.filter((el) => el.month === currentMonth)[0];
     setCurrentData(filterData.data);
   }, [data]);
@@ -53,10 +39,10 @@ export default function BarChart({ title, data, onClick, toggleBarChartData }) {
                 <FilterMonth className={"w-full h-full"} />
               </span>
               <Dropdown
-                data={months}
+                data={MONTH_NAME_MAP}
                 onChange={handleMonthChange}
                 title="Select your month"
-                selectValue={months[month.getMonth()]}
+                selectValue={MONTH_NAME_MAP[month.getMonth()]}
                 className="indent-1 w-24 "
               />
             </div>
