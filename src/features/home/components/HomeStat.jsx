@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import { useStore } from "../../../store/useStore";
 import StatsBannerHome from "../../../components/StatsBannerComponent/StatsBannerHome";
+import { USER_ROLE } from "../../../constants";
 
 export default function HomeStat() {
+  const { role } = useStore((state) => state.authUser);
+  const isSupported = role === USER_ROLE.SUPPORTER
+
   const navigate = useNavigate();
   const { projectSupport, towardIdea, contribution } = useStore(
     (state) => state.stats.data
@@ -41,14 +45,14 @@ export default function HomeStat() {
             >
               SEE PROJECT
             </Button>
-            <Button
+           {!isSupported && <Button
               onClick={() => navigate("/supporter-register")}
               bg="supporter-saturate"
               border="supporter-saturate"
               height="full"
             >
               GET STARTED
-            </Button>
+            </Button>}
           </div>
         </div>
       </main>
