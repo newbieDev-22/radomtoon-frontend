@@ -39,7 +39,7 @@ export default function TierCard({
   const filterHistory = histories?.filter((el) => el.productId === +productId);
   const isSupported = role === USER_ROLE.SUPPORTER && filterHistory.length > 0;
   const filterData = filterProductByProductId(+productId);
-  console.log(filterData);
+
   const isFinish =
     filterData?.productStatusId === APPROVAL_STATUS_ID.SUCCESS ||
     filterData?.productStatusId === APPROVAL_STATUS_ID.FAILED;
@@ -83,9 +83,10 @@ export default function TierCard({
         className=" relative hover:scale-[102%] active:scale-100 transition-all w-[60vw]"
         onClick={handleGoToPayment}
       >
-        {role === USER_ROLE.SUPPORTER || role === USER_ROLE.GUEST ? (
-          ""
-        ) : (
+        {role === USER_ROLE.SUPPORTER ||
+        role === USER_ROLE.GUEST ||
+        !isCreator ||
+        isApproved ? null : (
           <button
             className="absolute top-2 right-2 hover:scale-[110%] active:scale-100"
             onClick={() => setIsDeleteModalOpen(true)}
