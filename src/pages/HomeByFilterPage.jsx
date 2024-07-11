@@ -22,7 +22,7 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeInOut" } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeInOut" } },
 };
 
 export default function HomeByFilterPage() {
@@ -41,6 +41,10 @@ export default function HomeByFilterPage() {
       filterProduct(categoryId, word);
     }
   }, [categoryId, word, filterProduct]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>

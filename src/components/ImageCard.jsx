@@ -46,7 +46,7 @@ export default function ImageCard({
   return (
     <div
       role="button"
-      className="relative h-full transition-all duration-450 cursor-pointer"
+      className="relative h-full transition-all duration-300 cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

@@ -1,18 +1,19 @@
 import dayjs from "dayjs";
 import ReactPlayer from "react-player/youtube";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useStore } from "../../../store/useStore";
+import { toast } from "react-toastify";
+
 import { APPROVAL_STATUS_ID, MIN_DEADLINE_DAYS, USER_ROLE } from "../../../constants";
 import Button from "../../../components/Button";
-import { useNavigate, useParams } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
-import { useStore } from "../../../store/useStore";
-import CampaignShowContent from "./CampaignShowContent";
-import CampaignEditContent from "./CampaignEditContent";
-import { toast } from "react-toastify";
-import validateProduct from "../../../validators/validate-create-project";
 import Spinner from "../../../components/Spinner";
 import Modal from "../../../components/Modal";
 import ConfirmModal from "../../../components/ConfirmModal";
+import CampaignShowContent from "./CampaignShowContent";
+import CampaignEditContent from "./CampaignEditContent";
 import RejectApproval from "../../admin/components/RejectApproval";
+import validateProduct from "../../../validators/validate-create-project";
 
 const initialInputError = {
   productName: "",
