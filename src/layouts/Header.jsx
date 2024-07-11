@@ -22,8 +22,8 @@ export default function Header() {
   return (
     <>
       <header
-        className={`2xl:px-48 md:mt-0 items-start md:items-center grid z-20 h-[12vh] bg-transparent
-          grid-cols-1 md:flex grid-rows-2 md:justify-between  ${
+        className={`2xl:px-48 mt-3 md:mt-0 items-start md:items-center grid z-20 h-[12vh] bg-transparent
+          grid-cols-1 md:flex grid-rows-2 md:justify-between   ${
             (inHomePage || location.pathname.includes("/search")) && "absolute w-full"
           } `}
       >

@@ -7,7 +7,7 @@ export default function StatsBannerHome({ data }) {
     >
       <div
         className={
-          "h-[20vh] rounded-2xl w-[80vw] px-3 grid grid-cols-3 content-center bg-white/[11%] overflow-auto scroll-hidden shadow-md"
+          "h-[17vh] md:h-[20vh] rounded-2xl w-[80vw] px-28 gap-56 text-center grid grid-cols-3 content-center bg-black/[45%] overflow-auto scroll-hidden shadow-md"
         }
       >
         {data.map((item) => (

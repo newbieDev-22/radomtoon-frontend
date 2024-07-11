@@ -26,9 +26,9 @@ export default function HomeStat() {
     <div className="min-w-full">
       <motion.img
         src={
-          "https://i.pinimg.com/originals/f4/ac/8f/f4ac8f70c1cfc5d0d57b2cf21d2803df.jpg"
+          "https://i.pinimg.com/originals/e7/50/38/e75038ae16be9d330cb1f3563833647e.gif"
         }
-        className="absolute w-full h-full object-cover"
+        className="absolute w-full h-full object-cover -hue-rotate-15"
         alt="home-stat"
       />
       <main className="relative flex flex-col justify-center items-center h-[100vh] z-10 overflow-hidden">
