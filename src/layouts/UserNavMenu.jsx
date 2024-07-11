@@ -20,7 +20,7 @@ export default function UserNavMenu({ inHomePage, currentUser }) {
       {currentUser === USER_ROLE.SUPPORTER && (
         <Button
           onClick={() => navigate("/supporter-histories")}
-          bg="creator-normal"
+          bg="supporter-normal"
           width="40"
           height="14"
         >
@@ -30,7 +30,7 @@ export default function UserNavMenu({ inHomePage, currentUser }) {
       {currentUser === USER_ROLE.CREATOR && (
         <Button
           onClick={() => navigate(`/creator-panel/${user.id}`)}
-          bg="creator-normal"
+          bg="supporter-normal"
           width="40"
           height="14"
         >
@@ -40,7 +40,7 @@ export default function UserNavMenu({ inHomePage, currentUser }) {
       {currentUser === USER_ROLE.ADMIN && (
         <Button
           onClick={() => navigate("/admin-panel")}
-          bg="creator-normal"
+          bg="supporter-normal"
           width="40"
           height="14"
         >

@@ -36,11 +36,20 @@ export default function App() {
       fetchUser();
       fetchComment();
       fetchStats();
-      fetchFiveProduct();
       fetchCreatorUser();
+      fetchFiveProduct();
+      fetchCreatorProduct();
     };
     fetch();
-  }, [fetchProduct, fetchUser, fetchComment, fetchStats, fetchFiveProduct,fetchCreatorUser]);
+  }, [
+    fetchProduct,
+    fetchUser,
+    fetchComment,
+    fetchStats,
+    fetchFiveProduct,
+    fetchCreatorProduct,
+    fetchCreatorUser,
+  ]);
 
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {
@@ -50,7 +59,7 @@ export default function App() {
       };
       fetch();
     }
-  }, [fetchWaitingApproval, role]);
+  }, [fetchWaitingApproval, fetchDashboardData, role]);
 
   useEffect(() => {
     if (role === USER_ROLE.SUPPORTER) {
@@ -69,14 +78,22 @@ export default function App() {
   useEffect(() => {
     const fetch = async () => {
       if (role === USER_ROLE.CREATOR) {
-        fetchCreatorUser();
         fetchCreatorProduct();
       } else {
         resetCreatorProduct();
       }
     };
     fetch();
-  }, [user, product, fetchCreatorProduct, fetchCreatorUser, resetCreatorProduct, role]);
+  }, [user, product, fetchCreatorProduct, resetCreatorProduct, role]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      if (role === USER_ROLE.CREATOR) {
+        fetchCreatorUser();
+      }
+    };
+    fetch();
+  }, [user, fetchCreatorUser, role]);
 
   if (
     userLoading ||

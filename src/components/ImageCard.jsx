@@ -45,7 +45,7 @@ export default function ImageCard({
         <div className="relative">
           <div className={isEditCardMap[isEdit]}>
             <div
-              className="h-40 relative overflow-hidden"
+              className="h-40 relative overflow-hidden bg-white px-2 pt-2"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               onClick={() => navigate(`/campaign/${productId}`)}
@@ -53,7 +53,7 @@ export default function ImageCard({
               {!hover || !vid ? (
                 <img
                   src={imageSrc}
-                  className={`absolute h-full w-full object-cover rounded-t-lg`}
+                  className={` h-full w-full object-cover rounded-t-lg`}
                   alt="product-card"
                 />
               ) : null}
@@ -71,13 +71,15 @@ export default function ImageCard({
                 </div>
               )}
             </div>
-            <ProgressBar
-              Numerator={totalFund}
-              Denominator={goal}
-              height={progressHeight}
-            />
+            <div className="px-2 bg-white">
+              <ProgressBar
+                Numerator={totalFund}
+                Denominator={goal}
+                height={progressHeight}
+              />
+            </div>
 
-            <div className="flex px-2 gap-2 py-2">
+            <div className="flex bg-white px-2 gap-2 py-2 ">
               <div
                 role="button"
                 className="w-1/6"

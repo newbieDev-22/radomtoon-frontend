@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
@@ -241,12 +240,7 @@ export default function SupporterRegister() {
                   <p className="text-red-500 text-sm mb-4">{checkboxError}</p>
                 )}
 
-                <Button
-                  width={"full"}
-                  height="14"
-                  bg="creator-saturate"
-                  color="white"
-                >
+                <Button width={"full"} height="14" bg="creator-saturate" color="white">
                   Request Approve
                 </Button>
               </div>

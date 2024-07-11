@@ -262,7 +262,7 @@ export const productSlice = (set, get) => ({
     }
   },
 
-  filterProduct: (categoryId = 0, word = null) => {
+  filterProduct: (categoryId = null, word = null) => {
     const approvalProduct = get().approvalProduct;
     const cloneData = [...approvalProduct];
     const keyFilter = ["productName", "creatorName"];

@@ -4,13 +4,17 @@ import validateEvidenceMilestone from "../../../validators/validate-evidence-mil
 import { toast } from "react-toastify";
 import { useStore } from "../../../store/useStore";
 import { useParams } from "react-router-dom";
+import Lottie from "lottie-react";
+import UploadeFile from "../../../assets/images/imageUpload2.json";
 
 export default function EvidenceModalDetail({ milestoneRankId }) {
   const { productId } = useParams();
   const fileEl = useRef();
   const [file, setFile] = useState(null);
   const creatorProductData = useStore((state) => state.creatorProduct.data);
-  const sendMilestoneEvidence = useStore((state) => state.sendMilestoneEvidence);
+  const sendMilestoneEvidence = useStore(
+    (state) => state.sendMilestoneEvidence
+  );
 
   const productData = creatorProductData
     .filter((el) => el.id === +productId)
@@ -52,7 +56,12 @@ export default function EvidenceModalDetail({ milestoneRankId }) {
           formData.append(key, value);
         }
       }
-      await sendMilestoneEvidence(milestoneData.id, formData, productId, milestoneRankId);
+      await sendMilestoneEvidence(
+        milestoneData.id,
+        formData,
+        productId,
+        milestoneRankId
+      );
 
       toast.success("Milestone evidence sent");
     } catch (error) {
@@ -62,41 +71,43 @@ export default function EvidenceModalDetail({ milestoneRankId }) {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <p className="mb-2">Evidence Detail</p>
-        <div className="flex flex-col gap-2">
-          <textarea
-            className="mb-4 w-[500px] h-[175px] rounded-lg p-2 border-[1.5px] border-gray-200 outline-none"
-            name="evidenceTextDetail"
-            placeholder="Please fill your evidence detail...."
-            value={input.evidenceTextDetail}
-            onChange={handleInputChange}
-          />
-          {inputError.evidenceTextDetail && (
-            <small className="text-red-500 font-semibold">
-              {inputError.evidenceTextDetail}
-            </small>
-          )}
-        </div>
-        <div onClick={() => fileEl.current.click()}>
-          {file ? (
-            <div className="flex flex-col items-center shadow-md">
-              <img
-                src={URL.createObjectURL(file)}
-                alt="Uploaded"
-                className="w-[500px] h-[175px] object-cover rounded-lg"
-              />
-            </div>
-          ) : (
-            <div className="cursor-pointer ">
-              <span className="flex justify-center items-center w-[500px] h-[175px] border-[1.5px] border-gray rounded-lg p-8">
-                + Add your image Evidence
-              </span>
-            </div>
-          )}
-        </div>
+      <form onSubmit={handleSubmit} className="flex-col">
+        <div className="flex flex-row gap-5">
+          <div className="flex flex-col gap-2">
+            <p className="mb-2 font-semibold text-2xl">Evidence Detail :</p>
+            <textarea
+              className=" w-[500px] h-[350px] rounded-lg py-2 border-[1.5px] border-gray-200 outline-none px-4"
+              name="evidenceTextDetail"
+              placeholder="Please fill your evidence detail...."
+              value={input.evidenceTextDetail}
+              onChange={handleInputChange}
+            />
+            {inputError.evidenceTextDetail && (
+              <small className="text-red-500 font-semibold">
+                {inputError.evidenceTextDetail}
+              </small>
+            )}
+          </div>
 
-        <div className="flex justify-center gap-4 mt-4">
+          <div onClick={() => fileEl.current.click()}>
+            {file ? (
+              <div className="flex flex-col items-center shadow-md mt-10">
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt="Uploaded"
+                  className="w-[500px] h-[350px] aspect-16/9 object-cover rounded-lg mt-2"
+                />
+              </div>
+            ) : (
+              <div className="w-[500px] h-[350px] object-cover rounded-lg mt-12 items-center">
+                <div className="scale-100 cursor-pointer flex justify-center w-full h-full">
+                  <Lottie animationData={UploadeFile} loop={true} />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="flex justify-center gap-4 mt-10">
           <Button
             onClick={handleClearEvidence}
             width={"small"}

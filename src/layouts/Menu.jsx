@@ -7,7 +7,7 @@ import { useStore } from "../store/useStore";
 export default function Menu() {
   const role = useStore((state) => state.authUser.role);
   const location = useLocation();
-  const inHomePage = location.pathname == "/";
+  const inHomePage = ["/", "/search"].some(path => location.pathname.includes(path));
 
   return (
     <div>
