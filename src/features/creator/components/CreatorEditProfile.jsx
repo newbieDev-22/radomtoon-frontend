@@ -4,6 +4,7 @@ import { useStore } from "../../../store/useStore";
 import { useParams } from "react-router-dom";
 import { USER_ROLE } from "../../../constants";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 export default function CreatorEditProfile() {
   const { creatorId } = useParams();
@@ -18,6 +19,13 @@ export default function CreatorEditProfile() {
 
   const [aboutInput, setAboutInput] = useState(initialInput);
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setAboutInput({
+      biography: selectedCreator.biography || "",
+      website: selectedCreator.website || "",
+    });
+  }, [creatorId, selectedCreator]);
 
   const handleOnSave = async () => {
     try {
