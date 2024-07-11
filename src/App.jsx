@@ -36,6 +36,7 @@ export default function App() {
       fetchUser();
       fetchComment();
       fetchStats();
+      fetchCreatorUser();
       fetchFiveProduct();
       fetchCreatorProduct();
     };
@@ -47,6 +48,7 @@ export default function App() {
     fetchStats,
     fetchFiveProduct,
     fetchCreatorProduct,
+    fetchCreatorUser,
   ]);
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export default function App() {
       };
       fetch();
     }
-  }, [fetchWaitingApproval, role]);
+  }, [fetchWaitingApproval, fetchDashboardData, role]);
 
   useEffect(() => {
     if (role === USER_ROLE.SUPPORTER) {
