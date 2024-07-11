@@ -110,6 +110,7 @@ export default function HomeByFilterPage() {
                 />
               </motion.div>
             ))}
+            {searchProduct.length % 4 !== 0 && <div className="w-20 h-80"></div>}
           </motion.div>
         </div>
       </div>
