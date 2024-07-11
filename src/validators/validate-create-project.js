@@ -13,10 +13,13 @@ const productSchema = Joi.object({
   deadline: Joi.date().greater("now").required(),
   categoryId: Joi.number().integer().min(1).max(10).required(),
   productVideo: Joi.string().allow("", null),
-  summaryDetail: Joi.string()
-    .trim()
-    .required()
-    .messages({ "string.empty": "Summary detail is required" }),
+  summaryDetail: Joi.string().trim().max(256).required().messages(
+    { "string.empty": "Summary detail is required" },
+    {
+      "string.max":
+        "Summary detail length must be less than or equal to 256 characters long",
+    }
+  ),
 });
 
 const validateProduct = (input) => validateWrapper(productSchema, input);
