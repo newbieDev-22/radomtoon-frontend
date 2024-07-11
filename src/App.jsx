@@ -38,7 +38,6 @@ export default function App() {
       fetchStats();
       fetchCreatorUser();
       fetchFiveProduct();
-      fetchCreatorProduct();
     };
     fetch();
   }, [
@@ -47,7 +46,6 @@ export default function App() {
     fetchComment,
     fetchStats,
     fetchFiveProduct,
-    fetchCreatorProduct,
     fetchCreatorUser,
   ]);
 
