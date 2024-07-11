@@ -23,9 +23,9 @@ export const productSlice = (set, get) => ({
         data: { productList },
       } = await productApi.getProduct();
 
-      const approvalProduct = productList.filter(
-        (el) => el.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS
-      );
+      const approvalProduct = productList
+        .filter((el) => el.productStatusId === APPROVAL_STATUS_ID.PENDING)
+        .sort((a, b) => b.totalFund - a.totalFund);
 
       set((state) => ({
         product: { ...state.product, data: productList },
