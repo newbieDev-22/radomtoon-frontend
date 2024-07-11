@@ -37,9 +37,17 @@ export default function App() {
       fetchComment();
       fetchStats();
       fetchFiveProduct();
+      fetchCreatorProduct();
     };
     fetch();
-  }, [fetchProduct, fetchUser, fetchComment, fetchStats, fetchFiveProduct]);
+  }, [
+    fetchProduct,
+    fetchUser,
+    fetchComment,
+    fetchStats,
+    fetchFiveProduct,
+    fetchCreatorProduct,
+  ]);
 
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {
@@ -68,14 +76,22 @@ export default function App() {
   useEffect(() => {
     const fetch = async () => {
       if (role === USER_ROLE.CREATOR) {
-        fetchCreatorUser();
         fetchCreatorProduct();
       } else {
         resetCreatorProduct();
       }
     };
     fetch();
-  }, [user, product, fetchCreatorProduct, fetchCreatorUser, resetCreatorProduct, role]);
+  }, [user, product, fetchCreatorProduct, resetCreatorProduct, role]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      if (role === USER_ROLE.CREATOR) {
+        fetchCreatorUser();
+      }
+    };
+    fetch();
+  }, [user, fetchCreatorUser, role]);
 
   if (
     userLoading ||
