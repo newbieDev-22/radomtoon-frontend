@@ -55,7 +55,9 @@ export default function CreatorDashboard() {
           <h1 className="w-full px-10 justify-start text-lg font-semibold text-radomtoon-bright mt-4 ">
             Milestone Progress
           </h1>
-          <Milestone approvalStatusObj={approvalStatusObj} />
+          <div className="w-full">
+            <Milestone approvalStatusObj={approvalStatusObj} />
+          </div>
         </span>
         <span className="row-span-2 col-span-2 sm:col-span-2 md:col-span-1 h-96 md:h-full bg-white rounded-2xl">
           <PieChart title="Tiers Percentage" data={pieChartData} />
