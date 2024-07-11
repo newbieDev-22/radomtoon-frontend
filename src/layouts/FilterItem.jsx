@@ -6,8 +6,13 @@ export default function FilterItem({ page, categoryId }) {
   const filterProduct = useStore((state) => state.filterProduct);
 
   const handleClickCategory = () => {
-    navigate(`/search/?categoryId=${categoryId}`);
-    filterProduct(categoryId);
+    if (categoryId !== 0) {
+      navigate(`/search/?categoryId=${categoryId}`);
+      filterProduct(categoryId);
+    } else {
+      filterProduct();
+      navigate(`/search`);
+    }
   };
 
   return (

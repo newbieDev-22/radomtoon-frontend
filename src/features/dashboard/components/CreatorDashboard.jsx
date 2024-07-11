@@ -69,54 +69,120 @@ export default function CreatorDashboard() {
                 <div className="flex flex-col  gap-4 w-full">
                   <div className="flex justify-between items-center p-3 border-b-2">
                     <h1>Planning</h1>
-                    <Button
-                      onClick={() => {
-                        setOpenEvidenceModal(true);
-                        setCurrentMilestone(1);
-                      }}
-                      disabled={
-                        approvalStatusObj[1] === APPROVAL_STATUS_ID.SUCCESS ||
-                        approvalStatusObj[1] === APPROVAL_STATUS_ID.PENDING ||
-                        selectedProduct.productStatusId !== PRODUCT_STATUS_ID.SUCCESS
-                      }
-                    >
-                      Send Evidence
-                    </Button>
+                    {approvalStatusObj[1] !== APPROVAL_STATUS_ID.PENDING ? (
+                      <div className="w-56">
+                        <Button
+                          width={"full"}
+                          onClick={() => {
+                            setOpenEvidenceModal(true);
+                            setCurrentMilestone(1);
+                          }}
+                          disabled={
+                            approvalStatusObj[1] === APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[1] === APPROVAL_STATUS_ID.PENDING ||
+                            selectedProduct.productStatusId !== PRODUCT_STATUS_ID.SUCCESS
+                          }
+                        >
+                          Send Evidence
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="w-56">
+                        <Button
+                          width={"full"}
+                          onClick={() => {
+                            setOpenEvidenceModal(true);
+                            setCurrentMilestone(1);
+                          }}
+                          disabled={
+                            approvalStatusObj[1] === APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[1] === APPROVAL_STATUS_ID.PENDING ||
+                            selectedProduct.productStatusId !== PRODUCT_STATUS_ID.SUCCESS
+                          }
+                        >
+                          Pending Approval
+                        </Button>
+                      </div>
+                    )}
                   </div>
                   <div className="flex justify-between items-center p-3 border-b-2">
                     <h1>Prototype</h1>
-                    {
-                      <Button
-                        onClick={() => {
-                          setOpenEvidenceModal(true);
-                          setCurrentMilestone(2);
-                        }}
-                        disabled={
-                          approvalStatusObj[1] !== APPROVAL_STATUS_ID.SUCCESS ||
-                          approvalStatusObj[2] === APPROVAL_STATUS_ID.SUCCESS ||
-                          approvalStatusObj[2] === APPROVAL_STATUS_ID.PENDING
-                        }
-                      >
-                        Send Evidence
-                      </Button>
-                    }
+                    {approvalStatusObj[2] !== APPROVAL_STATUS_ID.PENDING ? (
+                      <div className="w-56">
+                        <Button
+                          width={"full"}
+                          onClick={() => {
+                            setOpenEvidenceModal(true);
+                            setCurrentMilestone(2);
+                          }}
+                          disabled={
+                            approvalStatusObj[1] !== APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[2] === APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[2] === APPROVAL_STATUS_ID.PENDING
+                          }
+                        >
+                          Send Evidence
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="w-56">
+                        <Button
+                          width={"full"}
+                          onClick={() => {
+                            setOpenEvidenceModal(true);
+                            setCurrentMilestone(2);
+                          }}
+                          disabled={
+                            approvalStatusObj[1] !== APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[2] === APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[2] === APPROVAL_STATUS_ID.PENDING
+                          }
+                        >
+                          Pending Approval
+                        </Button>
+                      </div>
+                    )}
                   </div>
                   <div className="flex justify-between items-center p-3 border-b-2">
                     <h1>Production</h1>
-                    <Button
-                      onClick={() => {
-                        setOpenEvidenceModal(true);
-                        setCurrentMilestone(3);
-                      }}
-                      disabled={
-                        approvalStatusObj[1] !== APPROVAL_STATUS_ID.SUCCESS ||
-                        approvalStatusObj[2] !== APPROVAL_STATUS_ID.SUCCESS ||
-                        approvalStatusObj[3] === APPROVAL_STATUS_ID.SUCCESS ||
-                        approvalStatusObj[3] === APPROVAL_STATUS_ID.PENDING
-                      }
-                    >
-                      Send Evidence
-                    </Button>
+                    {approvalStatusObj[3] !== APPROVAL_STATUS_ID.PENDING ? (
+                      <div className="w-56">
+                        <Button
+                          width={"full"}
+                          onClick={() => {
+                            setOpenEvidenceModal(true);
+                            setCurrentMilestone(3);
+                          }}
+                          disabled={
+                            approvalStatusObj[1] !== APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[2] !== APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[3] === APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[3] === APPROVAL_STATUS_ID.PENDING
+                          }
+                        >
+                          Send Evidence
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="w-56">
+                        <Button
+                          onClick={() => {
+                            setOpenEvidenceModal(true);
+                            setCurrentMilestone(3);
+                          }}
+                          width={"full"}
+                          bg="gray"
+                          disabled={
+                            approvalStatusObj[1] !== APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[2] !== APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[3] === APPROVAL_STATUS_ID.SUCCESS ||
+                            approvalStatusObj[3] === APPROVAL_STATUS_ID.PENDING
+                          }
+                        >
+                          Pending Approval
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

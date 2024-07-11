@@ -12,15 +12,10 @@ export default function Header() {
   const inHomePage = location.pathname === "/";
 
   const navigate = useNavigate();
-
-  const resetSearch = useStore((state) => state.resetSearch);
-  const setCategoryFilter = useStore((state) => state.setCategoryFilter);
-  const setWord = useStore((state) => state.setWord);
+  const filterProduct = useStore((state) => state.filterProduct);
 
   const handleToHomePage = () => {
-    resetSearch();
-    setCategoryFilter(null);
-    setWord("");
+    filterProduct();
     navigate("/search");
   };
 
@@ -29,8 +24,7 @@ export default function Header() {
       <header
         className={`2xl:px-48 md:mt-0 items-start md:items-center grid z-20 h-[12vh] bg-transparent
           grid-cols-1 md:flex grid-rows-2 md:justify-between  ${
-            (inHomePage || location.pathname.includes('/search')) && "absolute w-full"
-
+            (inHomePage || location.pathname.includes("/search")) && "absolute w-full"
           } `}
       >
         <div className="flex justify-self-start ">
