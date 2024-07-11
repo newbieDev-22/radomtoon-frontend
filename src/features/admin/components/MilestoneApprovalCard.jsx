@@ -89,7 +89,7 @@ export default function MilestoneApprovalCard({
       </Modal>
       <Modal
         title="Milestone Evidence"
-        width={60}
+        width={65}
         open={isOpenApproveEvidenceModal}
         onClose={() => setIsOpenApproveEvidenceModal(false)}
       >
