@@ -6,7 +6,7 @@ export default function ProfileCard({ creatorId }) {
   const navigate = useNavigate();
   return (
     <div
-      className="flex w-72 flex-col items-center bg-white rounded-lg drop-shadow-md py-5 gap-5"
+      className="flex w-72 flex-col items-center bg-white rounded-lg drop-shadow-md py-5 gap-5 cursor-pointer"
       onClick={() => navigate(`/creator-panel/${creatorId}`)}
     >
       {selectedCreator?.profileImage ? (

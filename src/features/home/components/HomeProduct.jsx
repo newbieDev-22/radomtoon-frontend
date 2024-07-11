@@ -35,7 +35,7 @@ export default function HomeProduct() {
                         <div className="w-1/2 bg-black/50 opacity-90 flex flex-col justify-center px-16 gap-4 rounded-tl-3xl">
                           <div className="flex flex-col gap-6 text-white py-4">
                             <div className="flex gap-4">
-                              <div className="bg-supporter-normal text-black rounded-lg text-center p-2 font-bold text-lg flex items-center w-fit">
+                              <div className="bg-gray-400 text-black rounded-lg text-center p-2 font-bold text-lg flex items-center w-fit">
                                 {item.category}
                               </div>
                               <div className="font-bold flex flex-col justify-center gap-1">
