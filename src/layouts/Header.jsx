@@ -1,16 +1,15 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RadomtoonIcon } from "../icons";
 import SearchBar from "./SearchBar";
 import Menu from "./Menu";
 import FilterBar from "./FilterBar";
-import { useNavigate } from "react-router-dom";
 import { useStore } from "../store/useStore";
 
-const LANDING_PATH = "/landing";
+const HOME_PATH = "/";
 
 export default function Header() {
   const location = useLocation();
-  const inLanding = location.pathname == "/landing";
+  const inHomePage = location.pathname === "/";
 
   const navigate = useNavigate();
 
@@ -22,7 +21,7 @@ export default function Header() {
     resetSearch();
     setCategoryFilter(null);
     setWord("");
-    navigate("/");
+    navigate("/search");
   };
 
   return (
@@ -30,7 +29,8 @@ export default function Header() {
       <header
         className={`2xl:px-48 md:mt-0 items-start md:items-center grid z-20 h-[12vh] bg-transparent
           grid-cols-1 md:flex grid-rows-2 md:justify-between  ${
-            (inLanding || location.pathname.includes('/search')) && "absolute w-full"
+            (inHomePage || location.pathname.includes('/search')) && "absolute w-full"
+
           } `}
       >
         <div className="flex justify-self-start ">
@@ -46,7 +46,7 @@ export default function Header() {
             <Menu />
           </div>
         </div>
-        {location.pathname !== LANDING_PATH ? (
+        {location.pathname !== HOME_PATH ? (
           <div className="flex justify-center px-6 md:px-0 w-full md:w-[32vw]">
             <SearchBar />
           </div>
@@ -58,7 +58,7 @@ export default function Header() {
         </div>
       </header>
 
-      {location.pathname !== LANDING_PATH && <FilterBar />}
+      {location.pathname != HOME_PATH && <FilterBar />}
     </>
   );
 }

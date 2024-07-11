@@ -1,6 +1,29 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { CloseIcon } from "../icons";
+import Backdrop from "./Backdrop";
+import { motion } from "framer-motion";
+
+const dropIn = {
+  hidden: {
+    y: "-100vh",
+    opacity: 0,
+  },
+  visible: {
+    y: "0",
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+      type: "spring",
+      damping: 25,
+      stiffness: 500,
+    },
+  },
+  exit: {
+    y: "100vh",
+    opacity: 0,
+  },
+};
 
 export default function Modal({ width = 30, title, children, open, onClose }) {
   useEffect(() => {
@@ -17,14 +40,18 @@ export default function Modal({ width = 30, title, children, open, onClose }) {
     <>
       {open
         ? createPortal(
-            <>
+            <Backdrop onClick={onClose}>
               <div className=" fixed inset-0 bg-[#000000]/45 z-30"></div>
-              <div className="fixed inset-0 z-40" onClick={onClose}>
+              <div className="fixed inset-0 z-40">
                 <div className="flex justify-center items-center min-h-screen">
-                  <div
+                  <motion.div
+                    onClick={(e) => e.stopPropagation()}
+                    variants={dropIn}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
                     className="bg-white rounded-lg shadow-lg"
                     style={{ width: `${width}rem` }}
-                    onClick={(e) => e.stopPropagation()}
                   >
                     <div className="relative mb-6">
                       <div className="flex justify-center items-center pt-8 pb-2 relative rounded-t-lg">
@@ -41,10 +68,10 @@ export default function Modal({ width = 30, title, children, open, onClose }) {
                     </div>
 
                     <div className="px-12 pb-6 flex justify-center">{children}</div>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
-            </>,
+            </Backdrop>,
             document.getElementById("modal")
           )
         : null}

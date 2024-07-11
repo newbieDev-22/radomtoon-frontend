@@ -70,6 +70,10 @@ export default function SupporterRegister() {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      if (!isPolicyChecked) {
+        setCheckboxError("Please accept the terms and conditions");
+        return;
+      }
       const validationErrors = validateRegister(input);
       if (validationErrors) {
         setInputError({ ...initialInputError, ...validationErrors });

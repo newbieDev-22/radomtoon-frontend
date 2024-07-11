@@ -38,12 +38,12 @@ export default function CampaignPage() {
       <CampaignSection handleSubPageChange={handleSubPageChange} />
       <div className="flex w-[100vw]">
         <span className="w-[75vw] px-20 py-4 ">
-          {subPage === subPageMap.STORY && <Editor />}
-          {subPage === subPageMap.MILESTONE && <MilestoneContainer />}
+          {subPage === subPageMap.STORY && <Editor/>}
+          {subPage === subPageMap.MILESTONE && <MilestoneContainer/>}
           {subPage === subPageMap.REWARD && (
             <ProductRewardContainer isCreator={isCreator} />
           )}
-          {subPage === subPageMap.FORUM && <ProductCommentContainer />}
+          {subPage === subPageMap.FORUM &&  <ProductCommentContainer/>}
         </span>
         <span className="w-[25vw] mt-20 pr-10 ">
           <div className="sticky top-32">

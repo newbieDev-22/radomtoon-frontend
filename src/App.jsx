@@ -31,25 +31,31 @@ export default function App() {
   const fetchFiveProduct = useStore((state) => state.fetchFiveProduct);
 
   useEffect(() => {
-    fetchProduct();
-    fetchUser();
-    fetchCreatorUser();
-    fetchComment();
-    fetchStats();
-    fetchFiveProduct();
+    const fetch = async () => {
+      fetchProduct();
+      fetchUser();
+      fetchComment();
+      fetchStats();
+      fetchFiveProduct();
+      fetchCreatorProduct();
+    };
+    fetch();
   }, [
     fetchProduct,
     fetchUser,
-    fetchCreatorUser,
     fetchComment,
     fetchStats,
     fetchFiveProduct,
+    fetchCreatorProduct,
   ]);
 
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {
-      fetchWaitingApproval();
-      fetchDashboardData();
+      const fetch = async () => {
+        fetchWaitingApproval();
+        fetchDashboardData();
+      };
+      fetch();
     }
   }, [fetchWaitingApproval, role]);
 
@@ -60,18 +66,32 @@ export default function App() {
   }, [fetchHistory, role]);
 
   useEffect(() => {
-    fetchStats();
-    fetchFiveProduct();
+    const fetch = async () => {
+      fetchStats();
+      fetchFiveProduct();
+    };
+    fetch();
   }, [historyLoading, fetchStats, fetchFiveProduct]);
 
   useEffect(() => {
-    if (role === USER_ROLE.CREATOR) {
-      fetchCreatorUser();
-      fetchCreatorProduct();
-    } else {
-      resetCreatorProduct();
-    }
-  }, [user, product, fetchCreatorProduct, fetchCreatorUser, resetCreatorProduct, role]);
+    const fetch = async () => {
+      if (role === USER_ROLE.CREATOR) {
+        fetchCreatorProduct();
+      } else {
+        resetCreatorProduct();
+      }
+    };
+    fetch();
+  }, [user, product, fetchCreatorProduct, resetCreatorProduct, role]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      if (role === USER_ROLE.CREATOR) {
+        fetchCreatorUser();
+      }
+    };
+    fetch();
+  }, [user, fetchCreatorUser, role]);
 
   if (
     userLoading ||

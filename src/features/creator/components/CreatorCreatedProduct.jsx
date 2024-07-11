@@ -5,7 +5,6 @@ import ImageCard from "../../../components/ImageCard";
 import dayjs from "dayjs";
 import { USER_ROLE } from "../../../constants";
 import getProductStatus from "../../../utils/get-product-status";
-import Loading from "../../../components/Loading/Loading";
 
 export default function CreatorCreatedProduct() {
   const { creatorId } = useParams();
@@ -16,10 +15,6 @@ export default function CreatorCreatedProduct() {
     role === USER_ROLE.CREATOR && user.id === +creatorId;
   const filterData = filterProductByCreatorId(creatorId, !shouldFilterByApprovalStatus);
   const navigate = useNavigate();
-
-  if (!filterData.length) {
-    return <Loading />;
-  }
 
   const isCorrectCreator = user?.id === +creatorId && role === USER_ROLE.CREATOR;
   const profileImage = isCorrectCreator

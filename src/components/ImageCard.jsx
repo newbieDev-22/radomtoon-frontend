@@ -17,13 +17,12 @@ export default function ImageCard({
   vid,
   widthSize = "medium",
   heightSize = "large",
-  mainCard = false,
   productId,
   creatorId,
   isEdit = false,
   progressHeight = "medium",
   projectStatus = STATUS_PRODUCT.DRAFTING,
-  isCorrectCreator=false
+  isCorrectCreator = false,
 }) {
   const [hover, setHover] = useState(false);
   const handleMouseEnter = () => setHover(true);
@@ -35,20 +34,9 @@ export default function ImageCard({
   };
 
   const isEditCardMap = {
-    true: `group ${widthMap[widthSize]} ${
-      heightMap[heightSize]
-    }  active:scale-100 transition duration-300 rounded-xl ${
-      mainCard
-        ? "h-auto w-[580px]"
-        : "border border-transparent overflow-hidden shadow-lg"
+    true: `group ${widthMap[widthSize]} ${heightMap[heightSize]}  active:scale-100 transition duration-300 rounded-xl border border-transparent overflow-hidden shadow-lg
     }  `,
-    false: `group ${widthMap[widthSize]} ${
-      heightMap[heightSize]
-    }  active:scale-100 transition duration-300 rounded-xl ${
-      mainCard
-        ? "h-auto w-[580px]"
-        : "border border-transparent hover:h-auto hover:absolute z-20 overflow-hidden hover:bg-white hover:border-slate-300 hover:shadow-lg"
-    }  `,
+    false: `group ${widthMap[widthSize]} ${heightMap[heightSize]}  active:scale-100 transition duration-300 rounded-xl border border-transparent hover:h-auto hover:absolute z-20 overflow-hidden hover:bg-white hover:border-slate-300 hover:shadow-lg`,
   };
 
   return (
@@ -57,9 +45,7 @@ export default function ImageCard({
         <div className="relative ">
           <div className={isEditCardMap[isEdit]}>
             <div
-              className={`${
-                mainCard ? "h-80  rounded-t-md" : "h-40"
-              } relative overflow-hidden`}
+              className="h-40 relative overflow-hidden"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               onClick={() => navigate(`/campaign/${productId}`)}
@@ -91,7 +77,8 @@ export default function ImageCard({
               height={progressHeight}
             />
 
-            <div className={`flex px-2 bg-white  gap-2 ${mainCard ? "py-4" : "py-2"} `}>
+
+            <div className="flex bg-white px-2 gap-2 py-2">
               <div
                 role="button"
                 className="w-1/6"
@@ -104,7 +91,7 @@ export default function ImageCard({
                     alt="Avatar"
                   />
                 ) : (
-                  <div className="w-full aspect-square font-semibold text-2xl text-white rounded-full bg-gray-500 flex justify-center items-center">
+                  <div className="w-full aspect-square font-semibold text-xl text-white rounded-full bg-gray-400 flex justify-center items-center">
                     {creatorName[0].toUpperCase()}
                   </div>
                 )}
@@ -113,9 +100,7 @@ export default function ImageCard({
               <div className="overflow-hidden px-2 group w-5/6">
                 <div
                   role="button"
-                  className={`font-medium truncate group-hover:underline ${
-                    mainCard && "text-xl"
-                  }`}
+                  className="font-medium truncate group-hover:underline"
                   onClick={() => navigate(`/campaign/${productId}`)}
                 >
                   {productName}
@@ -131,13 +116,7 @@ export default function ImageCard({
                   </div>
                 </span>
                 {!isEdit && (
-                  <div
-                    className={`${
-                      mainCard
-                        ? "opacity-100 -translate-y-3"
-                        : "opacity-0 group-hover:opacity-100 duration-[1s] group-hover:-translate-y-4"
-                    }`}
-                  >
+                  <div className="opacity-0 group-hover:opacity-100 duration-[1s] group-hover:-translate-y-4">
                     <p>{content}</p>
                   </div>
                 )}

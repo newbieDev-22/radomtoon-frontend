@@ -17,7 +17,7 @@ export default function Input({
       <input
         className={`w-full ${
           heightMapping[height]
-        } indent-2 px-2 border-[1.5px] outline-none rounded-lg focus:border-radomtoon-dark transition duration-300 placeholder-gray-400 ${
+        } indent-2 px-2 border-[1.5px] outline-none focus:outline-none hover:outline-none active:outline-none rounded-lg focus:border-radomtoon-dark transition duration-300 placeholder-gray-400 ${
           error ? "border-red-500" : "border-gray"
         }`}
         type={type}

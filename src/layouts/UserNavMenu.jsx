@@ -4,7 +4,7 @@ import { USER_ROLE } from "../constants";
 import { useStore } from "../store/useStore";
 import { toast } from "react-toastify";
 
-export default function UserNavMenu({ inLanding, currentUser }) {
+export default function UserNavMenu({ inHomePage, currentUser }) {
   const user = useStore((state) => state.authUser.user);
   const navigate = useNavigate();
   const logout = useStore((state) => state.logout);
@@ -48,7 +48,7 @@ export default function UserNavMenu({ inLanding, currentUser }) {
         </Button>
       )}
       <button
-        className={`${inLanding ? "text-white" : "text-black"}`}
+        className={`${inHomePage ? "text-white" : "text-black"}`}
         onClick={handleLogout}
       >
         LOG OUT

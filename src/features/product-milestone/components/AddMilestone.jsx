@@ -9,6 +9,7 @@ export default function AddMilestone({
   milestoneData,
   isCreator,
   isApproved,
+  isPass,
 }) {
   const [input, setInput] = useState({
     milestoneDetail: milestoneData?.milestoneDetail || "",
@@ -41,7 +42,11 @@ export default function AddMilestone({
     <>
       {productLoading && <Spinner transparent />}
       <div className="w-3/4 h-80 flex flex-col items-center justify-between rounded-2xl shadow-lg mt-2">
-        <span className={`text-2xl font-bold text-center ${!isApproved ? "bg-gray-300":"text-white bg-[#00d7c0]"} w-full p-4 rounded-tr-2xl rounded-tl-2xl`}>
+        <span
+          className={`text-2xl font-bold text-center ${
+            !isApproved || !isPass ? "bg-gray-300" : "text-white bg-[#00d7c0]"
+          } w-full p-4 rounded-tr-2xl rounded-tl-2xl`}
+        >
           {name}
         </span>
 
@@ -67,7 +72,6 @@ export default function AddMilestone({
           </div>
         )}
         {isCreator && !isApproved && (
-
           <div className="flex gap-2 mb-4">
             {isEditing ? (
               <Button bg="creator-normal" width="40" onClick={handleSubmit} rounded={1}>

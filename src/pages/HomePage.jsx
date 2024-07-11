@@ -1,22 +1,13 @@
-import { useStore } from "../store/useStore";
-import StatsBanner from "../components/StatsBannerComponent/StatsBanner";
-import InitialHome from "../layouts/InitialHome";
+import HomeGetStart from "../features/home/components/HomeGetStart";
+import HomeStat from "../features/home/components/HomeStat";
+import HomeProduct from "../features/home/components/HomeProduct";
+import Carousal from "../components/Carousal";
 
 export default function HomePage() {
-  const { projectSupport, towardIdea, contribution } = useStore(
-    (state) => state.stats.data
-  );
-
-  const dataStatsBar = [
-    { id: 1, amount: projectSupport, title: "active projects" },
-    { id: 2, amount: towardIdea, title: "towards ideas", currency: "THB" },
-    { id: 3, amount: contribution, title: "contributions" },
+  const carouselList = [
+    <HomeGetStart key={1} />,
+    <HomeStat key={2} />,
+    <HomeProduct key={3} />,
   ];
-
-  return (
-    <>
-      <StatsBanner data={dataStatsBar} />
-      <InitialHome />
-    </>
-  );
+  return <Carousal>{carouselList}</Carousal>;
 }
