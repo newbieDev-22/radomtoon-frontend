@@ -27,7 +27,7 @@ export default function ProductInfo({
           <div>
             <TimeIcon className="w-4 h-4" />
           </div>
-          <span className="mt-[2px]">{daysLeft} days left</span>
+          <span>{daysLeft} days left</span>
         </div>
       </span>
       {hover && (
