@@ -2,8 +2,8 @@ import { APPROVAL_STATUS_ID } from "../../../constants";
 
 export default function Milestone({ approvalStatusObj }) {
   return (
-    <div className="w-full">
-      <div className="flex justify-center sticky top-20 bg-white rounded-2xl">
+  
+      <div className="flex justify-center sticky top-20 pt-4 bg-white rounded-2xl">
         <ul className="steps w-[1200px] ">
           <li
             className={`step ${
@@ -28,6 +28,6 @@ export default function Milestone({ approvalStatusObj }) {
           </li>
         </ul>
       </div>
-    </div>
+
   );
 }
