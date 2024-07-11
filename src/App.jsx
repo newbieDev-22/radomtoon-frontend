@@ -37,9 +37,10 @@ export default function App() {
       fetchComment();
       fetchStats();
       fetchFiveProduct();
+      fetchCreatorUser();
     };
     fetch();
-  }, [fetchProduct, fetchUser, fetchComment, fetchStats, fetchFiveProduct]);
+  }, [fetchProduct, fetchUser, fetchComment, fetchStats, fetchFiveProduct,fetchCreatorUser]);
 
   useEffect(() => {
     if (role === USER_ROLE.ADMIN) {
