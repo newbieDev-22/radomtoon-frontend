@@ -8,6 +8,7 @@ export default function ProductInfo({
   productId,
   content,
   hover,
+  isEdit,
 }) {
   const navigate = useNavigate();
   return (
@@ -30,11 +31,11 @@ export default function ProductInfo({
           <span>{daysLeft} days left</span>
         </div>
       </span>
-      {hover && (
+      {hover && !isEdit ? (
         <div className="opacity-0 pt-2 pb-1 group-hover:opacity-100 duration-[1s] ">
           <p>{content}</p>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
