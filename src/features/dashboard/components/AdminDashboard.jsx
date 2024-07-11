@@ -19,7 +19,7 @@ export default function AdminDashboard() {
     data: el.topFiveByTotalSupporter,
   }));
   const [barChartData, setBarChartData] = useState(barChartSupporters);
-  console.log(barChartData);
+
   const handleToggleData = () => {
     const barChartSupporters = barChartDataAll.map((el) => ({
       month: el.month,
