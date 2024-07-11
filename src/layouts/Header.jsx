@@ -21,7 +21,7 @@ export default function Header() {
     resetSearch();
     setCategoryFilter(null);
     setWord("");
-    navigate("/");
+    navigate("/search");
   };
 
   return (

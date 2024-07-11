@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
+import { useStore } from "../../../store/useStore";
+import { USER_ROLE } from "../../../constants";
 
 const fadeInLeft = {
   initial: {
@@ -19,6 +21,8 @@ const fadeInLeft = {
 };
 
 export default function HomeGetStart() {
+  const { role } = useStore((state) => state.authUser);
+  const isSupported = role === USER_ROLE.SUPPORTER
   const navigate = useNavigate();
 
   return (
@@ -48,14 +52,14 @@ export default function HomeGetStart() {
             >
               SEE PROJECT
             </Button>
-            <Button
+           { !isSupported  && <Button
               onClick={() => navigate("/supporter-register")}
               bg="supporter-saturate"
               border="supporter-saturate"
               height="full"
             >
               GET STARTED
-            </Button>
+            </Button>}
           </div>
         </div>
       </main>

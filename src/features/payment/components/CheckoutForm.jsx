@@ -34,7 +34,7 @@ export default function CheckoutForm() {
         if (paymentIntent.status === "succeeded") {
           await createSupportProduct(tierId);
           toast.success("Payment successfully!");
-          navigate("/");
+          navigate("/search");
         }
       }
 
