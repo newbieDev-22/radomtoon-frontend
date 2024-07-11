@@ -26,7 +26,9 @@ export default function Editor() {
   const updateStory = useStore((state) => state.updateStory);
 
   const isCreator = role === USER_ROLE.CREATOR && user.id === filterData?.creatorId;
-  const isApproved = filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
+  const isApproved =
+    filterData?.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS ||
+    filterData?.approvalStatusId === APPROVAL_STATUS_ID.PENDING;
 
   const handleSubmit = async (e) => {
     try {

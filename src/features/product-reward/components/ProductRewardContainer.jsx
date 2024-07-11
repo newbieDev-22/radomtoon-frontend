@@ -30,7 +30,9 @@ export default function ProductRewardContainer({ isCreator }) {
     TIER_RANK_NUMBERS.map((rank) => ({ tierRankId: rank, available: true }))
   );
 
-  const isApproved = filterData.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS;
+  const isApproved =
+    filterData.approvalStatusId === APPROVAL_STATUS_ID.SUCCESS ||
+    filterData.approvalStatusId === APPROVAL_STATUS_ID.FAILED;
 
   useEffect(() => {
     setTierRankAvailable((prev) =>
@@ -127,7 +129,7 @@ export default function ProductRewardContainer({ isCreator }) {
                 handleDataChange={handleDataChange}
                 isApproved={isApproved}
                 isCreator={isCreator}
-                index={i+1}
+                index={i + 1}
               />
             ))}
         </div>
