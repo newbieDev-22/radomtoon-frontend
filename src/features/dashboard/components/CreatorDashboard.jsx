@@ -10,10 +10,13 @@ import { useStore } from "../../../store/useStore";
 import { useParams } from "react-router-dom";
 import {
   APPROVAL_STATUS_ID,
+  MILESTONE_STATUS,
   PRODUCT_STATUS_ID,
   STATUS_PRODUCT_THEME,
 } from "../../../constants";
 import getProductStatus from "../../../utils/get-product-status";
+
+
 
 export default function CreatorDashboard() {
   const { productId } = useParams();
@@ -136,8 +139,9 @@ export default function CreatorDashboard() {
       {openEvidenceModal && (
         <Modal
           onClose={() => setOpenEvidenceModal(false)}
-          title="Milestone : 1"
-          width={45}
+          title={MILESTONE_STATUS[currentMilestone]}
+          width={75}
+          height={40}
           open={true}
         >
           <EvidenceModalDetail milestoneRankId={currentMilestone} />

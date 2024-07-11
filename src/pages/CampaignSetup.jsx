@@ -10,7 +10,8 @@ import { toast } from "react-toastify";
 import validateProduct from "../validators/validate-create-project";
 import Spinner from "../components/Spinner";
 import { motion } from "framer-motion";
-import { CloudUpload } from "../icons";
+import UploadLottie from "../assets/images/upload.json"
+import Lottie from "lottie-react";
 
 const initialInput = {
   productName: "",
@@ -111,7 +112,7 @@ export default function CampaignSetup() {
   };
 
   return (
-    <>
+    <div className="bg-creator-normal">
       {productLoading && <Spinner transparent />}
       <input
         type="file"
@@ -149,13 +150,15 @@ export default function CampaignSetup() {
                 className="w-3/5 flex flex-col justify-center items-center p-4 sm:p-6 md:p-10 hover:rounded-xl hover:scale-105 duration-500"
                 onClick={() => fileEl.current.click()}
               >
-                <div className="w-full scale-75">
-                  <CloudUpload />
+                <div className="h-full">
+                <div className="w-full scale-[200%] py-20">
+                  <Lottie animationData={UploadLottie} loop={true} />
                 </div>
 
                 <h3 className="text-white text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold text-center">
                   Add product image
                 </h3>
+                </div>
               </div>
             )}
           </div>
@@ -280,6 +283,6 @@ export default function CampaignSetup() {
           </form>
         </motion.div>
       </div>
-    </>
+    </div>
   );
 }
