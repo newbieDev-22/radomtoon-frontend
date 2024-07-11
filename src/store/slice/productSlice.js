@@ -51,14 +51,9 @@ export const productSlice = (set, get) => ({
     }
   },
 
-  filterProductByCreatorId: (creatorId, isApproved = null) => {
+  filterProductByCreatorId: (creatorId) => {
     const { data } = get().product;
-    if (data.length > 0) {
-      const products = isApproved ? get().approvalProduct : data;
-      return products.filter((el) => el.creatorId === +creatorId);
-    } else {
-      return [];
-    }
+    return data.filter((el) => el.creatorId === +creatorId);
   },
 
   createProduct: async (formData) => {

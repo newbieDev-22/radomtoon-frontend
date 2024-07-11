@@ -13,7 +13,7 @@ export default function CreatorCreatedProduct() {
   const filterProductByCreatorId = useStore((state) => state.filterProductByCreatorId);
   const shouldFilterByApprovalStatus =
     role === USER_ROLE.CREATOR && user.id === +creatorId;
-  const filterData = filterProductByCreatorId(creatorId, !shouldFilterByApprovalStatus);
+  const filterData = filterProductByCreatorId(creatorId);
   const navigate = useNavigate();
 
   const isCorrectCreator = user?.id === +creatorId && role === USER_ROLE.CREATOR;
