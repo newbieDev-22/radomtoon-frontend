@@ -4,8 +4,6 @@ import Approval from "../features/admin/components/Approval";
 import AdminDashboard from "../features/dashboard/components/AdminDashboard";
 import { useStore } from "../store/useStore";
 
-const mockImgStatsBar =
-  "https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.0,f_auto,h_460/bmt7dsxiwpfjlnxpcazs";
 
 const adminMenuStyleMap = {
   isNotSelected:
@@ -25,7 +23,7 @@ export default function AdminPanel() {
 
   return (
     <div>
-      <StatsBar data={adminStatsData} bg={mockImgStatsBar} />
+      <StatsBar data={adminStatsData}  />
       <div className="flex flex-row justify-center w-full border-b-1 shadow-md py-4">
         <button
           onClick={() => setSelectMenu(adminMenu.Approval)}

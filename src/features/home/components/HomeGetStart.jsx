@@ -24,6 +24,7 @@ export default function HomeGetStart() {
   const { role } = useStore((state) => state.authUser);
   const isSupported = role === USER_ROLE.SUPPORTER
   const isCreator = role === USER_ROLE.CREATOR
+  const isAdmin = role === USER_ROLE.ADMIN
   const navigate = useNavigate();
 
   return (
@@ -53,7 +54,7 @@ export default function HomeGetStart() {
             >
               SEE PROJECT
             </Button>
-           { !isSupported && !isCreator  && <Button
+           { !isSupported && !isCreator  && !isAdmin && <Button
               onClick={() => navigate("/supporter-register")}
               bg="supporter-saturate"
               border="supporter-saturate"
