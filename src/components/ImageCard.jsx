@@ -40,14 +40,17 @@ export default function ImageCard({
   };
 
   return (
-    <div className={`relative h-full`}>
+    <div
+      role="button"
+      className="relative h-full transition-all duration-450 cursor-pointer"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="flex gap-4">
         <div className="relative">
           <div className={isEditCardMap[isEdit]}>
             <div
-              className="h-40 relative overflow-hidden bg-white px-2 pt-2"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              className="h-40 relative overflow-hidden bg-white/70 px-2 pt-2"
               onClick={() => navigate(`/campaign/${productId}`)}
             >
               {!hover || !vid ? (
@@ -58,70 +61,113 @@ export default function ImageCard({
                 />
               ) : null}
               {hover && vid && (
-                <div className="relative w-full h-full">
+                <div className=" w-full h-full">
                   <ReactPlayer
                     url={vid}
                     playing
                     muted
                     width="100%"
                     height="100%"
-                    className="absolute top-0 left-0 rounded-t-lg"
+                    className="rounded-t-lg"
                   />
-                  <div className="absolute w-full h-full cursor-pointer" />
                 </div>
               )}
             </div>
-            <div className="px-2 bg-white">
+            <div className="px-2 bg-white/70">
               <ProgressBar
                 Numerator={totalFund}
                 Denominator={goal}
                 height={progressHeight}
               />
             </div>
-
-            <div className="flex bg-white px-2 gap-2 py-2 ">
-              <div
-                role="button"
-                className="w-1/6"
-                onClick={() => navigate(`/creator-panel/${creatorId}`)}
-              >
-                {avatarImage ? (
-                  <img
-                    src={avatarImage}
-                    className="aspect-square rounded-full"
-                    alt="Avatar"
-                  />
-                ) : (
-                  <div className="w-full aspect-square font-semibold text-xl text-white rounded-full bg-gray-400 flex justify-center items-center">
-                    {creatorName[0].toUpperCase()}
+            <div className=" px-2 pb-2 bg-white/70 rounded-b-xl">
+              {!hover ? (
+                <div className="flex bg-white px-2 gap-2 pt-2 pb-1 rounded-b-xl">
+                  <div
+                    role="button"
+                    className="w-1/6"
+                    onClick={() => navigate(`/creator-panel/${creatorId}`)}
+                  >
+                    {avatarImage ? (
+                      <img
+                        src={avatarImage}
+                        className="aspect-square rounded-full"
+                        alt="Avatar"
+                      />
+                    ) : (
+                      <div className="w-full aspect-square font-semibold text-xl text-white rounded-full bg-gray-400 flex justify-center items-center">
+                        {creatorName[0].toUpperCase()}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                  <div className="overflow-hidden px-2 group w-5/6">
+                    <div
+                      role="button"
+                      className="font-medium truncate group-hover:underline"
+                      onClick={() => navigate(`/campaign/${productId}`)}
+                    >
+                      {productName}
+                    </div>
+                    <div className="flex flex-row justify-between pt-[2px]">
+                      <span className="text-gray-600 text-xs">{creatorName}</span>
+                    </div>
 
-              <div className="overflow-hidden px-2 group w-5/6">
-                <div
-                  role="button"
-                  className="font-medium truncate group-hover:underline"
-                  onClick={() => navigate(`/campaign/${productId}`)}
-                >
-                  {productName}
+                    <span className="text-xs text-gray-500 font-medium">
+                      <div className="flex items-center gap-1 py-1">
+                        <div>
+                          <TimeIcon className={"w-4 h-4"} />
+                        </div>
+                        <span className="mt-[2px]">{daysLeft} days left</span>
+                      </div>
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-row justify-between">
-                  <span className="text-gray-600 text-xs block">{creatorName}</span>
-                </div>
+              ) : (
+                <div className="flex bg-white px-2 gap-2 pt-2 pb-1 rounded-b-xl">
+                  <div
+                    role="button"
+                    className="w-1/6"
+                    onClick={() => navigate(`/creator-panel/${creatorId}`)}
+                  >
+                    {avatarImage ? (
+                      <img
+                        src={avatarImage}
+                        className="aspect-square rounded-full"
+                        alt="Avatar"
+                      />
+                    ) : (
+                      <div className="w-full aspect-square font-semibold text-xl text-white rounded-full bg-gray-400 flex justify-center items-center">
+                        {creatorName[0].toUpperCase()}
+                      </div>
+                    )}
+                  </div>
+                  <div className="overflow-hidden px-2 group w-5/6">
+                    <div
+                      role="button"
+                      className="font-medium truncate group-hover:underline"
+                      onClick={() => navigate(`/campaign/${productId}`)}
+                    >
+                      {productName}
+                    </div>
+                    <div className="flex flex-row justify-between pt-[2px]">
+                      <span className="text-gray-600 text-xs">{creatorName}</span>
+                    </div>
 
-                <span className="mr-2 text-xs text-gray-500 font-medium">
-                  <div className="flex items-center gap-1 py-1">
-                    <TimeIcon className={"w-4 h-4"} />
-                    {daysLeft} days left
+                    <span className="text-xs text-gray-500 font-medium">
+                      <div className="flex items-center gap-1 py-1">
+                        <div>
+                          <TimeIcon className={"w-4 h-4"} />
+                        </div>
+                        <span className="mt-[2px]">{daysLeft} days left</span>
+                      </div>
+                    </span>
+
+                    <div className="opacity-0 pt-2 pb-1 group-hover:opacity-100 duration-[1s] ">
+                      <p>{content}</p>
+                    </div>
                   </div>
-                </span>
-                {!isEdit && (
-                  <div className="opacity-0 group-hover:opacity-100 duration-[1s] group-hover:-translate-y-4">
-                    <p>{content}</p>
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
           {/* button */}
