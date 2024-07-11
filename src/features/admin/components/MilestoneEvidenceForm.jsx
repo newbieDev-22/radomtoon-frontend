@@ -8,7 +8,7 @@ export default function MilestoneEvidenceForm({
 }) {
   return (
     <div className="flex justify-center">
-      <form onSubmit={(e) => e.preventDefault()} action="">
+      <form onSubmit={(e) => e.preventDefault()}>
         <div className="flex flex-col justify-center items-center w-auto">
           <div className="flex w-full p-4 gap-4">
             <div className="w-1/2">

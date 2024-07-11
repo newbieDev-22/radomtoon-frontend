@@ -23,6 +23,7 @@ const fadeInLeft = {
 export default function HomeGetStart() {
   const { role } = useStore((state) => state.authUser);
   const isSupported = role === USER_ROLE.SUPPORTER
+  const isCreator = role === USER_ROLE.CREATOR
   const navigate = useNavigate();
 
   return (
@@ -52,7 +53,7 @@ export default function HomeGetStart() {
             >
               SEE PROJECT
             </Button>
-           { !isSupported  && <Button
+           { !isSupported && !isCreator  && <Button
               onClick={() => navigate("/supporter-register")}
               bg="supporter-saturate"
               border="supporter-saturate"

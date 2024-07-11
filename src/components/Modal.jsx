@@ -25,7 +25,7 @@ const dropIn = {
   },
 };
 
-export default function Modal({ width = 30, title, children, open, onClose }) {
+export default function Modal({ width = 30, title, children, open, onClose , height }) {
   useEffect(() => {
     const handleEscPress = (e) => {
       if (e.keyCode === 27) {
@@ -51,7 +51,7 @@ export default function Modal({ width = 30, title, children, open, onClose }) {
                     animate="visible"
                     exit="exit"
                     className="bg-white rounded-lg shadow-lg"
-                    style={{ width: `${width}rem` }}
+                    style={{ width: `${width}rem` , height: `${height}rem` }}
                   >
                     <div className="relative mb-6">
                       <div className="flex justify-center items-center pt-8 pb-2 relative rounded-t-lg">
