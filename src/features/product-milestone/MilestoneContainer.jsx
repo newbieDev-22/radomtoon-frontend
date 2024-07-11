@@ -27,7 +27,7 @@ export default function MilestoneContainer() {
 
   return (
     <div>
-      <Milestone />
+      <Milestone approvalStatusObj={approvalStatusObj} />
       <div className="flex items-center flex-col gap-10 mt-10">
         <AddMilestone
           name="Planning"
