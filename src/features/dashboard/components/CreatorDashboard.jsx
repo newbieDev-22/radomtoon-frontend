@@ -61,20 +61,19 @@ export default function CreatorDashboard() {
     const fetch = async () => {
       const { supporter, totalFund, availableFund } = await fetchCreatorStat(productId);
 
-      if (!supporter || !totalFund || !availableFund) return;
       const dataStatsBar = [
         {
           title: "Supporters",
-          amount: supporter,
+          amount: supporter || 0,
         },
         {
           title: "Total Fund",
-          amount: totalFund,
+          amount: totalFund || 0,
           currency: "THB",
         },
         {
           title: "Avaliable Fund",
-          amount: availableFund,
+          amount: availableFund || 0,
           currency: "THB",
         },
       ];
