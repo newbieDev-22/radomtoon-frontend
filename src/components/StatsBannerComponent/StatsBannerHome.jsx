@@ -1,9 +1,13 @@
 import StatsItemHome from "./StatsItemHome";
 
-export default function StatsBannerHome({ data }) {
+export default function StatsBannerHome({
+  data,
+  width = "w-screen",
+  height = "h-[30vh] md:h-[40vh]",
+}) {
   return (
     <div
-      className={`h-[30vh] md:h-[40vh] w-screen flex items-center justify-center relative`}
+      className={`${height} ${width} w-screen flex items-center justify-center relative`}
     >
       <div
         className={

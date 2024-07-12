@@ -1,10 +1,13 @@
 import StatsItem from "./StatsItem";
 
-export default function StatsBanner({ data, bg }) {
+export default function StatsBanner({
+  data,
+  bg,
+  width = "w-screen",
+  height = "h-[10vh] md:h-[15vh]",
+}) {
   return (
-    <div
-      className={`h-[30vh] md:h-[40vh] w-screen flex items-center justify-center relative`}
-    >
+    <div className={`${height} ${width} flex items-center justify-center relative`}>
       <div className="h-[10vh] md:h-[15vh] w-[80vw] px-3 flex items-center text-center justify-evenly bg-white overflow-auto scroll-hidden shadow-md">
         {data.map((item, index, arr) => (
           <StatsItem

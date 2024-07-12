@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Milestone from "../../product-milestone/components/Milestone";
 import PieChart from "../../../components/chart/pieChart/PieChart";
 import LineChart from "../../../components/chart/lineChart/LineChart";
@@ -15,11 +15,29 @@ import {
   STATUS_PRODUCT_THEME,
 } from "../../../constants";
 import getProductStatus from "../../../utils/get-product-status";
+import StatsBanner from "../../../components/StatsBannerComponent/StatsBanner";
 
 export default function CreatorDashboard() {
   const { productId } = useParams();
   const pieChartData = useStore((state) => state.creatorDashboardData.pieChartData);
   const lineChartData = useStore((state) => state.creatorDashboardData.lineChartData);
+  const fetchCreatorStat = useStore((state) => state.fetchCreatorStat);
+  const [statData, setStatData] = useState([
+    {
+      title: "Supporters",
+      amount: 0,
+    },
+    {
+      title: "Total Fund",
+      amount: 0,
+      currency: "THB",
+    },
+    {
+      title: "Avaliable Fund",
+      amount: 0,
+      currency: "THB",
+    },
+  ]);
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -39,6 +57,32 @@ export default function CreatorDashboard() {
     approvalStatusObj[element.milestoneRankId] = element.approvalStatusId;
   });
 
+  useEffect(() => {
+    const fetch = async () => {
+      const { supporter, totalFund, availableFund } = await fetchCreatorStat(productId);
+
+      if (!supporter || !totalFund || !availableFund) return;
+      const dataStatsBar = [
+        {
+          title: "Supporters",
+          amount: supporter,
+        },
+        {
+          title: "Total Fund",
+          amount: totalFund,
+          currency: "THB",
+        },
+        {
+          title: "Avaliable Fund",
+          amount: availableFund,
+          currency: "THB",
+        },
+      ];
+      setStatData(dataStatsBar);
+    };
+    fetch();
+  }, [fetchCreatorStat, productId]);
+
   return (
     <div className="py-10 px-10 md:px-40 2xl:px-80 bg-[#b6e5e9]">
       <div className="py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
@@ -49,7 +93,11 @@ export default function CreatorDashboard() {
           {`Status : ${STATUS_PRODUCT_THEME[status].text}`}
         </h2>
       </div>
-
+      <div className="py-5 mb-5 bg-[#e7f5fc] rounded-3xl">
+        <div className="w-full py-4 px-8">
+          <StatsBanner data={statData} width="w-full" />
+        </div>
+      </div>
       <div className="grid grid-cols-2 gap-10 p-10 mx-auto rounded-3xl md:w-full  bg-[#e7f5fc]">
         <span className="sm:col-span-2 col-span-2 md:col-span-1 bg-white rounded-2xl flex justify-center items-center flex-col">
           <h1 className="w-full px-10 justify-start text-lg font-semibold text-radomtoon-bright mt-4 ">

@@ -10,11 +10,9 @@ creatorApi.sendMilestoneEvidence = (milestoneId, data) =>
 creatorApi.getDeliveryStatus = (productId) =>
   axios.get(`/creators/product/${productId}/delivery-status`);
 
-creatorApi.updateDeliveryStatus = (productId,supporterId) =>
+creatorApi.updateDeliveryStatus = (productId, supporterId) =>
   axios.patch(`/support-products/product/${productId}/supporter/${supporterId}`);
 
-
-
-
+creatorApi.getCreatorStatus = (productId) => axios.get(`/stats/product/${productId}`);
 
 export default creatorApi;
