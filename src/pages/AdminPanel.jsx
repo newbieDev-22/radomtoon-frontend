@@ -1,9 +1,8 @@
 import { useState } from "react";
-import StatsBar from "../components/StatsBannerComponent/StatsBanner";
+import StatsBanner from "../components/StatsBannerComponent/StatsBanner";
 import Approval from "../features/admin/components/Approval";
 import AdminDashboard from "../features/dashboard/components/AdminDashboard";
 import { useStore } from "../store/useStore";
-
 
 const adminMenuStyleMap = {
   isNotSelected:
@@ -23,7 +22,7 @@ export default function AdminPanel() {
 
   return (
     <div>
-      <StatsBar data={adminStatsData}  />
+      <StatsBanner data={adminStatsData} height="h-[30vh]" />
       <div className="flex flex-row justify-center w-full border-b-1 shadow-md py-4">
         <button
           onClick={() => setSelectMenu(adminMenu.Approval)}

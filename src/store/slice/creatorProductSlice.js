@@ -1,7 +1,7 @@
 import creatorApi from "../../apis/creator";
 import productApi from "../../apis/product";
 
-export const creatorProductSlice = (set,get) => ({
+export const creatorProductSlice = (set, get) => ({
   creatorProduct: { data: [], loading: false, error: null, today: new Date() },
 
   fetchCreatorProduct: async () => {
@@ -30,6 +30,15 @@ export const creatorProductSlice = (set,get) => ({
       }));
     }
   },
+
+  fetchCreatorStat: async (productId) => {
+    try {
+      const creatorStatResponse = await creatorApi.getCreatorStatus(+productId);
+      return creatorStatResponse.data.stat;
+    } catch (err) {
+      console.error(err);
+    }
+  },
   resetCreatorProduct: () =>
     set((state) => ({
       creatorProduct: {
@@ -40,12 +49,7 @@ export const creatorProductSlice = (set,get) => ({
       },
     })),
 
-  sendMilestoneEvidence: async (
-    milestoneId,
-    body,
-    productId,
-    milestoneRankId
-  ) => {
+  sendMilestoneEvidence: async (milestoneId, body, productId, milestoneRankId) => {
     try {
       set((state) => ({
         creatorProduct: { ...state.creatorProduct, loading: true, error: null },
@@ -59,31 +63,28 @@ export const creatorProductSlice = (set,get) => ({
       const { data } = get().creatorProduct;
       const dummyData = [...data];
       const productIndex = dummyData.findIndex((el) => el.id === +productId);
-      
+
       if (productIndex !== -1) {
-        const milestoneIndex =
-        dummyData[productIndex].productMilestones.findIndex((el) => el.milestoneRankId === +milestoneRankId);
+        const milestoneIndex = dummyData[productIndex].productMilestones.findIndex(
+          (el) => el.milestoneRankId === +milestoneRankId
+        );
         if (milestoneIndex !== -1) {
           dummyData[productIndex].productMilestones[milestoneIndex] =
-          milestoneEvidenceResponse.data.milestone;
+            milestoneEvidenceResponse.data.milestone;
           set((state) => ({
             creatorProduct: { ...state.creatorProduct, data: dummyData },
           }));
         }
       }
-      
     } catch (err) {
-      console.error(err)
+      console.error(err);
       set((state) => ({
         creatorProduct: { ...state.creatorProduct, error: err.message },
       }));
-
     } finally {
-
       set((state) => ({
-        creatorProduct: { ...state.creatorProduct, loading: false},
+        creatorProduct: { ...state.creatorProduct, loading: false },
       }));
-
     }
   },
 });
