@@ -49,7 +49,7 @@ export default function HomeByFilterPage() {
   return (
     <div>
       <div
-        className={`h-[30vh] md:h-[40vh] w-screen flex items-center justify-center relative`}
+        className={`h-[30vh] md:h-[40vh] w-full flex items-center justify-center relative`}
       >
         {[0, null].includes(categoryId) && !word && (
           <h1 className="text-center text-6xl md:text-8xl text-white font-mono font-bold pt-10">
@@ -80,7 +80,6 @@ export default function HomeByFilterPage() {
           alt=""
         />
       </div>
-
       <div
         className={`flex justify-center gap-10 pt-10 pb-20 ${CATEGORIES_HUE_MAP[categoryId]} bg-gradient-to-r from-[#33076f] via-[#df07fa] to-[#2a085e]`}
       >
