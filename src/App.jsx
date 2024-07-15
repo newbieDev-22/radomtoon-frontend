@@ -7,15 +7,14 @@ import { USER_ROLE } from "./constants";
 
 export default function App() {
   const fetchProduct = useStore((state) => state.fetchProduct);
-  const role = useStore((state) => state.authUser.role);
+  const { user, role, userLoading } = useStore((state) => state.authUser);
   const fetchUser = useStore((state) => state.fetchUser);
   const fetchCreatorProduct = useStore((state) => state.fetchCreatorProduct);
   const fetchCreatorUser = useStore((state) => state.fetchCreatorUser);
   const resetCreatorProduct = useStore((state) => state.resetCreatorProduct);
   const fetchWaitingApproval = useStore((state) => state.fetchWaitingApproval);
   const waitingApprovalLoading = useStore((state) => state.waitingApproval.loading);
-  const productLoading = useStore((state) => state.product.loading);
-  const userLoading = useStore((state) => state.authUser.loading);
+  const { product, productLoading } = useStore((state) => state.product);
   const creatorUserLoading = useStore((state) => state.creatorUser.loading);
   const creatorProductLoading = useStore((state) => state.creatorProduct.loading);
   const fetchDashboardData = useStore((state) => state.fetchDashboardData);
@@ -26,8 +25,6 @@ export default function App() {
   const fetchStats = useStore((state) => state.fetchStats);
   const fetchHistory = useStore((state) => state.fetchHistory);
   const historyLoading = useStore((state) => state.supporter.loading);
-  const user = useStore((state) => state.authUser.user);
-  const product = useStore((state) => state.product.data);
   const fetchFiveProduct = useStore((state) => state.fetchFiveProduct);
 
   useEffect(() => {
