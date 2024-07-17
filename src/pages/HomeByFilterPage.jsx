@@ -88,7 +88,7 @@ export default function HomeByFilterPage() {
             variants={containerVariants}
             initial="hidden"
             animate="show"
-            className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-4 pb-20 2xl:pb-20"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-4 pb-20 2xl:pb-20"
           >
             {searchProduct.map((el) => (
               <motion.div key={el.id} variants={itemVariants}>

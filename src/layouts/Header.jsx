@@ -28,10 +28,10 @@ export default function Header() {
           } `}
       >
         <div className="flex justify-self-start ">
-          <div className="w-64 overflow-hidden">
+          <div className="w-64 overflow-hidden ml-3 md:ml-0">
             <div
               onClick={handleToHomePage}
-              className="w-52 md:w-72 text-supporter-saturate overflow-hidden"
+              className="w-52 md:w-72 text-supporter-saturate overflow-hidden "
             >
               <RadomtoonIcon />
             </div>

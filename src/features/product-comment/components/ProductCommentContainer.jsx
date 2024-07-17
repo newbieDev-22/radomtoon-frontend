@@ -78,14 +78,14 @@ export default function ProductCommentContainer() {
   return (
     <>
       {commentLoading && <Spinner transparent />}
-      <div className=" bg-gray-200 m-auto px-20 py-10 rounded-3xl">
+      <div className=" bg-gray-200 m-auto px-3 md:px-20 py-3 md:py-10 rounded-3xl">
         <form
           className="flex gap-5 justify-between mb-10 items-center"
           onSubmit={handleCreateComment}
         >
           <div className="w-full">
             <textarea
-              className={`w-full px-8 py-4 min-h-16 max-h-32 outline-none rounded-xl text-lg
+              className={`w-full px-3 md:px-8 py-2 md:py-4 min-h-16 max-h-32 outline-none rounded-xl text-lg
             ${inputError.comment ? " border-red-500" : "border-gray-300"}`}
               value={input.comment}
               placeholder="Write your comment here..."

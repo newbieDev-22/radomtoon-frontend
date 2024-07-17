@@ -80,7 +80,7 @@ export default function TierCard({
   return (
     <>
       <div
-        className=" relative hover:scale-[102%] active:scale-100 transition-all w-[60vw]"
+        className="relative hover:scale-[102%] active:scale-100 transition-all w-full"
         onClick={handleGoToPayment}
       >
         {role === USER_ROLE.SUPPORTER ||
@@ -88,7 +88,7 @@ export default function TierCard({
         !isCreator ||
         isApproved ? null : (
           <button
-            className="absolute top-2 right-2 hover:scale-[110%] active:scale-100"
+            className=" absolute top-2 right-2 hover:scale-[110%] active:scale-100"
             onClick={() => setIsDeleteModalOpen(true)}
           >
             <CloseIcon color="gray" />
