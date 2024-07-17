@@ -92,7 +92,7 @@ export default function ProductRewardContainer({ isCreator }) {
   return (
     <>
       {productLoading && <Spinner transparent />}
-      <div className="w-4/5 m-auto p-6">
+      <div className="w-full md:w-4/5 m-auto p-6">
         <div className="flex justify-between items-center">
           <div className="py-4 flex flex-col gap-2">
             <h2 id="header" className="font-bold text-4xl">

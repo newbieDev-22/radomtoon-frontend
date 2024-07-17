@@ -2,7 +2,7 @@ import TierCard from "./TierCard";
 
 export default function TierContainer({ data, isApproved }) {
   return (
-    <div className=" w-7/12 m-auto px-6 pb-6">
+    <div className="w-full md:w-7/12  m-auto px-6 pb-6">
       <h2 id="header" className=" font-bold text-3xl">
         Select your reward
       </h2>
@@ -10,7 +10,7 @@ export default function TierContainer({ data, isApproved }) {
         Select an option below
       </h3>
       <div
-        className="flex flex-col gap-4 items-center
+        className="flex flex-col gap-4
         "
       >
         {data

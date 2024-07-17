@@ -33,11 +33,11 @@ export default function CampaignPage() {
   };
 
   return (
-    <div className="py-10">
+    <div className="py-0 md:py-10 ">
       <CampaignContent />
       <CampaignSection handleSubPageChange={handleSubPageChange} />
-      <div className="flex w-[100vw]">
-        <span className="w-[75vw] px-20 py-4 ">
+      <div className="flex ">
+        <span className="w-full md:w-[75vw] px-10 md:px-20 py-4 ">
           {subPage === subPageMap.STORY && <Editor/>}
           {subPage === subPageMap.MILESTONE && <MilestoneContainer/>}
           {subPage === subPageMap.REWARD && (
@@ -45,7 +45,7 @@ export default function CampaignPage() {
           )}
           {subPage === subPageMap.FORUM &&  <ProductCommentContainer/>}
         </span>
-        <span className="w-[25vw] mt-20 pr-10 ">
+        <span className="hidden md:block w- mt-20 pr-10 ">
           <div className="sticky top-32">
             <ProfileCard creatorId={filterData.creatorId} />
           </div>

@@ -198,17 +198,17 @@ export default function CampaignContent() {
           }
         }}
       />
-      <div className="flex flex-col justify-center gap-8 items-center">
+      <div className="flex flex-col justify-center gap-0 md:gap-8 items-stretch md:items-center">
         <div className="flex flex-col gap-4 justify-center items-center w-3/4 m-auto ">
           {!isEdit ? (
             <>
-              <h1 className="text-4xl font-semibold text-center">{input.productName}</h1>
-              <p className="text-lg text-gray-500 text-center">{input.summaryDetail}</p>
+              <h1 className="hidden md:flex text-4xl font-semibold text-center">{input.productName}</h1>
+              <p className="hidden md:flex text-lg text-gray-500 text-center">{input.summaryDetail}</p>
             </>
           ) : null}
         </div>
-        <div className="flex justify-center items-center gap-8">
-          <div className="flex justify-center w-2/5">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+          <div className="flex justify-center w-full md:w-2/5">
             {isEdit && file ? (
               <div onClick={() => fileEl.current.click()}>
                 <img
@@ -241,7 +241,13 @@ export default function CampaignContent() {
               />
             ) : null}
           </div>
-          <div className="flex flex-col gap-4 px-4">
+          {!isEdit ? (
+            <>
+              <h1 className="flex md:hidden text-3xl font-semibold px-4">{input.productName}</h1>
+              <p className="flex md:hidden text-gray-500 px-4">{input.summaryDetail}</p>
+            </>
+          ) : null}
+          <div className="flex flex-col gap-4 px-4 w-full md:w-auto">
             {isEdit ? (
               <CampaignEditContent
                 input={input}

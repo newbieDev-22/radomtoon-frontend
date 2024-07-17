@@ -49,7 +49,7 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
   };
 
   const role = el.userId ? USER_ROLE.SUPPORTER : USER_ROLE.CREATOR;
-  const margin = role === USER_ROLE.CREATOR ? "mr-56" : "ml-56";
+  const margin = role === USER_ROLE.CREATOR ? "mr-10 md:mr-56" : "ml-10 md:ml-56";
 
   return (
     <div className={`bg-white p-5 rounded-xl mb-5 ${margin} `}>
@@ -82,14 +82,11 @@ export default function ProductCommentCard({ el, handleClickDeleteFunction }) {
           </h3>
           {role === USER_ROLE.CREATOR && (
             <>
-              <h3 className="font-semibold text-xl">
+              <h3 className="font-semibold text-lg md:text-xl">
                 {el.creatorFirstName} {el.creatorLastName}
               </h3>
-              <h3
-                className="active:brightness-75 p-2
-            font-bold px-4 rounded-md bg-yellow-300"
-              >
-                CREATOR
+              <h3 className="p-1 font-bold text-xs rounded-md bg-creator-saturate text-white">
+                Creator
               </h3>
             </>
           )}
